@@ -1,5 +1,5 @@
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
-import { AuthWrapperComponent } from '@domain/auth/auth-wrapper-component/auth-wrapper.component';
+import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
 import { Formik } from 'formik';
 import { FormContainer } from './forgot-password.styles';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';

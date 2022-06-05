@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 import { Link } from 'react-router-dom';
 
-import ImgBackground from '../assets/images/BackgroundPage2.png';
-import ImgBackgroundForm from '../assets/images/BackgroundFormLogin.png';
-import LineBottomTitle from '../assets/images/LineBottomLoginTitle.png';
+import ImgBackground from '../../assets/images/BackgroundPage2.png';
+import ImgBackgroundForm from '../../assets/images/BackgroundFormLogin.png';
+import LineBottomTitle from '../../assets/images/LineBottomLoginTitle.png';
 
 export const LoginSection = styled.aside`
   width: 100%;

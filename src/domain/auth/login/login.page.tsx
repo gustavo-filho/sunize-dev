@@ -1,4 +1,4 @@
-import { AuthWrapperComponent } from '@domain/auth/auth-wrapper-component/auth-wrapper.component';
+import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
 import { Formik } from 'formik';
 import { useCallback } from 'react';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
