@@ -2,17 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const dashboardStore = createSlice({
   name: 'DASHBOARD',
-  reducers: {
-    SET_USER: (state, action) => {
-      state.user = action.payload;
-    },
-  },
+  reducers: {},
   initialState: {
-    user: {
-      name: 'Gustavo',
-    },
+    dashboard: null,
   },
 });
 
-export const { SET_USER } = dashboardStore.actions;
+// export const {} = dashboardStore.actions;
 export default dashboardStore.reducer;
