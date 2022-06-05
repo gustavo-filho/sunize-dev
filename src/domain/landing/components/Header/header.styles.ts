@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { typing } from '../../../../shared/styles/animations.styles';
-import initialImage from './assets/b2b-marketing.webp';
+import { typing } from '@shared/styles/animations.styles';
+import initialImage from '@shared/assets/images/b2b-marketing.webp';
 
 export const HeaderContainer = styled.header`
   min-height: 90vh;
@@ -370,7 +370,6 @@ export const Hero = styled.section`
 
         mark {
           font-size: 58px;
-          margin-top: -30px;
         }
       }
     }

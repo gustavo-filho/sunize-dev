@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 // Assets
-import { ReactComponent as More } from 'Assets/index/More.svg';
-import { ReactComponent as Less } from 'Assets/index/Less.svg';
+import { ReactComponent as More } from '@shared/assets/images/More.svg';
+import { ReactComponent as Less } from '@shared/assets/images/Less.svg';
 
 import { Acordion } from './accordion.styles';
 
