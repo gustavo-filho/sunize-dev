@@ -1,4 +1,4 @@
-import { AuthWrapperProps } from '@domain/Auth/auth-wrapper-component/auth-wrapper.types';
+import { AuthWrapperProps } from '@domain/auth/auth-wrapper-component/auth-wrapper.types';
 import {
   BackgroundPlace,
   Title,

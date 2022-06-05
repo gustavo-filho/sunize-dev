@@ -1,8 +1,8 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import dashboardReducer from '../../src/domain/dashboard/dashboard.store';
-import userReducer from '../../src/domain/dashboard/user/user.store';
+import userReducer from '../domain/auth/user/user.store';
 import { createLogger } from 'redux-logger';
-import { userListener } from '../domain/dashboard/user/user.store.middlewares';
+import { userListener } from '../domain/auth/user/user.store.middlewares';
 
 export const store = configureStore({
   reducer: {

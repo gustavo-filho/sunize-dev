@@ -3,12 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.middlewares.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.middlewares.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/assets/images/BackgroundFormLogin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/assets/images/BackgroundFormLogin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/assets/images/BackgroundPage2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/assets/images/BackgroundPage2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/assets/images/LineBottomLoginTitle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/assets/images/LineBottomLoginTitle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/assets/images/LoginImage.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/assets/images/LoginImage.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/auth-route.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/auth-route.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/auth-route.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/auth-route.wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/auth-wrapper-component/auth-wrapper.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/auth-wrapper-component/auth-wrapper.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/auth-wrapper-component/auth-wrapper.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/auth-wrapper-component/auth-wrapper.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/auth-wrapper-component/auth-wrapper.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/auth-wrapper-component/auth-wrapper.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/login/login.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/login/login.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/login/login.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/login/login.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Auth/login/login.validation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/login/login.validation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.middlewares.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.store.middlewares.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/user/user.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/user/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/services/api-routes.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api-routes.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +94,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/domain/auth" />
       <recent name="$PROJECT_DIR$/src/shared/assets/images" />
     </key>
   </component>
@@ -105,7 +118,7 @@
       <workItem from="1654438556788" duration="487000" />
       <workItem from="1654439201432" duration="68000" />
       <workItem from="1654439427000" duration="11876000" />
-      <workItem from="1654451436471" duration="5051000" />
+      <workItem from="1654451436471" duration="6912000" />
     </task>
     <servers />
   </component>

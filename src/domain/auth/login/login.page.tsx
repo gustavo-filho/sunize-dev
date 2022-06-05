@@ -1,14 +1,15 @@
-import { FormContainer, KeyIcon, Container } from './login.styles';
-import { AuthWrapperComponent } from '@domain/Auth/auth-wrapper-component/auth-wrapper.component';
+import { AuthWrapperComponent } from '@domain/auth/auth-wrapper-component/auth-wrapper.component';
 import { Formik } from 'formik';
 import { useCallback } from 'react';
-import { schema } from './login.validation';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { BiEnvelope } from 'react-icons/bi';
-import { ASYNC_SIGN_IN, userSelector } from '@domain/dashboard/user/user.store';
+import { ASYNC_SIGN_IN, userSelector } from '@domain/auth/user/user.store';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { UserAuthProps } from '@domain/dashboard/user/user.types';
+import { UserAuthProps } from '@domain/auth/user/user.types';
+import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
+import { schema } from '@domain/auth/login/login.validation';
+import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -27,12 +28,12 @@ export const LoginPage = () => {
   );
 
   return (
-    <Container>
+    <AuthRouteWrapper>
       <AuthWrapperComponent
         title="Entrar na conta"
         subtitle="Não possui uma conta?"
         firstAction={{ label: 'Cadastre-se', path: '/register' }}
-        secondAction={{ label: 'Esqueci minha senha', path: '/forgetpass' }}
+        secondAction={{ label: 'Esqueci minha senha', path: '/forgot-pass' }}
       >
         <Formik
           onSubmit={onSubmit}
@@ -41,7 +42,7 @@ export const LoginPage = () => {
             email: '',
             password: '',
           }}
-          render={({ isSubmitting }) => (
+          render={() => (
             <FormContainer>
               <DefaultInput
                 mode="dark"
@@ -63,6 +64,6 @@ export const LoginPage = () => {
           )}
         />
       </AuthWrapperComponent>
-    </Container>
+    </AuthRouteWrapper>
   );
 };

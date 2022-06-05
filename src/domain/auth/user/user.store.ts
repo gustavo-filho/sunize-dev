@@ -18,13 +18,33 @@ export const ASYNC_SIGN_IN = createAsyncThunk(
         toast.error(err.response.data.message, {
           position: 'top-right',
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         });
         return err;
+      });
+
+    return response.data;
+  },
+);
+
+export const ASYNC_RECOVERY_PASSWORD = createAsyncThunk(
+  'USER/RECOVERY_PASSWORD',
+  async ({ email }: { email: string }) => {
+    const response = await api
+      .post(API_ROUTES.AUTH.RECOVERY_PASSWORD, {
+        email,
+      })
+      .then(res => {
+        toast.success('Email enviado', {
+          position: 'top-right',
+          autoClose: 5000,
+        });
+      })
+      .catch(err => {
+        toast.error(`Erro ao recuperar senha. ${err.response.data.message}`, {
+          position: 'top-right',
+          autoClose: 5000,
+        });
+        return err.data;
       });
 
     return response.data;
@@ -47,8 +67,6 @@ const userReducer = createSlice({
     });
     builder.addCase(ASYNC_SIGN_IN.rejected, (state, action) => {
       state.loading = false;
-
-      console.log({ ac: action });
       state.error = action.error;
     });
     builder.addCase(ASYNC_SIGN_IN.fulfilled, (state, action) => {
