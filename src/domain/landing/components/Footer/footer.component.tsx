@@ -36,13 +36,13 @@ export const Footer = () => {
         </LogoContainer>
         <NavContainer>
           <strong>Redes Sociais</strong>
-          <a href="">
+          <a href="/">
             <BsInstagram /> Instagram
           </a>
-          <a href="">
+          <a href="/">
             <BsFacebook /> Facebook
           </a>
-          <a href="">
+          <a href="/">
             <BsYoutube /> YouTube
           </a>
         </NavContainer>
@@ -70,7 +70,7 @@ export const Footer = () => {
         <NavContainer>
           <strong>Contato</strong>
 
-          <a href="">
+          <a href="/">
             <BsWhatsapp /> Fale conosco
           </a>
 
@@ -82,8 +82,8 @@ export const Footer = () => {
       <Credits>
         &copy; Sunize 2021, Todos os direitos reservados.
         <nav>
-          <a href="#">Termos de Uso</a> |{' '}
-          <a href="#">Politica de privacidade</a>
+          <a href="/">Termos de Uso</a> |{' '}
+          <a href="/">Politica de privacidade</a>
         </nav>
       </Credits>
     </Container>

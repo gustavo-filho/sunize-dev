@@ -8,5 +8,4 @@ const dashboardStore = createSlice({
   },
 });
 
-// export const {} = dashboardStore.actions;
 export default dashboardStore.reducer;

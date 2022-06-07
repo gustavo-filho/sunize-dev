@@ -10,10 +10,12 @@ import { UserAuthProps } from '@domain/auth/user/user.types';
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
 import { schema } from '@domain/auth/login/login.validation';
 import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
+import { useHistory } from 'react-router-dom';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
+  const history = useHistory();
 
   const onSubmit = useCallback(
     (values: UserAuthProps) => {
@@ -22,9 +24,11 @@ export const LoginPage = () => {
           email: values.email,
           password: values.password,
         }),
-      );
+      ).then(() => {
+        history.push('/dashboard');
+      });
     },
-    [dispatch],
+    [dispatch, history],
   );
 
   return (

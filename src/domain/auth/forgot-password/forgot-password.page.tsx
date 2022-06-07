@@ -6,11 +6,15 @@ import { DefaultInput } from '@shared/components/DefaultInput/default-input.comp
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { BiEnvelope } from 'react-icons/bi';
 import { schema } from '@domain/auth/forgot-password/forgot-password.validation';
-import { useAppDispatch } from '../../../store/hooks';
-import { ASYNC_RECOVERY_PASSWORD } from '@domain/auth/user/user.store';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import {
+  ASYNC_RECOVERY_PASSWORD,
+  userSelector,
+} from '@domain/auth/user/user.store';
 
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
 
   const onSubmit = (values: any) => {
     dispatch(ASYNC_RECOVERY_PASSWORD({ email: values.email }));
@@ -27,7 +31,7 @@ export const ForgotPassword = () => {
           onSubmit={onSubmit}
           validationSchema={schema}
           initialValues={{ email: '' }}
-          render={({ isSubmitting }) => (
+          render={() => (
             <FormContainer>
               <DefaultInput
                 mode="dark"
@@ -37,7 +41,7 @@ export const ForgotPassword = () => {
                 placeholder="Digite seu email"
               />
 
-              <DefaultButton loading={isSubmitting}>
+              <DefaultButton loading={user.recoveryPassword.loading}>
                 Recuperar senha
               </DefaultButton>
             </FormContainer>

@@ -5,6 +5,7 @@ import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
 import { UserAuthProps } from './user.types';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 export const ASYNC_SIGN_IN = createAsyncThunk(
   'USER/SIGN_IN',
@@ -38,6 +39,7 @@ export const ASYNC_RECOVERY_PASSWORD = createAsyncThunk(
           position: 'top-right',
           autoClose: 5000,
         });
+        return res.data;
       })
       .catch(err => {
         toast.error(`Erro ao recuperar senha. ${err.response.data.message}`, {
@@ -55,12 +57,22 @@ const userReducer = createSlice({
   initialState: {
     data: {
       name: '',
+      account_type: '',
+      id: null,
     },
     loading: false,
     error: {},
+    recoveryPassword: {
+      loading: false,
+    },
   },
   name: STORE_DOMAIN.USER,
-  reducers: {},
+  reducers: {
+    INITIAL_LOGIN: state => {
+      if (Cookies.get('@Sunize:user'))
+        state.data = JSON.parse(Cookies.get('@Sunize:user') ?? '');
+    },
+  },
   extraReducers: builder => {
     builder.addCase(ASYNC_SIGN_IN.pending, (state, action) => {
       state.loading = true;
@@ -73,8 +85,19 @@ const userReducer = createSlice({
       state.data = action.payload.data;
       state.loading = false;
     });
+    builder.addCase(ASYNC_RECOVERY_PASSWORD.rejected, (state, action) => {
+      state.recoveryPassword.loading = false;
+    });
+    builder.addCase(ASYNC_RECOVERY_PASSWORD.fulfilled, (state, action) => {
+      state.recoveryPassword.loading = false;
+      console.log({ action });
+    });
+    builder.addCase(ASYNC_RECOVERY_PASSWORD.pending, (state, action) => {
+      state.recoveryPassword.loading = true;
+    });
   },
 });
 
+export const { INITIAL_LOGIN } = userReducer.actions;
 export const userSelector = (state: RootState) => state.user;
 export default userReducer.reducer;
