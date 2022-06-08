@@ -89,8 +89,8 @@ const userReducer = createSlice({
       state.recoveryPassword.loading = false;
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.fulfilled, (state, action) => {
-      state.recoveryPassword.loading = false;
       console.log({ action });
+      state.recoveryPassword.loading = false;
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.pending, (state, action) => {
       state.recoveryPassword.loading = true;

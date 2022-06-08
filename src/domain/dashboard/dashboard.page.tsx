@@ -17,6 +17,7 @@ import { Charts } from '@domain/dashboard/components/Charts/charts.component';
 import { CardTiles } from '@domain/dashboard/components/CardTiles/card-tiles.component';
 import { useState } from 'react';
 import { dataMock } from '@domain/dashboard/dashboard.mocks';
+import { Header } from '@domain/dashboard/components/Header/header.component';
 import {
   Types,
   Data,
@@ -54,6 +55,8 @@ export const Dashboard = () => {
   };
 
   return (
+    <>
+    <Header />
     <WrapperContent>
       <Container>
         <CardChart>
@@ -91,71 +94,50 @@ export const Dashboard = () => {
         <CardsDetailsWrapper>
           <TitleSection>Receitas</TitleSection>
           <CardTiles
-            value={
-              basicInformations.salesAmmount ?? <DotsLoader color="white" />
-            }
+            value={basicInformations.salesAmmount ?? <DotsLoader color="white" />}
             title="Total de Vendas"
-            icon={<BsCreditCard />}
-          />
+            icon={<BsCreditCard />} />
           <CardTiles
             value={basicInformations.reimbursed ?? <DotsLoader color="white" />}
             title="Reembolsado"
-            icon={<BsReceipt />}
-          />
+            icon={<BsReceipt />} />
           <CardTiles
-            value={
-              basicInformations.reimbursedPercent ?? (
-                <DotsLoader color="white" />
-              )
-            }
+            value={basicInformations.reimbursedPercent ?? (
+              <DotsLoader color="white" />
+            )}
             title="% Reembolsados"
-            icon={<BsReceipt />}
-          />
+            icon={<BsReceipt />} />
 
           <TitleSection>Perfomance</TitleSection>
           <CardTiles
-            value={
-              basicInformations.performanceSales ?? <DotsLoader color="white" />
-            }
+            value={basicInformations.performanceSales ?? <DotsLoader color="white" />}
             title="Vendas"
-            icon={<BsCreditCard />}
-          />
+            icon={<BsCreditCard />} />
           <CardTiles
-            value={
-              basicInformations.performanceReimbursed ?? (
-                <DotsLoader color="white" />
-              )
-            }
+            value={basicInformations.performanceReimbursed ?? (
+              <DotsLoader color="white" />
+            )}
             title="Reembolsado"
-            icon={<BsReceipt />}
-          />
+            icon={<BsReceipt />} />
 
           <TitleSection>Boletos</TitleSection>
           <CardTiles
-            value={
-              basicInformations.genetedTickets ?? <DotsLoader color="white" />
-            }
+            value={basicInformations.genetedTickets ?? <DotsLoader color="white" />}
             title="Gerados"
-            icon={<BsCreditCard />}
-          />
+            icon={<BsCreditCard />} />
           <CardTiles
-            value={
-              basicInformations.paidTickets ?? <DotsLoader color="white" />
-            }
+            value={basicInformations.paidTickets ?? <DotsLoader color="white" />}
             title="Pagos"
-            icon={<BsReceipt />}
-          />
+            icon={<BsReceipt />} />
           <CardTiles
-            value={
-              basicInformations.ticketsConvertPercent ?? (
-                <DotsLoader color="white" />
-              )
-            }
+            value={basicInformations.ticketsConvertPercent ?? (
+              <DotsLoader color="white" />
+            )}
             title="% Conversões"
-            icon={<BsReceipt />}
-          />
+            icon={<BsReceipt />} />
         </CardsDetailsWrapper>
       </Container>
     </WrapperContent>
+    </>
   );
 };
