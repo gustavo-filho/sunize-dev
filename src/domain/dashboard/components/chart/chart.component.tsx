@@ -1,13 +1,14 @@
-import { Chart } from 'react-google-charts';
-import { ChartsProps } from '@domain/dashboard/components/Charts/charts.types';
+import { Chart as GoogleChart } from 'react-google-charts';
+interface ChartProps {
+  data: (string | number)[][];
+}
 
-export const Charts = ({ data }: ChartsProps) => {
+export const Chart = ({ data }: ChartProps) => {
   return (
-    <Chart
+    <GoogleChart
       height={'100%'}
       width={'100%'}
       chartType="LineChart"
-      loader={<div>Carregando</div>}
       data={data}
       options={{
         series: {

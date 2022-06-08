@@ -1,5 +1,7 @@
-export const dataMock = {
-  year: [
+import { BY_TIME_DATA } from '@domain/dashboard/dashboard.contants';
+
+export const DASHBOARD_MOCK = {
+  [BY_TIME_DATA.MONTHLY]: [
     ['x', 'Total'],
     ['Jan', 1000],
     ['Fev', 500],
@@ -14,7 +16,7 @@ export const dataMock = {
     ['Nov', 5000],
     ['Dez', 6000],
   ],
-  month: [
+  [BY_TIME_DATA.DAILY]: [
     ['x', 'Total'],
     ['01', 100],
     ['02', 200],
@@ -47,18 +49,8 @@ export const dataMock = {
     ['29', 900],
     ['30', 1000],
   ],
-  day: [
+  [BY_TIME_DATA.YEARLY]: [
     ['x', 'Total'],
-    ['00', 1000],
-    ['01', 100],
-    ['02', 200],
-    ['03', 400],
-    ['04', 300],
-    ['05', 600],
-    ['06', 700],
-    ['07', 800],
-    ['08', 900],
-    ['09', 200],
     ['10', 1000],
     ['11', 2000],
     ['12', 400],
