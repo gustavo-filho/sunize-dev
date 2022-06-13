@@ -3,7 +3,7 @@ import { LandingPage } from '@domain/landing/landing.page';
 import { LoginPage } from '@domain/auth/login/login.page';
 import { ForgotPassword } from '@domain/auth/forgot-password/forgot-password.page';
 import { PrivateRouteWrapper } from './private-route.wrapper';
-import { Dashboard } from '@domain/dashboard/dashboard.page';
+import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 
 export const Routes = () => (
   <BrowserRouter>
@@ -11,7 +11,8 @@ export const Routes = () => (
       <Route path="/" exact component={LandingPage} />
       <Route path="/login" exact component={LoginPage} />
       <Route path="/forgot-pass" exact component={ForgotPassword} />
-      <PrivateRouteWrapper path="/dashboard" component={Dashboard} />
+      <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
+      <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
     </Switch>
   </BrowserRouter>
 );

@@ -3,16 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.component.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.styles.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.types.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Charts/charts.component.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Charts/charts.types.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.mocks.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.contants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.contants.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,25 +62,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/src/shared/assets/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/gustavofilho/sunize/sunize-front/src/domain/dashboard/products/assets/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/gustavofilho/sunize/sunize-front/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "/Users/gustavofilho/sunize/sunize-front/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/assets/images" />
       <recent name="$PROJECT_DIR$/src/shared/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/Auth/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/login/assets/images" />
@@ -117,7 +119,11 @@
       <workItem from="1654560952179" duration="10195000" />
       <workItem from="1654618089028" duration="1887000" />
       <workItem from="1654650641418" duration="4418000" />
-      <workItem from="1654655234641" duration="2221000" />
+      <workItem from="1654655234641" duration="3587000" />
+      <workItem from="1654723389214" duration="1922000" />
+      <workItem from="1654827568613" duration="1513000" />
+      <workItem from="1654962874287" duration="8855000" />
+      <workItem from="1655074071918" duration="8409000" />
     </task>
     <servers />
   </component>

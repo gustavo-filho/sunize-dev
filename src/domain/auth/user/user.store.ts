@@ -58,7 +58,8 @@ const userReducer = createSlice({
     data: {
       name: '',
       account_type: '',
-      id: null,
+      id: 0,
+      access_token: '',
     },
     loading: false,
     error: {},

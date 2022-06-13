@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         --webkit-font-smoothing: antialiased;
         background: ${theme.colors.darkBlueBackground};
+        padding-inline: 2rem;
     }
     body, input, textarea, button {
         font-family: 'Montserrat', sans-serif;

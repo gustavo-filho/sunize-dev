@@ -1,18 +1,17 @@
 import { Route, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { INITIAL_LOGIN, userSelector } from '@domain/auth/user/user.store';
-import { ComponentType, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
+import { DashboardWrapper } from '@domain/dashboard/components/dashboard-wrapper/dashboard.wrapper';
 
 interface PrivateRouteWrapperProps {
-  component: ComponentType<any>;
   path: string;
 }
 
 export const PrivateRouteWrapper = ({
-  component,
   path,
   ...rest
 }: PrivateRouteWrapperProps) => {
@@ -49,5 +48,5 @@ export const PrivateRouteWrapper = ({
     fetchData();
   }, [fetchData]);
 
-  return <Route exact {...rest} path={path} component={component} />;
+  return <Route exact {...rest} path={path} component={DashboardWrapper} />;
 };

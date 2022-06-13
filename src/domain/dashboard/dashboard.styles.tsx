@@ -15,6 +15,7 @@ export const MainContent = styled.div`
 
 export const CardTitle = styled.p`
   width: 100%;
+  max-width: 1200px;
   color: white;
   font-size: 2rem;
 `;
