@@ -15,11 +15,10 @@ export const GlobalStyle = createGlobalStyle`
         @media (max-width: 720px) {
             font-size: 87.5%;
         }
-    }
+    } 
     body {
         --webkit-font-smoothing: antialiased;
         background: ${theme.colors.darkBlueBackground};
-        padding-inline: 2rem;
     }
     body, input, textarea, button {
         font-family: 'Montserrat', sans-serif;

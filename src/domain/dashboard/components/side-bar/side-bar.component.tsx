@@ -17,14 +17,13 @@ import {
   MdOutlineCreateNewFolder,
   MdPayments,
 } from 'react-icons/md';
-import { GiHistogram } from 'react-icons/gi';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { useState } from 'react';
 
 export const SideBar = () => {
   const { pathname } = useLocation();
-  const [isMenuOpen] = useState(false);
+  const [isMenuOpen] = useState(true);
   const history = useHistory();
 
   return (
@@ -49,7 +48,6 @@ export const SideBar = () => {
           <MenuItem icon={<MdGroup />}>Produtos afiliados</MenuItem>
         </SubMenu>
         <SubMenu title="Vendas" icon={<AiOutlineShoppingCart />}>
-          <MenuItem icon={<GiHistogram />}>Minhas vendas</MenuItem>
           <MenuItem icon={<MdPayments />}>Registro de vendas</MenuItem>
           <MenuItem icon={<MdPayments />}>Registro de compras</MenuItem>
         </SubMenu>

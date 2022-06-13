@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.contants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.contants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +114,7 @@
       <workItem from="1654723389214" duration="1922000" />
       <workItem from="1654827568613" duration="1513000" />
       <workItem from="1654962874287" duration="8855000" />
-      <workItem from="1655074071918" duration="8409000" />
+      <workItem from="1655074071918" duration="9890000" />
     </task>
     <servers />
   </component>
