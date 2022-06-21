@@ -23,7 +23,7 @@ import { useState } from 'react';
 
 export const SideBar = () => {
   const { pathname } = useLocation();
-  const [isMenuOpen] = useState(true);
+  const [isMenuOpen] = useState(false);
   const history = useHistory();
 
   return (
@@ -44,12 +44,36 @@ export const SideBar = () => {
           >
             Meus produtos
           </MenuItem>
-          <MenuItem icon={<MdOutlineCreateNewFolder />}>Criar produto</MenuItem>
-          <MenuItem icon={<MdGroup />}>Produtos afiliados</MenuItem>
+          <MenuItem
+            icon={<MdOutlineCreateNewFolder />}
+            onClick={() => history.push(DASHBOARD_ROUTES.CREATE_PRODUCT)}
+            active={pathname === DASHBOARD_ROUTES.CREATE_PRODUCT}
+          >
+            Criar produto
+          </MenuItem>
+          <MenuItem
+            icon={<MdGroup />}
+            onClick={() => history.push(DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES)}
+            active={pathname === DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES}
+          >
+            Produtos afiliados
+          </MenuItem>
         </SubMenu>
         <SubMenu title="Vendas" icon={<AiOutlineShoppingCart />}>
-          <MenuItem icon={<MdPayments />}>Registro de vendas</MenuItem>
-          <MenuItem icon={<MdPayments />}>Registro de compras</MenuItem>
+          <MenuItem
+            icon={<MdPayments />}
+            onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
+            active={pathname === DASHBOARD_ROUTES.SALE_RECORD}
+          >
+            Registro de vendas
+          </MenuItem>
+          <MenuItem
+            icon={<MdPayments />}
+            onClick={() => history.push(DASHBOARD_ROUTES.PURCHASE_RECORD)}
+            active={pathname === DASHBOARD_ROUTES.PURCHASE_RECORD}
+          >
+            Registro de compras
+          </MenuItem>
         </SubMenu>
         <MenuItem icon={<MdGroups />}>Afiliados</MenuItem>
         <MenuItem icon={<AiFillShop />}>Mercado</MenuItem>

@@ -16,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
             font-size: 87.5%;
         }
     } 
+    a {
+      text-decoration: none;
+    }
     body {
         --webkit-font-smoothing: antialiased;
         background: ${theme.colors.darkBlueBackground};
@@ -23,7 +26,6 @@ export const GlobalStyle = createGlobalStyle`
     body, input, textarea, button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        color: white;
     }
     h1, h2, h3, h4, h5, h6, strong {
         font-weight: 600;

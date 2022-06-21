@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard.wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/products/my-products/my-products.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/products/my-products/my-products.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/products/products.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/products/products.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,27 +59,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/src/domain/dashboard/products/assets/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/gustavofilho/sunize/sunize-front/src/shared/assets/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/gustavofilho/sunize/sunize-front/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "/Users/gustavofilho/sunize/sunize-front/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/assets/images" />
       <recent name="$PROJECT_DIR$/src/shared/assets/images" />
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/Auth/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/login/assets/images" />
       <recent name="$PROJECT_DIR$" />
@@ -116,7 +122,11 @@
       <workItem from="1654962874287" duration="8855000" />
       <workItem from="1655074071918" duration="10484000" />
       <workItem from="1655127358364" duration="35000" />
-      <workItem from="1655502919975" duration="798000" />
+      <workItem from="1655502919975" duration="1446000" />
+      <workItem from="1655567049862" duration="558000" />
+      <workItem from="1655569083459" duration="4306000" />
+      <workItem from="1655729606109" duration="92000" />
+      <workItem from="1655820041193" duration="12994000" />
     </task>
     <servers />
   </component>
