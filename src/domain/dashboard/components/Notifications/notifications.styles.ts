@@ -19,6 +19,20 @@ export const BellNotification = styled.div`
     :hover {
       color: ${shade(0.15, 'white')};
     }
+    
+  }
+
+  @keyframes shine {
+  from {
+    filter: drop-shadow(0 0 0 white);
+  }
+  to {
+    filter: drop-shadow(0 0 8px white);
+  }
+  }
+  .shine{
+    animation: shine 0.5 forwards 0s  normal;
+
   }
 
   span {
@@ -32,6 +46,8 @@ export const BellNotification = styled.div`
     padding: 0.15rem;
     font-size: 0.7rem;
   }
+
+
 `
 
 export const NotiticationsContainer = styled(motion.main)`
@@ -75,7 +91,7 @@ export const NotiticationsContainer = styled(motion.main)`
     right: 2%;
     width: 30px;
     height: 30px;
-    border-radius: 20%;
+    border-radius: 50%;
     border: 0;
     display: flex;
     justify-content: center;
@@ -83,6 +99,10 @@ export const NotiticationsContainer = styled(motion.main)`
     background-color: #2c2c3b;
     transition: background-color 0.3s ease;
 
+    > svg {
+      color: #c27c2c;
+      font-size: 1.15rem;
+    }
     :hover {
       background-color: #c27c2c;
 
@@ -91,10 +111,6 @@ export const NotiticationsContainer = styled(motion.main)`
       }
     }
 
-    > svg {
-      color: #c27c2c;
-      font-size: 1.15rem;
-    }
   }
 
   h1 {

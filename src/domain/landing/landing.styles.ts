@@ -4,6 +4,20 @@ import { SectionProps } from './landing.types';
 export const Container = styled.div`
   background-color: #f1f1f1;
   overflow: hidden;
+
+  [data-scroll] {
+    /* opacity: 0; */
+    opacity: 1;
+    transition: .5s;
+  }
+  [data-scroll="left"] {
+    /* transform: translate3d(-100px, 0, 0); */
+    transform: translate3d(0px, 0, 0);
+  }
+  [data-scroll].animate {
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+  }
 `;
 
 export const Main = styled.main`
@@ -78,7 +92,7 @@ export const Section = styled.section<SectionProps>`
       background-color: transparent;
       color: #eaa73d !important;
       display: block;
-      margin-top: -20px;
+      margin-top: -11px;
       padding: 0;
     }
   }
@@ -244,7 +258,7 @@ export const ConversionColumn = styled.div`
       margin-bottom: 0;
 
       mark {
-        margin-top: -40px;
+        margin-top: -28px;
       }
     }
   }
@@ -417,7 +431,7 @@ export const FaqColumn = styled.div`
     font-size: 46px;
 
     mark {
-      margin-top: -30px;
+      margin-top: -21px;
       font-size: 54px;
     }
   }

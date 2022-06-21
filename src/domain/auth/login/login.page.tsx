@@ -9,8 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { UserAuthProps } from '@domain/auth/user/user.types';
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
 import { schema } from '@domain/auth/login/login.validation';
-import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
+import { FormContainer, KeyIcon, } from '@domain/auth/login/login.styles';
 import { useHistory } from 'react-router-dom';
+// import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs" ;   
+
+
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +33,7 @@ export const LoginPage = () => {
     },
     [dispatch, history],
   );
+
 
   return (
     <AuthRouteWrapper>
