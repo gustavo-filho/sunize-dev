@@ -1,5 +1,5 @@
 import { DashboardWrapperConstants } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { SideBar } from '@domain/dashboard/components/side-bar/side-bar.component';
 
 export const DashboardWrapper = () => {
