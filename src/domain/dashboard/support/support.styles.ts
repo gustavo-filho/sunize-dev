@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   max-width: 1640px;
+  width: 100%;
   margin: 60px auto 0px auto;
-  margin-left: 250px;
   padding: 0 6%;
   > h2 {
     margin-bottom: 1rem;
