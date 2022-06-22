@@ -78,7 +78,11 @@ export const SideBar = () => {
         <MenuItem icon={<MdGroups />}>Afiliados</MenuItem>
         <MenuItem icon={<AiFillShop />}>Mercado</MenuItem>
         <MenuItem icon={<AiFillBank />}>Saldo</MenuItem>
-        <MenuItem icon={<AiOutlineQuestionCircle />}>Suporte</MenuItem>
+        <MenuItem
+          icon={<AiOutlineQuestionCircle />}
+          onClick={() => history.push(DASHBOARD_ROUTES.SUPPORT)}
+          active={pathname === DASHBOARD_ROUTES.SUPPORT}
+        >Suporte</MenuItem>
       </Menu>
     </SideBarContainer>
   );

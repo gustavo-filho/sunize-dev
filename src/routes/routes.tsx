@@ -13,6 +13,7 @@ export const Routes = () => (
       <Route path="/forgot-pass" exact component={ForgotPassword} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
+      <PrivateRouteWrapper path={DASHBOARD_ROUTES.SUPPORT} />
     </Switch>
   </BrowserRouter>
 );
