@@ -360,47 +360,38 @@ export function ModalAddAccount({ modal, setModal }: any) {
                       <Input
                         name="complement"
                         text="Complemento (Opcional)"
-                        onChange={(e: any) =>
-                          setFieldValue('complement', e.target.value)
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('complement', event.target.value)
                         }
                         placeholder="Digite um complemento para sua residência"
                       />
 
                       <Input
                         name="district"
-                        text="Seu bairro *"
-                        onChange={(e) =>
-                          setFieldValue('district', e.target.value)
+                        text="Informe o bairro da sua residência"
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('district', event.target.value)
                         }
-                        placeholder="Digite o nome do seu bairro"
+                        placeholder="Bairro da residência"
                       />
 
                       <Input
                         name="cityName"
-                        text="Nome de sua cidade *"
-                        onChange={(e) =>
-                          setFieldValue('cityName', e.target.value)
+                        text="Informe a cidade da sua residência"
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('cityName', event.target.value)
                         }
-                        placeholder="Digite o nome de sua cidade"
+                        placeholder="Cidade da residência"
                       />
 
-                      {/* <InputMasked
-                        name="StateInitials"
-                        text="Sigla de seu estado *"
-                        mask="aa"
-                        maskChar=""
-                        onChange={(e) =>
-                          setFieldValue('StateInitials', e.target.value)
-                        }
-                        placeholder="Digite a sigla de seu estado"
-                      /> */}
-                      <Input
+                      <InputMaskedModalAddAccount
                         name="stateInitials"
-                        text="Sigla de seu estado *"
-                        onChange={(e: any) =>
-                          setFieldValue('stateInitials', e.target.value)
+                        text="Informa a sigla do estado da residência"
+                        mask="aa"
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('stateInitials', event.target.value)
                         }
-                        placeholder="Digite a sigla de seu estado"
+                        placeholder="UF da Residência"
                       />
                     </>
                   )}
