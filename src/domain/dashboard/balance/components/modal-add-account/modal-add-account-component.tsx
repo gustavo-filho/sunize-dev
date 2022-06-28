@@ -18,7 +18,6 @@ import {
   Error,
   PersonType,
 } from './modal-add-account-styles'
-import InputMasked from '@shared/components/input-masked/input-masked.component'
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import { Input } from '@shared/components/input/input.component'
 import { SingleSelect } from '@shared/components/select/select.component'
@@ -30,6 +29,8 @@ import { SelectBank } from '@domain/dashboard/components/select-bank-component/s
 import { schema } from './modal-add-account-schema'
 import { toast } from 'react-toastify'
 import { InputCpfOrCnpj } from '@shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-component'
+import { addAcountTypeValues } from './types/modal-add-account-values-types'
+import { InputMaskedModalAddAccount } from './input-masked-add-account/input-masked-modal-add-account'
 
 export function ModalAddAccount({ modal, setModal }: any) {
   const user = useAppSelector(userSelector);
@@ -45,67 +46,88 @@ export function ModalAddAccount({ modal, setModal }: any) {
       axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
         if (!res.data.erro) {
           setStatusGetLocation('success')
-          setFieldValue('Street', res.data.logradouro)
-          setFieldValue('Complement', res.data.complemento)
-          setFieldValue('CityName', res.data.localidade)
-          setFieldValue('StateInitials', res.data.uf)
-          setFieldValue('CountryName', 'Brasil')
-          setFieldValue('District', res.data.bairro)
+          setFieldValue('street', res.data.logradouro)
+          setFieldValue('complement', res.data.complemento)
+          setFieldValue('cityName', res.data.localidade)
+          setFieldValue('stateInitials', res.data.uf)
+          setFieldValue('countryName', 'Brasil')
+          setFieldValue('district', res.data.bairro)
         }
       })
     }
   }, [])
 
   const onSubmit = useCallback(
-    async (values: any) => {
-      if (isCpf === true) {
-        values.cpnj = ''
-      } else {
-        values.cpf = ''
-      }
+    async (values: addAcountTypeValues) => {
+      console.log('values', values)
+      // if (isCpf === true) {
+      //   values.cnpj = ''
+      // } else {
+      //   values.cpf = ''
+      // }
 
-      let ZipCode = values.ZipCode
-      ZipCode = String(ZipCode).replace(/[-_]/g, '')
+      // let ZipCode = values.zipCode
+      // ZipCode = String(ZipCode).replace(/[-_]/g, '')
 
-      const subAccount = {
-        account: {
-          Identity: values.cpf ? values.cpf : values.cnpj,
-          BankData: {
-            Bank: {
-              Code: values.bank,
-            },
-            BankAgency: values.agency,
-            BankAgencyDigit: values.BankAgencyDigit,
-            BankAccount: values.account,
-            BankAccountDigit: values.digit,
-            AccountType: {
-              Code: values.account_type,
-            },
-          },
-          Address: {
-            ZipCode: ZipCode,
-            Street: values.Street,
-            Number: values.Number,
-            Complement: values.Complement,
-            District: values.District,
-            CityName: values.CityName,
-            StateInitials: values.StateInitials,
-            CountryName: values.CountryName,
-          },
-        },
-      }
+      // const subAccount = {
+      //   account: {
+      //     Identity: values.cpf ? values.cpf : values.cnpj,
+      //     BankData: {
+      //       Bank: {
+      //         Code: values.bank,
+      //       },
+      //       BankAgency: values.agency,
+      //       BankAgencyDigit: values.digit,
+      //       BankAccount: values.account,
+      //       BankAccountDigit: values.digit,
+      //       AccountType: {
+      //         Code: values.accountType,
+      //       },
+      //     },
+      //     Address: {
+      //       ZipCode: ZipCode,
+      //       Street: values.street,
+      //       Number: values.number,
+      //       Complement: values.complement,
+      //       District: values.district,
+      //       CityName: values.cityName,
+      //       StateInitials: values.stateInitials,
+      //       CountryName: values.countryName,
+      //     },
+      //   },
+      // }
 
-      try {
-        await api.post(`/users/${user.data.id}/safe2pay/sub-accounts`, subAccount, {
-          headers: { 'sunize-access-token': user.data.access_token },
-        })
-        toast.success('Sua conta foi cadastrada!')
-      } catch (error) {
-        toast.error('Ocorreu um erro ao tentar cadastrar sua conta!')
-      }
+      // try {
+      //   await api.post(`/users/${user.data.id}/safe2pay/sub-accounts`, subAccount, {
+      //     headers: { 'sunize-access-token': user.data.access_token },
+      //   })
+      //   toast.success('Sua conta foi cadastrada!')
+      // } catch (error) {
+      //   toast.error('Ocorreu um erro ao tentar cadastrar sua conta!')
+      // }
     },
     [user.data.id, user.data.access_token, isCpf],
   )
+
+  const addAcountDefaultValue: addAcountTypeValues = {
+    bank: '',
+    favoredName: '',
+    personType: 'PF',
+    cpf: '',
+    cnpj: '',
+    accountType: '',
+    agency: '',
+    account: '',
+    digit: '',
+    zipCode: '',
+    street: '',
+    number: '',
+    complement: '',
+    district: '',
+    cityName: '',
+    stateInitials: '',
+    countryName: '',
+  }
 
   // const validate = useCallback(
   //   (values:any) => {
@@ -145,29 +167,13 @@ export function ModalAddAccount({ modal, setModal }: any) {
 
             <Formik
               initialValues={{
-                bank: '',
-                favoredName: '',
-                person_type: 'PF',
-                cpf: '',
-                cnpj: '',
-                account_type: '',
-                agency: '',
-                account: '',
-                digit: '',
-                ZipCode: '',
-                Street: '',
-                Number: '',
-                Complement: '',
-                District: '',
-                CityName: '',
-                StateInitials: '',
-                CountryName: '',
+                ...addAcountDefaultValue
               }}
               onSubmit={onSubmit}
               // validate={validate}
-              validationSchema={schema}
-              validateOnChange
-              validateOnBlur
+              // validationSchema={schema}
+              // validateOnChange
+              // validateOnBlur
               render={({ errors, touched, setFieldValue }) => (
                 <Form>
                   <SelectBank
@@ -180,25 +186,13 @@ export function ModalAddAccount({ modal, setModal }: any) {
 
                   <FormGroupTop>
                     <FieldFormik
+                      id="favoredName"
                       name="favoredName"
                       placeholder="Nome do Favorecido"
-                    />
-                    {/* <InputMask
-                      mask={null}
-                      maskChar=""
                       onChange={(e: any) => {
-                        const value = parseFloat(e.target.value) ?? ''
-                        setFieldValue('agency', value)
+                        setFieldValue('favoredName', e.target.value)
                       }}
-                    >
-                      {(inputProps:any) => (
-                        <FieldFormik
-                          {...inputProps}
-                          name="favoredName"
-                          placeholder="Nome do Favorecido"
-                        />
-                      )}
-                    </InputMask> */}
+                    />
                   </FormGroupTop>
 
                   <FormGroupTop>
@@ -210,7 +204,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                             setFieldValue('cnpj', '')
                           }}
                           type="radio"
-                          name="person_type"
+                          name="personType"
                           id="physical"
                           value="PF"
                         />
@@ -229,7 +223,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                             setFieldValue('cpf', '')
                           }}
                           type="radio"
-                          name="person_type"
+                          name="personType"
                           id="juridic"
                           value="PJ"
                         />
@@ -270,7 +264,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                       <FieldFormik
                         type="radio"
                         id="current"
-                        name="account_type"
+                        name="accountType"
                         value="CURRENT_ACCOUNT"
                       />
                       <label htmlFor="current">Conta Corrente</label>
@@ -280,7 +274,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                       <FieldFormik
                         type="radio"
                         id="savings"
-                        name="account_type"
+                        name="accountType"
                         value="SAVINGS_ACCOUNT"
                       />
                       <label htmlFor="SAVINGS_ACCOUNT">Conta Poupança</label>
@@ -288,70 +282,36 @@ export function ModalAddAccount({ modal, setModal }: any) {
                   </FormGroup>
 
                   <AccountFields>
-                    {/* <InputMask
-                      mask="999999"
-                      maskChar=""
-                      onChange={(e) => setFieldValue('agency', e.target.value)}
-                    >
-                      {(inputProps) => (
-                        <FieldFormik
-                          {...inputProps}
-                          name="agency"
-                          placeholder="Agência"
-                        />
-                      )}
-                    </InputMask> */}
-
-                    <FieldFormik
+                    <InputMask
                       name="agency"
                       placeholder="Agência"
-                    />
+                      mask="999999"
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('agency', event.target.value)}>
+                    </InputMask>
 
-                    <FieldFormik
+                    <InputMask
                       name="account"
                       placeholder="Conta"
-                    />
-
-                    {/* <InputMask
                       mask="99999999"
-                      maskChar=""
-                      onChange={(e) => setFieldValue('account', e.target.value)}
-                    >
-                      {(inputProps: any) => (
-                        <FieldFormik
-                          {...inputProps}
-                          name="account"
-                          placeholder="Conta"
-                        />
-                      )}
-                    </InputMask> */}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('account', event.target.value)}>
+                    </InputMask>
 
-                    {/* <InputMask
-                      mask="9"
-                      maskChar=""
-                      onChange={(e) => setFieldValue('digit', e.target.value)}
-                    >
-                      {(inputProps: any) => (
-                        <FieldFormik
-                          {...inputProps}
-                          name="digit"
-                          placeholder="Digito"
-                        />
-                      )}
-                    </InputMask> */}
-                    <FieldFormik
+                    <InputMask
                       name="digit"
                       placeholder="Digito"
-                    />
+                      mask="9"
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('digit', event.target.value)}>
+                    </InputMask>
                   </AccountFields>
 
                   <h2>Informações de endereço</h2>
 
                   <SingleSelect
+                    id='countryName'
                     options={countriesFormated}
                     label="Selecione seu pais"
                     onChange={({ value }) => {
-                      setFieldValue('CountryName', String(value))
+                      setFieldValue('countryName', String(value))
                     }}
                     placeholder="Selecione seu pais"
                     customTheme={{
@@ -361,26 +321,15 @@ export function ModalAddAccount({ modal, setModal }: any) {
                     }}
                   />
 
-                  {/* <InputMasked
-                    name="ZipCode"
-                    text="Seu CEP *"
+                  <InputMaskedModalAddAccount
+                    name="zipCode"
+                    text="Informe seu CEP"
                     mask="99999-999"
-                    maskChar=""
-                    onChange={(e: any) => {
-                      setFieldValue('ZipCode', e.target.value)
-                      getLocation(e.target.value, setFieldValue)
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setFieldValue('zipCode', event.target.value)
+                      getLocation(event.target.value, setFieldValue)
                     }}
-                    placeholder="Digite seu CEP"
-                  /> */}
-
-                  <Input
-                    name="ZipCode"
-                    text="Seu CEP *"
-                    onChange={(e: any) => {
-                      setFieldValue('ZipCode', e.target.value)
-                      getLocation(e.target.value, setFieldValue)
-                    }}
-                    placeholder="Digite seu CEP"
+                    placeholder="CEP"
                   />
 
                   {statusGetLocation === 'trying' ? (
@@ -390,57 +339,47 @@ export function ModalAddAccount({ modal, setModal }: any) {
                   ) : (
                     <>
                       <Input
-                        name="Street"
-                        text="Sua rua *"
-                        onChange={(e: any) =>
-                          setFieldValue('Street', e.target.value)
+                        name="street"
+                        text="Informe o nome da rua da sua residência"
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('street', event.target.value)
                         }
-                        placeholder="Digite o nome da sua rua"
+                        placeholder="Rua da residência"
                       />
 
-                      {/* <InputMasked
-                        name="Number"
-                        text="Número de sua residência *"
-                        mask="999"
-                        maskChar=""
-                        onChange={(e) =>
-                          setFieldValue('Number', e.target.value)
+                      <InputMaskedModalAddAccount
+                        name="number"
+                        text="Informe o número da sua residência"
+                        mask="999999"
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue('number', event.target.value)
                         }
-                        placeholder="Digite o número de sua residência"
-                      /> */}
-
-                      <Input
-                        name="Number"
-                        text="Número de sua residência *"
-                        onChange={(e: any) =>
-                          setFieldValue('Number', e.target.value)
-                        }
-                        placeholder="Digite o número de sua residência"
+                        placeholder="Número da residência"
                       />
 
                       <Input
-                        name="Complement"
+                        name="complement"
                         text="Complemento (Opcional)"
                         onChange={(e: any) =>
-                          setFieldValue('Complement', e.target.value)
+                          setFieldValue('complement', e.target.value)
                         }
                         placeholder="Digite um complemento para sua residência"
                       />
 
                       <Input
-                        name="District"
+                        name="district"
                         text="Seu bairro *"
                         onChange={(e) =>
-                          setFieldValue('District', e.target.value)
+                          setFieldValue('district', e.target.value)
                         }
                         placeholder="Digite o nome do seu bairro"
                       />
 
                       <Input
-                        name="CityName"
+                        name="cityName"
                         text="Nome de sua cidade *"
                         onChange={(e) =>
-                          setFieldValue('CityName', e.target.value)
+                          setFieldValue('cityName', e.target.value)
                         }
                         placeholder="Digite o nome de sua cidade"
                       />
@@ -456,10 +395,10 @@ export function ModalAddAccount({ modal, setModal }: any) {
                         placeholder="Digite a sigla de seu estado"
                       /> */}
                       <Input
-                        name="StateInitials"
+                        name="stateInitials"
                         text="Sigla de seu estado *"
                         onChange={(e: any) =>
-                          setFieldValue('StateInitials', e.target.value)
+                          setFieldValue('stateInitials', e.target.value)
                         }
                         placeholder="Digite a sigla de seu estado"
                       />
@@ -467,7 +406,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                   )}
 
                   <Error>
-                    <ErrorMessage name="CountryName" />
+                    <ErrorMessage name="countryName" />
                   </Error>
 
                   <Errors>
@@ -503,11 +442,11 @@ export function ModalAddAccount({ modal, setModal }: any) {
                       </p>
                     )}
 
-                    {errors.account_type && touched.account_type && (
+                    {errors.accountType && touched.accountType && (
                       <p>
                         <FaTimesCircle />
                         &nbsp;&nbsp;
-                        {errors.account_type}
+                        {errors.accountType}
                       </p>
                     )}
 
@@ -543,7 +482,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
               )}
             />
           </ContentModal>
-          {/* <Overlay modal={modal} onClick={() => setModal(!modal)}></Overlay> */}
+          <Overlay onClick={() => setModal(!modal)}></Overlay>
         </Container>
       )}
     </>

@@ -13,7 +13,7 @@ interface InputData extends InputProps {
   labelPosition?: 'left' | 'center' | 'right'
   disabled?: boolean
   text: string
-  icon: React.ComponentType
+  icon?: React.ComponentType
 }
 
 const InputMasked: React.FC<InputData> = ({
