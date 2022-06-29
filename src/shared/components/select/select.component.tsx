@@ -81,7 +81,7 @@ export const SingleSelect: React.FC<Props> = ({
         name="color"
         placeholder={placeholder}
         options={options}
-        onChange={() => console.log('alow')}
+        onChange={onChange}
         defaultValue={defaultValue}
       />
     </Container>

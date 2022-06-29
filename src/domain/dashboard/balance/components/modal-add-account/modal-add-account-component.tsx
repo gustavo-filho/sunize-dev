@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react'
 import { FaTimes, FaTimesCircle } from 'react-icons/fa'
 import { Formik, Form, Field as FieldFormik, ErrorMessage } from 'formik'
 import InputMask from 'react-input-mask'
+import { toast } from 'react-toastify'
+import axios, { AxiosResponse } from 'axios'
 import { bankTypes } from '../../bankTypes'
-import axios from 'axios'
 import { listCountries } from './list-coutries'
-
 import {
   Container,
   ContentModal,
@@ -27,23 +27,23 @@ import { userSelector } from '@domain/auth/user/user.store'
 import { api } from '@shared/services/api'
 import { SelectBank } from '@domain/dashboard/components/select-bank-component/select-bank-component'
 import { schema } from './modal-add-account-schema'
-import { toast } from 'react-toastify'
 import { InputCpfOrCnpj } from '@shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-component'
 import { addAcountTypeValues } from './types/modal-add-account-values-types'
 import { InputMaskedModalAddAccount } from './input-masked-add-account/input-masked-modal-add-account'
+import { subAccountTypesValues } from './types/sub-account-types'
 
-export function ModalAddAccount({ modal, setModal }: any) {
+export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
   const user = useAppSelector(userSelector);
   const [isCpf, setIsCpf] = useState(true)
   const countriesFormated = formatCountries(listCountries)
-
   const [statusGetLocation, setStatusGetLocation] = useState('nottried')
 
   const getLocation = useCallback((value: any, setFieldValue: any) => {
     const cep = value.replace(/[-_]/g, '')
     if (cep.length === 8) {
       setStatusGetLocation('trying')
-      axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
+      axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res: AxiosResponse<any, any>
+      ) => {
         if (!res.data.erro) {
           setStatusGetLocation('success')
           setFieldValue('street', res.data.logradouro)
@@ -60,51 +60,51 @@ export function ModalAddAccount({ modal, setModal }: any) {
   const onSubmit = useCallback(
     async (values: addAcountTypeValues) => {
       console.log('values', values)
-      // if (isCpf === true) {
-      //   values.cnpj = ''
-      // } else {
-      //   values.cpf = ''
-      // }
+      if (isCpf === true) {
+        values.cnpj = ''
+      } else {
+        values.cpf = ''
+      }
 
-      // let ZipCode = values.zipCode
-      // ZipCode = String(ZipCode).replace(/[-_]/g, '')
+      let zipCode: string = values.zipCode
+      zipCode = String(zipCode).replace(/[-_]/g, '')
 
-      // const subAccount = {
-      //   account: {
-      //     Identity: values.cpf ? values.cpf : values.cnpj,
-      //     BankData: {
-      //       Bank: {
-      //         Code: values.bank,
-      //       },
-      //       BankAgency: values.agency,
-      //       BankAgencyDigit: values.digit,
-      //       BankAccount: values.account,
-      //       BankAccountDigit: values.digit,
-      //       AccountType: {
-      //         Code: values.accountType,
-      //       },
-      //     },
-      //     Address: {
-      //       ZipCode: ZipCode,
-      //       Street: values.street,
-      //       Number: values.number,
-      //       Complement: values.complement,
-      //       District: values.district,
-      //       CityName: values.cityName,
-      //       StateInitials: values.stateInitials,
-      //       CountryName: values.countryName,
-      //     },
-      //   },
-      // }
+      const subAccount: subAccountTypesValues = {
+        account: {
+          identity: values.cpf ? values.cpf : values.cnpj,
+          bankData: {
+            bank: {
+              code: values.bank,
+            },
+            bankAgency: values.agency,
+            bankAgencyDigit: values.digit,
+            bankAccount: values.account,
+            bankAccountDigit: values.digit,
+            accountType: {
+              code: values.accountType,
+            },
+          },
+          address: {
+            zipCode: zipCode,
+            street: values.street,
+            number: values.number,
+            complement: values.complement,
+            district: values.district,
+            cityName: values.cityName,
+            stateInitials: values.stateInitials,
+            countryName: values.countryName,
+          },
+        },
+      }
 
-      // try {
-      //   await api.post(`/users/${user.data.id}/safe2pay/sub-accounts`, subAccount, {
-      //     headers: { 'sunize-access-token': user.data.access_token },
-      //   })
-      //   toast.success('Sua conta foi cadastrada!')
-      // } catch (error) {
-      //   toast.error('Ocorreu um erro ao tentar cadastrar sua conta!')
-      // }
+      try {
+        await api.post(`/users/${user.data.id}/safe2pay/sub-accounts`, subAccount, {
+          headers: { 'sunize-access-token': user.data.access_token },
+        })
+        toast.success('Sua conta foi cadastrada!')
+      } catch (error) {
+        toast.error('Ocorreu um erro ao tentar cadastrar sua conta!')
+      }
     },
     [user.data.id, user.data.access_token, isCpf],
   )
@@ -129,30 +129,34 @@ export function ModalAddAccount({ modal, setModal }: any) {
     countryName: '',
   }
 
-  // const validate = useCallback(
-  //   (values:any) => {
-  //     const errors = {}
+  const validate = useCallback(
+    (values: any) => {
+      const errors = {}
 
-  //     if (values.bank === 'Nome do Banco' || !values.bank)
-  //       errors.bank = 'Selecione o nome do Banco'
+      if (values.bank === 'Nome do Banco' || !values.bank)
+        // @ts-ignore
+        errors.bank = 'Selecione o nome do Banco'
 
-  //     if (isCpf) {
-  //       const cpfLength = values.cpf.split('').length
+      if (isCpf) {
+        const cpfLength = values.cpf.split('').length
+        console.log('cpfLength', values.cpf)
 
-  //       if (cpfLength < 14) {
-  //         errors.cpf = 'CPF inválido'
-  //       }
-  //     } else {
-  //       const cnpjLength = values.cnpj.split('').length
-  //       if (cnpjLength < 18) {
-  //         errors.cnpj = 'CNPJ inválido'
-  //       }
-  //     }
+        if (cpfLength < 14) {
+          // @ts-ignore
+          errors.cpf = 'CPF inválido'
+        }
+      } else {
+        const cnpjLength = values.cnpj.split('').length
+        if (cnpjLength < 18) {
+          // @ts-ignore
+          errors.cnpj = 'CNPJ inválido'
+        }
+      }
 
-  //     return errors
-  //   },
-  //   [isCpf],
-  // )
+      return errors
+    },
+    [isCpf],
+  )
 
   return (
     <>
@@ -170,10 +174,10 @@ export function ModalAddAccount({ modal, setModal }: any) {
                 ...addAcountDefaultValue
               }}
               onSubmit={onSubmit}
-              // validate={validate}
-              // validationSchema={schema}
-              // validateOnChange
-              // validateOnBlur
+              validate={validate}
+              validationSchema={schema}
+              validateOnChange
+              validateOnBlur
               render={({ errors, touched, setFieldValue }) => (
                 <Form>
                   <SelectBank
@@ -241,18 +245,18 @@ export function ModalAddAccount({ modal, setModal }: any) {
                         id="cpf"
                         name="cpf"
                         mask="999.999.999-99"
-                        onChange={(e: any) => setFieldValue('cpf', e.target.value)}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('cpf', event.target.value)}
                         placeholder="Digite seu CPF"
-                        value={null}
+                        value={undefined}
                       />
                     ) : (
                       <InputCpfOrCnpj
                         id="cnpj"
                         name="cnpj"
                         mask="99.999.999/9999-99"
-                        onChange={(e: any) => setFieldValue('cnpj', e.target.value)}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('cnpj', event.target.value)}
                         placeholder="Digite seu CNPJ"
-                        value={null}
+                        value={undefined}
                       />
                     )}
                   </FormGroupTop>
@@ -311,7 +315,7 @@ export function ModalAddAccount({ modal, setModal }: any) {
                     options={countriesFormated}
                     label="Selecione seu pais"
                     onChange={({ value }) => {
-                      setFieldValue('countryName', String(value))
+                      setFieldValue('countryName', value)
                     }}
                     placeholder="Selecione seu pais"
                     customTheme={{
