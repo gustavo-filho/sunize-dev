@@ -71,28 +71,28 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
 
       const subAccount: subAccountTypesValues = {
         account: {
-          identity: values.cpf ? values.cpf : values.cnpj,
-          bankData: {
-            bank: {
-              code: values.bank,
+          Identity: values.cpf ? values.cpf : values.cnpj,
+          BankData: {
+            Bank: {
+              Code: values.bank,
             },
-            bankAgency: values.agency,
-            bankAgencyDigit: values.digit,
-            bankAccount: values.account,
-            bankAccountDigit: values.digit,
-            accountType: {
-              code: values.accountType,
+            BankAgency: values.agency,
+            BankAgencyDigit: values.digit,
+            BankAccount: values.account,
+            BankAccountDigit: values.digit,
+            AccountType: {
+              Code: values.accountType,
             },
           },
-          address: {
-            zipCode: zipCode,
-            street: values.street,
-            number: values.number,
-            complement: values.complement,
-            district: values.district,
-            cityName: values.cityName,
-            stateInitials: values.stateInitials,
-            countryName: values.countryName,
+          Address: {
+            ZipCode: zipCode,
+            Street: values.street,
+            Number: values.number,
+            Complement: values.complement,
+            District: values.district,
+            CityName: values.cityName,
+            StateInitials: values.stateInitials,
+            CountryName: values.countryName,
           },
         },
       }
