@@ -101,7 +101,8 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
         await api.post(`/users/${user.data.id}/safe2pay/sub-accounts`, subAccount, {
           headers: { 'sunize-access-token': user.data.access_token },
         })
-        toast.success('Sua conta foi cadastrada!')
+        toast.success('Sua conta foi cadastrada!');
+        setModal(!modal);
       } catch (error) {
         toast.error('Ocorreu um erro ao tentar cadastrar sua conta, favor entrar em contato com o suporte!')
       }
