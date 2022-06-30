@@ -31,14 +31,15 @@ import { InputCpfOrCnpj } from '@shared/components/input-cpf-or-cnpj-component/i
 import { addAcountTypeValues } from './types/modal-add-account-values-types'
 import { InputMaskedModalAddAccount } from './input-masked-add-account/input-masked-modal-add-account'
 import { subAccountTypesValues } from './types/sub-account-types'
+import { modalAddAccountComponentValue } from './types/modal-add-account-component.types'
 
-export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
+export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentValue): JSX.Element {
   const user = useAppSelector(userSelector);
   const [isCpf, setIsCpf] = useState(true)
   const countriesFormated = formatCountries(listCountries)
   const [statusGetLocation, setStatusGetLocation] = useState('nottried')
 
-  const getLocation = useCallback((value: any, setFieldValue: any) => {
+  const getLocation = useCallback((value: string, setFieldValue: any) => {
     const cep = value.replace(/[-_]/g, '')
     if (cep.length === 8) {
       setStatusGetLocation('trying')
@@ -59,7 +60,6 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
 
   const onSubmit = useCallback(
     async (values: addAcountTypeValues) => {
-      console.log('values', values)
       if (isCpf === true) {
         values.cnpj = ''
       } else {
@@ -103,7 +103,7 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
         })
         toast.success('Sua conta foi cadastrada!')
       } catch (error) {
-        toast.error('Ocorreu um erro ao tentar cadastrar sua conta!')
+        toast.error('Ocorreu um erro ao tentar cadastrar sua conta, favor entrar em contato com o suporte!')
       }
     },
     [user.data.id, user.data.access_token, isCpf],
@@ -130,29 +130,52 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
   }
 
   const validate = useCallback(
-    (values: any) => {
+    (values: addAcountTypeValues) => {
       const errors = {}
+      const agencyValue = values.agency.replaceAll('_', '');
+      const accountValue = values.account.replaceAll('_', '');
+      const digitValue = values.digit.replaceAll('_', '');
 
       if (values.bank === 'Nome do Banco' || !values.bank)
         // @ts-ignore
         errors.bank = 'Selecione o nome do Banco'
 
-      if (isCpf) {
-        const cpfLength = values.cpf.split('').length
-        console.log('cpfLength', values.cpf)
+      if (agencyValue.length < 4) {
+        // @ts-ignore
+        errors.agency = 'Agência inválida'
+      }
 
-        if (cpfLength < 14) {
+      if (accountValue.length < 5) {
+        // @ts-ignore
+        errors.account = 'Conta inválida'
+      }
+
+      if (digitValue.length < 1) {
+        // @ts-ignore
+        errors.digit = 'Digito inválida'
+      }
+
+      if (isCpf) {
+        const cpfValid = values.cpf
+          .replaceAll('.', '')
+          .replaceAll('_', '')
+          .replace('-', '')
+
+        if (cpfValid.length < 11) {
           // @ts-ignore
           errors.cpf = 'CPF inválido'
         }
       } else {
-        const cnpjLength = values.cnpj.split('').length
-        if (cnpjLength < 18) {
+        const cnpjValid = values.cnpj
+          .replaceAll('.', '')
+          .replaceAll('_', '')
+          .replace('/', '')
+          .replace('-', '');
+        if (cnpjValid.length < 14) {
           // @ts-ignore
           errors.cnpj = 'CNPJ inválido'
         }
       }
-
       return errors
     },
     [isCpf],
@@ -193,8 +216,8 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
                       id="favoredName"
                       name="favoredName"
                       placeholder="Nome do Favorecido"
-                      onChange={(e: any) => {
-                        setFieldValue('favoredName', e.target.value)
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setFieldValue('favoredName', event.target.value)
                       }}
                     />
                   </FormGroupTop>
@@ -289,7 +312,7 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
                     <InputMask
                       name="agency"
                       placeholder="Agência"
-                      mask="999999"
+                      mask="9999"
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue('agency', event.target.value)}>
                     </InputMask>
 
@@ -308,7 +331,7 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
                     </InputMask>
                   </AccountFields>
 
-                  <h2>Informações de endereço</h2>
+                  <h1>Informações de endereço</h1 >
 
                   <SingleSelect
                     id='countryName'
@@ -325,11 +348,13 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
                     }}
                   />
 
-                  <InputMaskedModalAddAccount
+                  <Input
                     name="zipCode"
                     text="Informe seu CEP"
-                    mask="99999-999"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      event.target.value = Math.max(0, Number(event.target.value))
+                        .toString()
+                        .slice(0, 8);
                       setFieldValue('zipCode', event.target.value)
                       getLocation(event.target.value, setFieldValue)
                     }}
@@ -351,13 +376,17 @@ export function ModalAddAccount({ modal, setModal }: any): JSX.Element {
                         placeholder="Rua da residência"
                       />
 
-                      <InputMaskedModalAddAccount
+                      <Input
                         name="number"
                         text="Informe o número da sua residência"
-                        mask="999999"
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        type='number'
+                        maxLength={6}
+                        onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+                          event.target.value = Math.max(0, Number(event.target.value))
+                            .toString()
+                            .slice(0, 6);
                           setFieldValue('number', event.target.value)
-                        }
+                        }}
                         placeholder="Número da residência"
                       />
 

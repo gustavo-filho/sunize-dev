@@ -43,9 +43,11 @@ export const ContentModal = styled.div`
     }
   }
   h1 {
-    color: #4b4b4b;
+    color: rgb(75, 75, 75);
     font-size: 1.3rem;
     margin-top: 3rem;
+    margin-bottom: 0.5em;
+    font-weight: 500;
   }
   h4 {
     color: #4b4b4b;

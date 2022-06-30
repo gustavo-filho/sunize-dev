@@ -199,7 +199,6 @@ export const CurrentBalance = (): JSX.Element => {
       <ModalAddAccount
         modal={modalAddAccount}
         setModal={setModalAddAccount}
-        setBankingAccounts={setBankingAccounts}
       />
     </Container>
   )

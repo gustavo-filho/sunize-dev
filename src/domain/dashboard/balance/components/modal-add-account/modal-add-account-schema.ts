@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 
 export const schema = Yup.object().shape({
   accountType: Yup.string().required('Selecione o tipo de Conta'),
-  favoredName: Yup.string().required('Digite o nome do Favorecido'),
+  favoredName: Yup.string().required('Digite o nome do Favorecido').min(4,'Favor informar o nome completo!'),
   agency: Yup.string().required('Agência Inválida').min(4, 'Agência Inválida'),
   account: Yup.string()
     .required('Conta Inválida')
