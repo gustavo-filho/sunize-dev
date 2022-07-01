@@ -1,39 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-
 import { NavLink } from 'react-router-dom'
-
-// Utils
 import { api } from '@shared/services/api';
-
-// Components
 import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component';
-
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-
 import { Container, AddAccount, Value } from './current.balance.styles'
-
 import { bankTypes } from '../bankTypes'
-
 import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../store/hooks';
 import WithdrawalAccounts from '../withdrawal-accounts/withdraw-accounts-component';
 import { ModalAddAccount } from '../components/modal-add-account/modal-add-account-component';
 import { WrapperNavigation } from '../balance.styles';
 
-
 export const CurrentBalance = (): JSX.Element => {
   const user = useAppSelector(userSelector);
   const [modalAddAccount, setModalAddAccount] = useState(false)
   const [modalTransfer, setModalTransfer] = useState(false)
-
   const [isShowBalance, setIsShowBalance] = useState(true)
   const [isShowRelease, setIsShowRelease] = useState(true)
   const [isShowAvailable, setIsShowAvailable] = useState(true)
   const [bankingAccounts, setBankingAccounts] = useState<any>([])
   const [loading, setLoading] = useState(false)
-
   const [balanceValues, setBalanceValues] = useState({
     balance: 0,
     release: 0,
@@ -94,7 +82,7 @@ export const CurrentBalance = (): JSX.Element => {
       </WrapperNavigation>
       <div className="balance">
         <div className="contentBalance">
-          <div className="totalBalance">
+          <div style={{ color: 'green' }} className="totalBalance">
             <p>
               Saldo Total{' '}
               <b onClick={() => setIsShowBalance(!isShowBalance)}>
@@ -112,7 +100,7 @@ export const CurrentBalance = (): JSX.Element => {
             </Value>
           </div>
 
-          <div className="FutureLauch">
+          <div style={{ color: '#c27c2c' }} className="FutureLauch">
             <p>
               Lançamentos Futuro{' '}
               <b onClick={() => setIsShowRelease(!isShowRelease)}>
@@ -129,7 +117,7 @@ export const CurrentBalance = (): JSX.Element => {
             </Value>
           </div>
 
-          <div className="withdrawalAvailable">
+          <div style={{ color: 'green' }} className="withdrawalAvailable">
             <p>
               Disponível para Saque{' '}
               <b onClick={() => setIsShowAvailable(!isShowAvailable)}>

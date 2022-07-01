@@ -82,6 +82,7 @@ export const Container = styled.div`
     font-size: 18px;
   }
   .contentBalance p {
+    margin-bottom: 1em ;
     color: rgb(204, 204, 204);
   }
   .FutureLauch span {
