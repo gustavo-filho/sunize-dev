@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { FaTimes } from 'react-icons/fa'
 import CurrencyInput from 'react-currency-input-field'
 import { history } from './history'
-import { modalTransferType } from '../modal-add-account/types/modal-transfer.type'
+import { modalTransferType } from '../../types/modal-transfer.type'
 import {
   Container,
   ContentModal,
@@ -12,7 +12,7 @@ import {
   MoneyArt,
   Error,
 } from './modal-transfer-style'
-import { accountInformationModalTransfer } from '../modal-add-account/types/modal-transfer-account-information.types'
+import { accountInformationModalTransfer } from '../../types/modal-transfer-account-information.types'
 
 export function ModalTransfer({ modal, setModal, data, balance }: modalTransferType) {
   const [error, setError] = useState<string | null>(null)

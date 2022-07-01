@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component'
-
-
-
+import { withdrawalAccountsType } from '../types/withdrawal-accounts.type'
 import { Container, Content, MoneyArt } from './withdraw-accounts-styles'
 
-const WithdrawalAccounts = ({
+export function WithdrawalAccounts({
   data,
-  setBankingAccounts,
-  bankingAccounts,
   balanceAvailable,
-}:any ) => {
+}: withdrawalAccountsType) {
   const [modalTransfer, setModalTransfer] = useState(false)
-
+  
   return (
     <Container>
       <Content onClick={() => setModalTransfer(!modalTransfer)}>
@@ -45,4 +41,3 @@ const WithdrawalAccounts = ({
   )
 }
 
-export default WithdrawalAccounts

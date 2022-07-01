@@ -1,4 +1,4 @@
-export const bankTypes = [
+export const listBanks = [
     {
       value: '001',
       name: 'Banco do Brasil S.A.',

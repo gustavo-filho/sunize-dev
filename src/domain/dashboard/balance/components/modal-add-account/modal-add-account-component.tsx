@@ -4,7 +4,7 @@ import { Formik, Form, Field as FieldFormik, ErrorMessage } from 'formik'
 import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
-import { bankTypes } from '../../bankTypes'
+import { listBanks } from '../../listBanks'
 import { listCountries } from './list-coutries'
 import {
   Container,
@@ -28,10 +28,10 @@ import { api } from '@shared/services/api'
 import { SelectBank } from '@domain/dashboard/components/select-bank-component/select-bank-component'
 import { schema } from './modal-add-account-schema'
 import { InputCpfOrCnpj } from '@shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-component'
-import { addAcountTypeValues } from './types/modal-add-account-values-types'
+import { addAcountTypeValues } from '../../types/modal-add-account-values-types'
 import { InputMaskedModalAddAccount } from './input-masked-add-account/input-masked-modal-add-account'
-import { subAccountTypesValues } from './types/sub-account-types'
-import { modalAddAccountComponentValue } from './types/modal-add-account-component.types'
+import { subAccountTypesValues } from '../../types/sub-account-types'
+import { modalAddAccountComponentValue } from '../../types/modal-add-account-component.types'
 
 export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentValue): JSX.Element {
   const user = useAppSelector(userSelector);
@@ -107,6 +107,7 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
         toast.error('Ocorreu um erro ao tentar cadastrar sua conta, favor entrar em contato com o suporte!')
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user.data.id, user.data.access_token, isCpf],
   )
 
@@ -206,7 +207,7 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                 <Form>
                   <SelectBank
                     defaultName="Nome do Banco"
-                    options={bankTypes}
+                    options={listBanks}
                     valueBeforeName
                     fieldName="bank"
                     setFieldValue={setFieldValue}
