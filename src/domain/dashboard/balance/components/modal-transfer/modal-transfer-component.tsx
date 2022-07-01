@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import Cookies from 'js-cookie'
 import { FaTimes } from 'react-icons/fa'
-
 import CurrencyInput from 'react-currency-input-field'
-
+import { history } from './history'
+import { modalTransferType } from '../modal-add-account/types/modal-transfer.type'
 import {
   Container,
   ContentModal,
@@ -12,11 +12,11 @@ import {
   MoneyArt,
   Error,
 } from './modal-transfer-style'
-import { history } from './history'
+import { accountInformationModalTransfer } from '../modal-add-account/types/modal-transfer-account-information.types'
 
-export function ModalTransfer({ modal, setModal, data, balance }: any) {
+export function ModalTransfer({ modal, setModal, data, balance }: modalTransferType) {
   const [error, setError] = useState<string | null>(null)
-  const [valueMoney, setValueMoney] = useState('')
+  const [valueMoney, setValueMoney] = useState<string | undefined>('')
 
   const onSubmit = useCallback(() => {
     if (valueMoney) {
@@ -40,9 +40,54 @@ export function ModalTransfer({ modal, setModal, data, balance }: any) {
     }
   }, [setError, valueMoney, data])
 
-  const validateMoney = useCallback((value: any) => {
+  const validateMoney = useCallback((value?: string) => {
     setValueMoney(value)
   }, [])
+
+  /**
+   * Account information function.
+   * @param account 
+   * @returns 
+   */
+  function accountInformation(account: accountInformationModalTransfer): JSX.Element {
+    return (
+      <>
+        <strong>
+          {account.BankData.Bank} - {account.BankData.Bankname}
+        </strong>
+        <p>
+          Agência: {account.BankData.Agency}
+          {account.BankData.AgencyDigit && `-${account.BankData.AgencyDigit}`}
+        </p>
+        <p>
+          Conta: {account.BankData.Account}-{account.BankData.AccountDigit}
+        </p>
+        <p>Tipo de Conta: {account.BankData.AccountType}</p>
+      </>
+    )
+  }
+
+  /**
+   * Function referring to Current Input
+   * @returns 
+   */
+  function currenctInput(): JSX.Element {
+    return (
+      <>
+        <CurrencyInput
+          autoFocus
+          id="value"
+          name="value"
+          placeholder="0,00"
+          decimalScale={2}
+          allowNegativeValue={false}
+          onValueChange={(value) => validateMoney(value)}
+          prefix="R$ "
+          maxLength={6}
+        />
+      </>
+    )
+  }
 
   return (
     <>
@@ -52,33 +97,13 @@ export function ModalTransfer({ modal, setModal, data, balance }: any) {
             <button>
               <FaTimes onClick={() => setModal(false)} />
             </button>
-            <h1>Retirar</h1>
+            <h1>Transferência</h1>
             <h1>Conta Selecionada</h1>
             <MoneyArt>
               <p>$</p>
             </MoneyArt>
-            <strong>
-              {data.BankData.Bank} - {data.BankData.Bankname}
-            </strong>
-            <p>
-              Agência: {data.BankData.Agency}
-              {data.BankData.AgencyDigit && `-${data.BankData.AgencyDigit}`}
-            </p>
-            <p>
-              Conta: {data.BankData.Account}-{data.BankData.AccountDigit}
-            </p>
-            <p>Tipo de Conta: {data.BankData.AccountType}</p>
-
-            <CurrencyInput
-              autoFocus
-              id="value"
-              name="value"
-              placeholder="0,00"
-              decimalScale={2}
-              allowNegativeValue={false}
-              onValueChange={(value) => validateMoney(value)}
-              prefix="R$ "
-            />
+            {accountInformation(data)}
+            {currenctInput()}
             {error && <Error>{error}</Error>}
 
             <p>
@@ -92,19 +117,14 @@ export function ModalTransfer({ modal, setModal, data, balance }: any) {
                   : 'R$ 0,00'}
               </b>
             </p>
-
-            <p>
-              A taxa de transferência é de:
-              <br />
-              <b>R$ 3,50</b>
-            </p>
+            
             <FormGroup>
               <button type="submit" onClick={onSubmit}>
                 Transferir
               </button>
             </FormGroup>
           </ContentModal>
-          {/* <Overlay modal={modal} onClick={() => setModal(false)}></Overlay> */}
+          <Overlay onClick={() => setModal(!modal)}></Overlay>
         </Container>
       )}
     </>

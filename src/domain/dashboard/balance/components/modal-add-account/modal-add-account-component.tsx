@@ -102,7 +102,7 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
           headers: { 'sunize-access-token': user.data.access_token },
         })
         toast.success('Sua conta foi cadastrada!');
-        setModal(!modal);
+        setModal(false)
       } catch (error) {
         toast.error('Ocorreu um erro ao tentar cadastrar sua conta, favor entrar em contato com o suporte!')
       }
