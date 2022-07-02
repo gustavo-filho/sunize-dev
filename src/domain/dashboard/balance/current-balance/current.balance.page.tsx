@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { NavLink } from 'react-router-dom'
 import { api } from '@shared/services/api';
 import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
@@ -11,9 +10,9 @@ import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../store/hooks';
 import { WithdrawalAccounts } from '../withdrawal-accounts/withdraw-accounts-component';
 import { ModalAddAccount } from '../components/modal-add-account/modal-add-account-component';
-import { WrapperNavigation } from '../balance.styles';
 import { ballanceValuesType } from '../types/current-ballance-values.type';
 import { bankingAccountsType } from '../types/current-ballance-banking-accounts.type';
+import { wrapperNavigation } from '../components/wrapper-navigation.component';
 
 export function CurrentBalance(): JSX.Element {
   const user = useAppSelector(userSelector);
@@ -179,19 +178,6 @@ export function CurrentBalance(): JSX.Element {
           </span>
         )}
       </div>
-    )
-  }
-
-  function wrapperNavigation(): JSX.Element {
-    return (
-      <WrapperNavigation>
-        <NavLink to="/dashboard/saldo" exact activeClassName="active">
-          Saldo
-        </NavLink>
-        <NavLink to="/dashboard/saldo/extrato" exact activeClassName="active">
-          Extratos e Relatórios
-        </NavLink>
-      </WrapperNavigation>
     )
   }
 

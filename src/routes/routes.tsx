@@ -14,6 +14,7 @@ export const Routes = () => (
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.SUPPORT} />
+      <PrivateRouteWrapper path={DASHBOARD_ROUTES.BALANCE} />
     </Switch>
   </BrowserRouter>
 );

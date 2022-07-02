@@ -7,6 +7,7 @@ import { Affiliates } from '@domain/dashboard/products/affiliates/affiliates.pag
 import { SaleRecord } from '@domain/dashboard/sales/sale-record/sale-record.page';
 import { PurchaseRecordPage } from '@domain/dashboard/sales/purchase-record/purchase-record.page';
 import { CurrentBalance } from '@domain/dashboard/balance/current-balance/current.balance.page';
+import { AccountStatements } from '@domain/dashboard/balance/account-statements';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -18,11 +19,13 @@ export const DASHBOARD_ROUTES = {
   SALE_RECORD: '/dashboard/registro-de-vendas',
   PURCHASE_RECORD: '/dashboard/registro-de-compras',
   BALANCE: '/dashboard/saldo',
+  EXTRACT_BALANCE: '/dashboard/saldo/extrato'
 };
 
 interface DashboardWrapperConstantsProps {
   route: string;
 }
+
 
 export const DashboardWrapperConstants = ({
   route,
@@ -37,6 +40,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
     [DASHBOARD_ROUTES.PURCHASE_RECORD]: <PurchaseRecordPage />,
     [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
+    [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
   };
 
   return <>{components[route]}</>;
