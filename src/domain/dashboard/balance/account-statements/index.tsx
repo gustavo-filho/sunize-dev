@@ -10,13 +10,7 @@ import { userSelector } from '@domain/auth/user/user.store';
 import { wrapperNavigation } from '../components/wrapper-navigation.component'
 import { transactionDataType } from '../types/account-statements-transaction-data-types'
 
-export function AccountStatements({
-    Transaction,
-    Date,
-    Value,
-    Account,
-    Bank,
-}: any | undefined) {
+export function AccountStatements(): JSX.Element {
     const [data, setData] = useState<transactionDataType[]>([])
     const user = useAppSelector(userSelector);
 
