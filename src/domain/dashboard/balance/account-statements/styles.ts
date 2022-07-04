@@ -13,6 +13,14 @@ export const Container = styled.div`
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
   }
+  h3 {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 16px 0;
+    font-size: 20px;
+    color: #bcbcc2;
+  }
   > p {
     font-size: 20px;
     line-height: 27px;
