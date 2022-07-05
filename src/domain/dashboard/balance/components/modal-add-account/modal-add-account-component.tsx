@@ -137,6 +137,9 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
       const agencyValue = values.agency.replaceAll('_', '');
       const accountValue = values.account.replaceAll('_', '');
       const digitValue = values.digit.replaceAll('_', '');
+      const zipCodeValue = values.zipCode.replaceAll('_', '');
+      const stateInitialsValue = values.stateInitials.replaceAll('_', '');
+      const numberValue = values.number.replaceAll('_', '');
 
       if (values.bank === 'Nome do Banco' || !values.bank)
         // @ts-ignore
@@ -155,6 +158,21 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
       if (digitValue.length < 1) {
         // @ts-ignore
         errors.digit = 'Digito inválida'
+      }
+
+      if (zipCodeValue.length < 8) {
+        // @ts-ignore
+        errors.zipCode = 'CEP inválido'
+      }
+
+      if (numberValue.length < 1) {
+        // @ts-ignore
+        errors.number = 'Número inválido'
+      }
+
+      if (stateInitialsValue.length < 2) {
+        // @ts-ignore
+        errors.stateInitials = 'UF inválido'
       }
 
       if (isCpf) {
@@ -350,13 +368,11 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                     }}
                   />
 
-                  <Input
+                  <InputMaskedModalAddAccount
+                    mask="99999-999"
                     name="zipCode"
                     text="Informe seu CEP"
-                    onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      event.target.value = Math.max(0, Number(event.target.value))
-                        .toString()
-                        .slice(0, 8);
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                       setFieldValue('zipCode', event.target.value)
                       getLocation(event.target.value, setFieldValue)
                     }}
@@ -369,7 +385,8 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                     ''
                   ) : (
                     <>
-                      <Input
+                      <InputMaskedModalAddAccount
+                        mask=""
                         name="street"
                         text="Informe o nome da rua da sua residência"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -378,21 +395,18 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                         placeholder="Rua da residência"
                       />
 
-                      <Input
+                      <InputMaskedModalAddAccount
+                        mask="999999"
                         name="number"
                         text="Informe o número da sua residência"
-                        type='number'
-                        maxLength={6}
-                        onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                          event.target.value = Math.max(0, Number(event.target.value))
-                            .toString()
-                            .slice(0, 6);
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                           setFieldValue('number', event.target.value)
                         }}
                         placeholder="Número da residência"
                       />
 
-                      <Input
+                      <InputMaskedModalAddAccount
+                        mask=""
                         name="complement"
                         text="Complemento (Opcional)"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -401,7 +415,8 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                         placeholder="Digite um complemento para sua residência"
                       />
 
-                      <Input
+                      <InputMaskedModalAddAccount
+                        mask=""
                         name="district"
                         text="Informe o bairro da sua residência"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -410,7 +425,8 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
                         placeholder="Bairro da residência"
                       />
 
-                      <Input
+                      <InputMaskedModalAddAccount
+                        mask=""
                         name="cityName"
                         text="Informe a cidade da sua residência"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

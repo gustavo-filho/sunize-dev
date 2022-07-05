@@ -45,8 +45,6 @@ export const Container = styled.div<ContainerProps>`
   font-size: 18px;
   color: #070707;
   font-weight: 500;
-  padding: 0 17px;
-  outline: 0;
   border-radius: 4px;
   transition: 0.3s;
   display: flex;
@@ -63,20 +61,20 @@ export const Container = styled.div<ContainerProps>`
     color: #c2c2c2;
 
     ${({ isFilled }) =>
-      !!isFilled &&
-      css`
+    !!isFilled &&
+    css`
         color: #e7af07;
       `}
 
     ${({ isErrored }) =>
-      !!isErrored &&
-      css`
+    !!isErrored &&
+    css`
         color: #ff5252;
       `}
 
     ${({ isFocused }) =>
-      !!isFocused &&
-      css`
+    !!isFocused &&
+    css`
         color: #e7af07;
       `}
   }
@@ -98,6 +96,8 @@ export const Container = styled.div<ContainerProps>`
     background-color: transparent;
     border: 0;
     font-size: 16px;
+    width: 100%;
+    height: 50px;
   }
 `
 

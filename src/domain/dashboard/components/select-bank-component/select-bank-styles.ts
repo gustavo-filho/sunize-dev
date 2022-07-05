@@ -47,11 +47,12 @@ export const DropDownList = styled.ul`
 `
 
 export const ListItem = styled.li`
+background-color: #dcdcdc;
   list-style: none;
   font-size: 0.9rem;
   cursor: pointer;
   padding: 4px 8px;
   &:hover {
-    background-color: #f1f1f1;
+    background-color: #818181;
   }
 `
