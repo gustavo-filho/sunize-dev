@@ -75,19 +75,27 @@ export const SideBar = () => {
             Registro de compras
           </MenuItem>
         </SubMenu>
-        <MenuItem icon={<MdGroups />}>Afiliados</MenuItem>
+        <MenuItem
+          icon={<MdGroups />}
+          onClick={() => history.push(DASHBOARD_ROUTES.AFFILIATES)}
+          active={pathname === DASHBOARD_ROUTES.AFFILIATES}
+        >
+          Afiliados
+        </MenuItem>
         <MenuItem icon={<AiFillShop />}>Mercado</MenuItem>
         <MenuItem
           icon={<AiFillBank />}
           onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
           active={pathname === DASHBOARD_ROUTES.BALANCE}
-        >Saldo
+        >
+          Saldo
         </MenuItem>
         <MenuItem
           icon={<AiOutlineQuestionCircle />}
           onClick={() => history.push(DASHBOARD_ROUTES.SUPPORT)}
           active={pathname === DASHBOARD_ROUTES.SUPPORT}
-        >Suporte
+        >
+          Suporte
         </MenuItem>
       </Menu>
     </SideBarContainer>
