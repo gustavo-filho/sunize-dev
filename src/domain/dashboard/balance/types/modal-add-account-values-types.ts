@@ -1,5 +1,6 @@
 export interface addAcountTypeValues {
     bank: string,
+    bankName?: string,
     favoredName: string,
     personType: string,
     cpf: string,

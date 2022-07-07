@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
+import { ModalEditAccount } from '../components/modal-edit-account/modal-edit-account-component'
 import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component'
 import { withdrawalAccountsType } from '../types/withdrawal-accounts.type'
 import { Container, Content, MoneyArt } from './withdraw-accounts-styles'
 
 export function WithdrawalAccounts({
-  data,
-  balanceAvailable,
+  dataBanking,
 }: withdrawalAccountsType) {
-  const [modalTransfer, setModalTransfer] = useState(false)
-  
+  const [modalEditAccount, setModalEditAccount] = useState(false)
+
   return (
     <Container>
-      <Content onClick={() => setModalTransfer(!modalTransfer)}>
+      <Content onClick={() => setModalEditAccount(!modalEditAccount)}>
         <div className="MoneyArtWrapper">
           <MoneyArt>
             <p>$</p>
@@ -19,23 +19,23 @@ export function WithdrawalAccounts({
         </div>
         <div className="AccountInformation">
           <p className="Bank">
-            {data.BankData.Bank} - {data.BankData.Bankname}
+            {dataBanking.BankData.Bank} - {dataBanking.BankData.Bankname}
           </p>
           <p>
-            Agência: {data.BankData.Agency}-
-            {data.BankData.AgencyDigit && data.BankData.AgencyDigit}
+            Agência: {dataBanking.BankData.Agency}-
+            {dataBanking.BankData.AgencyDigit && dataBanking.BankData.AgencyDigit}
           </p>
           <p>
-            Conta: {data.BankData.Account}-{data.BankData.AccountDigit}
+            Conta: {dataBanking.BankData.Account}-{dataBanking.BankData.AccountDigit}
           </p>
-          <p>Tipo de Conta: {data.BankData.AccountType}</p>
+          <p>Tipo de Conta: {dataBanking.BankData.AccountType}</p>
         </div>
       </Content>
-      <ModalTransfer
-        modal={modalTransfer}
-        setModal={setModalTransfer}
-        data={data}
-        balance={balanceAvailable}
+
+      <ModalEditAccount
+        modal={modalEditAccount}
+        setModal={setModalEditAccount}
+        dataUpdateBanking={dataBanking}
       />
     </Container>
   )

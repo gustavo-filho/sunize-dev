@@ -13,6 +13,7 @@ import { ModalAddAccount } from '../components/modal-add-account/modal-add-accou
 import { ballanceValuesType } from '../types/current-ballance-values.type';
 import { bankingAccountsType } from '../types/current-ballance-banking-accounts.type';
 import { wrapperNavigation } from '../components/wrapper-navigation.component';
+import { FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup, Typography } from '@mui/material';
 
 export function CurrentBalance(): JSX.Element {
   const user = useAppSelector(userSelector);
@@ -29,9 +30,9 @@ export function CurrentBalance(): JSX.Element {
     available: 0,
   })
 
-  const getBankingAccounts = useCallback(() => {
+  const getBankingAccounts = useCallback(async () => {
     setLoading(true)
-    api
+    await api
       .get(`users/${user.data.id}/safe2pay/sub-accounts`, {
         headers: { 'sunize-access-token': user.data.access_token },
       })
@@ -49,29 +50,6 @@ export function CurrentBalance(): JSX.Element {
       })
   }, [user.data.access_token, user.data.id])
 
-  // useEffect(() => {
-  //   async function loadingData(): Promise<void> {
-  //     try {
-  //       const response = await api.get(`users/balance/${user.data.id}`)
-  //       console.log('response', response.data.data)
-  //       const balance = {
-  //         balance: response.data.data.AmountReceived,
-  //         release: response.data.data.AmountPreviewTotal,
-  //         available: response.data.data.AmountAvailableToday,
-  //       }
-  //       setBalanceValues(balance)
-  //     } catch (error: any) {
-  //       if (error.response.data.message !== 'Você deve cadastrar os seus dados da Safe2Pay') {
-  //         toast.error('Tivemos um problema na requisição do seu Saldo, favor entre em contato com o suporte')
-  //       } else {
-  //         toast.error('Favor realizar o cadastro da sua conta bancária, clicando no botão abaixo: "Adicionar novas contas..."')
-  //       }
-  //     }
-  //   }
-  //   loadingData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [getBankingAccounts, user.data.id]);
-
   useEffect(() => {
     getBankingAccounts()
     api.get(`users/balance/${user.data.id}`).then((res) => {
@@ -83,7 +61,7 @@ export function CurrentBalance(): JSX.Element {
       setBalanceValues(balance)
     })
       .catch((error: any) => {
-        console.log('error',error)
+        console.log('error', error)
         if (error.response.data.message !== 'Você deve cadastrar os seus dados da Safe2Pay') {
           toast.error('Tivemos um problema na requisição do seu Saldo, favor entre em contato com o suporte')
         } else {
@@ -156,19 +134,21 @@ export function CurrentBalance(): JSX.Element {
     )
   }
 
-  function buttonTransfer(labelDisplayed: string): JSX.Element {
+  function componentDailyWithdrawal(labelDisplayed: string): JSX.Element {
     return (
-      <>
-        <button
-          onClick={() =>
-            bankingAccounts.length
-              ? setModalTransfer(true)
-              : toast.error('Você não possui nenhuma conta bancária cadastrada.')
-          }
-          className="btnTransfer">
-          $ {labelDisplayed}
-        </button>
-      </>
+      <FormControl>
+        <p>{labelDisplayed}</p>
+        <RadioGroup
+          style={{ marginTop: '-30px' }}
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          defaultValue="false"
+        >
+          <FormControlLabel value="true" control={<Radio style={{ color: '#818181' }} />} label={<Typography style={{ marginTop: '35px' }}>Sim</Typography>} />
+          <FormControlLabel value="false" control={<Radio style={{ color: '#818181' }} />} label={<Typography style={{ marginTop: '35px' }}>Não</Typography>} />
+        </RadioGroup>
+      </FormControl>
     )
   }
 
@@ -179,7 +159,7 @@ export function CurrentBalance(): JSX.Element {
           {totalBallanceComponent('Saldo Total')}
           {futureReleases('Lançamentos Futuro')}
           {availableForWithdrawal('Disponível para Saque')}
-          {buttonTransfer('Transfira agora')}
+          {componentDailyWithdrawal('Deseja receber saques diários?')}
         </div>
       </div>
     )
@@ -192,8 +172,7 @@ export function CurrentBalance(): JSX.Element {
           bankingAccounts.map((bankAccount: any) => (
             <WithdrawalAccounts
               key={bankAccount.BankData.Bank}
-              data={bankAccount}
-              balanceAvailable={balanceValues.available}
+              dataBanking={bankAccount}
             />
           ))
         ) : (
@@ -254,7 +233,7 @@ export function CurrentBalance(): JSX.Element {
 
       {ballanceComponent()}
 
-      <h3>Contas disponíveis para saque</h3>
+      <h3>Conta disponível para saque</h3>
 
       {alignAccounts()}
 

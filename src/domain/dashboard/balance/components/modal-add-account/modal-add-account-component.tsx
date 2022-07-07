@@ -19,14 +19,13 @@ import {
   PersonType,
 } from './modal-add-account-styles'
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
-import { Input } from '@shared/components/input/input.component'
 import { SingleSelect } from '@shared/components/select/select.component'
 import { formatCountries } from '@shared/utils/formatCountries'
 import { useAppSelector } from '../../../../../store/hooks'
 import { userSelector } from '@domain/auth/user/user.store'
 import { api } from '@shared/services/api'
 import { SelectBank } from '@domain/dashboard/components/select-bank-component/select-bank-component'
-import { schema } from './modal-add-account-schema'
+import { schemaAccount } from './modal-add-account-schema'
 import { InputCpfOrCnpj } from '@shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-component'
 import { addAcountTypeValues } from '../../types/modal-add-account-values-types'
 import { InputMaskedModalAddAccount } from './input-masked-add-account/input-masked-modal-add-account'
@@ -218,7 +217,7 @@ export function ModalAddAccount({ modal, setModal }: modalAddAccountComponentVal
               }}
               onSubmit={onSubmit}
               validate={validate}
-              validationSchema={schema}
+              validationSchema={schemaAccount}
               validateOnChange
               validateOnBlur
               render={({ errors, touched, setFieldValue }) => (
