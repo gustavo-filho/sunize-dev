@@ -18,7 +18,7 @@ import { InputSearch } from '@shared/components/input-search/input-search.compon
 import { useCallback, useEffect, useState } from 'react';
 import { AffiliateProduct } from '@domain/dashboard/products/affiliates/components/affilate-product/affiliate-product.component';
 
-export const Affiliates = () => {
+export const ProductsOfAffiliates = () => {
   const user = useAppSelector(userSelector).data;
   const dispatch = useAppDispatch();
   const productsStore = useAppSelector(productSelector);
