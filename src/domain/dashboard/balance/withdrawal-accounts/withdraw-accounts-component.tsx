@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { ModalEditAccount } from '../components/modal-edit-account/modal-edit-account-component'
-import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component'
-import { withdrawalAccountsType } from '../types/withdrawal-accounts.type'
+import { AccountComponentModal } from '../components/accountComponentModal/account-component-modal'
+import { IWithdrawalAccountsType } from '../types/withdrawal-accounts.type'
 import { Container, Content, MoneyArt } from './withdraw-accounts-styles'
 
 export function WithdrawalAccounts({
   dataBanking,
-}: withdrawalAccountsType) {
+}: IWithdrawalAccountsType) {
   const [modalEditAccount, setModalEditAccount] = useState(false)
 
   return (
@@ -32,10 +31,11 @@ export function WithdrawalAccounts({
         </div>
       </Content>
 
-      <ModalEditAccount
+      <AccountComponentModal
         modal={modalEditAccount}
         setModal={setModalEditAccount}
         dataUpdateBanking={dataBanking}
+        updateModal={true}
       />
     </Container>
   )

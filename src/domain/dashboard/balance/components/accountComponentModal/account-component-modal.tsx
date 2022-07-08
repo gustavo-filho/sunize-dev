@@ -1,82 +1,150 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { useFormik, FormikProvider } from 'formik'
-import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
-import axios, { AxiosResponse } from 'axios'
-import { listBanks } from '../../listBanks'
-import {
-    FormGroup,
-    Overlay,
-} from '../modal-add-account/modal-add-account-styles'
+import axios from 'axios'
 import { useAppSelector } from '../../../../../store/hooks'
 import { userSelector } from '@domain/auth/user/user.store'
 import { api } from '@shared/services/api'
-import { schemaAccount } from '../modal-add-account/modal-add-account-schema'
-import { listCountries } from '../modal-add-account/list-coutries'
+import { schemaAccount } from './account-schema'
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
-import { modalEditAccountComponentValue } from '../../types/modal-edit-account-component-types'
+import { IAccountComponentModalPropsValues } from '../../types/account-component-modal-props-values'
 import { Autocomplete, FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material'
-import { addAcountTypeValues } from '../../types/modal-add-account-values-types'
+import { IAccountComponentModalTypes } from '../../types/account-component-modal-types'
+import { ISubAccountTypesValues } from '../../types/account-component-sub-account-types'
+import { listCountries } from '../../config/list-coutries'
+import { FormGroup, Overlay } from './account-styled-component-styles'
+import { listBanks } from '../../config/list-banks'
 
-export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEditAccountComponentValue): JSX.Element {
+export function AccountComponentModal({ modal, setModal, updateModal, dataUpdateBanking }: IAccountComponentModalPropsValues): JSX.Element {
     const user = useAppSelector(userSelector);
     const [statusGetLocation, setStatusGetLocation] = useState('nottried')
+    const [dataResponse, setDataResponse] = useState<IAccountComponentModalTypes>()
 
-    const editAcountDefaultValue: addAcountTypeValues = {
-        bank: dataUpdateBanking.BankData.Bankname ? dataUpdateBanking.BankData.Bankname : '',
-        favoredName: dataUpdateBanking.ResponsibleName ? dataUpdateBanking.ResponsibleName : '',
-        personType: dataUpdateBanking.Identity.length === 11 ? 'PF' : 'PJ',
-        cpf: dataUpdateBanking.Identity.length === 11 ? dataUpdateBanking.Identity : '',
-        cnpj: dataUpdateBanking.Identity.length > 11 ? dataUpdateBanking.Identity : '',
-        accountType: dataUpdateBanking.BankData.AccountType ? dataUpdateBanking.BankData.AccountType : '',
-        agency: dataUpdateBanking.BankData.Agency ? dataUpdateBanking.BankData.Agency : '',
-        account: dataUpdateBanking.BankData.Account ? dataUpdateBanking.BankData.Account : '',
-        digit: dataUpdateBanking.BankData.AccountDigit ? dataUpdateBanking.BankData.AccountDigit : '',
-        zipCode: dataUpdateBanking.Address.ZipCode ? dataUpdateBanking.Address.ZipCode : '',
-        street: dataUpdateBanking.Address.Street ? dataUpdateBanking.Address.Street : '',
-        number: dataUpdateBanking.Address.Number ? dataUpdateBanking.Address.Number : '',
-        complement: dataUpdateBanking.Address.Complement ? dataUpdateBanking.Address.Complement : '',
-        district: dataUpdateBanking.Address.District ? dataUpdateBanking.Address.District : '',
-        cityName: dataUpdateBanking.Address.City ? dataUpdateBanking.Address.City : '',
-        stateInitials: dataUpdateBanking.Address.State ? dataUpdateBanking.Address.State : '',
-        countryName: dataUpdateBanking.Address.Country ? dataUpdateBanking.Address.Country : '',
-    }
+    useEffect(() => {
+        if (updateModal && dataUpdateBanking) {
+            const editAcountDefaultValue: IAccountComponentModalTypes = {
+                bank: dataUpdateBanking.BankData.Bankname,
+                favoredName: dataUpdateBanking.ResponsibleName,
+                personType: dataUpdateBanking.Identity.length === 11 ? 'PF' : 'PJ',
+                cpf: dataUpdateBanking.Identity.length === 11 ? dataUpdateBanking.Identity : '',
+                cnpj: dataUpdateBanking.Identity.length > 11 ? dataUpdateBanking.Identity : '',
+                accountType: dataUpdateBanking.BankData.AccountType,
+                agency: dataUpdateBanking.BankData.Agency,
+                account: dataUpdateBanking.BankData.Account,
+                digit: dataUpdateBanking.BankData.AccountDigit,
+                zipCode: dataUpdateBanking.Address.ZipCode,
+                street: dataUpdateBanking.Address.Street,
+                number: dataUpdateBanking.Address.Number,
+                complement: dataUpdateBanking.Address.Complement,
+                district: dataUpdateBanking.Address.District,
+                cityName: dataUpdateBanking.Address.City,
+                stateInitials: dataUpdateBanking.Address.State,
+                countryName: dataUpdateBanking.Address.Country,
+            }
+            setDataResponse(editAcountDefaultValue)
+        } else {
+            const addAcountDefaultValue: IAccountComponentModalTypes = {
+                bank: '',
+                favoredName: '',
+                personType: 'PF',
+                cpf: '',
+                cnpj: '',
+                accountType: '',
+                agency: '',
+                account: '',
+                digit: '',
+                zipCode: '',
+                street: '',
+                number: '',
+                complement: '',
+                district: '',
+                cityName: '',
+                stateInitials: '',
+                countryName: ''
+            }
+            setDataResponse(addAcountDefaultValue)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    function handleSubmit(values: addAcountTypeValues) {
-        console.log('values', values)
+    async function handleSubmit(values: IAccountComponentModalTypes): Promise<void> {
+        console.log('fui chamado', values)
+        const subAccount: ISubAccountTypesValues = {
+            account: {
+                Identity: values.cpf ? values.cpf : values.cnpj,
+                BankData: {
+                    Bank: {
+                        Code: values.bank,
+                    },
+                    BankAgency: values.agency,
+                    BankAgencyDigit: values.digit,
+                    BankAccount: values.account,
+                    BankAccountDigit: values.digit,
+                    AccountType: {
+                        Code: values.accountType,
+                    },
+                },
+                Address: {
+                    ZipCode: values.zipCode,
+                    Street: values.street,
+                    Number: values.number,
+                    Complement: values.complement,
+                    District: values.district,
+                    CityName: values.cityName,
+                    StateInitials: values.stateInitials,
+                    CountryName: values.countryName,
+                },
+            },
+        };
+
+        try {
+            await api.post(
+                `/users/${user.data.id}/safe2pay/sub-accounts`,
+                subAccount,
+                {
+                    headers: { 'sunize-access-token': user.data.access_token },
+                },
+            );
+            toast.success('Sua conta foi cadastrada!');
+            setModal(false);
+        } catch (error) {
+            toast.error(
+                'Ocorreu um erro ao tentar cadastrar sua conta, favor entrar em contato com o suporte!',
+            );
+        }
     }
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            ...editAcountDefaultValue,
+            ...dataResponse,
         },
-        validationSchema: schemaAccount,
+        // validationSchema: schemaAccount,
         onSubmit: (values) => {
-            handleSubmit(values);
+            if (!updateModal) {
+                handleSubmit(values);
+            } else {
+                console.log('Faltar implementar o back-end com o serviço de atualizar conta!')
+            }
         },
     });
 
-    const getLocation = useCallback((value: string) => {
-        const cep = value.replace(/[-_]/g, '')
-        if (cep.length === 8) {
-            setStatusGetLocation('trying')
-            axios.get(`https:viacep.com.br/ws/${cep}/json/`).then((res: AxiosResponse<any, any>
-            ) => {
-                if (!res.data.erro) {
-                    setStatusGetLocation('success')
-                    formik.values.street = res.data.logradouro;
-                    formik.values.complement = res.data.complemento;
-                    formik.values.cityName = res.data.localidade;
-                    formik.values.stateInitials = res.data.uf;
-                    formik.values.countryName = 'Brasil';
-                    formik.values.district = res.data.bairro;
-                }
-            })
+    async function getLocation(cep: string): Promise<void> {
+        setStatusGetLocation('trying')
+        try {
+            const response = await axios.get(`https:viacep.com.br/ws/${cep}/json/`)
+            setStatusGetLocation('success')
+            formik.values.street = response.data.logradouro;
+            formik.values.complement = response.data.complemento;
+            formik.values.cityName = response.data.localidade;
+            formik.values.stateInitials = response.data.uf;
+            formik.values.countryName = 'Brasil';
+            formik.values.district = response.data.bairro;
+        } catch (error) {
+            toast.error('Error na consulta do cep, favor inserir o endereço manualmente.')
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }
 
     useEffect(() => {
         if (formik.values.personType === 'PJ') {
@@ -85,13 +153,15 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
         if (formik.values.personType === 'PF') {
             formik.values.cnpj = ''
         }
-        if (formik.values.zipCode.length === 8) {
-            getLocation(formik.values.zipCode)
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formik.values])
 
-
+    useEffect(() => {
+        if (formik.values.zipCode && formik.values.zipCode.length === 8) {
+            getLocation(formik.values.zipCode)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formik.values.zipCode])
 
     return (
         <>
@@ -120,12 +190,21 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                 <FaTimes onClick={() => setModal(!modal)} />
                             </button> */}
 
-                            <Typography style={{
-                                display: 'flex', justifyContent: 'center', marginTop: '3rem', marginBottom: '0.5rem',
-                                fontWeight: 500, fontSize: '1.3rem', color: 'rgb(75, 75, 75)'
-                            }}>
-                                Editar Conta
-                            </Typography>
+                            {!updateModal ? (
+                                <Typography style={{
+                                    display: 'flex', justifyContent: 'center', marginTop: '3rem', marginBottom: '0.5rem',
+                                    fontWeight: 500, fontSize: '1.3rem', color: 'rgb(75, 75, 75)'
+                                }}>
+                                    Cadastrar Conta
+                                </Typography>
+                            ) : (
+                                <Typography style={{
+                                    display: 'flex', justifyContent: 'center', marginTop: '3rem', marginBottom: '0.5rem',
+                                    fontWeight: 500, fontSize: '1.3rem', color: 'rgb(75, 75, 75)'
+                                }}>
+                                    Editar Conta
+                                </Typography>
+                            )}
 
                             <Typography style={{
                                 marginTop: '10px', marginBottom: '10px', fontWeight: 500,
@@ -168,21 +247,32 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                             </FormControl>
 
                             {formik.values.personType === 'PF' ? (
-                                <TextField
-                                    id="cpf"
-                                    name="cpf"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.cpf}
-                                    placeholder="Digite seu CPF"
-                                />
+                                <>
+                                    <Typography>CPF</Typography>
+                                    <TextField
+                                        id="cpf"
+                                        name="cpf"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.cpf}
+                                        placeholder="Digite seu CPF"
+                                        error={formik.touched.cpf && Boolean(formik.errors.cpf)}
+                                        helperText={formik.touched.cpf && formik.errors.cpf}
+                                    />
+
+                                </>
                             ) : (
-                                <TextField
-                                    id="cnpj"
-                                    name="cnpj"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.cnpj}
-                                    placeholder="Digite seu CNPJ"
-                                />
+                                <>
+                                    <Typography>CNPJ</Typography>
+                                    <TextField
+                                        id="cnpj"
+                                        name="cnpj"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.cnpj}
+                                        placeholder="Digite seu CNPJ"
+                                        error={formik.touched.cnpj && Boolean(formik.errors.cnpj)}
+                                        helperText={formik.touched.cnpj && formik.errors.cnpj}
+                                    />
+                                </>
                             )}
 
                             <Typography style={{
@@ -208,7 +298,7 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                 renderInput={(params) =>
                                     <TextField
                                         {...params}
-                                        id='bankName'
+                                        id='bank'
                                         placeholder="Selecione o banco"
                                         variant="outlined"
                                     />}
@@ -254,6 +344,11 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                     variant='outlined'
                                     value={formik.values.agency}
                                     onChange={formik.handleChange}
+                                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        e.target.value = Math.max(0, Number(e.target.value))
+                                            .toString()
+                                            .slice(0, 5);
+                                    }}
                                     error={formik.touched.agency && Boolean(formik.errors.agency)}
                                     helperText={formik.touched.agency && formik.errors.agency}
                                 />
@@ -261,10 +356,16 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                     style={{ width: '30%' }}
                                     id='account'
                                     name="account"
+                                    type="number"
                                     placeholder="Conta"
                                     variant='outlined'
                                     value={formik.values.account}
                                     onChange={formik.handleChange}
+                                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        e.target.value = Math.max(0, Number(e.target.value))
+                                            .toString()
+                                            .slice(0, 8);
+                                    }}
                                     error={formik.touched.account && Boolean(formik.errors.account)}
                                     helperText={formik.touched.account && formik.errors.account}
                                 />
@@ -272,10 +373,16 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                     style={{ width: '30%' }}
                                     id='digit'
                                     name="digit"
+                                    type="number"
                                     placeholder="Digito"
                                     variant='outlined'
                                     value={formik.values.digit}
                                     onChange={formik.handleChange}
+                                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        e.target.value = Math.max(0, Number(e.target.value))
+                                            .toString()
+                                            .slice(0, 1);
+                                    }}
                                     error={formik.touched.digit && Boolean(formik.errors.digit)}
                                     helperText={formik.touched.digit && formik.errors.digit}
                                 />
@@ -288,8 +395,9 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                 Informações de Endereço
                             </Typography>
 
+                            <Typography>País</Typography>
                             <Autocomplete
-                                id="selectCountry"
+                                id="countryName"
                                 options={listCountries}
                                 getOptionLabel={(option) => option.nome}
                                 onChange={(_event, item) => {
@@ -297,11 +405,13 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                         formik.values.countryName = item.nome
                                     }
                                 }}
+
                                 renderInput={(params) =>
                                     <TextField
                                         {...params}
                                         placeholder="Selecione o país"
                                         variant="outlined"
+                                        onChange={formik.handleChange}
                                     />}
                             />
 
@@ -313,6 +423,11 @@ export function ModalEditAccount({ modal, setModal, dataUpdateBanking }: modalEd
                                 variant='outlined'
                                 value={formik.values.zipCode}
                                 onChange={formik.handleChange}
+                                onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    e.target.value = Math.max(0, Number(e.target.value))
+                                        .toString()
+                                        .slice(0, 8);
+                                }}
                                 error={formik.touched.zipCode && Boolean(formik.errors.zipCode)}
                                 helperText={formik.touched.zipCode && formik.errors.zipCode}
                             />

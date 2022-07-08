@@ -1,5 +1,5 @@
 /**REFATORAR NOVAMENTE,APÓS O SERVER SER REFATORADO PARA CAMEL CASE*/
-export interface bankingAccountsType {
+export interface IBankingAccountsType {
     Address: {
       City: string;
       Complement: string;

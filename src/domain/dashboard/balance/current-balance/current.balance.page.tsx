@@ -1,28 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { api } from '@shared/services/api';
-import { ModalTransfer } from '../components/modal-transfer/modal-transfer-component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Container, AddAccount, Value } from './current.balance.styles'
-import { listBanks } from '../listBanks'
 import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../store/hooks';
 import { WithdrawalAccounts } from '../withdrawal-accounts/withdraw-accounts-component';
-import { ModalAddAccount } from '../components/modal-add-account/modal-add-account-component';
 import { ballanceValuesType } from '../types/current-ballance-values.type';
-import { bankingAccountsType } from '../types/current-ballance-banking-accounts.type';
+import { IBankingAccountsType } from '../types/current-ballance-banking-accounts.type';
 import { wrapperNavigation } from '../components/wrapper-navigation.component';
-import { FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup, Typography } from '@mui/material';
+import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
+import { AccountComponentModal } from '../components/accountComponentModal/account-component-modal';
+import { listBanks } from '../config/list-banks';
 
 export function CurrentBalance(): JSX.Element {
   const user = useAppSelector(userSelector);
   const [modalAddAccount, setModalAddAccount] = useState(false)
-  const [modalTransfer, setModalTransfer] = useState(false)
   const [isShowBalance, setIsShowBalance] = useState(true)
   const [isShowRelease, setIsShowRelease] = useState(true)
   const [isShowAvailable, setIsShowAvailable] = useState(true)
-  const [bankingAccounts, setBankingAccounts] = useState<bankingAccountsType[]>([])
+  const [bankingAccounts, setBankingAccounts] = useState<IBankingAccountsType[]>([])
   const [loading, setLoading] = useState(false)
   const [balanceValues, setBalanceValues] = useState<ballanceValuesType>({
     balance: 0,
@@ -200,22 +198,12 @@ export function CurrentBalance(): JSX.Element {
     )
   }
 
-  function modalTransferFunc(): JSX.Element {
+  function accountComponentModal(): JSX.Element {
     return (
-      <ModalTransfer
-        modal={modalTransfer}
-        setModal={setModalTransfer}
-        data={bankingAccounts[0]}
-        balance={balanceValues.available}
-      />
-    )
-  }
-
-  function modalAddAccountFunc(): JSX.Element {
-    return (
-      <ModalAddAccount
+      <AccountComponentModal
         modal={modalAddAccount}
         setModal={setModalAddAccount}
+        updateModal={false}
       />
     )
   }
@@ -241,9 +229,7 @@ export function CurrentBalance(): JSX.Element {
 
       <CopyrightFooter limitWidth={1100} />
 
-      {modalTransferFunc()}
-
-      {modalAddAccountFunc()}
+      {accountComponentModal()}
 
     </Container>
   )
