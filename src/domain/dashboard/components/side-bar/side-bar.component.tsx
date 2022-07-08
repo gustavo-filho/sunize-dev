@@ -82,7 +82,13 @@ export const SideBar = () => {
         >
           Afiliados
         </MenuItem>
-        <MenuItem icon={<AiFillShop />}>Mercado</MenuItem>
+        <MenuItem
+          icon={<AiFillShop />}
+          onClick={() => history.push(DASHBOARD_ROUTES.MARKET)}
+          active={pathname === DASHBOARD_ROUTES.MARKET}
+        >
+          Mercado
+        </MenuItem>
         <MenuItem
           icon={<AiFillBank />}
           onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
