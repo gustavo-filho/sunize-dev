@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
-
-// Components
-
-// Pages
-// import EmAlta from './EmAlta'
-import { Recent, useFetch } from './components/recent/recent-component'
-// import TopComissoes from './TopComissoes'
+import { Recent } from './components/recent/recent-component'
 import { EBooks } from './components/ebook/ebook.component';
 import { Courses } from './components/courses/courses.component'
 import { Subscriptions } from './components/subscriptions/subscriptions.component'
-
-// styles
+import { TopCommissions } from './components/top-commissions/top-commissions.component';
 import {
     Container,
     InputSearch,
@@ -21,11 +14,10 @@ import {
     SearchAndResults,
     SearchResults,
 } from './market-page-styles'
-// import { ReactComponent as Loupe } from 'Assets/Dashboard/marketTest/Loupe.svg'
 import { CopyrightFooter } from '../components/copyright-footer/copyright-footer.component'
 import { Product } from '@shared/types/types'
 import { Loupe } from '@mui/icons-material'
-
+import { useFetch } from './config/useFetch.config';
 
 export function Market(): JSX.Element {
     const { data } = useFetch(`products/recent`)
@@ -116,13 +108,7 @@ export function Market(): JSX.Element {
                     <Route path="/dashboard/mercado/recentes" component={Recent} />
                     <Route path="/dashboard/mercado/assinaturas" component={Subscriptions} />
                     <Route path="/dashboard/mercado/ebooks" component={EBooks} />
-                    {/* <Route
-                        path="/dashboard/mercado/top-comissoes/"
-                        component={TopComissoes}
-                    />
-                    
-                    <Route path="/dashboard/mercado/cursos/" component={Cursos} />
-              */}
+                    <Route path="/dashboard/mercado/top-comissoes" component={TopCommissions} />
                 </Switch>
             </ProductWrapper>
             <CopyrightFooter limitWidth={1030} />

@@ -1,25 +1,11 @@
 import React, { useEffect, useState } from 'react'
-
-
-
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component'
 import { Container, Filter, InputSearch, PaginationContainer, Search, SearchAndResults, SearchResults } from './recent-styles'
-import useSWR from 'swr'
-import { api } from '@shared/services/api'
 import { MarketProduct } from '../market-product/market-product-component'
 import { Product } from '@shared/types/types'
 import { Loupe } from '@mui/icons-material'
 import { NavLink } from 'react-router-dom'
-
-export function useFetch<Data = any, Error = any>(url: string, params?: any) {
-    const { data, error, mutate } = useSWR<Data, Error>(url, async url => {
-        const response = await api.get(url, params);
-
-        return response.data;
-    });
-
-    return { data, error, mutate };
-}
+import { useFetch } from '../../config/useFetch.config'
 
 export function Recent(): JSX.Element {
     const [offset, setOffset] = useState(0)

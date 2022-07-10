@@ -5,13 +5,9 @@ import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
 import { FiStar } from 'react-icons/fi'
 import { useAppSelector } from '../../../../../../store/hooks'
 import { Container, TotalEvaluations } from './evaluation.styles'
+import { IPropsEvaluation } from '@domain/dashboard/market/interfaces/iprops-evaluation.type'
 
-interface Props {
-    productId: number
-    withoutNumber?: boolean
-}
-
-export const Evaluation: React.FC<Props> = ({ productId, withoutNumber }) => {
+export const Evaluation: React.FC<IPropsEvaluation> = ({ productId, withoutNumber }) => {
     const user = useAppSelector(userSelector);
     const [evaluation, setEvaluation] = useState(0)
 

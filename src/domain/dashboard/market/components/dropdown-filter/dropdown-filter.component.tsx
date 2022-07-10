@@ -3,23 +3,13 @@ import React from 'react'
 import { Menu, Dropdown, Button } from 'antd'
 import { Container } from './dropdown-filter.style';
 import { DownOutlined } from '@ant-design/icons'
-
-interface Category {
-  title: string
-  description: string
-}
-
-interface Props {
-  setSelectedOrder: (arg0: string) => void
-  setSelectedFilter: (arg0: string) => void
-  categories?: Category[]
-}
+import { PropsDropDownFilter } from '../../interfaces/iprops-dropdown-filter.type';
 
 export function DropdownFilter({
   setSelectedOrder,
   setSelectedFilter,
   categories,
-}: Props) {
+}: PropsDropDownFilter) {
   const orderMenu = (
     <Menu
       className="menuDropDown"

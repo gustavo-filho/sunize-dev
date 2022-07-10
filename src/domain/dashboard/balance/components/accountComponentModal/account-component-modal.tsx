@@ -9,12 +9,13 @@ import { api } from '@shared/services/api'
 import { schemaAccount } from './account-schema'
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import { IAccountComponentModalPropsValues } from '../../types/account-component-modal-props-values'
-import { Autocomplete, FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Autocomplete, FormControl, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
 import { IAccountComponentModalTypes } from '../../types/account-component-modal-types'
 import { ISubAccountTypesValues } from '../../types/account-component-sub-account-types'
 import { listCountries } from '../../config/list-coutries'
 import { FormGroup, Overlay } from './account-styled-component-styles'
 import { listBanks } from '../../config/list-banks'
+import { TextFieldComponent } from '../textFieldComponent'
 
 export function AccountComponentModal({ modal, setModal, updateModal, dataUpdateBanking }: IAccountComponentModalPropsValues): JSX.Element {
     const user = useAppSelector(userSelector);
@@ -120,7 +121,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
         initialValues: {
             ...dataResponse,
         },
-        // validationSchema: schemaAccount,
+        validationSchema: schemaAccount,
         onSubmit: (values) => {
             if (!updateModal) {
                 handleSubmit(values);
@@ -214,7 +215,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                             </Typography>
 
                             <Typography>Nome do Favorecido</Typography>
-                            <TextField
+                            <TextFieldComponent
                                 id='favoredName'
                                 name="favoredName"
                                 placeholder="Digite o nome do favorecido"
@@ -249,7 +250,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                             {formik.values.personType === 'PF' ? (
                                 <>
                                     <Typography>CPF</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id="cpf"
                                         name="cpf"
                                         onChange={formik.handleChange}
@@ -263,7 +264,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                             ) : (
                                 <>
                                     <Typography>CNPJ</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id="cnpj"
                                         name="cnpj"
                                         onChange={formik.handleChange}
@@ -296,7 +297,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     }
                                 }}
                                 renderInput={(params) =>
-                                    <TextField
+                                    <TextFieldComponent
                                         {...params}
                                         id='bank'
                                         placeholder="Selecione o banco"
@@ -336,7 +337,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                 </Typography>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-                                <TextField
+                                <TextFieldComponent
                                     style={{ width: '30%' }}
                                     id='agency'
                                     name="agency"
@@ -352,7 +353,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     error={formik.touched.agency && Boolean(formik.errors.agency)}
                                     helperText={formik.touched.agency && formik.errors.agency}
                                 />
-                                <TextField
+                                <TextFieldComponent
                                     style={{ width: '30%' }}
                                     id='account'
                                     name="account"
@@ -369,7 +370,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     error={formik.touched.account && Boolean(formik.errors.account)}
                                     helperText={formik.touched.account && formik.errors.account}
                                 />
-                                <TextField
+                                <TextFieldComponent
                                     style={{ width: '30%' }}
                                     id='digit'
                                     name="digit"
@@ -407,7 +408,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                 }}
 
                                 renderInput={(params) =>
-                                    <TextField
+                                    <TextFieldComponent
                                         {...params}
                                         placeholder="Selecione o país"
                                         variant="outlined"
@@ -416,7 +417,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                             />
 
                             <Typography style={{ marginTop: '20px' }}>CEP</Typography>
-                            <TextField
+                            <TextFieldComponent
                                 id='zipCode'
                                 name="zipCode"
                                 placeholder="Digite o CEP:"
@@ -439,7 +440,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                             ) : (
                                 <>
                                     <Typography style={{ marginTop: '20px' }}>Rua</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='street'
                                         name="street"
                                         placeholder="Digite o nome da rua:"
@@ -451,7 +452,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     />
 
                                     <Typography style={{ marginTop: '20px' }}>Número</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='number'
                                         name="number"
                                         placeholder="Digite o número:"
@@ -463,7 +464,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     />
 
                                     <Typography style={{ marginTop: '20px' }}>Complemento</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='complement'
                                         name="complement"
                                         placeholder="Digite o complemento(opcional):"
@@ -475,7 +476,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     />
 
                                     <Typography style={{ marginTop: '20px' }}>Bairro</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='district'
                                         name="district"
                                         placeholder="Digite o nome do bairro:"
@@ -487,7 +488,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     />
 
                                     <Typography style={{ marginTop: '20px' }}>Cidade</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='cityName'
                                         name="cityName"
                                         placeholder="Digite a cidade:"
@@ -499,7 +500,7 @@ export function AccountComponentModal({ modal, setModal, updateModal, dataUpdate
                                     />
 
                                     <Typography style={{ marginTop: '20px' }}>Sigla do Estado</Typography>
-                                    <TextField
+                                    <TextFieldComponent
                                         id='stateInitials'
                                         name="stateInitials"
                                         placeholder="Digite a UF do Estado:"

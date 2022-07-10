@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom'
 import { useFetch } from '../../config/useFetch.config'
 import { ICategory } from '../../interfaces/iCategory.types'
 
-export function Subscriptions(): JSX.Element {
+export function TopCommissions(): JSX.Element {
     const user = useAppSelector(userSelector);
     const [offset, setOffset] = useState(0)
     const [totalPages] = useState(0)
@@ -22,55 +22,22 @@ export function Subscriptions(): JSX.Element {
             headers: { 'sunize-access-token': user.data.access_token },
         },
     )
-    const [subscriptions, setSubscriptions] = useState([])
+    const [productsComission, setProductsComission] = useState([])
     const [productsSorted, setProductsSorted] = useState([])
     const [reverseSorted, setReverseSorted] = useState([])
     const [selectedOrder, setSelectedOrder] = useState('')
     const [selectedFilter, setSelectedFilter] = useState('')
     const [productsCategory, setProductsCategory] = useState([])
+    const [categories, setCategories] = useState([] as ICategory[])
     const [allProducts, setAllProducts] = useState<Product[]>()
     const [searchResults, setSearchResults] = useState<Product[]>([])
     const [search, setSearch] = useState('')
-    const [categories, setCategories] = useState([] as ICategory[])
 
     function handleChange(event: {
         target: { value: React.SetStateAction<string> }
     }) {
         setSearch(event.target.value)
     }
-
-    function sortFunction(a: any, b: any) {
-        if (a.price < b.price) {
-            return -1
-        } else {
-            return true
-        }
-    }
-
-    useEffect(() => {
-        getCategories()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const getCategories = useCallback(async () => {
-        const response = await api.get('categories', {
-            headers: { 'sunize-access-token': user.data.access_token },
-        })
-        setCategories(response.data.data)
-    }, [user.data.access_token])
-
-    useEffect(() => {
-        if (data) {
-            const filteredProducts = data.data.filter(
-                (product: { charge_type: string }) =>
-                    product.charge_type === 'RECURRENT',
-            )
-            setSubscriptions(filteredProducts)
-            setProductsSorted(filteredProducts.sort(sortFunction))
-            const reverseArray = filteredProducts.slice(0)
-            setReverseSorted(reverseArray.sort(sortFunction).reverse())
-        }
-    }, [data, offset])
 
     useEffect(() => {
         if (data) {
@@ -93,14 +60,43 @@ export function Subscriptions(): JSX.Element {
     }, [allProducts, search])
 
     useEffect(() => {
+        getCategories()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const getCategories = useCallback(async () => {
+        const response = await api.get('categories', {
+            headers: { 'sunize-access-token': user.data.access_token },
+        })
+        setCategories(response.data.data)
+    }, [user.data.access_token])
+
+    function sortFunction(a: any, b: any) {
+        if (a.price < b.price) {
+            return -1
+        } else {
+            return true
+        }
+    }
+
+    useEffect(() => {
+        if (data) {
+            setProductsComission(data.data)
+            setProductsSorted(data.data.sort(sortFunction))
+            const reverseArray = data.data.slice(0)
+            setReverseSorted(reverseArray.sort(sortFunction).reverse())
+        }
+    }, [data, offset])
+
+    useEffect(() => {
         if (selectedFilter) {
             if (
-                subscriptions.filter(
+                productsComission.filter(
                     (product: any) => product.categories[0]?.title === selectedFilter,
                 ).length > 0
             ) {
                 setProductsCategory(
-                    subscriptions.filter(
+                    productsComission.filter(
                         (product: any) => product.categories[0]?.title === selectedFilter,
                     ),
                 )
@@ -110,13 +106,12 @@ export function Subscriptions(): JSX.Element {
                 setProductsCategory([])
             }
         }
-    }, [selectedFilter, data, subscriptions])
+    }, [selectedFilter, data, productsComission])
 
     return (
         <>
-            {subscriptions ? (
+            {productsComission ? (
                 <Container>
-
                     <h2>Mercado de Produtos</h2>
                     <p>Afilie-se a um produto e comece a ter ganhos hoje mesmo!</p>
 
@@ -199,7 +194,7 @@ export function Subscriptions(): JSX.Element {
                                             </p>
                                         )
                             : selectedOrder === ''
-                                ? subscriptions.map((product, index) => (
+                                ? productsComission.map((product, index) => (
                                     <MarketProduct key={index} product={product} />
                                 ))
                                 : selectedOrder === 'topToBottom'
@@ -212,10 +207,10 @@ export function Subscriptions(): JSX.Element {
                                     ))}
                     </div>
                 </Container>
-            ) : !subscriptions ? (
-                <p>Buscando assinaturas...</p>
+            ) : !productsComission ? (
+                <p>Buscando produtos em recentes...</p>
             ) : (
-                error && <p>Erro ao buscar assinaturas</p>
+                error && <p>Erro ao buscar produtos em recentes</p>
             )}
 
             {totalPages > 1 && (

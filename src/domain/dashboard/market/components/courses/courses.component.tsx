@@ -4,14 +4,10 @@ import { DropdownFilter } from '../dropdown-filter/dropdown-filter.component'
 import { api } from '@shared/services/api'
 import { useAppSelector } from '../../../../../store/hooks'
 import { userSelector } from '@domain/auth/user/user.store'
-import { useFetch } from '../recent/recent-component'
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component'
 import { MarketProduct } from '../market-product/market-product-component'
-
-interface Category {
-    title: string
-    description: string
-}
+import { useFetch } from '../../config/useFetch.config'
+import { ICategory } from '../../interfaces/iCategory.types'
 
 export function Courses(): JSX.Element {
     const user = useAppSelector(userSelector);
@@ -29,7 +25,7 @@ export function Courses(): JSX.Element {
     const [selectedOrder, setSelectedOrder] = useState('')
     const [selectedFilter, setSelectedFilter] = useState('')
     const [productsCategory, setProductsCategory] = useState([])
-    const [categories, setCategories] = useState([] as Category[])
+    const [categories, setCategories] = useState([] as ICategory[])
 
     function sortFunction(a: any, b: any) {
         if (a.price < b.price) {
@@ -41,6 +37,7 @@ export function Courses(): JSX.Element {
 
     useEffect(() => {
         getCategories()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getCategories = useCallback(async () => {

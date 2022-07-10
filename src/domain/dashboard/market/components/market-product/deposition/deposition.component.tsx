@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
 import { Container, Content } from './deposition.styles'
-
 // import imgTop from 'Assets/Dashboard/marketTest/courseTest.png'
 import { Evaluation } from '../evaluation/evaluation.component'
 import { api } from '@shared/services/api'
-
-
-interface IAvaliation {
-    avaliation: {
-        description: string
-        clientId: string
-    }
-}
+import { IAvaliation } from '@domain/dashboard/market/interfaces/iavaliation.type'
 
 export function Deposition({ avaliation }: IAvaliation): JSX.Element {
     const [client, setClient] = useState({} as any)
@@ -23,6 +14,7 @@ export function Deposition({ avaliation }: IAvaliation): JSX.Element {
             setClient(data.data)
         }
         getUserData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -4,17 +4,13 @@ import { Container, Filter, InputSearch, PaginationContainer, Search, SearchAndR
 import { userSelector } from '@domain/auth/user/user.store'
 import { useAppSelector } from '../../../../../store/hooks'
 import { api } from '@shared/services/api'
-import { useFetch } from '../recent/recent-component'
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component'
 import { MarketProduct } from '../market-product/market-product-component'
 import { Product } from '@shared/types/types'
 import { Loupe } from '@mui/icons-material'
 import { NavLink } from 'react-router-dom'
-
-interface Category {
-    title: string
-    description: string
-}
+import { useFetch } from '../../config/useFetch.config'
+import { ICategory } from '../../interfaces/iCategory.types'
 
 export function EBooks(): JSX.Element {
     const user = useAppSelector(userSelector);
@@ -32,7 +28,7 @@ export function EBooks(): JSX.Element {
     const [selectedOrder, setSelectedOrder] = useState('')
     const [selectedFilter, setSelectedFilter] = useState('')
     const [productsCategory, setProductsCategory] = useState([])
-    const [categories, setCategories] = useState([] as Category[])
+    const [categories, setCategories] = useState([] as ICategory[])
     const [allProducts, setAllProducts] = useState<Product[]>()
     const [searchResults, setSearchResults] = useState<Product[]>([])
     const [search, setSearch] = useState('')

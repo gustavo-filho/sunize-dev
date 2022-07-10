@@ -17,16 +17,12 @@ import { Evaluation } from './evaluation/evaluation.component'
 import { Deposition } from './deposition/deposition.component'
 import ReactPixel from 'react-facebook-pixel'
 import { api } from '@shared/services/api'
-import { Product } from '@shared/types/types'
 import { useAppSelector } from '../../../../../store/hooks'
 import { userSelector } from '@domain/auth/user/user.store'
 import { toast } from 'react-toastify'
+import { IMarketProductProps } from '../../interfaces/imarket-product-props.type'
 
-interface MarketProductProps {
-    product: Product
-}
-
-export const MarketProduct: React.FC<MarketProductProps> = ({ product }) => {
+export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
     const user = useAppSelector(userSelector);
     const [modal, setModal] = useState(false)
     const [avaliations, setAvaliations] = useState([]) as any
