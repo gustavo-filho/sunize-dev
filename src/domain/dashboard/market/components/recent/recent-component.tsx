@@ -90,9 +90,17 @@ export function Recent(): JSX.Element {
                             <b>Assinaturas</b>
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink
+                            to="/dashboard/mercado/top-comissoes"
+                            activeClassName="active"
+                        >
+                            <b>Top Comissões</b>
+                        </NavLink>
+                    </li>
                 </ul>
             </Filter>
-            
+
             {productsRecent ? (
                 productsRecent.map((product, index) => (
                     <MarketProduct key={index} product={product} />

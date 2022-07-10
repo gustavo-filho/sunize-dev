@@ -159,6 +159,14 @@ export function TopCommissions(): JSX.Element {
                                     <b>Assinaturas</b>
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/mercado/top-comissoes"
+                                    activeClassName="active"
+                                >
+                                    <b>Top Comissões</b>
+                                </NavLink>
+                            </li>
                         </ul>
                     </Filter>
 
