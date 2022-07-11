@@ -98,7 +98,7 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
         <>
             <div style={{
                 width: '300px', height: '360px', backgroundColor: '#27293d', margin: '15px 30px 5.5rem 0px',
-                cursor: 'pointer',
+                cursor: 'pointer',transition: 'box-shadow 0.2s', boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)'
 
             }} onClick={() => setModal(!modal)}>
                 {product.image ? (
