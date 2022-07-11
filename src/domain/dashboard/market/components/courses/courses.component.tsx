@@ -37,7 +37,7 @@ export function Courses(): JSX.Element {
 
     useEffect(() => {
         getCategories()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getCategories = useCallback(async () => {
@@ -90,7 +90,7 @@ export function Courses(): JSX.Element {
                         categories={categories && categories}
                     />
 
-                    <div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {productsCategory.length > 0
                             ? selectedOrder === ''
                                 ? productsCategory.map((product, index) => (

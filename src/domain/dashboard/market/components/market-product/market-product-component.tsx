@@ -2,10 +2,7 @@ import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaImage, FaTimes } from 'react-icons/fa'
 import {
-    Container,
-    Img,
     EmptyImage,
-    CardInformation,
     Modal,
     ContentModal,
     Overlay,
@@ -99,27 +96,34 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
 
     return (
         <>
-            <Container onClick={() => setModal(!modal)}>
-                <Img>
-                    {product.image ? (
-                        <img src={product.image} alt={product.title} />
-                    ) : (
-                        <div>
-                            <FaImage />
-                        </div>
-                    )}
-                </Img>
-                <CardInformation>
+            <div style={{
+                width: '300px', height: '360px', backgroundColor: '#27293d', margin: '15px 30px 5.5rem 0px',
+                cursor: 'pointer',
+
+            }} onClick={() => setModal(!modal)}>
+                {product.image ? (
+                    <img style={{ width: '300px', height: '200px', marginBottom: '20px' }} src={product.image} alt={product.title} />
+                ) : (
+                    <div >
+                        <FaImage style={{ width: '70px', height: '200px', marginBottom: '20px', marginLeft: '110px', color: '#4b4b4b' }} />
+                    </div>
+                )}
+
+                <div style={{ textAlign: 'center', color: '#ccc' }}>
                     <strong>{product.title}</strong>
+                </div>
+                <div style={{ marginTop: '20px', marginLeft: '5px', color: '#ccc' }}>
                     <Evaluation productId={product.id} />
                     <p>{priceConverted}</p>
-                    <span>
-                        {hasAffiliate
-                            ? `Receba até ${commissionConverted} por venda`
-                            : 'Produto sem comissão'}
-                    </span>
-                </CardInformation>
-            </Container>
+                    <div style={{ marginTop: '20px', color: 'rgba(220, 152, 75, 1)' }}>
+                        <span>
+                            {hasAffiliate
+                                ? `Receba até ${commissionConverted} por venda`
+                                : 'Produto sem comissão'}
+                        </span>
+                    </div>
+                </div>
+            </div>
 
             <Modal modal={Number(modal)}>
                 <ContentModal>
