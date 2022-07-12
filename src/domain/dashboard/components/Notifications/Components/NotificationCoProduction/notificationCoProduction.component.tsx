@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react';
 
-import { Container, Buttons, MainContent } from './notificationCoProduction.styles'
+import {
+  Container,
+  Buttons,
+  MainContent,
+} from './notificationCoProduction.styles';
 
 // import { useAuth } from 'hooks/useAuth'
 // import { useToast } from 'hooks/Toast'
@@ -11,8 +15,8 @@ const NotificationCoProduction: any = ({
   producerId,
   id,
 }: any) => {
-  const [productName, setProductName] = useState('')
-  const [producerName, setProducerName] = useState('')
+  const [productName, setProductName] = useState('');
+  const [producerName, setProducerName] = useState('');
   // const { user } = useAuth()
   // const { addToast } = useToast()
 
@@ -77,7 +81,7 @@ const NotificationCoProduction: any = ({
         <button onClick={denyInvite}>Recusar</button> */}
       </Buttons>
     </Container>
-  )
-}
+  );
+};
 
-export default NotificationCoProduction
+export default NotificationCoProduction;

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from '@shared/styles/theme.constants';
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -14,9 +15,13 @@ export const GlobalStyle = createGlobalStyle`
         @media (max-width: 720px) {
             font-size: 87.5%;
         }
+    } 
+    a {
+      text-decoration: none;
     }
     body {
         --webkit-font-smoothing: antialiased;
+        background: ${theme.colors.darkBlueBackground};
     }
     body, input, textarea, button {
         font-family: 'Montserrat', sans-serif;
@@ -33,4 +38,4 @@ export const GlobalStyle = createGlobalStyle`
         cursor: not-allowed;
     }
   
-`
+`;

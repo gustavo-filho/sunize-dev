@@ -58,7 +58,8 @@ const userReducer = createSlice({
     data: {
       name: '',
       account_type: '',
-      id: null,
+      id: 0,
+      access_token: '',
       photo: ''
     },
     loading: false,
@@ -94,7 +95,6 @@ const userReducer = createSlice({
       state.recoveryPassword.loading = false;
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.fulfilled, (state, action) => {
-      console.log({ action });
       state.recoveryPassword.loading = false;
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.pending, (state, action) => {

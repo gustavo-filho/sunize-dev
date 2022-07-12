@@ -2,16 +2,177 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/account-statements/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/account-statements/styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/balance.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/accountComponentModal/account-component-modal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/accountComponentModal/account-schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/accountComponentModal/account-styled-component-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/textFieldComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/wrapper-navigation.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/config/list-banks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/config/list-coutries.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/current-balance/current.balance.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/current-balance/current.balance.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/account-component-modal-props-values.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/account-component-modal-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/account-component-sub-account-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/account-statements-transaction-data-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/current-ballance-banking-accounts.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/current-ballance-values.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/types/withdrawal-accounts.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/withdrawal-accounts/withdraw-accounts-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/withdrawal-accounts/withdraw-accounts-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/card-content/card-content.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/card-content/card-content.styles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/copyright-footer/copyright-footer.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/copyright-footer/copyright-footer.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard.wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/pagination/pagination.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/pagination/pagination.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/resume-card/resume-card.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/resume-card/resume-card.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/select-bank-component/select-bank-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/select-bank-component/select-bank-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.contants.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/courses/courses.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/courses/courses.style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/dropdown-filter/dropdown-filter.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/dropdown-filter/dropdown-filter.style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/ebook/ebook.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/deposition/deposition.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/deposition/deposition.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/evaluation/evaluation.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/evaluation/evaluation.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/market-product-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/market-product/market-product-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/recent/recent-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/recent/recent-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/subscriptions/subscriptions.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/components/top-commissions/top-commissions.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/config/useFetch.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/interfaces/iCategory.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/interfaces/iavaliation.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/interfaces/imarket-product-props.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/interfaces/iprops-dropdown-filter.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/interfaces/iprops-evaluation.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/market-page-index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/market/market-page-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/affiliates.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/components/affilate-product/affiliate-product.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/components/affilate-product/affiliate-product.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/products-of-affiliates.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/assets/images/photograph.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/assets/images/select-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/dropzone/dropzone.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/dropzone/dropzone.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/dropzone/file-list/file-list.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/dropzone/file-list/file-list.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/modal-rating/modal-rating.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/modal-rating/modal-rating.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/modal-report/modal-report.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/modal-report/modal-report.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/product-box/product-box.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/product-box/product-box.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/rating-star/rating-star.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/components/rating-star/rating-star.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/create-product/create-product.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/create-product/create-product.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/create-product/create-product.validation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/created-products/components/product-created-box/product-created-box.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/created-products/components/product-created-box/product-created-box.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/created-products/created-products.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/created-products/created-products.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/my-products/my-products.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/my-products/my-products.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/products.store.middlewares.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/products/products.store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/cancel-recurring-modal/cancel-recurring-modal.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/cancel-recurring-modal/cancel-recurring-modal.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/cancel-refund-modal/cancel-refund-modal.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/cancel-refund-modal/cancel-refund-modal.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/modal-confirm/modal-confirm.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/modal-confirm/modal-confirm.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/refund-modal/refund-modal.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/components/refund-modal/refund-modal.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/purchase-record/purchase-record.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/purchase-record/purchase-record.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/sale-record/sale-record.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/sales/sale-record/sale-record.style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/support/AccordionQuestion/accordionQuestion.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/support/AccordionQuestion/accordionQuestion.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/support/AccordionQuestion/accordionQuestion.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/support/support.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/dashboard/support/support.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/assets/images/logo-footer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/assets/images/loupe.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/SelectBank/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/SelectBank/styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/details-modal/details-modal.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/details-modal/details-modal.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-cpf-or-cnpj-component/input-cpf-or-cnpj-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-cpf-or-cnpj-component/types/container-props-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-masked/input-masked-styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-masked/input-masked.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-search/input-search.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input-search/input-search.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input/input.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/input/input.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/loader/loader.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/loader/loader.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/modal-confirmation/modal-confirmation.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/modal-confirmation/modal-confirmation.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/select/select.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/select/select.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/text-area/text-area.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/components/text-area/text-area.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/styles/theme.constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/types/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/utils/formatCountries.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/auth/forgot-password/forgot-password.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/forgot-password/forgot-password.page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/auth/login/login.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/login/login.page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/user/user.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/landing/components/Footer/footer.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/landing/components/Footer/footer.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/private-route.helper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.component.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.styles.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/CardTiles/card-tiles.types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Charts/charts.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/chart/chart.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Charts/charts.types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/Components/NotificationCoProduction/notificationCoProduction.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/Components/NotificationCoProduction/notificationCoProduction.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.mocks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.mock.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/dashboard.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.styles.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/dashboard.types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/landing/landing.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/landing/landing.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/private-route.wrapper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/services/api-routes.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api-routes.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/styles/global.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,12 +192,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1653969058" />
+                    <option name="branchName" value="feature/refactor-header" />
+                    <option name="lastUsedInstant" value="1657627257" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="feature/fix-classes-and-sessions" />
-                    <option name="lastUsedInstant" value="1653964597" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1653969058" />
                   </RecentBranch>
                 </list>
               </option>
@@ -51,7 +212,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="28loyrl7NaTBrJKQW1onsrIkpra" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -73,7 +234,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/gustavofilho/sunize/sunize-front/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -81,11 +242,13 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/shared/assets/images" />
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/Auth/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/login/assets/images" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/components/card-content" />
       <recent name="$PROJECT_DIR$/src/domain/auth/components" />
       <recent name="$PROJECT_DIR$/src/domain/auth" />
       <recent name="$PROJECT_DIR$/src/shared/assets/images" />
@@ -113,7 +276,21 @@
       <workItem from="1654439427000" duration="11876000" />
       <workItem from="1654451436471" duration="8249000" />
       <workItem from="1654522262760" duration="30000" />
-      <workItem from="1654560952179" duration="9369000" />
+      <workItem from="1654560952179" duration="10195000" />
+      <workItem from="1654618089028" duration="1887000" />
+      <workItem from="1654650641418" duration="4418000" />
+      <workItem from="1654655234641" duration="3587000" />
+      <workItem from="1654723389214" duration="1922000" />
+      <workItem from="1654827568613" duration="1513000" />
+      <workItem from="1654962874287" duration="8855000" />
+      <workItem from="1655074071918" duration="10484000" />
+      <workItem from="1655127358364" duration="35000" />
+      <workItem from="1655502919975" duration="1446000" />
+      <workItem from="1655567049862" duration="558000" />
+      <workItem from="1655569083459" duration="4306000" />
+      <workItem from="1655729606109" duration="92000" />
+      <workItem from="1655820041193" duration="13613000" />
+      <workItem from="1657060160828" duration="5433000" />
     </task>
     <servers />
   </component>
@@ -141,7 +318,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/fix-classes-and-sessions" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>

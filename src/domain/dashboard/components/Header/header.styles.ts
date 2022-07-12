@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.header`
   display: flex;
@@ -6,13 +6,20 @@ export const Container = styled.header`
   background: #1a1a28;
   height: 80px;
   align-items: center;
+  z-index: 102;
+  position: fixed;
+  width: 100%;
   /* overflow: hidden; */
-`
+`;
 
 export const LogoAndBars = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 2%;
+  margin-left: 20px;
+
+  div {
+    margin: 0 1rem;
+  }
 
   img {
     width: 200px;
@@ -30,7 +37,7 @@ export const LogoAndBars = styled.div`
       max-width: 150px;
     }
   }
-`
+`;
 
 export const UserInfo = styled.div`
   position: relative;
@@ -83,7 +90,7 @@ export const UserInfo = styled.div`
       }
     }
   }
-`
+`;
 
 export const BoxInfo = styled.div`
   position: fixed;
@@ -135,4 +142,4 @@ export const BoxInfo = styled.div`
   li {
     list-style: none;
   }
-`
+`;

@@ -24,28 +24,6 @@ import { DefaultButton } from '@shared/components/DefaultButton/default-button.c
 import { GrSend } from 'react-icons/gr';
 import { Accordion } from '@shared/components/Accordion/accordion.component';
 import { Footer } from '@domain/landing/components/Footer/footer.component';
-import { positions } from '@mui/system';
-import { getPositionOfLineAndCharacter } from 'typescript';
-
-
-// const target = document.querySelectorAll('[data-scroll]');
-// const animationClass = 'animate';
-
-// function animeScroll(){
-//   const windowTop = window.scrollY;
-  
-//   target.forEach(function(element){
-//     console.log(element.getBoundingClientRect().top)
-//     console.log(windowTop)
-//     if((windowTop) > element.getBoundingClientRect().top){
-//       element.classList.add(animationClass)
-//     }
-//   })
-// }
-
-// window.addEventListener('scroll', function() {
-//   animeScroll();
-// })
 
 export const LandingPage = () => {
   return (
@@ -55,7 +33,7 @@ export const LandingPage = () => {
       <Main>
         <Section>
           <h3>
-            Uma plataforma 
+            Uma plataforma
             <mark>completa para você</mark>
           </h3>
           <CardsWrapper>
@@ -258,7 +236,9 @@ export const LandingPage = () => {
               </figcaption>
             </CardBenefits>
 
-            <span className="benefits-and-more" data-scroll="left">E muito +</span>
+            <span className="benefits-and-more" data-scroll="left">
+              E muito +
+            </span>
           </BenefitsColumn>
         </Section>
 
@@ -270,49 +250,49 @@ export const LandingPage = () => {
 
             <div className="faq-accordion-wrapper">
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="1 - A Sunize tem sistema de afiliados?"
                 content="Dentro da plataforma, há uma vitrine para você afiliar-se a qualquer produto digital, desde que seja aprovada pelo produtor de conteúdo."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="2 - Qual o tempo mínimo e valor mínimo para realizar meus saques?"
                 content="Para cartão de crédito, o tempo mínimo para saque é de 30 dias, caso hajam parcelamentos cobramos antecipação de 2% a.m. Para boletos, pix, cartão de débito, apenas 7 dias."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="3 - Quais os benefícios do checkout da Sunize?"
                 content="Em nosso checkout, você possui diversos benefícios, dentre eles: upsell de um clique, contagem regressiva de escassez, mensagem de urgência, estética limpa e direto ao ponto, cupom de desconto, exibição de usuários que adquirem seus produtos, facilidade nos pagamentos, diversas opções de pagamentos (boleto, pix e cartão de crédito ou débito)."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="4 - Qual é o custo para utilizar a Sunize?"
                 content="A Sunize é a plataforma com os maiores custos-benefícios do mercado. Contamos com uma taxa padrão única de 6,99%, sem um centavo a mais (negociável de acordo com seu faturamento e visibilidade) realizada apenas sobre as vendas realizadas pelo produtor, existem taxas baixas de serviço de encargos e tributos para o cliente final. Não cobramos taxas em caso de estorno de pagamentos."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="5 - A Sunize aceita produtos físicos também?"
                 content="Temos planos futuros para aceitarmos produtos físicos. Por enquanto, a Sunize aceita somente infoprodutos, sendo eles eBooks ou cursos online, também temos um sistema de assinaturas, para pagamentos recorrentes."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="6 - Quais os benefícios para ser membro da Sunize?"
                 content="Os benefícios para ser um membro da Sunize são inúmeros: suporte com profissionais especializados, taxas baixíssimas, checkout de alta conversão, área de membros de alta qualidade, afiliações, renda passiva, proteção contra pirataria para seus produtos (eBook e Curso Online), entre diversos outros benefícios para você alavancar seus lucros."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="7 - A Sunize oferece área de membros?"
                 content="A Sunize têm área de membros exclusiva, tanto para cursos online, como para eBooks, também hospedamos e exibimos seus vídeos ou eBooks sem custos adicionais."
               />
 
               <Accordion
-              data-scroll="left"
+                data-scroll="left"
                 title="8 - A Sunize é segura para hospedar meu produto?"
                 content="Garantimos toda a sua segurança de seu eBook ou curso online com uma alta tecnologia de ponta. Seus eBooks e cursos online são acessados direto pela plataforma e ficam protegidos. Sem risco de plágio ou fraudes."
               />

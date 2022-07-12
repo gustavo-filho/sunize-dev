@@ -1,5 +1,7 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import dashboardReducer from '../../src/domain/dashboard/dashboard.store';
+import productsReducer from '../../src/domain/dashboard/products/products.store';
+import sideBarReducer from '@domain/dashboard/components/side-bar/side-bar.store';
 import userReducer from '../domain/auth/user/user.store';
 import { createLogger } from 'redux-logger';
 import { userListener } from '../domain/auth/user/user.store.middlewares';
@@ -8,6 +10,8 @@ export const store = configureStore({
   reducer: {
     dashboard: dashboardReducer,
     user: userReducer,
+    products: productsReducer,
+    sideBarStore: sideBarReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware()
