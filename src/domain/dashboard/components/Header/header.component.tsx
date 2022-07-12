@@ -46,9 +46,11 @@ export const Header = () => {
           }}
         />
 
-        <LogoAndBars>
-          <img src={Logo} alt="Sunize" />
-        </LogoAndBars>
+        {!mobile && (
+          <LogoAndBars>
+            <img src={Logo} alt="Sunize" />
+          </LogoAndBars>
+        )}
       </div>
 
       <UserInfo>
