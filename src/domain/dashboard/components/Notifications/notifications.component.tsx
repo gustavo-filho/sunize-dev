@@ -1,7 +1,6 @@
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { useMedia } from '@shared/hooks/useMedia';
 
 import {
   Container,
@@ -16,8 +15,6 @@ import { useAppSelector } from '../../../../store/hooks';
 import { notificationsSelector } from '@domain/dashboard/components/Notifications/notifications.store';
 
 export const Notifications = () => {
-  // const { user } = useAuth()
-  const mobile = useMedia('(max-width:500px)');
   const [isVisible, setIsVisible] = useState(false);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const notifications = useAppSelector(notificationsSelector);

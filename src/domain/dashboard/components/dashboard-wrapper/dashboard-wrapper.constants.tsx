@@ -32,7 +32,7 @@ export const DASHBOARD_ROUTES = {
   MARKET_COURSES: '/dashboard/mercado/cursos',
   MARKET_SUBSCRIPTIONS: '/dashboard/mercado/assinaturas',
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
-  MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes'
+  MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -52,7 +52,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
     [DASHBOARD_ROUTES.PURCHASE_RECORD]: <PurchaseRecordPage />,
     [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
-    // [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
+    [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
     [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
     [DASHBOARD_ROUTES.MARKET]: <Market />,
     [DASHBOARD_ROUTES.MARKET_RECENT]: <Recent />,
