@@ -8,7 +8,7 @@ import { sideBarSelector } from '@domain/dashboard/components/side-bar/side-bar.
 
 export const DashboardWrapper = () => {
   const { pathname } = useLocation();
-  const mobile = useMedia('(max-width: 500px)');
+  const mobile = useMedia('(max-width: 700px)');
   const sidebar = useAppSelector(sideBarSelector);
 
   return (

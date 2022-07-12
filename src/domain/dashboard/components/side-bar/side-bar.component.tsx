@@ -21,7 +21,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { useAppSelector } from '../../../../store/hooks';
 import { sideBarSelector } from '@domain/dashboard/components/side-bar/side-bar.store';
-import { useMedia } from '@shared/hooks/useMedia';
 
 export const SideBar = () => {
   const { pathname } = useLocation();

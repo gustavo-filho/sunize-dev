@@ -1,70 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Container,
   Buttons,
   MainContent,
 } from './notificationCoProduction.styles';
+import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
+import { userSelector } from '@domain/auth/user/user.store';
+import { api } from '@shared/services/api';
+import { toast } from 'react-toastify';
+import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
 
-// import { useAuth } from 'hooks/useAuth'
-// import { useToast } from 'hooks/Toast'
-
-const NotificationCoProduction: any = ({
-  resetNotifications,
-  productId,
-  producerId,
-  id,
-}: any) => {
+const NotificationCoProduction: any = ({ productId, producerId, id }: any) => {
   const [productName, setProductName] = useState('');
   const [producerName, setProducerName] = useState('');
-  // const { user } = useAuth()
-  // const { addToast } = useToast()
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const { data } = await api.get(`products/${productId}`)
-  //     setProductName(data.data.product.title)
-  //     const producer = await api.get(`user/name/${producerId}`)
-  //     setProducerName(producer.data.data.name)
-  //   }
-  //   fetchData()
-  // }, [])
+  const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
 
-  // async function approveInvite() {
-  //   try {
-  //     await api.put(`/user/${user.id}/coProducer/${id}`, {
-  //       accepted: true,
-  //       acceptedAt: new Date(),
-  //     })
-  //     addToast({
-  //       type: 'success',
-  //       title: 'Pedido de co-produção aceito!',
-  //     })
-  //     resetNotifications()
-  //   } catch (e) {
-  //     addToast({
-  //       type: 'error',
-  //       title: 'Algo de errado aconteceu :(',
-  //     })
-  //   }
-  // }
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await api.get(`products/${productId}`);
+      setProductName(data.data.product.title);
+      const producer = await api.get(`user/name/${producerId}`);
+      setProducerName(producer.data.data.name);
+    }
+    fetchData();
+  }, [producerId, productId]);
 
-  // async function denyInvite() {
-  //   try {
-  //     await api.delete(`/user/${user.id}/coProducer/${id}`)
-  //     addToast({
-  //       type: 'success',
-  //       title: 'Pedido de co-produção negado com sucesso.',
-  //     })
-  //     resetNotifications()
-  //   } catch (e: any) {
-  //     console.error(e.toString())
-  //     addToast({
-  //       type: 'error',
-  //       title: 'Algo de errado aconteceu.',
-  //     })
-  //   }
-  // }
+  async function approveInvite() {
+    try {
+      await api.put(`/user/${user.data.id}/coProducer/${id}`, {
+        accepted: true,
+        acceptedAt: new Date(),
+      });
+      toast.success('Pedido de co-produção aceito!');
+      dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
+    } catch (e) {
+      toast.error('Algo de errado aconteceu :(');
+    }
+  }
+
+  async function denyInvite() {
+    try {
+      await api.delete(`/user/${user.data.id}/coProducer/${id}`);
+      toast.success('Pedido de co-produção negado com sucesso.');
+      dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
+    } catch (e: any) {
+      toast.error('Algo de errado aconteceu.');
+    }
+  }
 
   return (
     <Container>
@@ -77,8 +62,8 @@ const NotificationCoProduction: any = ({
       </MainContent>
 
       <Buttons>
-        {/* <button onClick={approveInvite}>Aceitar</button>
-        <button onClick={denyInvite}>Recusar</button> */}
+        <button onClick={approveInvite}>Aceitar</button>
+        <button onClick={denyInvite}>Recusar</button>
       </Buttons>
     </Container>
   );

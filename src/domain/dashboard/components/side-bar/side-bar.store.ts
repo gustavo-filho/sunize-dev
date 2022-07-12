@@ -15,6 +15,6 @@ const sideBarStore = createSlice({
 
 export const { TOGGLE_SIDE_BAR } = sideBarStore.actions;
 
-export const sideBarSelector = (state: RootState) => state.sideBarStore;
+export const sideBarSelector = (state: RootState) => state.sidebar;
 
 export default sideBarStore.reducer;

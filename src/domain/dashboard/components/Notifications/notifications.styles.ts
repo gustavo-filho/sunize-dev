@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
 
-export const Container = styled.div``
+export const Container = styled.div``;
 
 export const BellNotification = styled.div`
   position: relative;
@@ -19,20 +19,18 @@ export const BellNotification = styled.div`
     :hover {
       color: ${shade(0.15, 'white')};
     }
-    
   }
 
   @keyframes shine {
-  from {
-    filter: drop-shadow(0 0 0 white);
+    from {
+      filter: drop-shadow(0 0 0 white);
+    }
+    to {
+      filter: drop-shadow(0 0 8px white);
+    }
   }
-  to {
-    filter: drop-shadow(0 0 8px white);
-  }
-  }
-  .shine{
-    animation: shine 0.5 forwards 0s  normal;
-
+  .shine {
+    animation: shine 0.5 forwards 0s normal;
   }
 
   span {
@@ -46,13 +44,11 @@ export const BellNotification = styled.div`
     padding: 0.15rem;
     font-size: 0.7rem;
   }
-
-
-`
+`;
 
 export const NotiticationsContainer = styled(motion.main)`
   position: fixed;
-  top: 3.4rem;
+  top: 5rem;
   right: 2%;
   z-index: 9;
   background: #1a1a28;
@@ -110,7 +106,6 @@ export const NotiticationsContainer = styled(motion.main)`
         color: white;
       }
     }
-
   }
 
   h1 {
@@ -152,7 +147,7 @@ export const NotiticationsContainer = styled(motion.main)`
       }
     }
   }
-`
+`;
 
 export const MessageWithoutNotification = styled.div`
   display: flex;
@@ -173,4 +168,4 @@ export const MessageWithoutNotification = styled.div`
     font-size: 5rem;
     color: ${shade(0.1, '#c27c2c')};
   }
-`
+`;

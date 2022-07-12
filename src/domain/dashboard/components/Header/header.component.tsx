@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Container,
   UserInfo,
@@ -19,14 +19,19 @@ import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
+import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
 
 export const Header = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
-  const mobile = useMedia('(max-width: 500px)');
+  const mobile = useMedia('(max-width: 700px)');
   const user = useAppSelector(userSelector);
   const sidebar = useAppSelector(sideBarSelector);
   const history = useHistory();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
+  }, [dispatch, user.data.id]);
 
   return (
     <Container>
@@ -94,7 +99,6 @@ export const Header = () => {
                   <Button
                     variant="text"
                     onClick={() => {
-                      console.log('cheguei aqui');
                       dispatch(SIGN_OUT());
                     }}
                   >

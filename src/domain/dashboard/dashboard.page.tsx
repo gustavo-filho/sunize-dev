@@ -18,7 +18,7 @@ import { useMedia } from '@shared/hooks/useMedia';
 
 export const Dashboard = () => {
   const [viewBy, setViewBy] = useState<BY_TIME_DATA>(BY_TIME_DATA.DAILY);
-  const mobile = useMedia('(max-width: 500px)');
+  const mobile = useMedia('(max-width: 700px)');
 
   return (
     <MainContent>
@@ -69,7 +69,7 @@ export const Dashboard = () => {
           maxWidth: '1200px',
           display: 'flex',
           gap: '2rem',
-          flexWrap: 'wrap',
+          flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
         <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
@@ -83,7 +83,7 @@ export const Dashboard = () => {
           maxWidth: '1200px',
           display: 'flex',
           gap: '2rem',
-          flexWrap: 'wrap',
+          flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
         <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
