@@ -38,18 +38,26 @@ export const Description = styled.div`
       margin-left: 0.4rem;
     }
   }
-  span:nth-of-type(1) {
-    padding: 0.1rem 0.3rem;
-    border-radius: 0.5rem;
-    background-color: #0a215b;
-    color: white;
-  }
-  span:nth-of-type(2) {
-    padding: 0.1rem 0.3rem;
-    border-radius: 0.5rem;
-    background-color: #e5fbef;
-    color: #4d4c4c;
-    border: 0.3px solid #4ee693;
+  div {
+    display: flex;
+    flex-direction: column;
+
+    span:nth-of-type(1) {
+      margin: 0.2rem 0;
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.5rem;
+      background-color: #0a215b;
+      color: white;
+    }
+    span:nth-of-type(2) {
+      margin: 0.2rem 0;
+      width: 60px;
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.5rem;
+      background-color: #e5fbef;
+      color: #4d4c4c;
+      border: 0.3px solid #4ee693;
+    }
   }
   h2 {
     color: #0b984b;

@@ -59,10 +59,12 @@ export function ReviewProduct(): JSX.Element {
                     </ProductImage>
                     <Description>
                         <strong>{product.title}</strong>
-                        <span>{lastInstallment.Installments}x de:</span>
-                        <span>
-                            <b>CUPOM:</b> {voucherApplied || 'SEM CUPOM'}
-                        </span>
+                        <div>
+                            <span>
+                                <b>CUPOM:</b> {voucherApplied || 'SEM CUPOM'}
+                            </span>
+                            <span>{lastInstallment.Installments}x de:</span>
+                        </div>
                         <h2>{lastInstallmentValueFormated()}</h2>
                         <small>ou à vista: {totalPriceFormated()}</small>
                     </Description>

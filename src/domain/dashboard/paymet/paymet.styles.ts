@@ -30,6 +30,9 @@ export const Container = styled.div<Props>`
   a {
     font-family: 'Montserrat', sans-serif;
   }
+  @media (max-width: 500px) {
+    margin-top: 0;
+  }
   div.product-unavailable {
     background-color: #0e1943;
     height: 100vh;
@@ -108,7 +111,14 @@ export const ContentLeft = styled.div`
 export const ContentRight = styled.div`
   flex: 0.5;
   @media (max-width: 1000px) {
-    display: none;
+    flex: 1;
+    width: 90%;
+    div > div, footer {
+      display: none;
+    }
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `
 

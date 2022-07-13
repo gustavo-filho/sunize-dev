@@ -2,6 +2,7 @@ import { shade } from 'polished'
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  /* position: absolute; */
   box-shadow: 0 0 16px 0.5px rgba(100, 100, 100, 0.2);
   border-radius: 0.5rem 0.5rem 0 0;
   header {
@@ -21,6 +22,11 @@ export const Container = styled.div`
       color: white;
       font-weight: 700;
     }
+    @media (max-width: 500px) {
+      justify-content: start;
+      padding-left: 1rem;
+      min-height: 5.65rem;
+  }
   }
 `
 

@@ -49,7 +49,6 @@ export const Container = styled.div<Props>`
       p {
         opacity: 0.9;
         font-size: 1.1rem;
-        margin-top: 1em;
       }
     }
   }
