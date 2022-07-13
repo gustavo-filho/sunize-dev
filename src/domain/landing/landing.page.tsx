@@ -10,6 +10,7 @@ import {
   CardBenefits,
   BenefitsColumn,
   FaqColumn,
+  GlobalPageStyle
 } from './landing.styles';
 import { Header } from '@domain/landing/components/Header/header.component';
 import TaxImage from '@shared/assets/images/tax1.png';
@@ -28,6 +29,7 @@ import { Footer } from '@domain/landing/components/Footer/footer.component';
 export const LandingPage = () => {
   return (
     <Container>
+      <GlobalPageStyle />
       <Header />
 
       <Main>
