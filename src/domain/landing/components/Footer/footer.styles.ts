@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from '@shared/styles/theme.constants';
 
 export const Container = styled.div`
   background-color: #030420;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border-top: 2px solid var(--brand-orange);
+  border-top: 2px solid ${theme.colors.yellow};
   margin-top: 10px;
 `;
 
@@ -80,11 +81,11 @@ export const NavContainer = styled.nav`
     }
 
     &:hover {
-      color: var(--brand-orange);
+      color: ${theme.colors.yellow};
     }
 
     &.navigator-link-button {
-      border: 1px solid var(--brand-orange);
+      border: 1px solid ${theme.colors.yellow};
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -102,7 +103,7 @@ export const NavContainer = styled.nav`
       }
 
       &:hover {
-        background-color: var(--brand-orange);
+        background-color: ${theme.colors.yellow};
         color: #fff;
       }
     }
