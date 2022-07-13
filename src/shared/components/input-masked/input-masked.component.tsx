@@ -38,7 +38,7 @@ const InputMasked: React.FC<InputData> = ({
     setFocused(false)
 
     if (inputRef.current) {
-      setFilled(!!inputRef.current.props.value ?? '') // ?.toString().replace(/[-_./()]/g, '')
+      setFilled(!!inputRef.current.props.value ?? '')
     }
   }, [inputRef])
 

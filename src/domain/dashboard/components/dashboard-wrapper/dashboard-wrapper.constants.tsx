@@ -14,6 +14,7 @@ import { Subscriptions } from '@domain/dashboard/market/components/subscriptions
 import { EBooks } from '@domain/dashboard/market/components/ebook/ebook.component';
 import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
+import { Payment } from '@domain/dashboard/paymet/paymet.component';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -32,7 +33,8 @@ export const DASHBOARD_ROUTES = {
   MARKET_COURSES: '/dashboard/mercado/cursos',
   MARKET_SUBSCRIPTIONS: '/dashboard/mercado/assinaturas',
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
-  MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes'
+  MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
+  PAYMENT: '/payment/:productId'
 };
 
 interface DashboardWrapperConstantsProps {
@@ -52,7 +54,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
     [DASHBOARD_ROUTES.PURCHASE_RECORD]: <PurchaseRecordPage />,
     [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
-    // [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
+    [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
     [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
     [DASHBOARD_ROUTES.MARKET]: <Market />,
     [DASHBOARD_ROUTES.MARKET_RECENT]: <Recent />,
@@ -60,6 +62,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MARKET_SUBSCRIPTIONS]: <Subscriptions />,
     [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
     [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
+    [DASHBOARD_ROUTES.PAYMENT]: <Payment  />,
   };
 
   return <>{components[route]}</>;

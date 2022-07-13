@@ -9,6 +9,9 @@ import {
     Divisor,
     CloseButton,
     DepositionsContainer,
+    Container,
+    Img,
+    CardInformation,
 } from './market-product-styles'
 import { Evaluation } from './evaluation/evaluation.component'
 import { Deposition } from './deposition/deposition.component'
@@ -96,99 +99,92 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
 
     return (
         <>
-            <div style={{
-                width: '300px', height: '360px', backgroundColor: '#27293d', margin: '15px 30px 5.5rem 0px',
-                cursor: 'pointer',transition: 'box-shadow 0.2s', boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)'
-
-            }} onClick={() => setModal(!modal)}>
+          <Container onClick={() => setModal(!modal)}>
+            <Img>
+              {product.image ? (
+                <img src={product.image} alt={product.title} />
+              ) : (
+                <div>
+                  <FaImage />
+                </div>
+              )}
+            </Img>
+            <CardInformation>
+              <strong>{product.title}</strong>
+              <Evaluation productId={product.id} />
+              <p>{priceConverted}</p>
+              <span>
+                {hasAffiliate
+                  ? `Receba até ${commissionConverted} por venda`
+                  : 'Produto sem comissão'}
+              </span>
+            </CardInformation>
+          </Container>
+    
+          <Modal modal={Number(modal)}>
+            <ContentModal>
+              <CloseButton>
+                <FaTimes onClick={() => setModal(!modal)} />
+              </CloseButton>
+    
+              <h1>{product.title}</h1>
+              <h4>
+                Por <b>{product.User.name}</b>
+              </h4>
+    
+              <main>
                 {product.image ? (
-                    <img style={{ width: '300px', height: '200px', marginBottom: '20px' }} src={product.image} alt={product.title} />
+                  <img src={product.image} alt={product.title} />
                 ) : (
-                    <div >
-                        <FaImage style={{ width: '70px', height: '200px', marginBottom: '20px', marginLeft: '110px', color: '#4b4b4b' }} />
-                    </div>
+                  <EmptyImage>
+                    <FaImage />
+                  </EmptyImage>
                 )}
-
-                <div style={{ textAlign: 'center', color: '#ccc' }}>
-                    <strong>{product.title}</strong>
+    
+                <div>
+                  {!product.sale_disabled ? (
+                    <>
+                      <p>Adquira este produto por {priceConverted}</p>
+                      <Link to={`/payment/${product.id}`}>Adquirir aqui</Link>
+                    </>
+                  ) : (
+                    <p>Este produto não está disponível no momento.</p>
+                  )}
+    
+                  {hasAffiliate && (
+                    <>
+                      <strong>
+                        Seja afiliado e receba até
+                        <br />
+                        <b>{commissionConverted} por cada venda</b>
+                      </strong>
+                      <button type="button" onClick={requestAffiliation}>
+                        Solicitar afiliação
+                      </button>
+                    </>
+                  )}
                 </div>
-                <div style={{ marginTop: '20px', marginLeft: '5px', color: '#ccc' }}>
-                    <Evaluation productId={product.id} />
-                    <p>{priceConverted}</p>
-                    <div style={{ marginTop: '20px', color: 'rgba(220, 152, 75, 1)' }}>
-                        <span>
-                            {hasAffiliate
-                                ? `Receba até ${commissionConverted} por venda`
-                                : 'Produto sem comissão'}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <Modal modal={Number(modal)}>
-                <ContentModal>
-                    <CloseButton>
-                        <FaTimes onClick={() => setModal(!modal)} />
-                    </CloseButton>
-
-                    <h1>{product.title}</h1>
-                    <h4>
-                        Por <b>{product.User.name}</b>
-                    </h4>
-
-                    <main>
-                        {product.image ? (
-                            <img src={product.image} alt={product.title} />
-                        ) : (
-                            <EmptyImage>
-                                <FaImage />
-                            </EmptyImage>
-                        )}
-
-                        <div>
-                            {!product.sale_disabled ? (
-                                <>
-                                    <p>Adquira este produto por {priceConverted}</p>
-                                    <Link to={`/payment/${product.id}`}>Adquirir aqui</Link>
-                                </>
-                            ) : (
-                                <p>Este produto não está disponível no momento.</p>
-                            )}
-
-                            {hasAffiliate && (
-                                <>
-                                    <strong>
-                                        Seja afiliado e receba até
-                                        <br />
-                                        <b>{commissionConverted} por cada venda</b>
-                                    </strong>
-                                    <button type="button" onClick={requestAffiliation}>
-                                        Solicitar afiliação
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    </main>
-
-                    <Divisor>
-                        <h1>Sobre o Curso</h1>
-                        <p className="description">{product.description}</p>
-                    </Divisor>
-
-                    <Divisor>
-                        <h1>Avaliações</h1>
-                    </Divisor>
-
-                    <DepositionsContainer>
-                        {avaliations.length > 0
-                            ? avaliations.map((avaliation: any) => (
-                                <Deposition avaliation={avaliation} key={avaliation.id} />
-                            ))
-                            : 'Este produto ainda não tem avaliações.'}
-                    </DepositionsContainer>
-                </ContentModal>
-                <Overlay onClick={() => setModal(!modal)}></Overlay>
-            </Modal>
+              </main>
+    
+              <Divisor>
+                <h1>Sobre o Curso</h1>
+                <p className="description">{product.description}</p>
+              </Divisor>
+    
+              <Divisor>
+                <h1>Avaliações</h1>
+              </Divisor>
+    
+              <DepositionsContainer>
+                {avaliations.length > 0
+                  ? avaliations.map((avaliation: any) => (
+                      <Deposition avaliation={avaliation} key={avaliation.id} />
+                    ))
+                  : 'Este produto ainda não tem avaliações.'}
+              </DepositionsContainer>
+            </ContentModal>
+            <Overlay onClick={() => setModal(!modal)}></Overlay>
+          </Modal>
         </>
-    )
+      )
 }

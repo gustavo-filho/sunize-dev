@@ -22,7 +22,7 @@ export interface CustomCheckoutData {
   };
   allow_orderbump: {
     allowed: boolean;
-    product?: string;
+    product?: number[];
   };
   color_header: {
     allowed: true;
