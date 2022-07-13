@@ -112,7 +112,11 @@ export const LandingPage = () => {
           </ConversionColumn>
 
           <ConversionColumn data-scroll="left">
-            <img src={CheckoutImage} alt="Checkout de Alta Conversão" />
+            <img
+              src={CheckoutImage}
+              draggable={false}
+              alt="Checkout de Alta Conversão"
+            />
           </ConversionColumn>
         </Section>
 
@@ -120,6 +124,7 @@ export const LandingPage = () => {
           <ExperienceThumbColumn data-scroll="left">
             <img
               style={{ maxWidth: '407px' }}
+              draggable={false}
               src={CreateProductImage}
               alt="A melhor experiência visual do mercado"
             />
@@ -156,6 +161,7 @@ export const LandingPage = () => {
             <img
               style={{ maxWidth: '550px' }}
               src={BenefitsImage}
+              draggable={false}
               alt="Tudo que você precisa"
             />
           </div>

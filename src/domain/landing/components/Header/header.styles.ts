@@ -336,6 +336,7 @@ export const Hero = styled.section`
       font-size: 22px;
       text-align: left;
       margin-top: 100px;
+      margin-bottom: 30px;
 
       mark {
         background-color: transparent;
@@ -352,6 +353,7 @@ export const Hero = styled.section`
     p {
       color: #fff;
       font-size: 18px;
+      line-height: 1.5em;
       max-width: 520px;
       margin-bottom: 60px;
     }

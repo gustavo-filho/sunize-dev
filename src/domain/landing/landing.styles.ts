@@ -1,5 +1,6 @@
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { SectionProps } from './landing.types';
+import { theme } from '@shared/styles/theme.constants'
 
 export const GlobalPageStyle = createGlobalStyle`
   body {
@@ -102,6 +103,7 @@ export const Section = styled.section<SectionProps>`
   & * img {
     width: 100%;
     z-index: 1;
+    user-select: none;
   }
 
   h3 {
@@ -120,15 +122,19 @@ export const Section = styled.section<SectionProps>`
 
     mark {
       background-color: transparent;
-      color: #eaa73d !important;
+      color: #eaa73d ;
       display: block;
-      margin-top: -11px;
-      padding: 0;
+      margin-top: -11px !important;
+      padding: 0px;
     }
   }
 
   p {
     font-size: 17px;
+
+    strong {
+      font-weight: bolder;
+    }
   }
 
   .no-padding {
@@ -200,7 +206,7 @@ export const Section = styled.section<SectionProps>`
             color: #fff;
 
             mark {
-              color: var(--brand-blue) !important;
+              color: ${theme.colors.darkBlue} !important;
               margin-top: -25px;
             }
           }
@@ -227,7 +233,7 @@ export const Section = styled.section<SectionProps>`
       }
 
       mark {
-        margin-top: -30px;
+        margin-top: -11px;
       }
     }
 
@@ -285,11 +291,14 @@ export const ConversionColumn = styled.div`
 
     h3 {
       font-size: 65px;
-      margin-bottom: 0;
 
       mark {
-        margin-top: -28px;
+        margin-top: -18px;
       }
+    }
+    
+    p {
+      line-height: 1.5em;
     }
   }
 `;
@@ -300,6 +309,10 @@ export const ExperienceColumn = styled.div`
   @media screen and (min-width: 768px) {
     padding-top: 30px !important;
     margin-bottom: 60px;
+  }
+
+  p {
+    margin-bottom: 1em;
   }
 `;
 
@@ -334,6 +347,7 @@ export const Card = styled.figure`
     }
 
     p {
+      margin-top: 12px;
       font-size: 12px;
       font-weight: 400;
     }
@@ -354,7 +368,7 @@ export const BenefitsColumn = styled.div`
 
   .benefits-and-more {
     display: block;
-    color: var(--brand-blue);
+    color: ${theme.colors.darkBlue};
     font-size: 50px;
     font-weight: bold;
     line-height: 50px;
