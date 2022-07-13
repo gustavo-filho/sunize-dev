@@ -10,7 +10,7 @@ import {
   CardBenefits,
   BenefitsColumn,
   FaqColumn,
-  GlobalPageStyle
+  GlobalPageStyle,
 } from './landing.styles';
 import { Header } from '@domain/landing/components/Header/header.component';
 import TaxImage from '@shared/assets/images/tax1.png';
@@ -25,6 +25,7 @@ import { DefaultButton } from '@shared/components/DefaultButton/default-button.c
 import { GrSend } from 'react-icons/gr';
 import { Accordion } from '@shared/components/Accordion/accordion.component';
 import { Footer } from '@domain/landing/components/Footer/footer.component';
+import { Link } from 'react-router-dom';
 
 export const LandingPage = () => {
   return (
@@ -139,7 +140,9 @@ export const LandingPage = () => {
               alt="A melhor experiência visual do mercado"
             />
 
-            <DefaultButton>Criar meu Produto</DefaultButton>
+            <Link style={{ display: 'contents' }} to="/register">
+              <DefaultButton>Criar meu Produto</DefaultButton>
+            </Link>
           </ExperienceColumn>
         </Section>
 
