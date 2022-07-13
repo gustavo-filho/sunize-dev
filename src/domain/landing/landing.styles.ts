@@ -1,5 +1,35 @@
-import styled, { css } from 'styled-components';
+import styled, { css, createGlobalStyle } from 'styled-components';
 import { SectionProps } from './landing.types';
+
+export const GlobalPageStyle = createGlobalStyle`
+  body {
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    /* Trackbar */
+    ::-webkit-scrollbar-track {
+      background: #1f1f2b;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #c27c2c;
+      border-radius: 7px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(194, 124, 44);
+    }
+
+    @media (max-width: 500px) {
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+  }
+`;
 
 export const Container = styled.div`
   background-color: #f1f1f1;

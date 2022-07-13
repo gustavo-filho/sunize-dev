@@ -51,7 +51,7 @@ export const Description = styled.div`
     }
     span:nth-of-type(2) {
       margin: 0.2rem 0;
-      width: 60px;
+      max-width: 65px;
       padding: 0.1rem 0.3rem;
       border-radius: 0.5rem;
       background-color: #e5fbef;

@@ -68,7 +68,9 @@ export const Header = () => {
             vários produtores digitais já mudaram a vida de milhares de pessoas.
           </p>
 
-          <DefaultButton>Começar agora</DefaultButton>
+          <Link style={{ display: 'contents' }} to="/register">
+            <DefaultButton>Começar agora</DefaultButton>
+          </Link>
         </div>
       </Hero>
     </HeaderContainer>
