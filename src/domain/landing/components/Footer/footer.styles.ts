@@ -66,7 +66,7 @@ export const NavContainer = styled.nav`
     }
   }
 
-  a {
+  a,span {
     color: #fff;
     display: flex;
     align-items: center;
@@ -75,6 +75,7 @@ export const NavContainer = styled.nav`
     margin-bottom: 5px;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 
     &.button-mail {
       margin-top: 5px;

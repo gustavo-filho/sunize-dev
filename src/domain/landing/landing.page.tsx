@@ -26,23 +26,23 @@ import { GrSend } from 'react-icons/gr';
 import { Accordion } from '@shared/components/Accordion/accordion.component';
 import { Footer } from '@domain/landing/components/Footer/footer.component';
 import { Link } from 'react-router-dom';
-import { ScrollReveal } from './components/ScrollReveal/ScrollReveal.component';
+import { ScrollReveal } from './components/ScrollReveal/scrollReveal.component';
 
 export const LandingPage = () => {
   return (
-    <Container>
+    <Container id="section-main">
       <GlobalPageStyle />
       <Header />
 
       <Main>
-        <Section>
+        <Section id="section-beneficts">
           <ScrollReveal>
             <h3>
               Uma plataforma
               <mark>completa para você</mark>
             </h3>
           </ScrollReveal>
-          <ScrollReveal>
+          <ScrollReveal animation="slide-down">
             <CardsWrapper>
               <Card data-scroll="left">
                 <img src={TaxImage} alt="Taxa Baixa para Todos" />
@@ -101,7 +101,7 @@ export const LandingPage = () => {
           </ScrollReveal>
         </Section>
 
-        <Section columns titleDestach>
+        <Section columns titleDestach id="section-differentials">
           <ScrollReveal animation="slide-left">
             <ConversionColumn data-scroll="left">
               <h3>
@@ -266,7 +266,7 @@ export const LandingPage = () => {
           </ScrollReveal>
         </Section>
 
-        <Section titleDestach dark>
+        <Section titleDestach dark id="section-faq">
           <FaqColumn>
             <h3 className="benefits-main-title" data-scroll="left">
               Perguntas <mark>Frequentes</mark>

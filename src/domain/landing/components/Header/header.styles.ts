@@ -34,17 +34,16 @@ export const HeaderContainer = styled.header`
     margin-bottom: 0;
   }
 
-  .navigation ul a {
+  .navigation ul span {
     position: relative;
     display: block;
-    margin: 0 25px;
     list-style: none;
-    font-size: 20px;
     line-height: 30px;
     color: #fff2e3;
+    cursor: pointer;
   }
 
-  .navigation ul a::before {
+  .navigation ul span::before {
     color: #de9543;
     content: '';
     position: absolute;
@@ -58,15 +57,15 @@ export const HeaderContainer = styled.header`
     transition: transform 0.5s ease;
   }
 
-  .navigation ul a:hover {
+  .navigation ul span:hover {
     opacity: 1;
   }
 
-  .navigation ul a:hover::before {
+  .navigation ul span:hover::before {
     transform: scaleX(1);
   }
 
-  .navigation ul a:hover {
+  .navigation ul span:hover {
     animation: ${typing} 0.3s forwards;
   }
 
@@ -76,7 +75,7 @@ export const HeaderContainer = styled.header`
     width: 100%;
   }
 
-  .navMobileActive ul a {
+  .navMobileActive ul span {
     color: #de9543 !important;
     border-bottom: 1px solid #eaeaea;
     width: 80%;

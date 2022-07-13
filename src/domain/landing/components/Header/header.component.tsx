@@ -2,8 +2,9 @@ import { HeaderContainer, Hero } from './header.styles';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
 import SunizeLogo from '@shared/assets/images/logob.png';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
+import { NavigateToComponent } from '@domain/landing/utils/navigateToComponent';
 
 export const Header = () => {
   const mobile = useMedia('(max-width: 1139px)');
@@ -28,19 +29,26 @@ export const Header = () => {
         >
           <ul>
             <li>
-              <NavLink to="/">Produtos</NavLink>
+              <span onClick={() => NavigateToComponent('section-beneficts')}>
+                Benefícios
+              </span>
             </li>
             <li>
-              <NavLink to="/">Afiliados</NavLink>
+              <span
+                onClick={() => NavigateToComponent('section-differentials')}
+              >
+                Diferenciais
+              </span>
             </li>
             <li>
-              <NavLink to="/">Clientes</NavLink>
+              <span onClick={() => NavigateToComponent('section-contact')}>
+                Contato
+              </span>
             </li>
             <li>
-              <NavLink to="/">Contato</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">FAQ</NavLink>
+              <span onClick={() => NavigateToComponent('section-faq')}>
+                FAQ
+              </span>
             </li>
           </ul>
           <div className="authButtonsContainer">

@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef } from 'react';
 import scrollReveal from 'scrollreveal';
-import animations from './ScrollReveal.animations';
+import animations from './scrollReveal.animations';
 
-import { ScrollRevealProps } from './ScrollReveal.types';
+import { ScrollRevealProps } from './scrollReveal.types';
 
 export const ScrollReveal: FC<ScrollRevealProps> = ({
   children,

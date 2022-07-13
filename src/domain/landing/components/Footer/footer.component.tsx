@@ -17,6 +17,7 @@ import {
   LogoContainer,
   NavContainer,
 } from './footer.styles';
+import { NavigateToComponent } from '@domain/landing/utils/navigateToComponent';
 
 export const Footer = () => {
   return (
@@ -50,24 +51,21 @@ export const Footer = () => {
         <NavContainer>
           <strong>Navegação</strong>
 
-          <Link to="/">
+          <span onClick={() => NavigateToComponent('section-main')}>
             <MdOutlineArrowForwardIos /> Início
-          </Link>
-          <Link to="/">
+          </span>
+          <span onClick={() => NavigateToComponent('section-beneficts')}>
+            <MdOutlineArrowForwardIos /> Benefícios
+          </span>
+          <span onClick={() => NavigateToComponent('section-differentials')}>
             <MdOutlineArrowForwardIos /> Diferencial
-          </Link>
-          <Link to="/">
-            <MdOutlineArrowForwardIos /> Taxas
-          </Link>
-          <Link to="/">
-            <MdOutlineArrowForwardIos /> Clientes
-          </Link>
-          <Link to="/">
+          </span>
+          <span onClick={() => NavigateToComponent('section-faq')}>
             <MdOutlineArrowForwardIos /> FAQ
-          </Link>
+          </span>
         </NavContainer>
 
-        <NavContainer>
+        <NavContainer id="section-contact">
           <strong>Contato</strong>
 
           <a href="/">
