@@ -31,10 +31,12 @@ export const Notifications = () => {
     >
       <BellNotification>
         <>
-          <FaRegBell className="shine" />
-          <span>
-            <p>{totalOfNotifications}</p>
-          </span>
+          <FaRegBell className={totalOfNotifications !== 0 ? "shine" : ""} />
+          {totalOfNotifications !== 0 && (
+            <span>
+              <p>{totalOfNotifications}</p>
+            </span>
+          )}
         </>
 
         {notifyTest < 1 && (
