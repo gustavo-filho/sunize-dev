@@ -121,7 +121,7 @@ export const ContentModal = styled.div`
   border-radius: 20px;
   width: 98%;
   max-width: 920px;
-  height: 95vh;
+  height: 81vh;
   overflow-y: auto;
   padding: 0 70px;
   /* Track */
