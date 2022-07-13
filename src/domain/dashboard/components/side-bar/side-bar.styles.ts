@@ -3,8 +3,8 @@ import { ProSidebar } from 'react-pro-sidebar';
 
 export const SideBarContainer = styled(ProSidebar)`
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
-  height: 100vh;
+  height: 100%;
   z-index: 2;
 `;

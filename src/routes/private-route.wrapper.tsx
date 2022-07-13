@@ -47,6 +47,11 @@ export const PrivateRouteWrapper = ({
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  useEffect(() => {
+    if(user.data.name === ''){
+      history.push('/login')
+    }
+  }, [history, user.data])
 
   return <Route exact {...rest} path={path} component={DashboardWrapper} />;
 };

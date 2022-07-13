@@ -60,6 +60,7 @@ const userReducer = createSlice({
       account_type: '',
       id: 0,
       access_token: '',
+      photo: ''
     },
     loading: false,
     error: {},
@@ -73,6 +74,10 @@ const userReducer = createSlice({
       if (Cookies.get('@Sunize:user'))
         state.data = JSON.parse(Cookies.get('@Sunize:user') ?? '');
     },
+    SIGN_OUT: state => {
+      Cookies.set('@Sunize:user', '')
+      state.data = userReducer.getInitialState().data
+    }
   },
   extraReducers: builder => {
     builder.addCase(ASYNC_SIGN_IN.pending, (state, action) => {
@@ -91,7 +96,6 @@ const userReducer = createSlice({
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.fulfilled, (state, action) => {
       state.recoveryPassword.loading = false;
-      console.log({ action });
     });
     builder.addCase(ASYNC_RECOVERY_PASSWORD.pending, (state, action) => {
       state.recoveryPassword.loading = true;
@@ -99,6 +103,6 @@ const userReducer = createSlice({
   },
 });
 
-export const { INITIAL_LOGIN } = userReducer.actions;
+export const { INITIAL_LOGIN, SIGN_OUT } = userReducer.actions;
 export const userSelector = (state: RootState) => state.user;
 export default userReducer.reducer;

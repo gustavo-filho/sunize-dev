@@ -19,15 +19,17 @@ import {
 } from 'react-icons/md';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
-import { useState } from 'react';
+import { useAppSelector } from '../../../../store/hooks';
+import { sideBarSelector } from '@domain/dashboard/components/side-bar/side-bar.store';
 
 export const SideBar = () => {
   const { pathname } = useLocation();
-  const [isMenuOpen] = useState(false);
+  const sidebar = useAppSelector(sideBarSelector);
+
   const history = useHistory();
 
   return (
-    <SideBarContainer collapsed={!isMenuOpen}>
+    <SideBarContainer collapsed={!sidebar.isOpen}>
       <Menu iconShape="square">
         <MenuItem
           active={pathname === DASHBOARD_ROUTES.DASHBOARD}

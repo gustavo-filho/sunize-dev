@@ -345,7 +345,7 @@ export const Hero = styled.section`
         font-weight: 800;
         padding: 0;
         margin: 0;
-        margin-top: -15px;
+        margin-top: -10px;
       }
     }
 

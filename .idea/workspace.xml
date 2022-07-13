@@ -3,13 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/auth/login/login.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/auth/login/login.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/balance/components/modal-add-account/modal-add-account-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/balance/components/modal-add-account/modal-add-account-component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/notifications.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/notifications.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/side-bar/side-bar.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/affiliates.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/products/affiliates/products-of-affiliates.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +37,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1653969058" />
+                    <option name="branchName" value="feature/refactor-header" />
+                    <option name="lastUsedInstant" value="1657627257" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="feature/fix-classes-and-sessions" />
-                    <option name="lastUsedInstant" value="1653964597" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1653969058" />
                   </RecentBranch>
                 </list>
               </option>

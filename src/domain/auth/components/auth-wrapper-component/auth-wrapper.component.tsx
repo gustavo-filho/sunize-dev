@@ -10,7 +10,7 @@ import {
 } from './auth-wrapper.styles';
 import { AnimationContainer } from '@shared/components/AnimationContainer/animation-container.component';
 
-import LogoLetters from '@shared/assets/images/LogoLetter.png';
+import LogoB from '@shared/assets/images/logob.png';
 
 export const AuthWrapperComponent = ({
   children,
@@ -23,7 +23,7 @@ export const AuthWrapperComponent = ({
     <>
       <LoginSection>
         <AnimationContainer>
-          <Image src={LogoLetters} alt="Sunize marketing digital" />
+          <Image src={LogoB} alt="Sunize marketing digital" />
 
           <Title>{title}</Title>
 
