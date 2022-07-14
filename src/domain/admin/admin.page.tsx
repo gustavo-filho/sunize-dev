@@ -1,26 +1,23 @@
-import { useState } from 'react';
 import { BY_TIME_DATA } from '@domain/admin/admin.contants';
+import { ADMIN_MOCK } from '@domain/admin/admin.mock';
 import {
-  CardTitle,
-  CardSubtitle,
-  CenterButton,
+  CardSubtitle, CardTitle, CenterButton,
   LeftButton,
   MainContent,
-  RightButton,
+  RightButton
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
-import { Box } from '@mui/material';
-import { Chart } from '@domain/admin/components/chart/chart.component';
-import { ADMIN_MOCK } from '@domain/admin/admin.mock';
 import { ResumeCard } from '@domain/admin/components/resume-card/resume-card.component';
-import { BsCreditCard } from 'react-icons/bs';
+import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
+import { useState } from 'react';
 import {
   AiOutlineAppstore,
   AiOutlineDollarCircle,
   AiOutlineRise,
-  AiOutlineUser,
+  AiOutlineUser
 } from 'react-icons/ai';
+import { LineChart } from './components/charts/components/line-chart/line-chart.component';
 
 export const Admin = () => {
   const [viewBy, setViewBy] = useState<BY_TIME_DATA>(BY_TIME_DATA.DAILY);
@@ -81,10 +78,10 @@ export const Admin = () => {
           )}
         </Box>
         <Box style={{ margin: '3rem 0' }}></Box>
-        <Chart data={ADMIN_MOCK[viewBy]} />
+        <LineChart data={ADMIN_MOCK[viewBy]} />
       </CardContent>
 
-      <CardTitle>Usuários online por categoria</CardTitle>
+      <CardTitle>Receitas</CardTitle>
       <Box
         style={{
           width: '100%',
@@ -94,9 +91,38 @@ export const Admin = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCard icon={<BsCreditCard />} label="Produtores" />
-        <ResumeCard icon={<BsCreditCard />} label="Afiliados" />
-        <ResumeCard icon={<BsCreditCard />} label="Compradores" />
+        <ResumeCard icon={<AiOutlineRise />} label="Total de vendas" />
+        <ResumeCard icon={<AiOutlineUser />} label="Rembolsado" />
+        <ResumeCard icon={<AiOutlineAppstore />} label="% Reembolsados" />
+      </Box>
+
+      <CardTitle>Perfomance</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCard icon={<AiOutlineRise />} label="Vendas" />
+        <ResumeCard icon={<AiOutlineUser />} label="Reembolsado" />
+      </Box>
+
+      <CardTitle>Boletos</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCard icon={<AiOutlineRise />} label="Gerados" />
+        <ResumeCard icon={<AiOutlineUser />} label="Pagos" />
+        <ResumeCard icon={<AiOutlineAppstore />} label="% Conversões" />
       </Box>
     </MainContent>
   );
