@@ -6,7 +6,10 @@ import { useAppSelector } from '../../../../store/hooks';
 import { userSelector } from '@domain/auth/user/user.store';
 import { wrapperNavigation } from '../components/wrapper-navigation.component'
 import { transactionDataType } from '../types/account-statements-transaction-data-types'
-import { Card, Center, TableContainer } from '@domain/dashboard/sales/sale-record/sale-record.style'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import { Typography } from 'antd';
 
 export function AccountStatements(): JSX.Element {
     const listAccountsTemp: transactionDataType[] = [
@@ -35,68 +38,115 @@ export function AccountStatements(): JSX.Element {
             userName: "Belluci"
         }
     ]
-    const [accountStatementsdata, setAccountStatementsdata] = useState<transactionDataType[]>(listAccountsTemp)
     const user = useAppSelector(userSelector);
+    const [modalFilter, setModalFilter] = useState(false);
+    const [dtIni, setDtIni] = useState('');
+    const [dataResponse, setDataResponse] = useState();
+
 
     useEffect(() => {
-        api
-            .get(`/users/${user.data.id}/transactions`)
-            .then((res) => {
-                setAccountStatementsdata(res.data.data)
-            })
-            .catch((e) => {
-                console.warn(e)
-            })
+        async function fetchMyAPI() {
+            try {
+                const response = await api.get(`/users/${user.data.id}/listDeposits?month=07&year=2022`)
+
+            } catch (error) {
+                console.log('error', error)
+            }
+        }
+
+        fetchMyAPI()
     }, [user.data.id])
 
-    return (
-            <Container>
-                <h2>Extratos</h2>
-                <p>
-                    Informações sobre seu saldo disponível e extratos dos saques
-                    realizados.
-                </p>
-                <div className="wrapperNavigation">
-                    {wrapperNavigation()}
-                </div>
-                <Center>
-                    <Card>
-                        <h3>Extratos e Relatórios</h3>
-                        <TableContainer>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Transação</th>
-                                        <th>Nome</th>
-                                        <th>Data</th>
-                                        <th>Valor</th>
-                                        <th>Conta</th>
-                                        <th>Banco</th>
-                                    </tr>
-                                </thead>
+    async function filterModal(): Promise<void> {
+        try {
+            const splitDtIni = dtIni.split('-')
+            console.log('splitDtIni', splitDtIni);
+            const response = await api.get(`/users/${user.data.id}/listDeposits?month=${splitDtIni[1]}&year=${splitDtIni[0]}`)
+            setDataResponse(response.data.body.Deposits)
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
 
-                                <tbody>
-                                    {accountStatementsdata &&
-                                        accountStatementsdata.map(transaction => (
-                                            <tr key={transaction.transactionId}>
-                                                <td>{transaction.transactionId}</td>
-                                                <td>{transaction.userName}</td>
-                                                <td>
-                                                    {transaction.date}
-                                                </td>
-                                                <td>
-                                                    {transaction.value}
-                                                </td>
-                                                <td>{transaction.account}</td>
-                                                <td>{transaction.bank}</td>
-                                            </tr>
-                                        ))}
-                                </tbody>
-                            </table>
-                        </TableContainer>
-                    </Card>
-                </Center>
-                <CopyrightFooter />
-            </Container>
+    console.log('response', dataResponse)
+
+    return (
+        <Container>
+            <h2>Extratos</h2>
+            <p>
+                Informações sobre seu saldo disponível e extratos dos saques
+                realizados.
+            </p>
+            <div className="wrapperNavigation">
+                {wrapperNavigation()}
+            </div>
+
+            <div style={{ backgroundColor: '#27293d' }}>
+                <h3>Extratos e Relatórios</h3>
+                {/* <TextField sx={{ background: '#bcbcc2', marginTop: '-35px' }} type='date' size='small' variant='outlined' />
+                <TextField sx={{ background: '#bcbcc2', marginTop: '-35px' }} type='date' size='small' variant='outlined' /> */}
+                <Button onClick={() => setModalFilter(true)}
+                    sx={{ marginTop: '-25px', backgroundColor: '#bcbcc2', color: 'black', height: '25px', marginRight: '10px' }}>
+                    <FilterAltIcon />
+                </Button>
+                <Button
+                    sx={{ marginTop: '-25px', backgroundColor: '#bcbcc2', color: 'black', height: '25px' }}>
+                    <FilterAltOffIcon />
+                </Button>
+                <Divider sx={{ backgroundColor: '#bcbcc2', }} />
+                <TableContainer component={Paper}>
+                    <Table sx={{ backgroundColor: '#27293d', minWidth: 650 }} size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }}>Transação</TableCell>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Nome</TableCell>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Data</TableCell>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Valor</TableCell>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Conta</TableCell>
+                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Banco</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {listAccountsTemp.map((row) => (
+                                <TableRow
+                                    key={row.transactionId}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                        {row.transactionId}
+                                    </TableCell>
+                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">
+                                        {row.userName}
+                                    </TableCell>
+                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.date}</TableCell>
+                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.value}</TableCell>
+                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.account}</TableCell>
+                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.bank}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+
+            <Dialog
+                open={modalFilter}
+                onClose={() => setModalFilter(false)}>
+                <DialogTitle>Filtro</DialogTitle>
+
+                <DialogContent sx={{ width: '300px', height: '120px' }}>
+
+                    <Typography style={{ fontSize: '15px', marginBottom: '10px' }}>Filtrar pelo mês e ano</Typography>
+                    <TextField onChange={(event) => setDtIni(event.target.value)} sx={{ width: '180px' }} type='date' variant='outlined' />
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={() => setModalFilter(false)}>Cancelar</Button>
+                    <Button onClick={() => filterModal()}>Filtrar</Button>
+                </DialogActions>
+            </Dialog>
+
+            <CopyrightFooter />
+        </Container >
     )
 }
