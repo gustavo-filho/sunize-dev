@@ -5,6 +5,7 @@ import { Header } from '@domain/admin/components/Header/header.component';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useAppSelector } from '../../../../store/hooks';
 import { sideBarSelector } from '@domain/admin/components/side-bar/side-bar.store';
+import '@domain/admin/config/chart-config';
 
 export const AdminWrapper = () => {
   const { pathname } = useLocation();

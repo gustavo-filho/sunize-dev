@@ -1,6 +1,6 @@
 type FormatDataProps = (string | number)[][];
 
-export function FormatData(data: FormatDataProps) {
+export function FormatChartData(data: FormatDataProps) {
   let period = data[0].filter((item, index) => index > 0);
   let datasets = data
     .filter((item, index) => index > 0)

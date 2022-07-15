@@ -26,12 +26,12 @@ export const CardSubtitle = styled.p`
 `;
 
 export const LeftButton = styledMaterial(Button)(
-  ({ isActive }: { isActive: boolean }) => ({
+  ({ isActive, padding }: { isActive: boolean; padding?: string }) => ({
     background: `${isActive ? theme.colors.yellow : 'transparent'}`,
     color: 'white',
     border: `2px solid ${theme.colors.yellow}`,
     borderRadius: '14px 0 0 14px',
-    padding: '5px 15px',
+    padding: `${padding || '5px 15px'}`,
     '&:hover': {
       background: theme.colors.yellow,
       border: `2px solid ${theme.colors.yellow}`,
@@ -54,3 +54,39 @@ export const CenterButton = styledMaterial(LeftButton)({
 export const RightButton = styledMaterial(LeftButton)({
   borderRadius: '0 14px 14px 0',
 });
+
+export const DeviceInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & + & {
+    margin-top: 0.5rem;
+  }
+
+  span {
+    color: ${theme.colors.textGray};
+    font-size: 1rem;
+
+    &.decrease svg {
+      color: #e63946;
+    }
+
+    &.increase svg {
+      color: #8fcb27;
+    }
+
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+`;
+export const DeviceTitle = styled.h3`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 300;
+  gap: 0.25rem;
+`;
