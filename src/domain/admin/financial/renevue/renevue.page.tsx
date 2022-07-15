@@ -22,7 +22,7 @@ import {
   CenterButton,
   LeftButton,
   RightButton,
-} from './renevue.styles';
+} from '@domain/admin/admin.styles';
 
 export const Renevue = () => {
   const [renevueViewBy, setRenevueViewBy] = useState<RENEVUE_BY_TIME_DATA>(
