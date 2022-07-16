@@ -7,7 +7,8 @@ import { Infra } from '@domain/admin/infra/infra.page';
 import { Complaints } from '@domain/admin/production/complaints/complaints.page';
 import { DocumentsControl } from '@domain/admin/production/documents-control/documents-control.page';
 import { ProductReviews } from '@domain/admin/production/product-reviews/product-reviews.page';
-import { UsersControl } from '@domain/admin/production/users-control/users-control.page';
+import { EmployeesControl } from '@domain/admin/production/users-control/employees/employees-control.page';
+import { UsersControl } from '@domain/admin/production/users-control/users/users-control.page';
 
 export const ADMIN_ROUTES = {
   ADMIN: '/admin',
@@ -19,6 +20,7 @@ export const ADMIN_ROUTES = {
 
   PRODUCTS_REVIEWS: '/admin/producao/revisao-produtos',
   USERS_CONTROL: '/admin/producao/controle-usuarios',
+  EMPLOYEES_CONTROL: '/admin/producao/controle-funcionarios',
   DOCUMENTS_CONTROL: '/admin/producao/revisao-documentos',
   COMPLAINTS: '/admin/producao/denuncias',
 
@@ -42,6 +44,7 @@ export const AdminWrapperConstants = ({
 
     [ADMIN_ROUTES.PRODUCTS_REVIEWS]: <ProductReviews />,
     [ADMIN_ROUTES.USERS_CONTROL]: <UsersControl />,
+    [ADMIN_ROUTES.EMPLOYEES_CONTROL]: <EmployeesControl />,
     [ADMIN_ROUTES.DOCUMENTS_CONTROL]: <DocumentsControl />,
     [ADMIN_ROUTES.COMPLAINTS]: <Complaints />,
 
