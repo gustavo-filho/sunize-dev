@@ -3,11 +3,12 @@ import { hexToRgba } from '@domain/admin/utils/hex-to-rgba';
 import { Line } from 'react-chartjs-2';
 interface ChartProps {
   data: (string | number)[][];
+  colors?: string[];
 }
 
-export const LineChart = ({ data }: ChartProps) => {
+export const LineChart = ({ data, colors }: ChartProps) => {
   const values = FormatChartData(data);
-  const colors = ['#d58746', '#87cefa', '#cca9dd', '#ff5722'];
+  colors = !colors ? ['#d58746', '#87cefa', '#cca9dd', '#ff5722'] : colors;
 
   return (
     <Line
@@ -18,9 +19,9 @@ export const LineChart = ({ data }: ChartProps) => {
             id: index,
             label: String(item.label),
             data: item.data,
-            backgroundColor: hexToRgba(colors[index], 0.3),
+            backgroundColor: hexToRgba(colors![index], 0.3),
             fill: true,
-            borderColor: colors[index],
+            borderColor: colors![index],
             borderWidth: 1,
             tension: 0.35,
           };
