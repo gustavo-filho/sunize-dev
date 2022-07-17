@@ -5,70 +5,106 @@ import { api } from '@shared/services/api'
 import { useAppSelector } from '../../../../store/hooks';
 import { userSelector } from '@domain/auth/user/user.store';
 import { wrapperNavigation } from '../components/wrapper-navigation.component'
-import { transactionDataType } from '../types/account-statements-transaction-data-types'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import { Typography } from 'antd';
+import { toast } from 'react-toastify';
+
+interface dataResponseInitType {
+    Amount: number
+    DepositDate: string
+    HashConfirmation: null
+    IsTransferred: boolean
+    Message: string
+    PaymentNumber: string
+    Tax: number
+}
 
 export function AccountStatements(): JSX.Element {
-    const listAccountsTemp: transactionDataType[] = [
-        {
-            transactionId: 45615181,
-            date: "01/07/2022",
-            value: "R$ 1000,00",
-            account: "123456-1",
-            bank: "Inter",
-            userName: "Thiego"
-        },
-        {
-            transactionId: 45615182,
-            date: "02/07/2022",
-            value: "R$ 1500,00",
-            account: "654321-1",
-            bank: "Inter",
-            userName: "Guilherme"
-        },
-        {
-            transactionId: 45615183,
-            date: "03/07/2022",
-            value: "R$ 2500,00",
-            account: "123789-1",
-            bank: "Inter",
-            userName: "Belluci"
-        }
-    ]
     const user = useAppSelector(userSelector);
     const [modalFilter, setModalFilter] = useState(false);
     const [dtIni, setDtIni] = useState('');
-    const [dataResponse, setDataResponse] = useState();
+    const [dataResponseInit, setDataResponseInit] = useState<dataResponseInitType[]>([]);
+    const [responseLastSixMonths, setResponseLastSixMonths] = useState<number[]>([])
+    const tableHeader = [
+        { titleHeader: 'Data' },
+        { titleHeader: 'Message' },
+        { titleHeader: 'Taxa' },
+        { titleHeader: 'PaymentNumber' },
+    ]
 
+    function lastSixMonths(): void {
+        const data = new Date();
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        let lastSixMonths = []
+        let sixMonth = 6
+        let monthValue = Number(mes)
+        while (sixMonth !== 0) {
+            sixMonth = sixMonth - 1
+            monthValue = monthValue - 1
+            lastSixMonths.push(monthValue)
+        }
+        setResponseLastSixMonths(lastSixMonths);
+    }
 
     useEffect(() => {
-        async function fetchMyAPI() {
-            try {
-                const response = await api.get(`/users/${user.data.id}/listDeposits?month=07&year=2022`)
+        lastSixMonths()
+    }, [])
 
-            } catch (error) {
-                console.log('error', error)
-            }
-        }
+    async function functionListDeposits(): Promise<void> {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1
+        const currentYear = currentDate.getFullYear();
+        const month1 = responseLastSixMonths[0]
+        const month2 = responseLastSixMonths[1]
+        const month3 = responseLastSixMonths[2]
+        const month4 = responseLastSixMonths[3]
+        const month5 = responseLastSixMonths[4]
+        const month6 = responseLastSixMonths[5]
 
-        fetchMyAPI()
-    }, [user.data.id])
+        const response7 = await api.get(`/users/${user.data.id}/listDeposits?month=${currentMonth}&year=${currentYear}`)
+        const response6 = await api.get(`/users/${user.data.id}/listDeposits?month=${month6}&year=${currentYear}`)
+        const response5 = await api.get(`/users/${user.data.id}/listDeposits?month=${month5}&year=${currentYear}`)
+        const response4 = await api.get(`/users/${user.data.id}/listDeposits?month=${month4}&year=${currentYear}`)
+        const response3 = await api.get(`/users/${user.data.id}/listDeposits?month=${month3}&year=${currentYear}`)
+        const response2 = await api.get(`/users/${user.data.id}/listDeposits?month=${month2}&year=${currentYear}`)
+        const response1 = await api.get(`/users/${user.data.id}/listDeposits?month=${month1}&year=${currentYear}`)
+
+        setDataResponseInit([
+            ...response1.data.body.Deposits,
+            ...response2.data.body.Deposits,
+            ...response3.data.body.Deposits,
+            ...response4.data.body.Deposits,
+            ...response5.data.body.Deposits,
+            ...response6.data.body.Deposits,
+            ...response7.data.body.Deposits,
+        ])
+    }
+
+    useEffect(() => {
+        functionListDeposits()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [responseLastSixMonths])
 
     async function filterModal(): Promise<void> {
         try {
             const splitDtIni = dtIni.split('-')
-            console.log('splitDtIni', splitDtIni);
             const response = await api.get(`/users/${user.data.id}/listDeposits?month=${splitDtIni[1]}&year=${splitDtIni[0]}`)
-            setDataResponse(response.data.body.Deposits)
+            setDataResponseInit([])
+            if (response) {
+                setDataResponseInit(response.data.body.Deposits)
+                setModalFilter(false);
+            }
         } catch (error) {
-            console.log('error', error)
+            toast.error('Não foi possivel realizar a filtragem, favor verificar!')
         }
     }
 
-    console.log('response', dataResponse)
+    function clearFilter(): void {
+        setDataResponseInit([])
+        functionListDeposits()
+    }
 
     return (
         <Container>
@@ -83,13 +119,12 @@ export function AccountStatements(): JSX.Element {
 
             <div style={{ backgroundColor: '#27293d' }}>
                 <h3>Extratos e Relatórios</h3>
-                {/* <TextField sx={{ background: '#bcbcc2', marginTop: '-35px' }} type='date' size='small' variant='outlined' />
-                <TextField sx={{ background: '#bcbcc2', marginTop: '-35px' }} type='date' size='small' variant='outlined' /> */}
                 <Button onClick={() => setModalFilter(true)}
                     sx={{ marginTop: '-25px', backgroundColor: '#bcbcc2', color: 'black', height: '25px', marginRight: '10px' }}>
                     <FilterAltIcon />
                 </Button>
                 <Button
+                    onClick={() => clearFilter()}
                     sx={{ marginTop: '-25px', backgroundColor: '#bcbcc2', color: 'black', height: '25px' }}>
                     <FilterAltOffIcon />
                 </Button>
@@ -98,32 +133,35 @@ export function AccountStatements(): JSX.Element {
                     <Table sx={{ backgroundColor: '#27293d', minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }}>Transação</TableCell>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Nome</TableCell>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Data</TableCell>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Valor</TableCell>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Conta</TableCell>
-                                <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="center">Banco</TableCell>
+                                {tableHeader.map((itemMap) => {
+                                    return (
+                                        <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="left">{itemMap.titleHeader}</TableCell>
+                                    )
+                                })}
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {listAccountsTemp.map((row) => (
-                                <TableRow
-                                    key={row.transactionId}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell sx={{ color: '#bcbcc2' }} component="th" scope="row">
-                                        {row.transactionId}
-                                    </TableCell>
-                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">
-                                        {row.userName}
-                                    </TableCell>
-                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.date}</TableCell>
-                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.value}</TableCell>
-                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.account}</TableCell>
-                                    <TableCell sx={{ color: '#bcbcc2' }} align="center">{row.bank}</TableCell>
-                                </TableRow>
-                            ))}
+                            {dataResponseInit.map((row) => {
+                                if (row.Message) {
+                                    return (
+                                        <TableRow
+                                            key={row.DepositDate}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                            <TableCell key={row.DepositDate} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                                {row.DepositDate}
+                                            </TableCell>
+                                            <TableCell key={row.Message} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                                {row.Message}
+                                            </TableCell>
+                                            <TableCell key={row.Tax} sx={{ color: '#bcbcc2' }} align="left">
+                                                {row.Tax}
+                                            </TableCell>
+                                            <TableCell key={row.PaymentNumber} sx={{ color: '#bcbcc2' }} align="left">{row.PaymentNumber}</TableCell>
+                                        </TableRow>
+                                    )
+                                }
+                                return <></>
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
