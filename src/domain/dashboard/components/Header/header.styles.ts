@@ -95,10 +95,10 @@ export const UserInfo = styled.div`
 export const BoxInfo = styled.div`
   position: fixed;
   z-index: 9;
-  top: 4rem;
+  top: 5rem;
   right: 1%;
   width: 98%;
-  max-width: 130px;
+  max-width: 250px;
   transition: transform 0.2s ease;
   animation: appear 0.2s ease-in-out;
 

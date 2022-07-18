@@ -16,13 +16,20 @@ import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
 import { Payment } from '@domain/dashboard/paymet/paymet.component';
 import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
+import { CreatePackage } from '@domain/dashboard/products/create-package/create-package.page';
+import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
+import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
   MY_PRODUCTS: '/dashboard/meus-produtos',
   SUPPORT: '/dashboard/suporte',
   CREATED_PRODUCTS: '/dashboard/meus-produtos/criados',
-  CREATE_PRODUCT: '/dashboard/create/course',
+  CREATE_PRODUCT: '/dashboard/create',
+  CREATE_COURSE: '/dashboard/create/course',
+  CREATE_PACKAGE: '/dashboard/create/package',
+  MY_CONTENT: '/dashboard/my-content',
+  MY_PACKAGES: '/dashboard/my-packages',
   PRODUCT_OF_AFFILIATES: '/dashboard/products-affiliates',
   SALE_RECORD: '/dashboard/registro-de-vendas',
   AFFILIATES: '/dashboard/afiliados',
@@ -48,8 +55,12 @@ export const DashboardWrapperConstants = ({
   const components: { [key: string]: JSX.Element } = {
     [DASHBOARD_ROUTES.DASHBOARD]: <Dashboard />,
     [DASHBOARD_ROUTES.MY_PRODUCTS]: <MyProducts />,
+    [DASHBOARD_ROUTES.MY_CONTENT]: <MyContent />,
+    [DASHBOARD_ROUTES.MY_PACKAGES]: <MyPackages />,
     [DASHBOARD_ROUTES.SUPPORT]: <Support />,
     [DASHBOARD_ROUTES.CREATED_PRODUCTS]: <CreatedProducts />,
+    [DASHBOARD_ROUTES.CREATE_COURSE]: <CreateProduct />,
+    [DASHBOARD_ROUTES.CREATE_PACKAGE]: <CreatePackage />,
     [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProductWrapper />,
     [DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES]: <ProductsOfAffiliates />,
     [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
