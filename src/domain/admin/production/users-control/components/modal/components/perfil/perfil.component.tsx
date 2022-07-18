@@ -2,11 +2,11 @@ import { userSelector } from '@domain/auth/user/user.store';
 import { Loader } from '@shared/components/loader/loader.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import { api } from '@shared/services/api';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../../../../store/hooks';
 import { UserData } from '../../modal.types';
-import { Container, Actions, LoaderContainer } from './perfil.styles';
+import { Actions, Container, LoaderContainer } from './perfil.styles';
 
 interface UserProps {
   userData: UserData;
@@ -34,7 +34,7 @@ export const Perfil = ({ userData }: UserProps) => {
       .catch((err: any) => {
         toast.error(err.response.data.message);
       });
-  }, [user.access_token, user.id, userData.user?.id]);
+  }, [user.access_token, user.id, userData]);
 
   const unblockUser = useCallback(() => {
     api
@@ -54,7 +54,7 @@ export const Perfil = ({ userData }: UserProps) => {
       .catch((err: any) => {
         toast.error(err.response.data.message);
       });
-  }, [user.access_token, user.id, userData.user?.id]);
+  }, [user.access_token, user.id, userData]);
 
   const onChange = useCallback(
     async (value: any) => {

@@ -29,7 +29,7 @@ export const BoxAffiliates = ({ user, affiliates }: BoxAffiliatesProps) => {
     const responseProduct = await api.get(`products/${affiliates.product_id}`);
     const dataProduct = responseProduct.data;
 
-    if (dataUser.sucess && dataProduct.sucess) {
+    if (dataUser.success && dataProduct.success) {
       setAffiliateUser(dataUser.data.user);
       setAffiliateProduct(dataProduct.data.product);
       return;
