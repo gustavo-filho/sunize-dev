@@ -15,6 +15,7 @@ import { EBooks } from '@domain/dashboard/market/components/ebook/ebook.componen
 import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
 import { Payment } from '@domain/dashboard/paymet/paymet.component';
+import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -34,7 +35,7 @@ export const DASHBOARD_ROUTES = {
   MARKET_SUBSCRIPTIONS: '/dashboard/mercado/assinaturas',
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
   MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
-  PAYMENT: '/payment/:productId'
+  PAYMENT: '/payment/:productId',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -49,7 +50,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MY_PRODUCTS]: <MyProducts />,
     [DASHBOARD_ROUTES.SUPPORT]: <Support />,
     [DASHBOARD_ROUTES.CREATED_PRODUCTS]: <CreatedProducts />,
-    [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProduct />,
+    [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProductWrapper />,
     [DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES]: <ProductsOfAffiliates />,
     [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
     [DASHBOARD_ROUTES.PURCHASE_RECORD]: <PurchaseRecordPage />,
@@ -62,7 +63,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MARKET_SUBSCRIPTIONS]: <Subscriptions />,
     [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
     [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
-    [DASHBOARD_ROUTES.PAYMENT]: <Payment  />,
+    [DASHBOARD_ROUTES.PAYMENT]: <Payment />,
   };
 
   return <>{components[route]}</>;
