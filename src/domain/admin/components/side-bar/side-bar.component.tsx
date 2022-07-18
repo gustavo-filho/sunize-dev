@@ -78,18 +78,18 @@ export const SideBar = () => {
             Revisões de Produtos
           </MenuItem>
           <MenuItem
+            active={pathname === ADMIN_ROUTES.DOCUMENTS_PENDING}
+            icon={<AiOutlineFileSearch />}
+            onClick={() => history.push(ADMIN_ROUTES.DOCUMENTS_PENDING)}
+          >
+            Revisão de Documentos
+          </MenuItem>
+          <MenuItem
             active={pathname === ADMIN_ROUTES.USERS_CONTROL}
             icon={<VscOrganization />}
             onClick={() => history.push(ADMIN_ROUTES.USERS_CONTROL)}
           >
             Controle de Usuários
-          </MenuItem>
-          <MenuItem
-            active={pathname === ADMIN_ROUTES.DOCUMENTS_CONTROL}
-            icon={<AiOutlineFileSearch />}
-            onClick={() => history.push(ADMIN_ROUTES.DOCUMENTS_CONTROL)}
-          >
-            Controle de Documentos
           </MenuItem>
           <MenuItem
             active={pathname === ADMIN_ROUTES.COMPLAINTS}

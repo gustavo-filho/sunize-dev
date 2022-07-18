@@ -5,7 +5,9 @@ import { Renevue } from '@domain/admin/financial/renevue/renevue.page';
 import { Transactions } from '@domain/admin/financial/transactions/transactions.page';
 import { Infra } from '@domain/admin/infra/infra.page';
 import { Complaints } from '@domain/admin/production/complaints/complaints.page';
-import { DocumentsControl } from '@domain/admin/production/documents-control/documents-control.page';
+import { DocumentsApproved } from '@domain/admin/production/documents-control/approved/documents-approved.page';
+import { DocumentsPending } from '@domain/admin/production/documents-control/pending/documents-pending.page';
+import { DocumentsRejected } from '@domain/admin/production/documents-control/rejected/documents-rejected.page';
 import { ProductReviews } from '@domain/admin/production/product-reviews/product-reviews.page';
 import { EmployeesControl } from '@domain/admin/production/users-control/employees/employees-control.page';
 import { UsersControl } from '@domain/admin/production/users-control/users/users-control.page';
@@ -21,7 +23,9 @@ export const ADMIN_ROUTES = {
   PRODUCTS_REVIEWS: '/admin/producao/revisao-produtos',
   USERS_CONTROL: '/admin/producao/controle-usuarios',
   EMPLOYEES_CONTROL: '/admin/producao/controle-funcionarios',
-  DOCUMENTS_CONTROL: '/admin/producao/revisao-documentos',
+  DOCUMENTS_PENDING: '/admin/producao/revisao-documentos/pendentes',
+  DOCUMENTS_APPROVED: '/admin/producao/revisao-documentos/aprovados',
+  DOCUMENTS_REJECTED: '/admin/producao/revisao-documentos/rejeitados',
   COMPLAINTS: '/admin/producao/denuncias',
 
   INFRA: '/admin/infraestrutura',
@@ -45,7 +49,11 @@ export const AdminWrapperConstants = ({
     [ADMIN_ROUTES.PRODUCTS_REVIEWS]: <ProductReviews />,
     [ADMIN_ROUTES.USERS_CONTROL]: <UsersControl />,
     [ADMIN_ROUTES.EMPLOYEES_CONTROL]: <EmployeesControl />,
-    [ADMIN_ROUTES.DOCUMENTS_CONTROL]: <DocumentsControl />,
+
+    [ADMIN_ROUTES.DOCUMENTS_PENDING]: <DocumentsPending />,
+    [ADMIN_ROUTES.DOCUMENTS_APPROVED]: <DocumentsApproved />,
+    [ADMIN_ROUTES.DOCUMENTS_REJECTED]: <DocumentsRejected />,
+
     [ADMIN_ROUTES.COMPLAINTS]: <Complaints />,
 
     [ADMIN_ROUTES.INFRA]: <Infra />,
