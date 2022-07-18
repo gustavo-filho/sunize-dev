@@ -9,7 +9,7 @@ import {
   Container,
   LinkTab,
   Statistics,
-} from '../documents-control.styles';
+} from '../documents-review.styles';
 
 export const DocumentsPending = () => {
   return (
