@@ -1,19 +1,35 @@
 import { UserBox } from '@domain/admin/production/users-control/components/user-box/user-box.component';
 
 import { userSelector } from '@domain/auth/user/user.store';
-import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
+import { api } from '@shared/services/api';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
-  LinkTab
+  LinkTab,
 } from '../users-control.styles';
 
 export const EmployeesControl = () => {
   const user = useAppSelector(userSelector);
-  const { data: users } = useFetch(`admin/${user.data.id}/users`);
+
+  const [users, setUsers] = useState<null | []>(null);
+
+  const getUsers = useCallback(async () => {
+    const response = await api.get(`admin/${user.data.id}/users`);
+    const data = response.data;
+    if (data.success) {
+      return setUsers(data.data.filter((user: any) => user.account_type !== 'USER'));
+    }
+    toast.error('Houve um erro ao carregar os usuários');
+  }, [user]);
+
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
 
   return (
     <Container>
@@ -34,12 +50,10 @@ export const EmployeesControl = () => {
         </div>
         <BoxWrapper>
           {users ? (
-            users.data.length ? (
-              users.data
-                .filter((user: any) => user.account_type !== 'USER')
-                .map((user: any) => <UserBox key={user.id} user={user} />)
+            users.length ? (
+              users.map((user: any) => <UserBox key={user.id} user={user} />)
             ) : (
-              !users.data[0] && <p>Houve um problema ao buscar usuários</p>
+              !users && <p>Houve um problema ao buscar usuários</p>
             )
           ) : (
             <p>Carregando...</p>

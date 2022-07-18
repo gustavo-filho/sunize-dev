@@ -1,7 +1,8 @@
-import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
+import { api } from '@shared/services/api';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import { Container } from './box-affiliates.styles';
 
 interface BoxAffiliatesProps {
@@ -10,6 +11,7 @@ interface BoxAffiliatesProps {
 }
 
 export const BoxAffiliates = ({ user, affiliates }: BoxAffiliatesProps) => {
+  const [affiliateProduct, setAffiliateProduct] = useState<any>({});
   const [affiliateUser, setAffiliateUser] = useState<any>({
     account_type: '',
     email: '',
@@ -17,22 +19,31 @@ export const BoxAffiliates = ({ user, affiliates }: BoxAffiliatesProps) => {
     name: '',
     photo: '',
   });
-  const affiliate_fetch = useFetch(
-    `admin/${user.id}/users/${affiliates.affiliate_id}`,
-  );
 
-  const { data: affiliate_product } = useFetch(
-    `products/${affiliates.product_id}`,
-  );
+  const getAffiliatesData = useCallback(async () => {
+    const responseUser = await api.get(
+      `admin/${user.id}/users/${affiliates.affiliate_id}`,
+    );
+    const dataUser = responseUser.data;
+
+    const responseProduct = await api.get(`products/${affiliates.product_id}`);
+    const dataProduct = responseProduct.data;
+
+    if (dataUser.sucess && dataProduct.sucess) {
+      setAffiliateUser(dataUser.data.user);
+      setAffiliateProduct(dataProduct.data.product);
+      return;
+    }
+
+    return toast.error('Erro ao buscar dados do afiliado');
+  }, [user, affiliates]);
 
   useEffect(() => {
-    if (affiliate_fetch.data) {
-      setAffiliateUser(affiliate_fetch.data.data.user);
-    }
-  }, [affiliate_fetch]);
+    getAffiliatesData();
+  }, [getAffiliatesData]);
 
   return (
-    <Container href={affiliate_product?.link_external || '#'} target="_blank">
+    <Container href={affiliateProduct?.link_external || '#'} target="_blank">
       <div>
         {affiliateUser && affiliateUser.photo ? (
           <img src={affiliateUser?.photo} alt={affiliateUser?.name} />
@@ -49,7 +60,7 @@ export const BoxAffiliates = ({ user, affiliates }: BoxAffiliatesProps) => {
             ID {affiliates.id} - Afiliado em{' '}
             {moment(affiliates.createdAt).format('DD/MM/YYYY')}
             <br />
-            Produto: {affiliate_product?.data?.product?.title}
+            Produto: {affiliateProduct?.title}
           </p>
         </div>
       </div>

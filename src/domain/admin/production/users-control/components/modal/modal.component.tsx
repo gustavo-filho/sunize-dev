@@ -37,9 +37,6 @@ export const Modal: React.FC<ModalProps> = ({ personId, setModal }) => {
     try {
       const response = await api.get(
         `admin/${user.data.id}/users/${personId}`,
-        {
-          headers: { 'sunize-access-token': user.data.access_token },
-        },
       );
 
       const allUsers = response.data.data;
