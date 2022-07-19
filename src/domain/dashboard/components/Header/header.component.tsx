@@ -20,6 +20,7 @@ import {
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
 import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
+import { MdDashboard } from 'react-icons/md';
 
 export const Header = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
@@ -92,6 +93,17 @@ export const Header = () => {
                     <span>
                       <FaUser />
                       Perfil
+                    </span>
+                  </Button>
+                </li>
+                <li onClick={() => setIsOpenBoxInfo(false)}>
+                  <Button
+                    variant="text"
+                    onClick={() => history.push('/dashboard/my-content')}
+                  >
+                    <span>
+                      <MdDashboard />
+                      Painel do aluno
                     </span>
                   </Button>
                 </li>

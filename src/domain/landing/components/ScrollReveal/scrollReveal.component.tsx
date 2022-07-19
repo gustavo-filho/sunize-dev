@@ -21,7 +21,7 @@ export const ScrollReveal: FC<ScrollRevealProps> = ({
         ...animationStyle,
       });
     }
-  }, []);
+  }, [animation, reset]);
 
   const childrenWithScrollProps = React.Children.map(children, child => {
     // Checking isValidElement is the safe way and avoids type error.
