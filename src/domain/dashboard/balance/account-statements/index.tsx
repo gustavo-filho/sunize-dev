@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 import { Container } from './styles'
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component'
 import { api } from '@shared/services/api'
@@ -29,9 +30,9 @@ export function AccountStatements(): JSX.Element {
     const [responseLastSixMonths, setResponseLastSixMonths] = useState<number[]>([])
     const tableHeader = [
         { titleHeader: 'Data' },
+        { titleHeader: 'Valor' },
         { titleHeader: 'Message' },
         { titleHeader: 'Taxa' },
-        { titleHeader: 'PaymentNumber' },
     ]
 
     function lastSixMonths(): void {
@@ -71,14 +72,58 @@ export function AccountStatements(): JSX.Element {
         const response2 = await api.get(`/users/${user.data.id}/listDeposits?month=${month2}&year=${currentYear}`)
         const response1 = await api.get(`/users/${user.data.id}/listDeposits?month=${month1}&year=${currentYear}`)
 
+        const listFilter7 = response7.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter6 = response6.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter5 = response5.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter4 = response4.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter3 = response3.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter2 = response2.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+        const listFilter1 = response1.data.body.Deposits.filter((itemFilter: dataResponseInitType) => {
+            if (itemFilter.Message === 'Pagamento Efetivado') {
+                return itemFilter
+            }
+            return ''
+        })
+
+
         setDataResponseInit([
-            ...response1.data.body.Deposits,
-            ...response2.data.body.Deposits,
-            ...response3.data.body.Deposits,
-            ...response4.data.body.Deposits,
-            ...response5.data.body.Deposits,
-            ...response6.data.body.Deposits,
-            ...response7.data.body.Deposits,
+            ...listFilter1,
+            ...listFilter2,
+            ...listFilter3,
+            ...listFilter4,
+            ...listFilter5,
+            ...listFilter6,
+            ...listFilter7,
         ])
     }
 
@@ -135,36 +180,46 @@ export function AccountStatements(): JSX.Element {
                             <TableRow>
                                 {tableHeader.map((itemMap) => {
                                     return (
-                                        <TableCell sx={{ fontWeight: 600, color: '#bcbcc2' }} align="left">{itemMap.titleHeader}</TableCell>
+                                        <TableCell key={uuid()} sx={{ fontWeight: 600, color: '#bcbcc2' }} align="left">{itemMap.titleHeader}</TableCell>
                                     )
                                 })}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {dataResponseInit.map((row) => {
-                                if (row.Message) {
-                                    return (
-                                        <TableRow
-                                            key={row.DepositDate}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                            <TableCell key={row.DepositDate} sx={{ color: '#bcbcc2' }} component="th" scope="row">
-                                                {row.DepositDate}
-                                            </TableCell>
-                                            <TableCell key={row.Message} sx={{ color: '#bcbcc2' }} component="th" scope="row">
-                                                {row.Message}
-                                            </TableCell>
-                                            <TableCell key={row.Tax} sx={{ color: '#bcbcc2' }} align="left">
-                                                {row.Tax}
-                                            </TableCell>
-                                            <TableCell key={row.PaymentNumber} sx={{ color: '#bcbcc2' }} align="left">{row.PaymentNumber}</TableCell>
-                                        </TableRow>
-                                    )
-                                }
-                                return <></>
-                            })}
-                        </TableBody>
+
+                        {dataResponseInit.length > 0 && (
+                            <>
+                                {dataResponseInit.map((row) => {
+                                    if (row.Message) {
+                                        return (
+                                            <TableBody>
+                                                <TableRow
+                                                    key={uuid()}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                    <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                                        {row.DepositDate.split('-').reverse().join('/')}
+                                                    </TableCell>
+                                                    <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                                        {row.Amount}
+                                                    </TableCell>
+                                                    <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                                                        {row.Message}
+                                                    </TableCell>
+                                                    <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} align="left">
+                                                        {row.Tax}
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        )
+                                    }
+                                    return <></>
+                                })}
+                            </>
+                        )}
                     </Table>
                 </TableContainer>
+                {dataResponseInit.length === 0 && (
+                    <Typography style={{ display: 'inline-block', width: '100%', textAlign: 'center', margin: '16px 0', color: ' #bcbcc2' }}>Nenhum resultado a ser exibido!</Typography>
+                )}
             </div>
 
             <Dialog

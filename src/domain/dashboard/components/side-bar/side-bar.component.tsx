@@ -94,7 +94,7 @@ export const SideBar = () => {
         <MenuItem
           icon={<AiFillBank />}
           onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
-          active={pathname === DASHBOARD_ROUTES.BALANCE}
+          active={pathname === DASHBOARD_ROUTES.BALANCE || pathname === DASHBOARD_ROUTES.EXTRACT_BALANCE}
         >
           Saldo
         </MenuItem>
