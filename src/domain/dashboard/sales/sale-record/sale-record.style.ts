@@ -282,7 +282,6 @@ export const Options = styled.td`
   li {
     cursor: pointer;
     list-style-type: none;
-    padding: 5px;
     transition: background-color 0.2s ease;
 
     &:hover {
