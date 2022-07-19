@@ -6,13 +6,11 @@ import { useCallback, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid'
 import {
-  Card,
   Options,
   Center,
   FormGroup,
   HeadInfo,
   Container,
-  Divisor,
 } from './sale-record.style';
 import { Field, Form, Formik } from 'formik';
 import { FaCog } from 'react-icons/fa';
