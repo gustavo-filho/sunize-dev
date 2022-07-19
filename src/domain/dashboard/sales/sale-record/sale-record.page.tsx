@@ -347,7 +347,6 @@ export const SaleRecord = () => {
                           </TableRow>
                         </TableBody>
                       )
-
                     })}
                   </>
                 )}
