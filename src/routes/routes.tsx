@@ -6,12 +6,14 @@ import { PrivateRouteWrapper } from './private-route.wrapper';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { PaymentProvider } from '@domain/dashboard/paymet/utils/usePaymet.component';
 import { Payment } from '@domain/dashboard/paymet/paymet.component';
+import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
 
 export const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LandingPage} />
       <Route path="/login" exact component={LoginPage} />
+      <Route path="/register" exact component={RegisterComponent} />
       <Route path="/forgot-pass" exact component={ForgotPassword} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
