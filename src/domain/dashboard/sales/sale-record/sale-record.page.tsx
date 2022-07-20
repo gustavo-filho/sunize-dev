@@ -4,16 +4,13 @@ import { useAppSelector } from '../../../../store/hooks';
 import { userSelector } from '@domain/auth/user/user.store';
 import { useCallback, useEffect, useState } from 'react';
 import * as Yup from 'yup';
-
+import { v4 as uuid } from 'uuid'
 import {
-  Card,
   Options,
   Center,
   FormGroup,
   HeadInfo,
   Container,
-  TableContainer,
-  Divisor,
 } from './sale-record.style';
 import { Field, Form, Formik } from 'formik';
 import { FaCog } from 'react-icons/fa';
@@ -24,6 +21,7 @@ import { api } from '@shared/services/api';
 import { DetailsModal } from '@shared/components/details-modal/details-modal.component';
 import { ModalConfirm } from '@domain/dashboard/sales/components/modal-confirm/modal-confirm.component';
 import { RefundModal } from '@domain/dashboard/sales/components/refund-modal/refund-modal.component';
+import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 interface Transaction {
   affiliate: { name: string };
@@ -57,6 +55,51 @@ export const SaleRecord = () => {
     time_start: Yup.string().required('Escolha a data de ínicio'),
     time_end: Yup.string().required('Escolha a data final'),
   });
+
+
+  const tableHeader = [
+    { titleHeader: 'Transação' },
+    { titleHeader: 'Produto' },
+    { titleHeader: 'Data' },
+    { titleHeader: 'Comissão' },
+    { titleHeader: 'Status' },
+    { titleHeader: 'Comprador' },
+    { titleHeader: 'Vendedor' },
+    { titleHeader: 'Forma de Pagamento' },
+    { titleHeader: 'Ações' },
+  ]
+
+  // <td>1</td>
+  // <td>Trader esportivo</td>
+  // <td>19/02/2021</td>
+  // <td>R$14,50</td>
+  // <td>Aprovada</td>
+  // <td>Fábio</td>
+  // <td>Léo</td>
+  // <td>Cartão de Crédito</td>
+
+  const listSalesMock = [
+    {
+      id: 1,
+      produto: 'Trader esportivo',
+      data: '19/02/2021',
+      comissao: 'R$14,50',
+      status: 'Aprovada',
+      comprador: 'Fábio',
+      vendedor: 'Léo',
+      pagamento: 'Cartão de Crédito'
+    },
+    {
+      id: 2,
+      produto: 'Trader esportivo',
+      data: '19/02/2021',
+      comissao: 'R$14,50',
+      status: 'Aprovada',
+      comprador: 'Fábio',
+      vendedor: 'Léo',
+      pagamento: 'Cartão de Crédito'
+    }
+  ]
 
   const onSubmit = useCallback(
     async (values: string) => {
@@ -118,7 +161,7 @@ export const SaleRecord = () => {
         <h2>Registros de Vendas</h2>
         <p>Tenha controle total sobre o seu desempenho em nossa plataforma.</p>
         <Center>
-          <Card>
+          <div style={{ backgroundColor: '#27293d' }}>
             <h3>Relatório de Vendas</h3>
             <Formik
               initialValues={{
@@ -211,15 +254,15 @@ export const SaleRecord = () => {
                       {isSubmitting
                         ? 'Confirmando...'
                         : !isValid
-                        ? 'Filtrar'
-                        : isValid && 'Filtrar'}
+                          ? 'Filtrar'
+                          : isValid && 'Filtrar'}
                     </button>
                   )}
                 </Form>
               )}
             />
 
-            <Divisor />
+            <Divider sx={{ backgroundColor: '#bcbcc2' }} />
 
             <HeadInfo>
               <h2>
@@ -230,15 +273,85 @@ export const SaleRecord = () => {
                 <b>
                   {sales
                     ? sales.total_sales.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      })
+                      style: 'currency',
+                      currency: 'BRL',
+                    })
                     : 'R$ 0,00'}
                 </b>
               </span>
             </HeadInfo>
+            <Divider sx={{ backgroundColor: '#bcbcc2', marginTop: '10px' }} />
+            <TableContainer component={Paper}>
+              <Table sx={{ backgroundColor: '#27293d', minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    {tableHeader.map((itemMap) => {
+                      return (
+                        <TableCell key={uuid()} sx={{ fontWeight: 600, color: '#bcbcc2' }} align="left">{itemMap.titleHeader}</TableCell>
+                      )
+                    })}
+                  </TableRow>
+                </TableHead>
 
-            <TableContainer>
+                {listSalesMock.length > 0 && (
+                  <>
+                    {listSalesMock.map((row) => {
+                      return (
+                        <TableBody>
+                          <TableRow
+                            key={uuid()}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, }}>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.id}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.produto}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.data}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.comissao}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.status}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} align="left">
+                              {row.comprador}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.vendedor}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              {row.pagamento}
+                            </TableCell>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                              <Options>
+                                <FaCog />
+                                <ul>
+                                  <li
+                                    onClick={() =>
+                                      handleToggleRefundModal(transaction.id)
+                                    }
+                                  >
+                                    Reembolsar transação
+                                  </li>
+                                  <li onClick={() => setDetailsModal(transaction)}>
+                                    Detalhes
+                                  </li>
+                                </ul>
+                              </Options>
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      )
+                    })}
+                  </>
+                )}
+              </Table>
+            </TableContainer>
+
+            {/* <TableContainer>
               <table>
                 <thead>
                   <tr>
@@ -340,8 +453,8 @@ export const SaleRecord = () => {
                   </tr>
                 </tbody>
               </table>
-            </TableContainer>
-          </Card>
+            </TableContainer> */}
+          </div>
         </Center>
 
         <NavLink to="/dashboard/vendas">Visão Geral</NavLink>
