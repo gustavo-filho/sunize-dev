@@ -8,7 +8,9 @@ import { Complaints } from '@domain/admin/production/complaints/complaints.page'
 import { DocumentsApproved } from '@domain/admin/production/documents-review/approved/documents-approved.page';
 import { DocumentsPending } from '@domain/admin/production/documents-review/pending/documents-pending.page';
 import { DocumentsRejected } from '@domain/admin/production/documents-review/rejected/documents-rejected.page';
-import { ProductReviews } from '@domain/admin/production/product-reviews/product-reviews.page';
+import { ProductsApproved } from '@domain/admin/production/products-review/approved/products-approved.page';
+import { ProductsPending } from '@domain/admin/production/products-review/pending/products-pending.page';
+import { ProductsRejected } from '@domain/admin/production/products-review/rejected/products-rejected.page';
 import { EmployeesControl } from '@domain/admin/production/users-control/employees/employees-control.page';
 import { UsersControl } from '@domain/admin/production/users-control/users/users-control.page';
 
@@ -20,7 +22,10 @@ export const ADMIN_ROUTES = {
   FINANCIAL_REFUNDS: '/admin/financeiro/reembolsos',
   FINANCIAL_CHECKOUT: '/admin/financeiro/checkout',
 
-  PRODUCTS_REVIEWS: '/admin/producao/revisao-produtos',
+  PRODUCTS_PENDING: '/admin/producao/revisao-produtos/pendentes',
+  PRODUCTS_APPROVED: '/admin/producao/revisao-produtos/aprovados',
+  PRODUCTS_REJECTED: '/admin/producao/revisao-produtos/rejeitados',
+
   USERS_CONTROL: '/admin/producao/controle-usuarios',
   EMPLOYEES_CONTROL: '/admin/producao/controle-funcionarios',
   DOCUMENTS_PENDING: '/admin/producao/revisao-documentos/pendentes',
@@ -46,7 +51,10 @@ export const AdminWrapperConstants = ({
     [ADMIN_ROUTES.FINANCIAL_REFUNDS]: <Refunds />,
     [ADMIN_ROUTES.FINANCIAL_CHECKOUT]: <Checkout />,
 
-    [ADMIN_ROUTES.PRODUCTS_REVIEWS]: <ProductReviews />,
+    [ADMIN_ROUTES.PRODUCTS_PENDING]: <ProductsPending />,
+    [ADMIN_ROUTES.PRODUCTS_APPROVED]: <ProductsApproved />,
+    [ADMIN_ROUTES.PRODUCTS_REJECTED]: <ProductsRejected />,
+
     [ADMIN_ROUTES.USERS_CONTROL]: <UsersControl />,
     [ADMIN_ROUTES.EMPLOYEES_CONTROL]: <EmployeesControl />,
 

@@ -71,9 +71,9 @@ export const SideBar = () => {
         </SubMenu>
         <SubMenu title="Produção" icon={<AiOutlineLaptop />}>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.PRODUCTS_REVIEWS}
+            active={pathname === ADMIN_ROUTES.PRODUCTS_PENDING}
             icon={<VscWorkspaceTrusted />}
-            onClick={() => history.push(ADMIN_ROUTES.PRODUCTS_REVIEWS)}
+            onClick={() => history.push(ADMIN_ROUTES.PRODUCTS_PENDING)}
           >
             Revisões de Produtos
           </MenuItem>
