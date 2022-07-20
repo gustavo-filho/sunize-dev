@@ -4,7 +4,9 @@ import { Refunds } from '@domain/admin/financial/refunds/refunds.page';
 import { Renevue } from '@domain/admin/financial/renevue/renevue.page';
 import { Transactions } from '@domain/admin/financial/transactions/transactions.page';
 import { Infra } from '@domain/admin/infra/infra.page';
-import { Complaints } from '@domain/admin/production/complaints/complaints.page';
+import { ComplaintsApproved } from '@domain/admin/production/complaints/approved/complaints-approved.page';
+import { ComplaintsPending } from '@domain/admin/production/complaints/pending/complaints-pending.page';
+import { ComplaintsRejected } from '@domain/admin/production/complaints/rejected/complaints-rejected.page';
 import { DocumentsApproved } from '@domain/admin/production/documents-review/approved/documents-approved.page';
 import { DocumentsPending } from '@domain/admin/production/documents-review/pending/documents-pending.page';
 import { DocumentsRejected } from '@domain/admin/production/documents-review/rejected/documents-rejected.page';
@@ -31,7 +33,10 @@ export const ADMIN_ROUTES = {
   DOCUMENTS_PENDING: '/admin/producao/revisao-documentos/pendentes',
   DOCUMENTS_APPROVED: '/admin/producao/revisao-documentos/aprovados',
   DOCUMENTS_REJECTED: '/admin/producao/revisao-documentos/rejeitados',
-  COMPLAINTS: '/admin/producao/denuncias',
+
+  COMPLAINTS_PENDING: '/admin/producao/denuncias/pendentes',
+  COMPLAINTS_APPROVED: '/admin/producao/denuncias/aprovadas',
+  COMPLAINTS_REJECTED: '/admin/producao/denuncias/rejeitadas',
 
   INFRA: '/admin/infraestrutura',
 };
@@ -62,7 +67,9 @@ export const AdminWrapperConstants = ({
     [ADMIN_ROUTES.DOCUMENTS_APPROVED]: <DocumentsApproved />,
     [ADMIN_ROUTES.DOCUMENTS_REJECTED]: <DocumentsRejected />,
 
-    [ADMIN_ROUTES.COMPLAINTS]: <Complaints />,
+    [ADMIN_ROUTES.COMPLAINTS_PENDING]: <ComplaintsPending />,
+    [ADMIN_ROUTES.COMPLAINTS_APPROVED]: <ComplaintsApproved />,
+    [ADMIN_ROUTES.COMPLAINTS_REJECTED]: <ComplaintsRejected />,
 
     [ADMIN_ROUTES.INFRA]: <Infra />,
   };

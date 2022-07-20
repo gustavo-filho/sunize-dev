@@ -1,0 +1,69 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import { FormGroup } from '@mui/material';
+import { InputSearch } from '@shared/components/input-search/input-search.component';
+import { Form, Formik } from 'formik';
+import {
+  AnimationContainer,
+  BoxWrapper,
+  Container,
+  LinkTab,
+  Statistics,
+} from '../../production.styles';
+
+export const ComplaintsPending = () => {
+  return (
+    <Container>
+      <AnimationContainer>
+        <h1>CENTRAL DE DENÚNCIAS</h1>
+        <h2>Tenha controle sobre todas as denúncias.</h2>
+
+        <Statistics>
+          <strong>
+            <b>0</b> denuncias pendentes
+          </strong>
+
+          <div>
+            <Formik
+              initialValues={{ search: '' }}
+              validationSchema={() => {}}
+              onSubmit={() => {}}
+              render={() => (
+                <Form>
+                  <FormGroup>
+                    <InputSearch
+                      name="search"
+                      placeholder="Pesquisar denúncias"
+                    />
+
+                    {/* <FilterButton /> */}
+                  </FormGroup>
+                </Form>
+              )}
+            />
+          </div>
+        </Statistics>
+
+        <div className="links">
+          <LinkTab active to={ADMIN_ROUTES.COMPLAINTS_PENDING}>
+            Pendentes
+          </LinkTab>
+          <LinkTab to={ADMIN_ROUTES.COMPLAINTS_APPROVED}>Aprovados</LinkTab>
+          <LinkTab to={ADMIN_ROUTES.COMPLAINTS_REJECTED}>Rejeitados</LinkTab>
+        </div>
+        <BoxWrapper>
+          {/* OnLoading = <p>Carregando...</p> */}
+          <p>Houve um problema ao carregar as denúncias</p>
+        </BoxWrapper>
+        {/* {totalPages > 1 && (
+          <PaginationContainer>
+            <Pagination
+              totalPages={totalPages}
+              offset={page}
+              setOffset={setPage}
+            />
+          </PaginationContainer>
+        )} */}
+      </AnimationContainer>
+    </Container>
+  );
+};

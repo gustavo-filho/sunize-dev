@@ -92,9 +92,9 @@ export const SideBar = () => {
             Controle de Usuários
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.COMPLAINTS}
+            active={pathname === ADMIN_ROUTES.COMPLAINTS_PENDING}
             icon={<VscReport />}
-            onClick={() => history.push(ADMIN_ROUTES.COMPLAINTS)}
+            onClick={() => history.push(ADMIN_ROUTES.COMPLAINTS_PENDING)}
           >
             Central de Denúncias
           </MenuItem>
