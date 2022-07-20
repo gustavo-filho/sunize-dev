@@ -1,12 +1,11 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { userSelector } from '@domain/auth/user/user.store';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
-import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import { ProductBoxApproved } from '../components/product-box-approved/product-box-approved.component';
@@ -17,7 +16,7 @@ import {
   LinkTab,
   PaginationContainer,
   Statistics,
-} from '../products-review.styles';
+} from '../../production.styles';
 
 export const ProductsApproved = () => {
   const user = useAppSelector(userSelector);
@@ -87,20 +86,11 @@ export const ProductsApproved = () => {
         </Statistics>
 
         <div className="links">
-          <LinkTab to="/admin/producao/revisao-produtos/pendentes">
-            Pendentes
-          </LinkTab>
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to="/admin/producao/revisao-produtos/aprovados"
-          >
+          <LinkTab to={ADMIN_ROUTES.PRODUCTS_PENDING}>Pendentes</LinkTab>
+          <LinkTab active to={ADMIN_ROUTES.PRODUCTS_APPROVED}>
             Aprovados
-          </Link>
-          <LinkTab to="/admin/producao/revisao-produtos/rejeitados">
-            Rejeitados
           </LinkTab>
+          <LinkTab to={ADMIN_ROUTES.PRODUCTS_REJECTED}>Rejeitados</LinkTab>
         </div>
         <BoxWrapper>
           {products ? (

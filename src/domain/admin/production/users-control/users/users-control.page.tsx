@@ -1,16 +1,16 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { userSelector } from '@domain/auth/user/user.store';
 import { api } from '@shared/services/api';
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
-import { UserBox } from '../components/user-box/user-box.component';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
-  LinkTab,
-} from '../users-control.styles';
+  LinkTab
+} from '../../production.styles';
+import { UserBox } from '../components/user-box/user-box.component';
 
 export const UsersControl = () => {
   const user = useAppSelector(userSelector);
@@ -36,17 +36,10 @@ export const UsersControl = () => {
         <h2>Tenha controle sobre os usuários.</h2>
 
         <div className="links">
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to="/admin/producao/controle-usuarios"
-          >
+          <LinkTab active to={ADMIN_ROUTES.USERS_CONTROL}>
             Usuários
-          </Link>
-          <LinkTab to="/admin/producao/controle-funcionarios">
-            Funcionários
           </LinkTab>
+          <LinkTab to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>Funcionários</LinkTab>
         </div>
         <BoxWrapper>
           {users ? (

@@ -1,15 +1,15 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
-import { DocumentBoxPending } from '../components/document-box-pending/document-box-pending.component';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
   LinkTab,
   Statistics,
-} from '../documents-review.styles';
+} from '../../production.styles';
+import { DocumentBoxPending } from '../components/document-box-pending/document-box-pending.component';
 
 export const DocumentsPending = () => {
   return (
@@ -45,20 +45,11 @@ export const DocumentsPending = () => {
         </Statistics>
 
         <div className="links">
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to="/admin/producao/revisao-documentos/pendentes"
-          >
+          <LinkTab active to={ADMIN_ROUTES.DOCUMENTS_PENDING}>
             Pendentes
-          </Link>
-          <LinkTab to="/admin/producao/revisao-documentos/aprovados">
-            Aprovados
           </LinkTab>
-          <LinkTab to="/admin/producao/revisao-documentos/rejeitados">
-            Rejeitados
-          </LinkTab>
+          <LinkTab to={ADMIN_ROUTES.DOCUMENTS_APPROVED}>Aprovados</LinkTab>
+          <LinkTab to={ADMIN_ROUTES.DOCUMENTS_REJECTED}>Rejeitados</LinkTab>
         </div>
         <BoxWrapper>
           {/* OnLoading = <p>Carregando...</p> */}
@@ -67,6 +58,15 @@ export const DocumentsPending = () => {
           // Inserir proprietário do documento
           />
         </BoxWrapper>
+        {/* {totalPages > 1 && (
+          <PaginationContainer>
+            <Pagination
+              totalPages={totalPages}
+              offset={page}
+              setOffset={setPage}
+            />
+          </PaginationContainer>
+        )} */}
       </AnimationContainer>
     </Container>
   );

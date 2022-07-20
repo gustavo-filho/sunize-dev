@@ -1,15 +1,15 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
-import { DocumentBoxApproved } from '../components/document-box-approved/document-box-approved.component';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
   LinkTab,
   Statistics,
-} from '../documents-review.styles';
+} from '../../production.styles';
+import { DocumentBoxApproved } from '../components/document-box-approved/document-box-approved.component';
 
 export const DocumentsApproved = () => {
   return (
@@ -45,20 +45,11 @@ export const DocumentsApproved = () => {
         </Statistics>
 
         <div className="links">
-          <LinkTab to="/admin/producao/revisao-documentos/pendentes">
-            Pendentes
-          </LinkTab>
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to="/admin/producao/revisao-documentos/aprovados"
-          >
+          <LinkTab to={ADMIN_ROUTES.DOCUMENTS_PENDING}>Pendentes</LinkTab>
+          <LinkTab active to={ADMIN_ROUTES.DOCUMENTS_APPROVED}>
             Aprovados
-          </Link>
-          <LinkTab to="/admin/producao/revisao-documentos/rejeitados">
-            Rejeitados
           </LinkTab>
+          <LinkTab to={ADMIN_ROUTES.DOCUMENTS_REJECTED}>Rejeitados</LinkTab>
         </div>
         <BoxWrapper>
           {/* OnLoading = <p>Carregando...</p> */}
@@ -67,6 +58,15 @@ export const DocumentsApproved = () => {
           // Inserir proprietário do documento
           />
         </BoxWrapper>
+        {/* {totalPages > 1 && (
+          <PaginationContainer>
+            <Pagination
+              totalPages={totalPages}
+              offset={page}
+              setOffset={setPage}
+            />
+          </PaginationContainer>
+        )} */}
       </AnimationContainer>
     </Container>
   );

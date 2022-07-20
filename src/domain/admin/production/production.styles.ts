@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+interface LinkTabProps {
+  active?: boolean;
+}
+
 export const Container = styled.section`
   max-width: 1640px;
   width: 100%;
@@ -58,21 +62,14 @@ export const AnimationContainer = styled.div`
         margin-bottom: 0px;
       }
     }
-
-    > a {
-      font-size: 18px;
-      color: #818181;
-      background-color: #27293d;
-      padding: 16px 22px 12px 22px;
-      border-radius: 4px 4px 0 0;
-    }
   }
 `;
 
-export const LinkTab = styled(Link)`
+export const LinkTab = styled(Link)<LinkTabProps>`
   font-size: 18px;
-  color: rgba(0, 0, 0, 1);
-  background-color: transparent !important;
+  color: #818181;
+  background-color: ${props =>
+    props.active ? '#27293d' : 'transparent'} !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
   text-decoration: none;
@@ -145,7 +142,6 @@ export const LoaderContainer = styled.div`
   }
 `;
 
-
 export const Statistics = styled.header`
   display: flex;
   flex: 0.6;
@@ -182,4 +178,4 @@ export const Statistics = styled.header`
       margin-bottom: 0.5rem;
     }
   }
-`
+`;

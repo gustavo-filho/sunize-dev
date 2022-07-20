@@ -1,3 +1,4 @@
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { userSelector } from '@domain/auth/user/user.store';
 import { FormGroup } from '@mui/material';
@@ -5,7 +6,6 @@ import { InputSearch } from '@shared/components/input-search/input-search.compon
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import { ProductBoxRejected } from '../components/product-box-rejected/product-box-rejected.component';
@@ -16,7 +16,7 @@ import {
   LinkTab,
   PaginationContainer,
   Statistics,
-} from '../products-review.styles';
+} from '../../production.styles';
 
 export const ProductsRejected = () => {
   const user = useAppSelector(userSelector);
@@ -55,8 +55,8 @@ export const ProductsRejected = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>REVISÃO DE DOCUMENTOS</h1>
-        <h2>Tenha controle sobre os documentos reprovados dos usuários.</h2>
+        <h1>REVISÃO DE PRODUTOS</h1>
+        <h2>Tenha controle sobre os produtos rejeitados dos produtores.</h2>
 
         <Statistics>
           <strong>
@@ -84,20 +84,11 @@ export const ProductsRejected = () => {
         </Statistics>
 
         <div className="links">
-          <LinkTab to="/admin/producao/revisao-produtos/pendentes">
-            Pendentes
-          </LinkTab>
-          <LinkTab to="/admin/producao/revisao-produtos/aprovados">
-            Aprovados
-          </LinkTab>
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to="/admin/producao/revisao-produtos/rejeitados"
-          >
+          <LinkTab to={ADMIN_ROUTES.PRODUCTS_PENDING}>Pendentes</LinkTab>
+          <LinkTab to={ADMIN_ROUTES.PRODUCTS_APPROVED}>Aprovados</LinkTab>
+          <LinkTab active to={ADMIN_ROUTES.PRODUCTS_REJECTED}>
             Rejeitados
-          </Link>
+          </LinkTab>
         </div>
         <BoxWrapper>
           {products ? (
