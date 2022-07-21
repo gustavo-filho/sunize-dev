@@ -98,7 +98,7 @@ export const BoxInfo = styled.div`
   top: 4rem;
   right: 1%;
   width: 98%;
-  max-width: 130px;
+  max-width: 150px;
   transition: transform 0.2s ease;
   animation: appear 0.2s ease-in-out;
 
