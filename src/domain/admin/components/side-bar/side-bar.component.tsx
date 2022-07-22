@@ -55,9 +55,9 @@ export const SideBar = () => {
             Transações
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.FINANCIAL_REFUNDS}
+            active={pathname === ADMIN_ROUTES.REFUNDS_PENDING}
             icon={<HiOutlineReceiptRefund />}
-            onClick={() => history.push(ADMIN_ROUTES.FINANCIAL_REFUNDS)}
+            onClick={() => history.push(ADMIN_ROUTES.REFUNDS_PENDING)}
           >
             Reembolsos
           </MenuItem>

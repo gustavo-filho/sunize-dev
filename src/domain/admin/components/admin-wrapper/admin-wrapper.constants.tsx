@@ -1,6 +1,8 @@
 import { Admin } from '@domain/admin/admin.page';
 import { Checkout } from '@domain/admin/financial/checkout/checkout.page';
-import { Refunds } from '@domain/admin/financial/refunds/refunds.page';
+import { RefundsApproved } from '@domain/admin/financial/refunds/approved/refunds-approved.page';
+import { RefundsPending } from '@domain/admin/financial/refunds/pending/refunds-pending.page';
+import { RefundsRejected } from '@domain/admin/financial/refunds/rejected/refunds-rejected.page';
 import { Renevue } from '@domain/admin/financial/renevue/renevue.page';
 import { Transactions } from '@domain/admin/financial/transactions/transactions.page';
 import { Infra } from '@domain/admin/infra/infra.page';
@@ -21,8 +23,11 @@ export const ADMIN_ROUTES = {
 
   FINANCIAL_RENEVUE: '/admin/financeiro/receitas',
   FINANCIAL_TRANSACTIONS: '/admin/financeiro/transacoes',
-  FINANCIAL_REFUNDS: '/admin/financeiro/reembolsos',
   FINANCIAL_CHECKOUT: '/admin/financeiro/checkout',
+  
+  REFUNDS_PENDING: '/admin/producao/reembolsos/pendentes',
+  REFUNDS_APPROVED: '/admin/producao/reembolsos/aprovados',
+  REFUNDS_REJECTED: '/admin/producao/reembolsos/rejeitados',
 
   PRODUCTS_PENDING: '/admin/producao/revisao-produtos/pendentes',
   PRODUCTS_APPROVED: '/admin/producao/revisao-produtos/aprovados',
@@ -30,6 +35,7 @@ export const ADMIN_ROUTES = {
 
   USERS_CONTROL: '/admin/producao/controle-usuarios',
   EMPLOYEES_CONTROL: '/admin/producao/controle-funcionarios',
+
   DOCUMENTS_PENDING: '/admin/producao/revisao-documentos/pendentes',
   DOCUMENTS_APPROVED: '/admin/producao/revisao-documentos/aprovados',
   DOCUMENTS_REJECTED: '/admin/producao/revisao-documentos/rejeitados',
@@ -53,8 +59,11 @@ export const AdminWrapperConstants = ({
 
     [ADMIN_ROUTES.FINANCIAL_RENEVUE]: <Renevue />,
     [ADMIN_ROUTES.FINANCIAL_TRANSACTIONS]: <Transactions />,
-    [ADMIN_ROUTES.FINANCIAL_REFUNDS]: <Refunds />,
     [ADMIN_ROUTES.FINANCIAL_CHECKOUT]: <Checkout />,
+
+    [ADMIN_ROUTES.REFUNDS_PENDING]: <RefundsPending />,
+    [ADMIN_ROUTES.REFUNDS_APPROVED]: <RefundsApproved />,
+    [ADMIN_ROUTES.REFUNDS_REJECTED]: <RefundsRejected />,
 
     [ADMIN_ROUTES.PRODUCTS_PENDING]: <ProductsPending />,
     [ADMIN_ROUTES.PRODUCTS_APPROVED]: <ProductsApproved />,
