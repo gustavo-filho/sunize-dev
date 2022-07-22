@@ -18,6 +18,28 @@ export const CardTitle = styled.p`
   max-width: 1200px;
   color: white;
   font-size: 2rem;
+
+  span {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+
+    @media screen and (max-width: 700px) {
+      display: block;
+      margin-left: 0;
+    }
+
+    strong {
+      font-size: 1rem;
+
+      &.decrease {
+        color: #e63946;
+      }
+
+      &.increase {
+        color: #8fcb27;
+      }
+    }
+  }
 `;
 
 export const CardSubtitle = styled.p`

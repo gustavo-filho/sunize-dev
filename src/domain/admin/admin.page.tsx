@@ -163,21 +163,27 @@ export const Admin = () => {
                 <DeviceTitle>
                   <AiOutlineDesktop color="#d58746" /> Desktop - 58.6%
                 </DeviceTitle>
-                <span className="increase">2% <AiOutlineArrowUp /></span>
+                <span className="increase">
+                  2% <AiOutlineArrowUp />
+                </span>
               </DeviceInfo>
               <DeviceInfo>
                 <DeviceTitle>
                   <AiOutlineMobile color="#87cefa" />
                   Mobile - 58.6%
                 </DeviceTitle>
-                <span className="decrease">-8% <AiOutlineArrowDown /></span>
+                <span className="decrease">
+                  -8% <AiOutlineArrowDown />
+                </span>
               </DeviceInfo>
               <DeviceInfo>
                 <DeviceTitle>
                   <AiOutlineTablet color="#cca9dd" />
                   Tablet - 58.6%
                 </DeviceTitle>
-                <span className="increase">5% <AiOutlineArrowUp /></span>
+                <span className="increase">
+                  5% <AiOutlineArrowUp />
+                </span>
               </DeviceInfo>
             </CardContent>
           </Box>
@@ -218,7 +224,12 @@ export const Admin = () => {
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Box>
             <CardSubtitle>Gráfico de usuários (Tempo Real)</CardSubtitle>
-            <CardTitle>Usuários Online</CardTitle>
+            <CardTitle>
+              Usuários Online
+              <span>
+                <strong className="increase">+5.2%</strong> vs ultimos 7 dias
+              </span>
+            </CardTitle>
           </Box>
           {!mobile && (
             <Box style={{ display: 'flex', alignItems: 'center' }}>
