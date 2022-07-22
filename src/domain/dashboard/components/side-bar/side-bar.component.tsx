@@ -69,13 +69,6 @@ export const SideBar = () => {
           >
             Registro de vendas
           </MenuItem>
-          <MenuItem
-            icon={<MdPayments />}
-            onClick={() => history.push(DASHBOARD_ROUTES.PURCHASE_RECORD)}
-            active={pathname === DASHBOARD_ROUTES.PURCHASE_RECORD}
-          >
-            Registro de compras
-          </MenuItem>
         </SubMenu>
         <MenuItem
           icon={<MdGroups />}
