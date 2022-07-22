@@ -11,7 +11,7 @@ import {
     Title,
 } from './wrapper-styles'
 
-import LogoLetters from '../../assets/images/Logo1.png'
+import LogoLetters from '../../../../shared/assets/images/logob.png'
 
 
 export function WrapperAuth({
@@ -22,7 +22,7 @@ export function WrapperAuth({
     secondAction,
 }: AuthContainerProps): JSX.Element {
     return (
-        <>
+        <div style={{ display: 'flex' }}>
             <LoginSection>
                 <AnimationContainer>
                     <Image src={LogoLetters} alt="Sunize marketing digital" />
@@ -46,6 +46,6 @@ export function WrapperAuth({
                 </AnimationContainer>
             </LoginSection>
             <BackgroundPlace />
-        </>
+        </div>
     )
 }

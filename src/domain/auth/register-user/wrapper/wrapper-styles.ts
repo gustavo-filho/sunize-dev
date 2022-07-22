@@ -51,6 +51,7 @@ export const Title = styled.h2`
     height: 2px;
     left: 0;
     width: 100%;
+    margin-bottom: -5px;
   }
   @media screen and (min-width: 768px) {
     margin-bottom: 65px;
@@ -94,7 +95,7 @@ export const Image = styled.img`
 `
 
 export const Footer = styled.footer`
-  color: #fff;
+  color: #a5a6a9;
   font-size: 15px;
   margin-top: 20px;
   span {

@@ -78,6 +78,7 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100%;
     font-size: 16px;
+    color: #FFFFFF
   }
   /* Cor de fundo do autocomplete */
   input:-webkit-autofill {
