@@ -11,11 +11,11 @@ import {
   FormGroup,
   HeadInfo,
   Container,
+  useStyles,
 } from './sale-record.style';
 import { Field, Form, Formik } from 'formik';
 import { FaCog } from 'react-icons/fa';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '@shared/services/api';
 import { DetailsModal } from '@shared/components/details-modal/details-modal.component';
@@ -43,6 +43,7 @@ interface SalesData {
 }
 
 export const SaleRecord = () => {
+  const classes = useStyles();
   const user = useAppSelector(userSelector).data;
   const [dataModal, setDataModal] = useState<string | Transaction>('');
   const [modalConfirm, setModalConfirm] = useState<string | Transaction>('');
@@ -68,15 +69,6 @@ export const SaleRecord = () => {
     { titleHeader: 'Forma de Pagamento' },
     { titleHeader: 'Ações' },
   ]
-
-  // <td>1</td>
-  // <td>Trader esportivo</td>
-  // <td>19/02/2021</td>
-  // <td>R$14,50</td>
-  // <td>Aprovada</td>
-  // <td>Fábio</td>
-  // <td>Léo</td>
-  // <td>Cartão de Crédito</td>
 
   const listSalesMock = [
     {
@@ -161,7 +153,7 @@ export const SaleRecord = () => {
         <h2>Registros de Vendas</h2>
         <p>Tenha controle total sobre o seu desempenho em nossa plataforma.</p>
         <Center>
-          <div style={{ backgroundColor: '#27293d' }}>
+          <div style={{ backgroundColor: '#27293d', width: '95%' }}>
             <h3>Relatório de Vendas</h3>
             <Formik
               initialValues={{
@@ -262,7 +254,7 @@ export const SaleRecord = () => {
               )}
             />
 
-            <Divider sx={{ backgroundColor: '#bcbcc2' }} />
+            <Divider sx={{ backgroundColor: '#61616e' }} />
 
             <HeadInfo>
               <h2>
@@ -280,11 +272,11 @@ export const SaleRecord = () => {
                 </b>
               </span>
             </HeadInfo>
-            <Divider sx={{ backgroundColor: '#bcbcc2', marginTop: '10px' }} />
+            <Divider sx={{ backgroundColor: '#61616e', marginTop: '10px' }} />
             <TableContainer component={Paper}>
               <Table sx={{ backgroundColor: '#27293d', minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
-                  <TableRow>
+                  <TableRow className={classes.tableRow}>
                     {tableHeader.map((itemMap) => {
                       return (
                         <TableCell key={uuid()} sx={{ fontWeight: 600, color: '#bcbcc2' }} align="left">{itemMap.titleHeader}</TableCell>
@@ -298,34 +290,34 @@ export const SaleRecord = () => {
                     {listSalesMock.map((row) => {
                       return (
                         <TableBody>
-                          <TableRow
+                          <TableRow className={classes.tableRow} w
                             key={uuid()}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, }}>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.id}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.produto}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.data}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.comissao}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.status}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} align="left">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} align="left">
                               {row.comprador}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.vendedor}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               {row.pagamento}
                             </TableCell>
-                            <TableCell key={uuid()} sx={{ color: '#bcbcc2' }} component="th" scope="row">
+                            <TableCell key={uuid()} sx={{ color: '#bcbcc2', paddingTop: '25px', paddingBottom: '25px' }} component="th" scope="row">
                               <Options>
                                 <FaCog />
                                 <ul>
@@ -456,8 +448,6 @@ export const SaleRecord = () => {
             </TableContainer> */}
           </div>
         </Center>
-
-        <NavLink to="/dashboard/vendas">Visão Geral</NavLink>
 
         <CopyrightFooter />
       </Container>

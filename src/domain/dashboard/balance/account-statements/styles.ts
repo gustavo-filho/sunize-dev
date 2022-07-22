@@ -1,4 +1,14 @@
+import { makeStyles } from '@mui/styles';
 import styled from 'styled-components'
+
+export const useStyles = makeStyles({
+  tableRow: {
+    borderBottom: '1px solid #61616e !important',
+    '& .MuiTableCell-root': {
+      borderBottom: 'none'
+    }
+  },
+});
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -11,15 +21,16 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 38px;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    padding-top: 32px;
   }
   h3 {
     display: inline-block;
     width: 100%;
-    text-align: center;
     margin: 16px 0;
     font-size: 20px;
     color: #bcbcc2;
+    margin-top: 32px;
   }
   > p {
     font-size: 20px;
@@ -27,7 +38,7 @@ export const Container = styled.div`
     color: #818181;
     margin-top: 10px;
     margin-bottom: 3rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
   .WrapperStatements {
     display: flex;

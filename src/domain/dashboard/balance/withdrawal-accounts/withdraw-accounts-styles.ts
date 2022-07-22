@@ -47,7 +47,7 @@ export const Content = styled.div`
   max-width: 800px;
   margin-bottom: 24px;
   flex: 0.2 1 380px;
-  background-color: #f5f5f5;
+  background-color: #27293d;
   transition: background-color 0.2s ease;
 
   :hover {
@@ -60,11 +60,11 @@ export const Content = styled.div`
   }
   .AccountInformation .Bank {
     font-size: 18px;
-    color: black;
+    color: #CCCCCC;
   }
   .AccountInformation p {
     font-size: 14px;
-    color: #787878;
+    color: #CCCCCC;
   }
 
   @media (max-width: 576px) {
