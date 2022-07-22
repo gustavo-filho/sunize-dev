@@ -6,4 +6,11 @@ export const Container = styled.div`
   }
   margin-bottom: 1rem;
   margin-top: -2rem;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
+  @media (max-width: 500px) {
+    margin: 0 auto;
+  }
 `

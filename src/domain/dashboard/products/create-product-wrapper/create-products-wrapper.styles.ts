@@ -28,7 +28,7 @@ export const useStyles = makeStyles({
     gap: '2rem',
   },
   contentBox: {
-    background: 'white',
+    background: '#1a1a28',
     color: theme.colors.textGray,
     padding: '2rem 1.5rem',
     borderRadius: '5px',
@@ -38,7 +38,7 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     '& .title': {
-      color: 'black',
+      color: 'white',
       fontSize: '1.5rem',
     },
     width: '25%',

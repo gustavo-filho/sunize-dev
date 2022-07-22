@@ -21,6 +21,6 @@ export const TotalEvaluations = styled.small<TotalEvaluationsProps>`
   ${({ evaluations }) =>
     !evaluations &&
     css`
-      margin-left: 0 !important;
+      margin-left: 8px;
     `}
 `

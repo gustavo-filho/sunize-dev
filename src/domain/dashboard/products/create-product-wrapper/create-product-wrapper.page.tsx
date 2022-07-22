@@ -11,7 +11,7 @@ export const CreateProductWrapper = () => {
     <div className={classes.container}>
       <div className={classes.main}>
         <div className={classes.titleBox}>
-          <h2 className={classes.title}>O QUE DESEJA CRIAR?</h2>
+          <h2 className={classes.title}>O que deseja criar?</h2>
         </div>
 
         <div className={classes.mainContent}>

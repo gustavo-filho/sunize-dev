@@ -43,6 +43,15 @@ export const Container = styled.div<ContainerProps>`
           color: #f5f5f5;
         }
       `}
+      @media (max-width: 768px) {
+        max-width: 450px;
+      }
+      @media (max-width: 500px) {
+        max-width: 330px;
+      }
+      @media (max-width: 280px) {
+        max-width: 240px;
+      }
   }
 `
 
@@ -68,5 +77,23 @@ export const Accordion = styled.section<AccordionProps>`
     line-height: 1.6rem;
     color: #ffffff;
     width: 550px;
+    @media (max-width: 768px) {
+      max-width: 450px;
+    }
+    @media (max-width: 500px) {
+      max-width: 330px;
+    }
+    @media (max-width: 280px) {
+      max-width: 240px;
+    }
+  }
+  @media (max-width: 768px) {
+    max-width: 450px;
+  }
+  @media (max-width: 500px) {
+    max-width: 330px;
+  }
+  @media (max-width: 280px) {
+    max-width: 240px;
   }
 `
