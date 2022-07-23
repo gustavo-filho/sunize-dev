@@ -48,7 +48,7 @@ export const BellNotification = styled.div`
 
 export const NotiticationsContainer = styled(motion.main)`
   position: fixed;
-  top: 5rem;
+  top: 3.4rem;
   right: 2%;
   z-index: 9;
   background: #1a1a28;
@@ -57,7 +57,6 @@ export const NotiticationsContainer = styled(motion.main)`
   width: 96%;
   max-width: 400px;
   height: 250px;
-  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 6px;

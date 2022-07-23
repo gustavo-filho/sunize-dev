@@ -57,7 +57,6 @@ export const NotiticationsContainer = styled(motion.main)`
   width: 96%;
   max-width: 400px;
   height: 250px;
-  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 6px;
@@ -160,7 +159,7 @@ export const MessageWithoutNotification = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 1.1rem;
-    color: #4a4958;
+    color: #727184;
   }
 
   svg {

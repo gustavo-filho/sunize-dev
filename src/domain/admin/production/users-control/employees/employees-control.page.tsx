@@ -14,14 +14,10 @@ import {
   AnimationContainer,
   BoxWrapper,
   Container,
-<<<<<<< HEAD
   LinkTabEmployees,
-  LinkTab
-=======
   LinkTab,
   PaginationContainer,
   Statistics,
->>>>>>> 12a2e4992607f21cd8d846dd7325962bc0bc0f7a
 } from '../../production.styles';
 
 export const EmployeesControl = () => {
