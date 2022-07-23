@@ -55,7 +55,11 @@ export const SideBar = () => {
             Transações
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.REFUNDS_PENDING}
+            active={
+              pathname === ADMIN_ROUTES.REFUNDS_PENDING ||
+              pathname === ADMIN_ROUTES.REFUNDS_APPROVED ||
+              pathname === ADMIN_ROUTES.REFUNDS_REJECTED
+            }
             icon={<HiOutlineReceiptRefund />}
             onClick={() => history.push(ADMIN_ROUTES.REFUNDS_PENDING)}
           >
@@ -71,28 +75,43 @@ export const SideBar = () => {
         </SubMenu>
         <SubMenu title="Produção" icon={<AiOutlineLaptop />}>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.PRODUCTS_PENDING}
+            active={
+              pathname === ADMIN_ROUTES.PRODUCTS_PENDING ||
+              pathname === ADMIN_ROUTES.PRODUCTS_APPROVED ||
+              pathname === ADMIN_ROUTES.PRODUCTS_REJECTED
+            }
             icon={<VscWorkspaceTrusted />}
             onClick={() => history.push(ADMIN_ROUTES.PRODUCTS_PENDING)}
           >
             Revisões de Produtos
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.DOCUMENTS_PENDING}
+            active={
+              pathname === ADMIN_ROUTES.DOCUMENTS_PENDING ||
+              pathname === ADMIN_ROUTES.DOCUMENTS_APPROVED ||
+              pathname === ADMIN_ROUTES.DOCUMENTS_REJECTED
+            }
             icon={<AiOutlineFileSearch />}
             onClick={() => history.push(ADMIN_ROUTES.DOCUMENTS_PENDING)}
           >
             Revisão de Documentos
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.USERS_CONTROL}
+            active={
+              pathname === ADMIN_ROUTES.USERS_CONTROL ||
+              pathname === ADMIN_ROUTES.EMPLOYEES_CONTROL
+            }
             icon={<VscOrganization />}
             onClick={() => history.push(ADMIN_ROUTES.USERS_CONTROL)}
           >
             Controle de Usuários
           </MenuItem>
           <MenuItem
-            active={pathname === ADMIN_ROUTES.COMPLAINTS_PENDING}
+            active={
+              pathname === ADMIN_ROUTES.COMPLAINTS_PENDING ||
+              pathname === ADMIN_ROUTES.COMPLAINTS_APPROVED ||
+              pathname === ADMIN_ROUTES.COMPLAINTS_REJECTED
+            }
             icon={<VscReport />}
             onClick={() => history.push(ADMIN_ROUTES.COMPLAINTS_PENDING)}
           >
