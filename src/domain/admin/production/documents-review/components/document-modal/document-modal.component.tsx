@@ -15,8 +15,6 @@ interface Data {
   document_number: string;
   document_type: 'RG' | 'CNH';
   document_brith_date: string;
-  document_mother_name: string;
-  document_father_name: string;
   createdAt: string;
 }
 

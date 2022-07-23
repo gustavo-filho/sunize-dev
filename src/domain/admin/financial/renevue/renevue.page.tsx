@@ -1,4 +1,11 @@
-import { MainContent } from '@domain/admin/admin.styles';
+import {
+  CardSubtitle,
+  CardTitle,
+  CenterButton,
+  LeftButton,
+  MainContent,
+  RightButton,
+} from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
 import { ResumeCard } from '@domain/admin/components/resume-card/resume-card.component';
@@ -7,22 +14,12 @@ import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
 import {
   AiOutlineAppstore,
-  AiOutlineCheck,
   AiOutlineRise,
-  AiOutlineSwap,
-  AiOutlineUpload,
   AiOutlineUser,
   AiOutlineWarning,
 } from 'react-icons/ai';
 import { RENEVUE_BY_TIME_DATA, SALES_BY_TIME_DATA } from './renevue.contants';
 import { RENEVUE_MOCK, SALES_MOCK } from './renevue.mock';
-import {
-  CardSubtitle,
-  CardTitle,
-  CenterButton,
-  LeftButton,
-  RightButton,
-} from '@domain/admin/admin.styles';
 
 export const Renevue = () => {
   const [renevueViewBy, setRenevueViewBy] = useState<RENEVUE_BY_TIME_DATA>(
@@ -36,6 +33,20 @@ export const Renevue = () => {
 
   return (
     <MainContent>
+      <CardTitle>Perfomance</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCard icon={<AiOutlineRise />} label="Vendas" />
+        <ResumeCard icon={<AiOutlineWarning />} label="Reembolsado" />
+      </Box>
+
       <CardTitle>Receitas</CardTitle>
       <Box
         style={{
@@ -132,50 +143,6 @@ export const Renevue = () => {
         <Box style={{ margin: '3rem 0' }}></Box>
         <LineChart data={SALES_MOCK[salesViewBy]} />
       </CardContent>
-
-      <CardTitle>Perfomance</CardTitle>
-      <Box
-        style={{
-          width: '100%',
-          maxWidth: '1200px',
-          display: 'flex',
-          gap: '2rem',
-          flexWrap: mobile ? 'wrap' : 'initial',
-        }}
-      >
-        <ResumeCard icon={<AiOutlineRise />} label="Vendas" />
-        <ResumeCard icon={<AiOutlineWarning />} label="Reembolsado" />
-      </Box>
-
-      <CardTitle>Boletos</CardTitle>
-      <Box
-        style={{
-          width: '100%',
-          maxWidth: '1200px',
-          display: 'flex',
-          gap: '2rem',
-          flexWrap: mobile ? 'wrap' : 'initial',
-        }}
-      >
-        <ResumeCard icon={<AiOutlineUpload />} label="Gerados" />
-        <ResumeCard icon={<AiOutlineCheck />} label="Pagos" />
-        <ResumeCard icon={<AiOutlineSwap />} label="% Conversões" />
-      </Box>
-
-      <CardTitle>Pix</CardTitle>
-      <Box
-        style={{
-          width: '100%',
-          maxWidth: '1200px',
-          display: 'flex',
-          gap: '2rem',
-          flexWrap: mobile ? 'wrap' : 'initial',
-        }}
-      >
-        <ResumeCard icon={<AiOutlineUpload />} label="Gerados" />
-        <ResumeCard icon={<AiOutlineCheck />} label="Pagos" />
-        <ResumeCard icon={<AiOutlineSwap />} label="% Conversões" />
-      </Box>
     </MainContent>
   );
 };

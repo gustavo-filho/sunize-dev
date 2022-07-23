@@ -4,15 +4,21 @@ import { Form, Formik } from 'formik';
 import { DocumentBoxRejected } from '../components/document-box-rejected/document-box-rejected.component';
 
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import Pagination from '@domain/admin/components/pagination/pagination.component';
+import { useState } from 'react';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
   LinkTab,
+  PaginationContainer,
   Statistics,
 } from '../../production.styles';
 
 export const DocumentsRejected = () => {
+  const [page, setPage] = useState(0);
+  const totalPages = 3;
+
   return (
     <Container>
       <AnimationContainer>
@@ -59,7 +65,7 @@ export const DocumentsRejected = () => {
           // Inserir proprietário do documento
           />
         </BoxWrapper>
-        {/* {totalPages > 1 && (
+        {totalPages > 1 && (
           <PaginationContainer>
             <Pagination
               totalPages={totalPages}
@@ -67,7 +73,7 @@ export const DocumentsRejected = () => {
               setOffset={setPage}
             />
           </PaginationContainer>
-        )} */}
+        )}
       </AnimationContainer>
     </Container>
   );

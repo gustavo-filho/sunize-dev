@@ -8,10 +8,16 @@ import {
   BoxWrapper,
   Container,
   LinkTab,
+  PaginationContainer,
   Statistics,
 } from '../../production.styles';
+import Pagination from '@domain/admin/components/pagination/pagination.component';
+import { useState } from 'react';
 
 export const ComplaintsRejected = () => {
+  const [page, setPage] = useState(0);
+  const totalPages = 3;
+
   return (
     <Container>
       <AnimationContainer>
@@ -55,7 +61,7 @@ export const ComplaintsRejected = () => {
           {/* OnLoading = <p>Carregando...</p> */}
           <p>Houve um problema ao carregar as denúncias</p>
         </BoxWrapper>
-        {/* {totalPages > 1 && (
+        {totalPages > 1 && (
           <PaginationContainer>
             <Pagination
               totalPages={totalPages}
@@ -63,7 +69,7 @@ export const ComplaintsRejected = () => {
               setOffset={setPage}
             />
           </PaginationContainer>
-        )} */}
+        )}
       </AnimationContainer>
     </Container>
   );

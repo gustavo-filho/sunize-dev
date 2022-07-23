@@ -1,17 +1,23 @@
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { Form, Formik } from 'formik';
+import { useState } from 'react';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
   LinkTab,
+  PaginationContainer,
   Statistics,
 } from '../../production.styles';
 import { DocumentBoxApproved } from '../components/document-box-approved/document-box-approved.component';
 
 export const DocumentsApproved = () => {
+  const [page, setPage] = useState(0);
+  const totalPages = 3;
+
   return (
     <Container>
       <AnimationContainer>
@@ -58,7 +64,7 @@ export const DocumentsApproved = () => {
           // Inserir proprietário do documento
           />
         </BoxWrapper>
-        {/* {totalPages > 1 && (
+        {totalPages > 1 && (
           <PaginationContainer>
             <Pagination
               totalPages={totalPages}
@@ -66,7 +72,7 @@ export const DocumentsApproved = () => {
               setOffset={setPage}
             />
           </PaginationContainer>
-        )} */}
+        )}
       </AnimationContainer>
     </Container>
   );

@@ -3,14 +3,21 @@ import { shade } from 'polished';
 import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
-  tableRow: {
-    borderBottom: '1px solid #61616e !important',
+  tableRowHead: {
+    borderBottom: '1px solid #34364b !important',
     '& .MuiTableCell-root': {
-      borderBottom: 'none'
-    }
+      borderBottom: 'none',
+    },
+  },
+  tableRow: {
+    '& + &': {
+      borderTop: '1px solid #34364b !important',
+    },
+    '& .MuiTableCell-root': {
+      borderBottom: 'none',
+    },
   },
 });
-
 
 export const Center = styled.div`
   display: flex;
