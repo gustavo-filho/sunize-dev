@@ -15,8 +15,6 @@ interface Data {
   document_number: string;
   document_type: 'RG' | 'CNH';
   document_brith_date: string;
-  document_mother_name: string;
-  document_father_name: string;
   createdAt: string;
 }
 
@@ -49,12 +47,6 @@ export const DocumentModal = ({ type, data, closeModal }: Props) => {
             <p>
               Data de nascimento: <b>{data.document_brith_date}</b>
             </p>
-            <p>
-              Nome da mãe: <b>{data.document_mother_name}</b>
-            </p>
-            <p>
-              Nome do pai: <b>{data.document_father_name}</b>
-            </p>
           </Description>
         ) : (
           <>
@@ -81,12 +73,6 @@ export const DocumentModal = ({ type, data, closeModal }: Props) => {
                 </p>
                 <p>
                   Data de nascimento: <b>{data.document_brith_date}</b>
-                </p>
-                <p>
-                  Nome da mãe: <b>{data.document_mother_name}</b>
-                </p>
-                <p>
-                  Nome do pai: <b>{data.document_father_name}</b>
                 </p>
               </div>
             </Content>

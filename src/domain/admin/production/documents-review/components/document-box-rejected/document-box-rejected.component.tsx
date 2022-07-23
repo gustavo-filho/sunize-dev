@@ -32,8 +32,6 @@ export const DocumentBoxRejected = () => {
             document_number: "000.000.000.00",
             document_type: 'RG',
             document_brith_date: "10/07/1980",
-            document_mother_name: "Julia Silva",
-            document_father_name: "Pedro Afonso",
             createdAt: "2020-07-13T00:00:00.000Z",
           }}
           closeModal={() => setModal(false)}
