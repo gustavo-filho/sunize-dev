@@ -65,26 +65,23 @@ export const Container = styled.div`
   padding: 0 6%;
 
   > h2 {
-    font-family: 'Nunito', sans-serif;
-    color: #bcbcc2;
-    display: inline-block;
-    width: 100%;
-    padding-top: 32px;
-    font-weight: 300;
+    margin-top: 80px;
+    margin-bottom: 32px;
+    font-weight: 200;
     font-size: 28px;
-    line-height: 38px;
-    margin-left: 63px;
+    line-height: 27px;
+    color: rgb(255, 255, 255);
+    font-family: Poppins, sans-serif;
   }
 
   > p {
     font-family: 'Nunito', sans-serif;
-    margin: 16px 0 32px 0;
+    margin: 0 0 32px 0;
     display: inline-block;
     width: 100%;
     font-size: 20px;
     line-height: 27px;
     color: #818181;
-    margin-left: 63px;
   }
 
   > a {

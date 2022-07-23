@@ -66,13 +66,14 @@ export const AnimationContainer = styled.div`
 `;
 
 export const LinkTab = styled(Link)<LinkTabProps>`
-  font-size: 18px;
+  font-size: 14px;
   color: #818181;
   background-color: ${props =>
     props.active ? '#27293d' : 'transparent'} !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
   text-decoration: none;
+  width: 110px;
 `;
 
 export const BoxWrapper = styled.div`

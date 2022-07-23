@@ -32,7 +32,7 @@ export const UsersControl = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CONTROLE DE USUÁRIOS</h1>
+        <h1>Controle de Usuários</h1>
         <h2>Tenha controle sobre os usuários.</h2>
 
         <div className="links">

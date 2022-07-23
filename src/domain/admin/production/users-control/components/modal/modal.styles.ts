@@ -38,6 +38,8 @@ export const ContentModal = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0 10px 2rem;
+    width: 95%;
+    height: 90vh;
 
     > div {
       justify-content: center;
@@ -62,8 +64,8 @@ export const CloseButton = styled.button`
   font-size: 0;
   cursor: pointer;
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 5px;
+  right: 5px;
   color: #c27c2c;
   background-color: rgba(255, 144, 0, 0.2);
   padding: 0.3rem;

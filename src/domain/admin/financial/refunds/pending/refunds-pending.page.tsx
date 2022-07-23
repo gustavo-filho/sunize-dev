@@ -14,7 +14,7 @@ export const RefundsPending = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CONTROLE DE REEMBOLSOS</h1>
+        <h1>Controle de Reembolsos</h1>
         <h2>Tenha controle sobre os pedidos de reembolso.</h2>
 
         <Statistics>
@@ -47,7 +47,7 @@ export const RefundsPending = () => {
           <LinkTab to={ADMIN_ROUTES.REFUNDS_REJECTED}>Rejeitados</LinkTab>
         </div>
         <BoxWrapper>
-          <p>Nenhum solicitação encontrada</p>
+          <p>Nenhuma solicitação encontrada</p>
           {/* OnError = <p>Nenhum solicitação encontrada</p> */}
           {/* OnLoading = <p>Carregando...</p> */}
         </BoxWrapper>

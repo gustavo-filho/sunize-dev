@@ -13,7 +13,7 @@ export const Container = styled.div`
   margin: 0.5rem;
   padding: 0.5rem 0;
   border-radius: 9px;
-  background-color: #fff;
+  background-color: rgb(31, 31, 43);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -47,10 +47,10 @@ export const Container = styled.div`
     flex: 1;
 
     img {
-      width: 46px;
-      height: 46px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      margin: 0 1.5rem;
+      margin: 0 1.5rem 0.5rem;
     }
 
     h3 {
@@ -67,12 +67,14 @@ export const Container = styled.div`
 
     div {
       strong {
-        font-size: 0.8rem;
+        font-size: 16px;
+        color: white;
       }
 
       p {
         font-size: 0.8rem;
         line-height: 24px;
+        color: rgb(204, 204, 204);
 
         b {
           color: #c27c2c;
@@ -309,7 +311,7 @@ export const Overlay = styled.div`
 
 export const Error = styled.p`
   color: #c62828;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   margin-top: 0.5rem;
 `

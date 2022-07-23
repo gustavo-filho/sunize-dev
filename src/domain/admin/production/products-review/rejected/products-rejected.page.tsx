@@ -55,7 +55,7 @@ export const ProductsRejected = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>REVISÃO DE PRODUTOS</h1>
+        <h1>Revisão de Produtos</h1>
         <h2>Tenha controle sobre os produtos rejeitados dos produtores.</h2>
 
         <Statistics>

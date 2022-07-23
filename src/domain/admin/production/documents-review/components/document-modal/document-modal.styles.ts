@@ -86,7 +86,7 @@ export const Content = styled.main`
     align-items: center;
 
     img {
-      margin: 0.5rem 0;
+      margin: 0 1.5rem 0.5rem;
       width: 90%;
     }
   }

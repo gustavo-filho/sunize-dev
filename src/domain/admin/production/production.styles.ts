@@ -66,13 +66,31 @@ export const AnimationContainer = styled.div`
 `;
 
 export const LinkTab = styled(Link)<LinkTabProps>`
-  font-size: 18px;
+  font-size: 14px;
   color: #818181;
   background-color: ${props =>
     props.active ? '#27293d' : 'transparent'} !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
   text-decoration: none;
+  width: 110px;
+  @media (max-width: 360px) {
+    width: 105.6px;
+  }
+`;
+
+export const LinkTabEmployees = styled(Link)<LinkTabProps>`
+  font-size: 14px;
+  color: #818181;
+  background-color: ${props =>
+    props.active ? '#27293d' : 'transparent'} !important;
+  padding: 16px 22px 12px 22px;
+  border-radius: 4px 4px 0 0;
+  text-decoration: none;
+  width: 130px;
+  @media (max-width: 360px) {
+    width: 105.6px;
+  }
 `;
 
 export const BoxWrapper = styled.div`
@@ -175,7 +193,7 @@ export const Statistics = styled.header`
 
     strong {
       margin-left: 0;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
   }
 `;

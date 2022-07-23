@@ -14,7 +14,7 @@ export const ComplaintsPending = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CENTRAL DE DENÚNCIAS</h1>
+        <h1>Central de Denúncias</h1>
         <h2>Tenha controle sobre todas as denúncias.</h2>
 
         <Statistics>

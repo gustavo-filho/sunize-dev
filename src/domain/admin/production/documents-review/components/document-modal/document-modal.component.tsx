@@ -49,12 +49,6 @@ export const DocumentModal = ({ type, data, closeModal }: Props) => {
             <p>
               Data de nascimento: <b>{data.document_brith_date}</b>
             </p>
-            <p>
-              Nome da mãe: <b>{data.document_mother_name}</b>
-            </p>
-            <p>
-              Nome do pai: <b>{data.document_father_name}</b>
-            </p>
           </Description>
         ) : (
           <>
@@ -81,12 +75,6 @@ export const DocumentModal = ({ type, data, closeModal }: Props) => {
                 </p>
                 <p>
                   Data de nascimento: <b>{data.document_brith_date}</b>
-                </p>
-                <p>
-                  Nome da mãe: <b>{data.document_mother_name}</b>
-                </p>
-                <p>
-                  Nome do pai: <b>{data.document_father_name}</b>
                 </p>
               </div>
             </Content>

@@ -14,7 +14,7 @@ export const ComplaintsApproved = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CENTRAL DE DENÚNCIAS</h1>
+        <h1>Central de Denúncias</h1>
         <h2>Tenha controle sobre as denúncias que foram aprovadas.</h2>
 
         <Statistics>

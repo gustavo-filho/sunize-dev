@@ -169,6 +169,8 @@ export const ContentModal = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 90vh;
+    width: 95%;
 
     div {
       justify-content: center;

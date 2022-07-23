@@ -15,7 +15,7 @@ export const DocumentsPending = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>REVISÃO DE DOCUMENTOS</h1>
+        <h1>Revisão de Documentos</h1>
         <h2>Tenha controle sobre os documentos dos usuários.</h2>
 
         <Statistics>

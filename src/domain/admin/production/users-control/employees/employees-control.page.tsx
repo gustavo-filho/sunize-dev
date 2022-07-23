@@ -10,6 +10,7 @@ import {
   AnimationContainer,
   BoxWrapper,
   Container,
+  LinkTabEmployees,
   LinkTab
 } from '../../production.styles';
 
@@ -36,14 +37,14 @@ export const EmployeesControl = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CONTROLE DE USUÁRIOS</h1>
+        <h1>Controle de Usuários</h1>
         <h2>Tenha controle sobre os usuários.</h2>
 
         <div className="links">
-          <LinkTab to={ADMIN_ROUTES.USERS_CONTROL}>Usuários</LinkTab>
-          <LinkTab active to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>
+          <LinkTabEmployees to={ADMIN_ROUTES.USERS_CONTROL}>Usuários</LinkTabEmployees>
+          <LinkTabEmployees active to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>
             Funcionários
-          </LinkTab>
+          </LinkTabEmployees>
         </div>
         <BoxWrapper>
           {users ? (

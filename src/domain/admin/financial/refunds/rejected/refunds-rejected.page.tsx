@@ -14,7 +14,7 @@ export const RefundsRejected = () => {
   return (
     <Container>
       <AnimationContainer>
-        <h1>CONTROLE DE REEMBOLSOS</h1>
+        <h1>Controle de Reembolsos</h1>
         <h2>Tenha controle sobre os pedidos que foram rejeitados.</h2>
 
         <Statistics>
@@ -47,7 +47,7 @@ export const RefundsRejected = () => {
           </LinkTab>
         </div>
         <BoxWrapper>
-          <p>Nenhum solicitação encontrada</p>
+          <p>Nenhuma solicitação encontrada</p>
           {/* OnError = <p>Nenhum solicitação encontrada</p> */}
           {/* OnLoading = <p>Carregando...</p> */}
         </BoxWrapper>
