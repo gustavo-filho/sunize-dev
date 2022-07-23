@@ -88,7 +88,7 @@ export const Content = styled.div`
 export const MoneyArt = styled.div`
   width: 50px;
   height: 50px;
-  background: #efeeed;
+  background: #1a1a28;
   border-radius: 25px;
   display: flex;
   justify-content: center;

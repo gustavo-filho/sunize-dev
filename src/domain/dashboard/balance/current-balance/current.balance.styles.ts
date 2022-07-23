@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   > h3 {
     color: #818181;
-    margin: 72px 0 32px 0;
+    margin: 50px 0 32px 0;
     text-align: center;
     max-width: 1100px;
     font-family: 'Nunito', sans-serif;
@@ -40,7 +40,7 @@ export const Container = styled.div`
     transform: translateX(-20px);
     animation: animeLeft 0.3s forwards;
     z-index: 1;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     width: 100%;
     max-width: 1100px;
     height: 100px;

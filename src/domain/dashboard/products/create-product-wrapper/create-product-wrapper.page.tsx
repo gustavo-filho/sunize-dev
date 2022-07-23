@@ -28,7 +28,7 @@ export const CreateProductWrapper = () => {
             className={classes.contentBox}
           >
             <img alt={'imagem do ebook'} src={Ebook} />
-            <p className={'title'}>E-book</p>
+            <p className={'title'}>e-Book</p>
             <p>Lance seu livro digital de forma simplificada</p>
           </Link>
           <Link

@@ -51,12 +51,9 @@ export const Header = () => {
             dispatch(TOGGLE_SIDE_BAR());
           }}
         />
-
-        {!mobile && (
           <LogoAndBars>
             <img src={Logo} alt="Sunize" />
           </LogoAndBars>
-        )}
       </div>
 
       <UserInfo>

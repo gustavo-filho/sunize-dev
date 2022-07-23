@@ -65,26 +65,20 @@ export const Container = styled.div`
   padding: 0 6%;
 
   > h2 {
-    font-family: 'Nunito', sans-serif;
-    color: #bcbcc2;
-    display: inline-block;
-    width: 100%;
-    padding-top: 32px;
-    font-weight: 300;
+    margin-bottom: 32px;
+    font-weight: 200;
     font-size: 28px;
-    line-height: 38px;
-    margin-left: 63px;
+    line-height: 27px;
+    color: #ffffff;
+    font-family: 'Poppins',sans-serif;
   }
 
   > p {
-    font-family: 'Nunito', sans-serif;
-    margin: 16px 0 32px 0;
-    display: inline-block;
-    width: 100%;
     font-size: 20px;
-    line-height: 27px;
+    font-weight: 400;
     color: #818181;
-    margin-left: 63px;
+    font-family: 'Poppins',sans-serif;
+    margin-bottom: 50px;
   }
 
   > a {
@@ -200,10 +194,8 @@ export const HeadInfo = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  width: 95%;
   overflow-x: auto;
   overflow-y: hidden;
-  margin: 32px auto;
 
   table {
     padding-top: 32px;
