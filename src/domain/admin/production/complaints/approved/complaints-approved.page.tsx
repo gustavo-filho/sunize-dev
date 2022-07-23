@@ -1,16 +1,22 @@
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { Form, Formik } from 'formik';
+import { useState } from 'react';
 import {
   AnimationContainer,
   BoxWrapper,
   Container,
   LinkTab,
+  PaginationContainer,
   Statistics,
 } from '../../production.styles';
 
 export const ComplaintsApproved = () => {
+  const [page, setPage] = useState(0);
+  const totalPages = 3;
+
   return (
     <Container>
       <AnimationContainer>
@@ -54,7 +60,7 @@ export const ComplaintsApproved = () => {
           {/* OnLoading = <p>Carregando...</p> */}
           <p>Houve um problema ao carregar as denúncias</p>
         </BoxWrapper>
-        {/* {totalPages > 1 && (
+        {totalPages > 1 && (
           <PaginationContainer>
             <Pagination
               totalPages={totalPages}
@@ -62,7 +68,7 @@ export const ComplaintsApproved = () => {
               setOffset={setPage}
             />
           </PaginationContainer>
-        )} */}
+        )}
       </AnimationContainer>
     </Container>
   );

@@ -1,8 +1,12 @@
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { UserBox } from '@domain/admin/production/users-control/components/user-box/user-box.component';
 
 import { userSelector } from '@domain/auth/user/user.store';
+import { FormGroup } from '@mui/material';
+import { InputSearch } from '@shared/components/input-search/input-search.component';
 import { api } from '@shared/services/api';
+import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
@@ -10,10 +14,14 @@ import {
   AnimationContainer,
   BoxWrapper,
   Container,
-  LinkTab
+  LinkTab,
+  PaginationContainer,
+  Statistics,
 } from '../../production.styles';
 
 export const EmployeesControl = () => {
+  const [page, setPage] = useState(0);
+  const totalPages = 3;
   const user = useAppSelector(userSelector);
 
   const [users, setUsers] = useState<null | []>(null);
@@ -39,6 +47,31 @@ export const EmployeesControl = () => {
         <h1>CONTROLE DE USUÁRIOS</h1>
         <h2>Tenha controle sobre os usuários.</h2>
 
+        <Statistics>
+          <strong>
+            <b>{users?.length}</b> funcionários ativos
+          </strong>
+
+          <div>
+            <Formik
+              initialValues={{ search: '' }}
+              onSubmit={values => {}}
+              render={() => (
+                <Form>
+                  <FormGroup>
+                    <InputSearch
+                      name="search"
+                      placeholder="Pesquisar usuário"
+                    />
+
+                    {/* <FilterButton /> */}
+                  </FormGroup>
+                </Form>
+              )}
+            />
+          </div>
+        </Statistics>
+
         <div className="links">
           <LinkTab to={ADMIN_ROUTES.USERS_CONTROL}>Usuários</LinkTab>
           <LinkTab active to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>
@@ -56,6 +89,15 @@ export const EmployeesControl = () => {
             <p>Carregando...</p>
           )}
         </BoxWrapper>
+        {totalPages > 1 && (
+          <PaginationContainer>
+            <Pagination
+              totalPages={totalPages}
+              offset={page}
+              setOffset={setPage}
+            />
+          </PaginationContainer>
+        )}
       </AnimationContainer>
     </Container>
   );
