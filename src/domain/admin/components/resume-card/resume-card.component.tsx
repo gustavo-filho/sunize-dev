@@ -1,7 +1,9 @@
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
 import { Box } from '@mui/material';
 import {
-  CircleIcon,
+  CircleIconRed,
+  CircleIconGreen,
+  CircleIconYellow,
   Label,
 } from '@domain/admin/components/resume-card/resume-card.styles';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
@@ -12,7 +14,7 @@ interface ResumeCardProps {
   label: string;
 }
 
-export const ResumeCard = ({ icon, label }: ResumeCardProps) => {
+export const ResumeCardYellow = ({ icon, label }: ResumeCardProps) => {
   return (
     <CardContent
       divProps={{
@@ -28,7 +30,55 @@ export const ResumeCard = ({ icon, label }: ResumeCardProps) => {
           alignItems: 'center',
         }}
       >
-        <CircleIcon>{icon}</CircleIcon>
+        <CircleIconYellow>{icon}</CircleIconYellow>
+        <DotsLoader />
+      </Box>
+      <Label>{label}</Label>
+    </CardContent>
+  );
+};
+
+export const ResumeCardGreen = ({ icon, label }: ResumeCardProps) => {
+  return (
+    <CardContent
+      divProps={{
+        style: {
+          width: '100%',
+        },
+      }}
+    >
+      <Box
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <CircleIconGreen>{icon}</CircleIconGreen>
+        <DotsLoader />
+      </Box>
+      <Label>{label}</Label>
+    </CardContent>
+  );
+};
+
+export const ResumeCardRed = ({ icon, label }: ResumeCardProps) => {
+  return (
+    <CardContent
+      divProps={{
+        style: {
+          width: '100%',
+        },
+      }}
+    >
+      <Box
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <CircleIconRed>{icon}</CircleIconRed>
         <DotsLoader />
       </Box>
       <Label>{label}</Label>

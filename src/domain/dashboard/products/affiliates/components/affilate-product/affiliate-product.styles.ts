@@ -13,6 +13,19 @@ export const Container = styled.div`
   margin-bottom: 20px;
 
   div {
+    > .buttonAffiliate {
+      border: 0;
+      cursor: pointer;
+      color: white;
+      background-color: #a00b0b;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+      padding: 5px 27px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      min-width: 100px;
+      margin: 15px 15px 15px 0px;
+    }
     > button {
       border: 0;
       cursor: pointer;
@@ -24,7 +37,7 @@ export const Container = styled.div`
       font-size: 1.05rem;
       font-weight: 600;
       min-width: 100px;
-      margin: 15px 0px 15px 0px;
+      margin: 15px 15px 15px 0px;
     }
 
     > button:not(:first-child) {

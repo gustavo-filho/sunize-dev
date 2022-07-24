@@ -18,9 +18,9 @@ import {
   RightButton,
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
-import { ChartCard } from '@domain/admin/components/chart-card/chart-card.component';
+import { ChartCardGreen, ChartCardRed, ChartCardYellow } from '@domain/admin/components/chart-card/chart-card.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
-import { ResumeCard } from '@domain/admin/components/resume-card/resume-card.component';
+import { ResumeCardGreen, ResumeCardRed, ResumeCardYellow } from '@domain/dashboard/components/resume-card/resume-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
@@ -60,10 +60,10 @@ export const Admin = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCard icon={<AiOutlineRise />} label="Total de vendas" />
-        <ResumeCard icon={<AiOutlineUser />} label="Usuários ativos" />
-        <ResumeCard icon={<AiOutlineAppstore />} label="Produtos cadastrados" />
-        <ResumeCard icon={<AiOutlineDollarCircle />} label="Lucro geral" />
+        <ResumeCardGreen icon={<AiOutlineRise />} label="Total de vendas" />
+        <ResumeCardGreen icon={<AiOutlineUser />} label="Usuários ativos" />
+        <ResumeCardGreen icon={<AiOutlineAppstore />} label="Produtos cadastrados" />
+        <ResumeCardGreen icon={<AiOutlineDollarCircle />} label="Lucro geral" />
       </Box>
       <CardTitle>Análise gráfica</CardTitle>
       <Box
@@ -199,13 +199,13 @@ export const Admin = () => {
             alignItems: 'stretch',
           }}
         >
-          <ChartCard
+          <ChartCardGreen
             color="#d58746"
             icon={<AiOutlineTeam />}
             data={ADMIN_SUBSCRIPTIONS_MOCK.USERS}
             label="Registros concluidos"
           />
-          <ChartCard
+          <ChartCardGreen
             color="#87cefa"
             icon={<BsBoxSeam />}
             data={ADMIN_SUBSCRIPTIONS_MOCK.ORDERS}

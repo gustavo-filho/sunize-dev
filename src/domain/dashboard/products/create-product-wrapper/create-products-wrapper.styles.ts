@@ -23,6 +23,10 @@ export const useStyles = makeStyles({
     background: theme.colors.mediumBlueBackground,
     borderRadius: '5px',
     display: 'flex',
+    ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
+      display: 'block',
+      wrap: 'flex-wrap',
+    },
     justifyContent: 'space-evenly',
 
     gap: '2rem',
@@ -42,6 +46,16 @@ export const useStyles = makeStyles({
       fontSize: '1.5rem',
     },
     width: '25%',
+    ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
+      width: '200px',
+      margin: 'auto',
+      marginBottom: '30px',
+    },
+    ['@media (max-width:280px)']: { // eslint-disable-line no-useless-computed-key
+      width: '120px',
+      margin: 'auto',
+      marginBottom: '30px',
+    },
     transition: 'all 0.2s',
     cursor: 'pointer',
     '&:hover': {

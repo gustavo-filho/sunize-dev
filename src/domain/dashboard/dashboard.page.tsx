@@ -8,11 +8,24 @@ import {
   MainContent,
   RightButton,
 } from '@domain/dashboard/dashboard.styles';
+import {
+  AiOutlineCheck,
+  AiOutlineFileDone,
+  AiOutlineFileExcel,
+  AiOutlineSwap,
+  AiOutlineUpload,
+  AiOutlineAppstore,
+  AiOutlineRise,
+  AiOutlineUser,
+  AiOutlineWarning,
+} from 'react-icons/ai';
+import { TbFileInvoice } from 'react-icons/tb';
+import { BsCartCheck, BsCartX } from 'react-icons/bs';
 import { CardContent } from '@domain/dashboard/components/card-content/card-content.component';
 import { Box } from '@mui/material';
 import { Chart } from '@domain/dashboard/components/chart/chart.component';
 import { DASHBOARD_MOCK } from '@domain/dashboard/dashboard.mock';
-import { ResumeCard } from '@domain/dashboard/components/resume-card/resume-card.component';
+import { ResumeCardYellow, ResumeCardRed, ResumeCardGreen } from '@domain/dashboard/components/resume-card/resume-card.component';
 import { BsCreditCard } from 'react-icons/bs';
 import { useMedia } from '@shared/hooks/useMedia';
 
@@ -62,6 +75,20 @@ export const Dashboard = () => {
         <Box style={{ margin: '3rem 0' }}></Box>
         <Chart data={DASHBOARD_MOCK[viewBy]} />
       </CardContent>
+      <CardTitle>Receitas</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCardGreen icon={<AiOutlineRise />} label="Total de Vendas" />
+        <ResumeCardRed icon={<AiOutlineWarning />} label="Reembolsado" />
+        <ResumeCardYellow icon={<AiOutlineAppstore />} label="% Reembolsados" />
+      </Box>
       <CardTitle>Perfomance</CardTitle>
       <Box
         style={{
@@ -72,9 +99,64 @@ export const Dashboard = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
-        <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
-        <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
+        <ResumeCardGreen icon={<AiOutlineRise />} label="Vendas" />
+        <ResumeCardRed icon={<AiOutlineWarning />} label="Reembolsado" />
+      </Box>
+      <CardTitle>Checkout</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCardYellow icon={<TbFileInvoice />} label="Checkouts abertos" />
+        <ResumeCardGreen icon={<AiOutlineFileDone />} label="Checkouts concluidos" />
+        <ResumeCardRed icon={<AiOutlineFileExcel />} label="Checkouts cancelados" />
+      </Box>
+      <CardTitle>Cartão de Crédito</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCardGreen icon={<BsCartCheck />} label="Compras aprovadas" />
+        <ResumeCardRed icon={<BsCartX />} label="Compras recusadas" />
+        <ResumeCardYellow icon={<AiOutlineSwap />} label="% Conversões" />
+      </Box>
+      <CardTitle>Cartão de Débito</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCardGreen icon={<BsCartCheck />} label="Compras aprovadas" />
+        <ResumeCardRed icon={<BsCartX />} label="Compras recusadas" />
+        <ResumeCardYellow icon={<AiOutlineSwap />} label="% Conversões" />
+      </Box>
+      <CardTitle>Pix</CardTitle>
+      <Box
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          display: 'flex',
+          gap: '2rem',
+          flexWrap: mobile ? 'wrap' : 'initial',
+        }}
+      >
+        <ResumeCardYellow icon={<AiOutlineUpload />} label="Gerados" />
+        <ResumeCardGreen icon={<AiOutlineCheck />} label="Pagos" />
+        <ResumeCardYellow icon={<AiOutlineSwap />} label="% Conversões" />
       </Box>
       <CardTitle>Boletos</CardTitle>
       <Box
@@ -86,8 +168,9 @@ export const Dashboard = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
-        <ResumeCard icon={<BsCreditCard />} label="Total de vendas" />
+        <ResumeCardYellow icon={<AiOutlineUpload />} label="Gerados" />
+        <ResumeCardGreen icon={<AiOutlineCheck />} label="Pagos" />
+        <ResumeCardYellow icon={<AiOutlineSwap />} label="% Conversões" />
       </Box>
     </MainContent>
   );

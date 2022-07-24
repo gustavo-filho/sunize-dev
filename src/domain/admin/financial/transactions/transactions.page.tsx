@@ -29,7 +29,7 @@ export const Transactions = () => {
     { titleHeader: 'Status' },
     { titleHeader: 'Comprador' },
     { titleHeader: 'Vendedor' },
-    { titleHeader: 'Forma de Pagamento Forma de Pagamento' },
+    { titleHeader: 'Forma de Pagamento' },
     { titleHeader: 'Ações' },
   ];
 

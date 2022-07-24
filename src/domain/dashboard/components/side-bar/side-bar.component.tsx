@@ -61,15 +61,28 @@ export const SideBar = () => {
             Produtos afiliados
           </MenuItem>
         </SubMenu>
+
+        {/*ANTIGO MENU DE VENDAS COM SUBMENU
+
         <SubMenu title="Vendas" icon={<AiOutlineShoppingCart />}>
           <MenuItem
             icon={<MdPayments />}
             onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
             active={pathname === DASHBOARD_ROUTES.SALE_RECORD}
           >
-            Registro de vendas
+            Registro de Vendas
           </MenuItem>
-        </SubMenu>
+        </SubMenu>*/}
+
+        <MenuItem
+          icon={<AiOutlineShoppingCart />}
+          onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
+          active={pathname === DASHBOARD_ROUTES.SALE_RECORD}
+        >
+          Vendas
+        </MenuItem>
+
+
         <MenuItem
           icon={<MdGroups />}
           onClick={() => history.push(DASHBOARD_ROUTES.AFFILIATES)}
@@ -77,6 +90,7 @@ export const SideBar = () => {
         >
           Afiliados
         </MenuItem>
+        
         <MenuItem
           icon={<AiFillShop />}
           onClick={() => history.push(DASHBOARD_ROUTES.MARKET)}

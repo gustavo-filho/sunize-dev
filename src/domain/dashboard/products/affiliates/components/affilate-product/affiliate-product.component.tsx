@@ -148,7 +148,10 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
         <div>
           <button onClick={() => setLinkIsVisible(!linkVisible)}>Links</button>
           <button onClick={() => handleGetMeta()}>Metas</button>
+          <button className={"buttonAffiliate"} onClick={() => toggleConfirmModal()}>Cancelar Afiliação</button>
+
         </div>
+        {/*
         <Options onClick={() => setIsOptionOpen(!isOptionsOpen)}>
           <FaEllipsisH />
           {isOptionsOpen && (
@@ -162,6 +165,7 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
             </ul>
           )}
         </Options>
+        */}
       </Container>
 
       <AnimatePresence>
@@ -182,7 +186,7 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
                 </h3>
 
                 <Description>
-                  <h1>Materias de divulgação</h1>
+                  <h1>Materiais de divulgação</h1>
                   {links.length ? (
                     links.map((link: any) => (
                       <a

@@ -40,6 +40,11 @@ export const FormGroup = styled.div`
     color: red;
     position: absolute;
     bottom: -2rem;
+    @media (max-width: 1060px) {
+      position: static;
+      bottom: -1rem;
+      margin-bottom: -10px;
+    }
   }
 
   label {
@@ -123,11 +128,12 @@ export const Container = styled.div`
     select,
     input {
       width: 100%;
-      border: 1px solid rgba(230, 230, 230, 1);
+      border: 1px solid #434248;
       padding: 6px 10px;
       margin: 10px 0;
       border-radius: 4px;
       color: gray;
+      background-color: #25273e;
     }
 
     button {

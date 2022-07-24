@@ -2,7 +2,9 @@ import { Box } from '@mui/material';
 import {
   CardContent,
   CardBody,
-  CircleIcon,
+  CircleIconYellow,
+  CircleIconRed,
+  CircleIconGreen,
   Label,
 } from '@domain/admin/components/chart-card/chart-card.styles';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
@@ -16,7 +18,7 @@ interface ChartCardProps {
   color: string;
 }
 
-export const ChartCard = ({ color, data, icon, label }: ChartCardProps) => {
+export const ChartCardYellow = ({ color, data, icon, label }: ChartCardProps) => {
   return (
     <CardContent>
       <CardBody>
@@ -27,7 +29,49 @@ export const ChartCard = ({ color, data, icon, label }: ChartCardProps) => {
             alignItems: 'center',
           }}
         >
-          <CircleIcon>{icon}</CircleIcon>
+          <CircleIconYellow>{icon}</CircleIconYellow>
+          <DotsLoader />
+        </Box>
+        <Label>{label}</Label>
+      </CardBody>
+      <LineCardChart color={color} data={data} />
+    </CardContent>
+  );
+};
+
+export const ChartCardGreen = ({ color, data, icon, label }: ChartCardProps) => {
+  return (
+    <CardContent>
+      <CardBody>
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <CircleIconGreen>{icon}</CircleIconGreen>
+          <DotsLoader />
+        </Box>
+        <Label>{label}</Label>
+      </CardBody>
+      <LineCardChart color={color} data={data} />
+    </CardContent>
+  );
+};
+
+export const ChartCardRed = ({ color, data, icon, label }: ChartCardProps) => {
+  return (
+    <CardContent>
+      <CardBody>
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <CircleIconRed>{icon}</CircleIconRed>
           <DotsLoader />
         </Box>
         <Label>{label}</Label>
