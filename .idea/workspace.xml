@@ -3,22 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="dac03bce-9540-4d6d-ad90-94726bfee494" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/affiliates.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/affiliates-container/affiliates-container.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/box-affiliate/box-affiliate.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/edit-comission-modal/edit-comission-modal.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/select-product/select-product.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/affiliates/components/tab-panel/tab-panel.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/notifications.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Notifications/notifications.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/Header/header.styles.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/dashboard/products/create-product-wrapper/create-product-wrapper.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/dashboard/products/create-product-wrapper/create-product-wrapper.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,10 +83,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/create-package" />
+      <recent name="$PROJECT_DIR$/src/domain/dashboard/products/assets/images" />
       <recent name="$PROJECT_DIR$/src/domain/dashboard/components/card-content" />
       <recent name="$PROJECT_DIR$/src/domain/auth/components" />
       <recent name="$PROJECT_DIR$/src/domain/auth" />
-      <recent name="$PROJECT_DIR$/src/shared/assets/images" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -136,6 +127,7 @@
       <workItem from="1655729606109" duration="92000" />
       <workItem from="1655820041193" duration="13613000" />
       <workItem from="1657060160828" duration="5433000" />
+      <workItem from="1658143942001" duration="12032000" />
     </task>
     <servers />
   </component>

@@ -88,7 +88,7 @@ export const AffiliatesPage = () => {
     },
     {
       index: 1,
-      title: 'Pedido de afiliados',
+      title: 'Pedido de Afiliados',
       description:
         'Tenha controle sobre os afiliados dos seus produtos digitais.',
       counter: renderQuantity,

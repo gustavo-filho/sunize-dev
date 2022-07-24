@@ -10,7 +10,7 @@ export const Container = styled.div`
   border-radius: 8px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 
   div {
     > button {
@@ -24,6 +24,7 @@ export const Container = styled.div`
       font-size: 1.05rem;
       font-weight: 600;
       min-width: 100px;
+      margin: 15px 0px 15px 0px;
     }
 
     > button:not(:first-child) {
@@ -55,6 +56,7 @@ export const Container = styled.div`
       strong {
         color: #c27c2c;
         font-size: 17px;
+        margin: 10px 0px 10px 0px;
       }
 
       span {

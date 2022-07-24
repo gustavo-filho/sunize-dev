@@ -143,8 +143,8 @@ export function CurrentBalance(): JSX.Element {
           name="row-radio-buttons-group"
           defaultValue="false"
         >
-          <FormControlLabel value="true" control={<Radio style={{ color: '#818181' }} />} label={<Typography style={{ marginTop: '35px' }}>Sim</Typography>} />
-          <FormControlLabel value="false" control={<Radio style={{ color: '#818181' }} />} label={<Typography style={{ marginTop: '35px' }}>Não</Typography>} />
+          <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="true" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Sim</Typography>} />
+          <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="false" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Não</Typography>} />
         </RadioGroup>
       </FormControl>
     )

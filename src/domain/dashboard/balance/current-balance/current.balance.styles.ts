@@ -12,15 +12,16 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 38px;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    padding-top: 32px;
   }
 
   > h3 {
     color: #818181;
-    margin: 72px 0 32px 0;
+    margin: 50px 0 32px 0;
     text-align: center;
     max-width: 1100px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   > p {
@@ -29,7 +30,7 @@ export const Container = styled.div`
     color: #818181;
     margin-top: 10px;
     margin-bottom: 3rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   .balance {
@@ -39,9 +40,10 @@ export const Container = styled.div`
     transform: translateX(-20px);
     animation: animeLeft 0.3s forwards;
     z-index: 1;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     width: 100%;
     max-width: 1100px;
+    height: 100px;
   }
   @keyframes animeLeft {
     to {
@@ -131,7 +133,7 @@ export const Container = styled.div`
 
       color: #818181;
       line-height: 1.5rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
   }
 
@@ -140,6 +142,7 @@ export const Container = styled.div`
   @media (max-width: 900px) {
     .balance {
       width: 100%;
+      height: 100%;
     }
 
     .contentBalance {

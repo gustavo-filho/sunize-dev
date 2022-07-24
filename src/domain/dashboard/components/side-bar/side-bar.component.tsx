@@ -69,13 +69,6 @@ export const SideBar = () => {
           >
             Registro de vendas
           </MenuItem>
-          <MenuItem
-            icon={<MdPayments />}
-            onClick={() => history.push(DASHBOARD_ROUTES.PURCHASE_RECORD)}
-            active={pathname === DASHBOARD_ROUTES.PURCHASE_RECORD}
-          >
-            Registro de compras
-          </MenuItem>
         </SubMenu>
         <MenuItem
           icon={<MdGroups />}
@@ -94,7 +87,7 @@ export const SideBar = () => {
         <MenuItem
           icon={<AiFillBank />}
           onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
-          active={pathname === DASHBOARD_ROUTES.BALANCE}
+          active={pathname === DASHBOARD_ROUTES.BALANCE || pathname === DASHBOARD_ROUTES.EXTRACT_BALANCE}
         >
           Saldo
         </MenuItem>

@@ -15,6 +15,12 @@ export const Container = styled.div`
   display: inline-block;
   flex-wrap: wrap;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    margin: 20px auto 4.5rem auto;
+  }
+  @media (max-width: 500px) {
+    margin: 20px auto 4.5rem auto;
+  }
   :hover {
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -69,6 +75,7 @@ export const CardInformation = styled.div`
     margin-top: 8px;
     margin-bottom: 16px;
     font-size: 14.6px;
+    font-weight: bold;
   }
   small {
     margin-left: 8px;
@@ -144,7 +151,7 @@ export const ContentModal = styled.div`
     }
   }
   h1 {
-    margin-top: 32px;
+    margin-top: 60px;
   }
   h4 {
     font-size: 17px;
@@ -167,6 +174,12 @@ export const ContentModal = styled.div`
     > div {
       display: flex;
       flex: 0.3 0 300px;
+      @media (max-width: 768px) {
+        flex: 0.3 0 100px;
+      }
+      @media (max-width: 500px) {
+        flex: 0.3 0 100px;
+      }
       flex-direction: column;
       align-items: flex-start;
       p {
@@ -178,9 +191,9 @@ export const ContentModal = styled.div`
       button,
       a {
         width: 100%;
-        max-width: 285px;
         height: 42px;
         border-radius: 4px;
+        max-width: 310px;
         color: #f5f5f5;
         border: 0;
         cursor: pointer;
@@ -225,7 +238,6 @@ export const ContentModal = styled.div`
     }
   }
   @media (max-width: 500px) {
-    height: 85vh;
     h3 {
       position: fixed;
       top: 5px;
@@ -238,8 +250,8 @@ export const CloseButton = styled.button`
   font-size: 0;
   cursor: pointer;
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 10px;
   color: #c27c2c;
   background-color: rgba(255, 144, 0, 0.2);
   padding: 0.3rem;
@@ -264,6 +276,12 @@ export const Divisor = styled.div`
   flex-direction: column;
   p {
     word-break: break-all;
+    @media (max-width: 768px) {
+      max-width: 300px;
+    }
+    @media (max-width: 500px) {
+      max-width: 300px;
+    }
   }
   h1 {
     color: #0e1943;
@@ -288,4 +306,5 @@ export const DepositionsContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+  margin-bottom: 50px;
 `

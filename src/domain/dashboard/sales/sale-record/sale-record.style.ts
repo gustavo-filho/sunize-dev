@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import { makeStyles } from '@mui/styles';
+
+export const useStyles = makeStyles({
+  tableRow: {
+    borderBottom: '1px solid #61616e !important',
+    '& .MuiTableCell-root': {
+      borderBottom: 'none'
+    }
+  },
+});
+
 
 export const Center = styled.div`
   display: flex;
@@ -54,26 +65,20 @@ export const Container = styled.div`
   padding: 0 6%;
 
   > h2 {
-    font-family: 'Poppins', sans-serif;
-    color: #bcbcc2;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    margin-top: 32px;
-    font-weight: 300;
+    margin-bottom: 32px;
+    font-weight: 200;
     font-size: 28px;
-    line-height: 38px;
+    line-height: 27px;
+    color: #ffffff;
+    font-family: 'Poppins',sans-serif;
   }
 
   > p {
-    font-family: 'Poppins', sans-serif;
-    margin: 16px 0 32px 0;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
     font-size: 20px;
-    line-height: 27px;
+    font-weight: 400;
     color: #818181;
+    font-family: 'Poppins',sans-serif;
+    margin-bottom: 50px;
   }
 
   > a {
@@ -96,8 +101,9 @@ export const Container = styled.div`
   h3 {
     display: inline-block;
     width: 100%;
-    text-align: center;
-    margin: 16px 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 16px 14px;
     font-size: 20px;
     color: #bcbcc2;
   }
@@ -188,10 +194,8 @@ export const HeadInfo = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  width: 95%;
   overflow-x: auto;
   overflow-y: hidden;
-  margin: 32px auto;
 
   table {
     padding-top: 32px;
@@ -282,7 +286,6 @@ export const Options = styled.td`
   li {
     cursor: pointer;
     list-style-type: none;
-    padding: 5px;
     transition: background-color 0.2s ease;
 
     &:hover {
