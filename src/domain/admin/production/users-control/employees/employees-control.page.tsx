@@ -13,11 +13,9 @@ import { useAppSelector } from '../../../../../store/hooks';
 import {
   AnimationContainer,
   BoxWrapper,
-  Container,
-  LinkTabEmployees,
-  LinkTab,
+  Container, LinkTab,
   PaginationContainer,
-  Statistics,
+  Statistics
 } from '../../production.styles';
 
 export const EmployeesControl = () => {
@@ -74,10 +72,10 @@ export const EmployeesControl = () => {
         </Statistics>
 
         <div className="links">
-          <LinkTabEmployees to={ADMIN_ROUTES.USERS_CONTROL}>Usuários</LinkTabEmployees>
-          <LinkTabEmployees active to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>
+          <LinkTab to={ADMIN_ROUTES.USERS_CONTROL}>Usuários</LinkTab>
+          <LinkTab active to={ADMIN_ROUTES.EMPLOYEES_CONTROL}>
             Funcionários
-          </LinkTabEmployees>
+          </LinkTab>
         </div>
         <BoxWrapper>
           {users ? (
