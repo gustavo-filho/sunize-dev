@@ -6,6 +6,7 @@ import { PrivateRouteWrapper } from './private-route.wrapper';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { PaymentProvider } from '@domain/dashboard/paymet/utils/usePaymet.component';
 import { Payment } from '@domain/dashboard/paymet/paymet.component';
+import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
 
 export const Routes = () => (
@@ -20,6 +21,7 @@ export const Routes = () => (
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.SUPPORT} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.BALANCE} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.MARKET} />
+      <PrivateRouteWrapper isAdmin path={ADMIN_ROUTES.ADMIN} />
       <Route
         path="/payment/:productId"
         component={() => (

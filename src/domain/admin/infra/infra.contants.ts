@@ -1,0 +1,11 @@
+export enum BY_SUBSCRIPTION_TYPE {
+  CPU = 'CPU',
+  MEMORY = 'MEMORY',
+  DOWNTIME = 'DOWNTIME',
+}
+
+export enum TRAFFIC_BY_TIME_DATA {
+  TODAY = 'TODAY',
+  DAILY = 'DAILY',
+  MONTHLY = 'MONTHLY',
+}

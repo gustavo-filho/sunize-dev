@@ -6,13 +6,16 @@ import Cookies from 'js-cookie';
 import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
 import { DashboardWrapper } from '@domain/dashboard/components/dashboard-wrapper/dashboard.wrapper';
+import { AdminWrapper } from '@domain/admin/components/admin-wrapper/admin.wrapper';
 
 interface PrivateRouteWrapperProps {
   path: string;
+  isAdmin?: boolean;
 }
 
 export const PrivateRouteWrapper = ({
   path,
+  isAdmin = false,
   ...rest
 }: PrivateRouteWrapperProps) => {
   const user = useAppSelector(userSelector);
@@ -32,6 +35,10 @@ export const PrivateRouteWrapper = ({
     if (!hasPermission) {
       history.push('/login');
     }
+
+    if (isAdmin && userData.account_type !== 'ADMIN') {
+      history.push('/login');
+    }
   } else {
     history.push('/login');
   }
@@ -48,10 +55,10 @@ export const PrivateRouteWrapper = ({
     fetchData();
   }, [fetchData]);
   useEffect(() => {
-    if(user.data.name === ''){
-      history.push('/login')
+    if (user.data.name === '') {
+      history.push('/login');
     }
-  }, [history, user.data])
+  }, [history, user.data]);
 
-  return <Route exact {...rest} path={path} component={DashboardWrapper} />;
+  return <Route exact {...rest} path={path} component={isAdmin ? AdminWrapper : DashboardWrapper} />;
 };

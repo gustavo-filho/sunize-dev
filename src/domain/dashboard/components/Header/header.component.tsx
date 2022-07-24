@@ -8,7 +8,7 @@ import {
 import { Notifications } from '@domain/dashboard/components/Notifications/notifications.component';
 import Logo from '@shared/assets/images/LogoLetter.png';
 import { useMedia } from '@shared/hooks/useMedia';
-import { FaCaretDown, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Button } from '@mui/material';
 import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
@@ -80,6 +80,19 @@ export const Header = () => {
           {isOpenBoxInfo && (
             <BoxInfo>
               <ul>
+                {user.data.account_type === 'ADMIN' && (
+                  <li onClick={() => setIsOpenBoxInfo(false)}>
+                    <Button
+                      variant="text"
+                      onClick={() => history.push('/admin')}
+                    >
+                      <span>
+                        <FaHome />
+                        Admin
+                      </span>
+                    </Button>
+                  </li>
+                )}
                 <li onClick={() => setIsOpenBoxInfo(false)}>
                   <Button
                     variant="text"

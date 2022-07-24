@@ -35,5 +35,6 @@ export const Content = styled.div<ContentProps>`
     padding-left: 6px;
     background-color: #1e1f32;
     border: 0;
+    color: white;
   }
 `;

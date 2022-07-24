@@ -18,7 +18,10 @@ import {
 } from './footer.styles';
 import { NavigateToComponent } from '@domain/landing/utils/navigateToComponent';
 
+
+
 export const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <Container>
       <FooterContainer>
@@ -77,7 +80,7 @@ export const Footer = () => {
         </NavContainer>
       </FooterContainer>
       <Credits>
-        &copy; Sunize 2021, Todos os direitos reservados.
+        &copy; Sunize {currentYear}, Todos os direitos reservados.
         <nav>
           <a href="/">Termos de Uso</a> |{' '}
           <a href="/">Politica de privacidade</a>
