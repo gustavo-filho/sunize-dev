@@ -11,7 +11,6 @@ interface HeaderProps {
 export const Container = styled.div<Props>`
   background-color: ${(p) => p.bgColor};
   min-height: 100vh;
-  margin-top: ${(p) => p.header};
   p,
   span,
   h1,

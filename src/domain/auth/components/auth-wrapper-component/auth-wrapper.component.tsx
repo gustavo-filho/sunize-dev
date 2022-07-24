@@ -8,6 +8,7 @@ import {
   LoginSection,
   Footer,
 } from './auth-wrapper.styles';
+import format from 'date-fns/format';
 import { AnimationContainer } from '@shared/components/AnimationContainer/animation-container.component';
 
 import LogoB from '@shared/assets/images/logob.png';
@@ -19,6 +20,7 @@ export const AuthWrapperComponent = ({
   firstAction,
   secondAction,
 }: AuthWrapperProps) => {
+  const currentDate = format(new Date(), 'yyyy');
   return (
     <>
       <LoginSection>
@@ -39,7 +41,7 @@ export const AuthWrapperComponent = ({
 
           <Footer>
             <span>Termos de uso - Políticas de privacidade</span>
-            Sunize 2021 - Todos os Direitos Reservados
+            Sunize {currentDate} - Todos os Direitos Reservados
           </Footer>
         </AnimationContainer>
       </LoginSection>

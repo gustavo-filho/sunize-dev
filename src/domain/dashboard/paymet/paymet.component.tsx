@@ -198,7 +198,7 @@ export function Payment() {
                 <div className="product-unavailable">
                     <img src={sunizeLogo} alt="Sunize" />
                     <h2>Este produto não está disponível no momento.</h2>
-                    <Link to="/dashboard">Voltar para a Dashboard</Link>
+                    <Link to="/">Voltar para a página inicial</Link>
                 </div>
             )}
         </Container>
