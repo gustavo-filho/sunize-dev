@@ -6,7 +6,10 @@ import {
   MainContent,
   RightButton,
 } from '@domain/admin/admin.styles';
-import { ChartCardGreen, ChartCardRed, ChartCardYellow } from '@domain/admin/components/chart-card/chart-card.component';
+import {
+  ChartCardRed,
+  ChartCardYellow,
+} from '@domain/admin/components/chart-card/chart-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';

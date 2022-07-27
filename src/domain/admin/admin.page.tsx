@@ -18,9 +18,9 @@ import {
   RightButton,
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
-import { ChartCardGreen, ChartCardRed, ChartCardYellow } from '@domain/admin/components/chart-card/chart-card.component';
+import { ChartCardGreen } from '@domain/admin/components/chart-card/chart-card.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
-import { ResumeCardGreen, ResumeCardRed, ResumeCardYellow } from '@domain/dashboard/components/resume-card/resume-card.component';
+import { ResumeCardGreen } from '@domain/dashboard/components/resume-card/resume-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
@@ -62,7 +62,10 @@ export const Admin = () => {
       >
         <ResumeCardGreen icon={<AiOutlineRise />} label="Total de vendas" />
         <ResumeCardGreen icon={<AiOutlineUser />} label="Usuários ativos" />
-        <ResumeCardGreen icon={<AiOutlineAppstore />} label="Produtos cadastrados" />
+        <ResumeCardGreen
+          icon={<AiOutlineAppstore />}
+          label="Produtos cadastrados"
+        />
         <ResumeCardGreen icon={<AiOutlineDollarCircle />} label="Lucro geral" />
       </Box>
       <CardTitle>Análise gráfica</CardTitle>

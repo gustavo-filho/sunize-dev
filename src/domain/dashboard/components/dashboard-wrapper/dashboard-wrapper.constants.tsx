@@ -18,6 +18,7 @@ import { CreateProductWrapper } from '@domain/dashboard/products/create-product-
 import { CreatePackage } from '@domain/dashboard/products/create-package/create-package.page';
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
+import { VideoClass } from '@domain/dashboard/products/video-class/video-class.page';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -28,7 +29,8 @@ export const DASHBOARD_ROUTES = {
   CREATE_COURSE: '/dashboard/create/course',
   CREATE_PACKAGE: '/dashboard/create/package',
   MY_CONTENT: '/dashboard/my-content',
-  MY_PACKAGES: '/dashboard/my-packages',
+  MY_PACKAGES: '/dashboard/my-content/my-packages',
+  VIDEO_CLASS: '/dashboard/my-content/my-packages/my-class',
   PRODUCT_OF_AFFILIATES: '/dashboard/products-affiliates',
   SALE_RECORD: '/dashboard/registro-de-vendas',
   AFFILIATES: '/dashboard/afiliados',
@@ -72,6 +74,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
     [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
     [DASHBOARD_ROUTES.PAYMENT]: <Payment />,
+    [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
   };
 
   return <>{components[route]}</>;

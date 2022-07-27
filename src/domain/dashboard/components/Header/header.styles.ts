@@ -22,6 +22,7 @@ export const LogoAndBars = styled.div`
   }
 
   img {
+    padding-right: 30px;
     width: 200px;
   }
 

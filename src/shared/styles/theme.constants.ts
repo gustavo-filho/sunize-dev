@@ -5,5 +5,6 @@ export const theme = {
     darkBlueBackground: '#1F1F2B',
     mediumBlueBackground: '#27293D',
     textGray: '#87888B',
+    success: '#5cb85c',
   },
 };

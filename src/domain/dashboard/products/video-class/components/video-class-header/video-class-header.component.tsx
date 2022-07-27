@@ -1,41 +1,34 @@
-import { useEffect, useState } from 'react';
+import { Container } from './video-class-header.styles';
+import Hamburger from 'hamburger-react';
 import {
-  Container,
-  UserInfo,
   BoxInfo,
   LogoAndBars,
+  UserInfo,
 } from '@domain/dashboard/components/Header/header.styles';
-import { Notifications } from '@domain/dashboard/components/Notifications/notifications.component';
 import Logo from '@shared/assets/images/LogoLetter.png';
-import { useMedia } from '@shared/hooks/useMedia';
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Notifications } from '@domain/dashboard/components/Notifications/notifications.component';
+import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
 import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Button } from '@mui/material';
-import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { MdDashboard } from 'react-icons/md';
 import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
-import { useHistory, useLocation } from 'react-router-dom';
-import Hamburger from 'hamburger-react';
+import { useMedia } from '@shared/hooks/useMedia';
+import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
 import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
-import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
-import { MdDashboard } from 'react-icons/md';
-import { shouldShowSideBar } from '@domain/dashboard/products/my-content/my-content.utils';
 
-export const Header = () => {
+export const VideoClassHeader = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
   const mobile = useMedia('(max-width: 700px)');
   const user = useAppSelector(userSelector);
   const sidebar = useAppSelector(sideBarSelector);
-  const { pathname } = useLocation();
 
   const history = useHistory();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
-  }, [dispatch, user.data.id]);
 
   return (
     <Container>
@@ -44,22 +37,20 @@ export const Header = () => {
           display: 'flex',
           alignItems: 'center',
           padding: '0 20px',
+          width: '280px',
         }}
       >
-        {shouldShowSideBar(pathname) && (
-          <Hamburger
-            color={'#ffffff'}
-            toggled={sidebar.isOpen}
-            onToggle={() => {
-              dispatch(TOGGLE_SIDE_BAR());
-            }}
-          />
-        )}
-
-        <LogoAndBars>
-          <img src={Logo} alt="Sunize" />
-        </LogoAndBars>
+        <Hamburger
+          color={'#ffffff'}
+          toggled={sidebar.isOpen}
+          onToggle={() => {
+            dispatch(TOGGLE_SIDE_BAR());
+          }}
+        />
       </div>
+      <LogoAndBars>
+        <img src={Logo} alt="Sunize" />
+      </LogoAndBars>
 
       <UserInfo>
         <Notifications />

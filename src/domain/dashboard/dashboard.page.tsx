@@ -16,7 +16,6 @@ import {
   AiOutlineUpload,
   AiOutlineAppstore,
   AiOutlineRise,
-  AiOutlineUser,
   AiOutlineWarning,
 } from 'react-icons/ai';
 import { TbFileInvoice } from 'react-icons/tb';
@@ -25,8 +24,11 @@ import { CardContent } from '@domain/dashboard/components/card-content/card-cont
 import { Box } from '@mui/material';
 import { Chart } from '@domain/dashboard/components/chart/chart.component';
 import { DASHBOARD_MOCK } from '@domain/dashboard/dashboard.mock';
-import { ResumeCardYellow, ResumeCardRed, ResumeCardGreen } from '@domain/dashboard/components/resume-card/resume-card.component';
-import { BsCreditCard } from 'react-icons/bs';
+import {
+  ResumeCardYellow,
+  ResumeCardRed,
+  ResumeCardGreen,
+} from '@domain/dashboard/components/resume-card/resume-card.component';
 import { useMedia } from '@shared/hooks/useMedia';
 
 export const Dashboard = () => {
@@ -113,8 +115,14 @@ export const Dashboard = () => {
         }}
       >
         <ResumeCardYellow icon={<TbFileInvoice />} label="Checkouts abertos" />
-        <ResumeCardGreen icon={<AiOutlineFileDone />} label="Checkouts concluidos" />
-        <ResumeCardRed icon={<AiOutlineFileExcel />} label="Checkouts cancelados" />
+        <ResumeCardGreen
+          icon={<AiOutlineFileDone />}
+          label="Checkouts concluidos"
+        />
+        <ResumeCardRed
+          icon={<AiOutlineFileExcel />}
+          label="Checkouts cancelados"
+        />
       </Box>
       <CardTitle>Cartão de Crédito</CardTitle>
       <Box

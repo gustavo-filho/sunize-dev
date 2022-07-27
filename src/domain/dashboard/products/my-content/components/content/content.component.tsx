@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom';
 import { useStyles } from '@domain/dashboard/products/my-content/components/content/content.styles';
 
 interface ContentProps {
-  title: string;
   image: string;
-  description: string;
 }
 
-export const Content = ({
-  title,
-  image,
-  description,
-  ...rest
-}: ContentProps) => {
+export const Content = ({ image, ...rest }: ContentProps) => {
   const classes = useStyles();
   return (
     <Link
@@ -22,8 +15,6 @@ export const Content = ({
       {...rest}
     >
       <img alt={'imagem do ebook'} src={image} />
-      <p className={'title'}>{title}</p>
-      <p>{description}</p>
     </Link>
   );
 };

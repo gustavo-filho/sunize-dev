@@ -11,12 +11,7 @@ import {
   AiOutlineShoppingCart,
 } from 'react-icons/ai';
 import { FiBox } from 'react-icons/fi';
-import {
-  MdGroup,
-  MdGroups,
-  MdOutlineCreateNewFolder,
-  MdPayments,
-} from 'react-icons/md';
+import { MdGroup, MdGroups, MdOutlineCreateNewFolder } from 'react-icons/md';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { useAppSelector } from '../../../../store/hooks';
@@ -62,18 +57,6 @@ export const SideBar = () => {
           </MenuItem>
         </SubMenu>
 
-        {/*ANTIGO MENU DE VENDAS COM SUBMENU
-
-        <SubMenu title="Vendas" icon={<AiOutlineShoppingCart />}>
-          <MenuItem
-            icon={<MdPayments />}
-            onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
-            active={pathname === DASHBOARD_ROUTES.SALE_RECORD}
-          >
-            Registro de Vendas
-          </MenuItem>
-        </SubMenu>*/}
-
         <MenuItem
           icon={<AiOutlineShoppingCart />}
           onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
@@ -82,7 +65,6 @@ export const SideBar = () => {
           Vendas
         </MenuItem>
 
-
         <MenuItem
           icon={<MdGroups />}
           onClick={() => history.push(DASHBOARD_ROUTES.AFFILIATES)}
@@ -90,7 +72,7 @@ export const SideBar = () => {
         >
           Afiliados
         </MenuItem>
-        
+
         <MenuItem
           icon={<AiFillShop />}
           onClick={() => history.push(DASHBOARD_ROUTES.MARKET)}
@@ -101,7 +83,10 @@ export const SideBar = () => {
         <MenuItem
           icon={<AiFillBank />}
           onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
-          active={pathname === DASHBOARD_ROUTES.BALANCE || pathname === DASHBOARD_ROUTES.EXTRACT_BALANCE}
+          active={
+            pathname === DASHBOARD_ROUTES.BALANCE ||
+            pathname === DASHBOARD_ROUTES.EXTRACT_BALANCE
+          }
         >
           Saldo
         </MenuItem>
