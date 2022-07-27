@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import './loading-page-fonts.css'
 
 const theme = createTheme({
     breakpoints: {
@@ -16,36 +17,31 @@ const theme = createTheme({
 export const useStyles = makeStyles(() => ({
     root: {
         height: '100vh',
-        background: 'linear-gradient(180deg, #0D1C54 0%, #112367 40.26%, #192963 60.65%, #112363 82.39%, #0D1C54 100%)'
+        background: '#0e1943'
     },
     imgLogo: {
         [theme.breakpoints.up('xs')]: {
             width: '200px',
-            height: '100px',
             marginTop: '60px',
-            marginLeft: '25px'
+            marginLeft: '80px'
         },
         [theme.breakpoints.up('sm')]: {
-            idth: '200px',
-            height: '100px',
+            width: '300px',
             marginTop: '130px',
-            marginLeft: '25px'
+            marginLeft: '30px'
         },
         [theme.breakpoints.up('md')]: {
-            width: '296px',
-            height: '137px',
+            width: '300px',
             marginTop: '130px',
             marginLeft: '30px'
         },
         [theme.breakpoints.up('lg')]: {
             width: '485px',
-            height: '175px',
             marginTop: '130px',
             marginLeft: '90px'
         },
         [theme.breakpoints.up('xl')]: {
             width: '485px',
-            height: '175px',
             marginTop: '130px',
             marginLeft: '90px'
         },

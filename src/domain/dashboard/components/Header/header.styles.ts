@@ -28,13 +28,13 @@ export const LogoAndBars = styled.div`
 
   @media (max-width: 500px) {
     > img {
-      width: 115px;
+      width: 125px;
     }
   }
 
   @media (max-width: 350px) {
     > img {
-      max-width: 100px;
+      width: 0px;
     }
   }
 `;

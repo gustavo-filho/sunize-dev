@@ -18,10 +18,10 @@ export function LoadingPage(): JSX.Element {
                         Estamos preparando o seu ambiente...
                     </p>
 
-                    <Link className={loadingStyles.linkText}
+                    {/*<Link className={loadingStyles.linkText}
                         to='/dashboard'>
                         Voltar para pagina inicial
-                    </Link>
+                    </Link>*/}
                 </div>
 
                 <div className={loadingStyles.divImageRight}>

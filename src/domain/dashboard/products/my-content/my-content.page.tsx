@@ -35,12 +35,12 @@ export const MyContent = () => {
   return (
     <div className={classes.container}>
       <div className={classes.main}>
-        <h2 className={classes.title} style={{ fontSize: '2rem' }}>
+        {/*<h2 className={classes.title} style={{ fontSize: '2rem' }}>
           PAINEL DO ALUNO
-        </h2>
+          </h2>*/}
         <div className={classes.mainContent}>
-          <h2 className={classes.title} style={{ width: '100%' }}>
-            Meus produtos
+          <h2 className={classes.title} style={{ fontSize: '2rem', width: '100%' }}>
+            Meus Produtos
           </h2>
           <Carousel
             responsive={responsive}
@@ -60,8 +60,8 @@ export const MyContent = () => {
           </Carousel>
         </div>
         <div className={classes.mainContent}>
-          <h2 className={classes.title} style={{ width: '100%' }}>
-            Meus pacotes
+          <h2 className={classes.title} style={{ fontSize: '2rem', width: '100%' }}>
+            Meus Pacotes
           </h2>
           <Carousel
             responsive={responsive}
