@@ -14,25 +14,37 @@ import {
   Container,
   LinkTab,
   PaginationContainer,
-  Statistics
+  Statistics,
 } from '../../production.styles';
 import { UserBox } from '../components/user-box/user-box.component';
 
 export const UsersControl = () => {
-  const [page, setPage] = useState(0);
-  const totalPages = 3;
-  
   const user = useAppSelector(userSelector);
   const [users, setUsers] = useState<null | []>(null);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [filter, setFilter] = useState('');
 
   const getUsers = useCallback(async () => {
-    const response = await api.get(`admin/${user.data.id}/users`);
+    const response = await api.get(`admin/${user.data.id}/users`, {
+      params: {
+        page,
+        paginate: 6,
+        filter,
+      },
+    });
     const data = response.data;
     if (data.success) {
-      return setUsers(data.data);
+      setUsers(data.data);
+
+      if (data.currentPage !== page) setPage(data.currentPage);
+      if (data.totalItems !== totalUsers) setTotalUsers(data.totalItems);
+      if (data.totalPages !== totalPages) setTotalPages(data.totalPages);
+      return;
     }
     toast.error('Houve um erro ao carregar os usuários');
-  }, [user]);
+  }, [user, totalUsers, page, totalPages, filter]);
 
   useEffect(() => {
     getUsers();
@@ -46,18 +58,22 @@ export const UsersControl = () => {
 
         <Statistics>
           <strong>
-            <b>{users?.length}</b> usuários ativos
+            <b>{totalUsers}</b> usuários ativos
           </strong>
 
           <div>
             <Formik
               initialValues={{ search: '' }}
-              onSubmit={values => {}}
-              render={() => (
+              onSubmit={values => {
+                setFilter(values.search);
+              }}
+              render={({ handleChange, values }) => (
                 <Form>
                   <FormGroup>
                     <InputSearch
                       name="search"
+                      onChange={handleChange}
+                      value={values.search}
                       placeholder="Pesquisar usuário"
                     />
 

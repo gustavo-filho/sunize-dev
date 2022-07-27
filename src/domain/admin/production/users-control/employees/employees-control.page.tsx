@@ -13,28 +13,40 @@ import { useAppSelector } from '../../../../../store/hooks';
 import {
   AnimationContainer,
   BoxWrapper,
-  Container, LinkTab,
+  Container,
+  LinkTab,
   PaginationContainer,
-  Statistics
+  Statistics,
 } from '../../production.styles';
 
 export const EmployeesControl = () => {
-  const [page, setPage] = useState(0);
-  const totalPages = 3;
   const user = useAppSelector(userSelector);
-
   const [users, setUsers] = useState<null | []>(null);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [filter, setFilter] = useState('');
 
   const getUsers = useCallback(async () => {
-    const response = await api.get(`admin/${user.data.id}/users`);
+    const response = await api.get(`admin/${user.data.id}/users`, {
+      params: {
+        page,
+        paginate: 6,
+        employee: true,
+        filter,
+      },
+    });
     const data = response.data;
     if (data.success) {
-      return setUsers(
-        data.data.filter((user: any) => user.account_type !== 'USER'),
-      );
+      setUsers(data.data);
+
+      if (data.currentPage !== page) setPage(data.currentPage);
+      if (data.totalItems !== totalUsers) setTotalUsers(data.totalItems);
+      if (data.totalPages !== totalPages) setTotalPages(data.totalPages);
+      return;
     }
     toast.error('Houve um erro ao carregar os usuários');
-  }, [user]);
+  }, [user, totalUsers, page, totalPages, filter]);
 
   useEffect(() => {
     getUsers();
@@ -48,22 +60,24 @@ export const EmployeesControl = () => {
 
         <Statistics>
           <strong>
-            <b>{users?.length}</b> funcionários ativos
+            <b>{totalUsers}</b> funcionários ativos
           </strong>
 
           <div>
             <Formik
               initialValues={{ search: '' }}
-              onSubmit={values => {}}
-              render={() => (
+              onSubmit={values => {
+                setFilter(values.search);
+              }}
+              render={({ handleChange, values }) => (
                 <Form>
                   <FormGroup>
                     <InputSearch
                       name="search"
+                      onChange={handleChange}
+                      value={values.search}
                       placeholder="Pesquisar usuário"
                     />
-
-                    {/* <FilterButton /> */}
                   </FormGroup>
                 </Form>
               )}
