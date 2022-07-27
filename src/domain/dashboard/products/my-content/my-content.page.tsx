@@ -1,6 +1,7 @@
 import { useStyles } from '@domain/dashboard/products/my-content/my-content.styles';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import './my-content.styles.css';
 import { Content } from '@domain/dashboard/products/my-content/components/content/content.component';
 
 export const MyContent = () => {
@@ -38,44 +39,42 @@ export const MyContent = () => {
           PAINEL DO ALUNO
         </h2>
         <div className={classes.mainContent}>
-          <h2
-            className={classes.title}
-            style={{ width: '100%', marginLeft: '1.8rem' }}
-          >
+          <h2 className={classes.title} style={{ width: '100%' }}>
             Meus produtos
           </h2>
-          <Carousel responsive={responsive} centerMode={true}>
-            {Array(7)
+          <Carousel
+            responsive={responsive}
+            centerMode={true}
+            sliderClass={'react-multi-carousel-track'}
+          >
+            {Array(12)
               .fill(product)
               .map(el => (
                 <Content
                   key={el.title}
-                  title={'Um título'}
-                  description={'Uma descrição'}
                   image={
-                    'https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+                    'https://cdn.cademi.com.br/cache/bkJT4aMHHwr9isatDfIpbHKsJH6iJgHDsUPJAFdk-550x550-resized.jpg'
                   }
                 />
               ))}
           </Carousel>
         </div>
         <div className={classes.mainContent}>
-          <h2
-            className={classes.title}
-            style={{ width: '100%', marginLeft: '1.8rem' }}
-          >
+          <h2 className={classes.title} style={{ width: '100%' }}>
             Meus pacotes
           </h2>
-          <Carousel responsive={responsive} centerMode={true}>
+          <Carousel
+            responsive={responsive}
+            centerMode={true}
+            sliderClass={'react-multi-carousel-track'}
+          >
             {Array(3)
               .fill(product)
               .map(el => (
                 <Content
                   key={el.title}
-                  title={'Um título'}
-                  description={'Uma descrição'}
                   image={
-                    'https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+                    'https://cdn.cademi.com.br/cache/Babrpv1we3fU0xKUOS9lXpvZar3usmnDx7DWG2kz-550x550-resized.jpg'
                   }
                   {...{ style: { filter: 'grayscale(1)' } }}
                 />

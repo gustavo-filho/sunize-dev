@@ -8,14 +8,17 @@ import {
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
-import { ResumeCardGreen, ResumeCardRed, ResumeCardYellow } from '@domain/admin/components/resume-card/resume-card.component';
+import {
+  ResumeCardGreen,
+  ResumeCardRed,
+  ResumeCardYellow,
+} from '@domain/admin/components/resume-card/resume-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
 import {
   AiOutlineAppstore,
   AiOutlineRise,
-  AiOutlineUser,
   AiOutlineWarning,
 } from 'react-icons/ai';
 import { RENEVUE_BY_TIME_DATA, SALES_BY_TIME_DATA } from './renevue.contants';

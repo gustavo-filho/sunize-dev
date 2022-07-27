@@ -4,7 +4,6 @@ import {
   Container,
   Meta,
   Overlay,
-  Options,
   Description,
   PaginationContainer,
   SellLink,
@@ -14,12 +13,7 @@ import { useAppDispatch } from '../../../../../../store/hooks';
 import { ASYNC_GET_CATEGORIES } from '@domain/dashboard/products/products.store';
 import { format, parseISO } from 'date-fns';
 import { api } from '@shared/services/api';
-import {
-  FaEllipsisH,
-  FaTimes,
-  FaTimesCircle,
-  FaUnlockAlt,
-} from 'react-icons/fa';
+import { FaTimes, FaUnlockAlt } from 'react-icons/fa';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
 import { AnimatePresence } from 'framer-motion';
 import { ModalConfirmation } from '@shared/components/modal-confirmation/modal-confirmation.component';
@@ -58,7 +52,6 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
   const [totalPages, setTotalPages] = useState(0);
   const [offset, setOffset] = useState(0);
 
-  const [isOptionsOpen, setIsOptionOpen] = useState(false);
   const [isModalConfirmationVisible, setIsModalConfirmationVisible] =
     useState(false);
 
@@ -148,8 +141,12 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
         <div>
           <button onClick={() => setLinkIsVisible(!linkVisible)}>Links</button>
           <button onClick={() => handleGetMeta()}>Metas</button>
-          <button className={"buttonAffiliate"} onClick={() => toggleConfirmModal()}>Cancelar Afiliação</button>
-
+          <button
+            className={'buttonAffiliate'}
+            onClick={() => toggleConfirmModal()}
+          >
+            Cancelar Afiliação
+          </button>
         </div>
         {/*
         <Options onClick={() => setIsOptionOpen(!isOptionsOpen)}>

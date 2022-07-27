@@ -1,5 +1,4 @@
 import { makeStyles } from '@mui/styles';
-import { theme } from '@shared/styles/theme.constants';
 
 export const useStyles = makeStyles({
   container: {
@@ -10,7 +9,7 @@ export const useStyles = makeStyles({
     paddingTop: '8rem',
   },
   main: {
-    width: '80%',
+    width: '90%',
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem',
@@ -21,14 +20,15 @@ export const useStyles = makeStyles({
   },
   mainContent: {
     width: '100%',
-    padding: '4rem',
     marginTop: '2rem',
-    background: theme.colors.mediumBlueBackground,
     borderRadius: '5px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
 
     gap: '2rem',
+  },
+  carousel: {
+    height: '250px',
   },
 });
