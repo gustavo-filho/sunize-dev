@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     color: 'white',
-    paddingTop: '8rem',
+    paddingTop: '2rem',
   },
   main: {
     width: '90%',

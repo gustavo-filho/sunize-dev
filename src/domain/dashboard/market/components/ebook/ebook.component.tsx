@@ -145,11 +145,11 @@ export function EBooks(): JSX.Element {
 
                     <Filter>
                         <ul>
-                            <li>
+                            {/*<li>
                                 <NavLink to="/dashboard/mercado/ebooks" activeClassName="active">
                                     <b>e-Books</b>
                                 </NavLink>
-                            </li>
+                            </li>*/}
                             <li>
                                 <NavLink to="/dashboard/mercado/cursos" activeClassName="active">
                                     <b>Cursos</b>

@@ -23,14 +23,14 @@ export const CreateProductWrapper = () => {
             <p className={'title'}>Curso Online</p>
             <p>Produza cursos incríveis na plataforma mais segura do mercado</p>
           </Link>
-          <Link
+          {/*<Link
             to={DASHBOARD_ROUTES.CREATE_COURSE}
             className={classes.contentBox}
           >
             <img alt={'imagem do ebook'} src={Ebook} />
             <p className={'title'}>e-Book</p>
             <p>Lance seu livro digital de forma simplificada</p>
-          </Link>
+          </Link>*/}
           <Link
             to={DASHBOARD_ROUTES.CREATE_PACKAGE}
             className={classes.contentBox}

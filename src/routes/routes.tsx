@@ -9,6 +9,7 @@ import { Payment } from '@domain/dashboard/paymet/paymet.component';
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
 import { LoadingPage } from '@domain/auth/register-user/loading-page/loading-page.index';
+import { RefundPage } from '@domain/refund/refund-page.index';
 
 export const Routes = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ export const Routes = () => (
       <Route path="/register" exact component={RegisterComponent} />
       <Route path="/forgot-pass" exact component={ForgotPassword} />
       <Route path="/loading" exact component={LoadingPage} />
+      <Route path="/refund" exact component={RefundPage} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
       <PrivateRouteWrapper path={DASHBOARD_ROUTES.SUPPORT} />
