@@ -32,7 +32,7 @@ export const Container = styled.section`
   width: 100%;
   max-width: 1220px;
   margin: 60px auto 0px auto;
-  padding: 4rem 2rem;
+  padding: 1rem 2rem;
   animation: animeTop 0.6s ease;
   position: relative;
   transition: top 1s ease;
@@ -52,7 +52,7 @@ export const Container = styled.section`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   > h2 {

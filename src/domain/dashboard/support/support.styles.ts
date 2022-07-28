@@ -11,7 +11,7 @@ export const Container = styled.div`
     font-weight: 200;
     font-size: 28px;
     line-height: 38px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: #ffffff;
   }
   > p {
@@ -34,7 +34,7 @@ export const Contact = styled.div`
   strong {
     display: block;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 22px;
     line-height: 38px;
     font-weight: 120;

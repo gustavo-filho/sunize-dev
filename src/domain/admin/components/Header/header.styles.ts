@@ -9,6 +9,7 @@ export const Container = styled.header`
   z-index: 102;
   position: fixed;
   width: 100%;
+  border-bottom: 2px solid #c37331;
   /* overflow: hidden; */
 `;
 

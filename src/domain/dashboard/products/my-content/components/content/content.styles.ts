@@ -8,13 +8,13 @@ export const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    transition: 'all 0.2s',
+    transition: 'all 0.35s',
     cursor: 'pointer',
 
     '&:hover': {
-      marginTop: '-10px',
+      marginTop: '-8px',
       boxShadow:
-        '4px 4px 8px rgba(0, 0, 0, 0.2), 0px 4px 8px rgba(0, 0, 0, 0.2)',
+        '0 0 13px #595959',
     },
     '& img': {
       height: '45vh',

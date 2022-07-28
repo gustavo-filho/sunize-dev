@@ -13,7 +13,8 @@ export const Container = styled.div`
     line-height: 38px;
     color: white;
     font-family: 'Nunito', sans-serif;
-    padding-top: 32px;
+    padding-top: 20px;
+    margin-bottom: 32px;
   }
 
   > h3 {
@@ -28,9 +29,8 @@ export const Container = styled.div`
     font-size: 20px;
     line-height: 27px;
     color: #818181;
-    margin-top: 10px;
-    margin-bottom: 3rem;
-    font-family: 'Nunito', sans-serif;
+    margin-bottom: 14px;
+    font-family: 'Poppins', sans-serif;
   }
 
   .balance {

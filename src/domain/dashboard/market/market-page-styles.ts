@@ -12,7 +12,7 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
   > p {
     font-size: 20px;

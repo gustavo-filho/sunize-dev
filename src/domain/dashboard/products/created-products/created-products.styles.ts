@@ -38,7 +38,7 @@ export const AnimationContainer = styled.div`
     font-weight: 200;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito',sans-serif;
   }
 
   > h2 {
