@@ -12,6 +12,7 @@ import { api } from '@shared/services/api'
 import { WrapperAuth } from './wrapper/wrapper-component.index'
 import { InputComponent } from './component/input-component/input-component'
 import { ButtonComponent } from './component/button-component/button-component.index'
+import { DefaultInput } from '@shared/components/DefaultInput/default-input.component'
 
 export function RegisterComponent(): JSX.Element {
     const [document, setDocument] = useState('')
@@ -96,9 +97,11 @@ export function RegisterComponent(): JSX.Element {
                             mode="dark"
                             name="password"
                             text="Senha *"
+                            handleShowPassword={true}
                             icon={KeyIcon}
                             placeholder="Digite sua senha"
                             type="password"
+                            onChange={(e) => setFieldValue('password', e.target.value)}
                         />
 
                         <ul className="passRequirement">

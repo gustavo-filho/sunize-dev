@@ -6,11 +6,14 @@ import { Container, Content, Error } from './input-styles'
 import { FiAlertCircle } from 'react-icons/fi'
 
 import { InputComponentData } from './interfaces/input-component-props.type'
+import { HandlePasswordButton } from '@shared/components/HandlePasswordButton/HandlePasswordButton'
 
 export function InputComponent({
     text,
     icon: Icon,
     mode = 'dark',
+    type,
+    handleShowPassword = false,
     ...props
 }: InputComponentData) {
     const [inputProps, meta] = useField<any>(props as any)
@@ -28,6 +31,13 @@ export function InputComponent({
             setFilled(!!inputMaskRef.current.props.value)
         }
     }, [])
+
+    const [typeInput, setTypeInput] = useState(type)
+
+    const handleChangeInputType = () => {
+        const newTypePassword = typeInput == 'password' ? 'text' : 'password';
+        setTypeInput(newTypePassword)
+    }
 
     return (
         <Content>
@@ -57,6 +67,7 @@ export function InputComponent({
                         />
                     ) : (
                         <input
+                            type={typeInput}
                             id={props.id || props.name}
                             {...inputProps}
                             {...props}
@@ -68,6 +79,10 @@ export function InputComponent({
                         <Error title={meta.error.toString()}>
                             <FiAlertCircle color="#ff5252" size={20} />
                         </Error>
+                    )}
+
+                    {!meta.error && handleShowPassword && (
+                        <HandlePasswordButton onClick={handleChangeInputType} typePassword={typeInput} id="handleShowPasswdBttn" />
                     )}
                 </Container>
             </div>

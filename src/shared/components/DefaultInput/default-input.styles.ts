@@ -13,6 +13,15 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
+
+  #handleShowPasswdBttn {
+    padding-left: 1.3rem;
+    background: none;
+    border: none;
+    width: 3rem;
+    padding-top: 0.5rem;
+    outline: none;
+  }
 `;
 
 export const Container = styled.div<ContainerProps>`
@@ -86,6 +95,7 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100%;
     font-size: 16px;
+    outline: none;
   }
 
   /* Cor de fundo do autocomplete */

@@ -1,6 +1,6 @@
 import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
 import { Formik } from 'formik';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { BiEnvelope } from 'react-icons/bi';
@@ -74,6 +74,7 @@ export const LoginPage = () => {
                 mode="dark"
                 name="password"
                 type="password"
+                handleShowPassword={true}
                 text="Senha *"
                 icon={KeyIcon}
                 placeholder="Digite sua senha"
