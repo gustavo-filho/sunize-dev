@@ -12,7 +12,7 @@ interface HandlePasswordButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const HandlePasswordButton = ({ typePassword, ...props } : HandlePasswordButton) => {
 
     return (
-        <Wrapper {...props} >
+        <Wrapper {...props} type="button" >
             {typePassword == 'password' ? <AiOutlineEye color="#FFF" fontSize="1.5rem"/> : <AiOutlineEyeInvisible color="#FFF" fontSize="1.5rem"/>}
         </Wrapper>
 
