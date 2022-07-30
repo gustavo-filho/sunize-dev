@@ -18,9 +18,9 @@ import {
   RightButton,
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
-import { ChartCardGreen } from '@domain/admin/components/chart-card/chart-card.component';
+import { ChartCard } from '@domain/admin/components/chart-card/chart-card.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
-import { ResumeCardGreen } from '@domain/dashboard/components/resume-card/resume-card.component';
+import { ResumeCard } from '@domain/admin/components/resume-card/resume-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
@@ -60,13 +60,26 @@ export const Admin = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCardGreen icon={<AiOutlineRise />} label="Total de vendas" />
-        <ResumeCardGreen icon={<AiOutlineUser />} label="Usuários ativos" />
-        <ResumeCardGreen
+        <ResumeCard
+          iconBackground="success"
+          icon={<AiOutlineRise />}
+          label="Total de vendas"
+        />
+        <ResumeCard
+          iconBackground="success"
+          icon={<AiOutlineUser />}
+          label="Usuários ativos"
+        />
+        <ResumeCard
+          iconBackground="success"
           icon={<AiOutlineAppstore />}
           label="Produtos cadastrados"
         />
-        <ResumeCardGreen icon={<AiOutlineDollarCircle />} label="Lucro geral" />
+        <ResumeCard
+          iconBackground="success"
+          icon={<AiOutlineDollarCircle />}
+          label="Lucro geral"
+        />
       </Box>
       <CardTitle>Análise gráfica</CardTitle>
       <Box
@@ -202,13 +215,15 @@ export const Admin = () => {
             alignItems: 'stretch',
           }}
         >
-          <ChartCardGreen
+          <ChartCard
+            iconBackground="success"
             color="#d58746"
             icon={<AiOutlineTeam />}
             data={ADMIN_SUBSCRIPTIONS_MOCK.USERS}
             label="Registros concluidos"
           />
-          <ChartCardGreen
+          <ChartCard
+            iconBackground="success"
             color="#87cefa"
             icon={<BsBoxSeam />}
             data={ADMIN_SUBSCRIPTIONS_MOCK.ORDERS}

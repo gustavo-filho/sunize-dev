@@ -1,24 +1,26 @@
-import { Box } from '@mui/material';
 import {
-  CardContent,
-  CardBody,
-  CircleIconYellow,
-  CircleIconRed,
-  CircleIconGreen,
-  Label,
+  CardBody, CardContent, CircleIcon, Label
 } from '@domain/admin/components/chart-card/chart-card.styles';
+import { LineCardChart } from '@domain/admin/components/chart-card/components/line-card-chart/line-card-chart.component';
+import { Box } from '@mui/material';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { ReactNode } from 'react';
-import { LineCardChart } from '@domain/admin/components/chart-card/components/line-card-chart/line-card-chart.component';
 
 interface ChartCardProps {
   icon: ReactNode;
   label: string;
   data: (number | string)[][];
   color: string;
+  iconBackground?: 'warning' | 'success' | 'error' | string;
 }
 
-export const ChartCardYellow = ({ color, data, icon, label }: ChartCardProps) => {
+export const ChartCard = ({
+  color,
+  data,
+  icon,
+  label,
+  iconBackground = 'warning',
+}: ChartCardProps) => {
   return (
     <CardContent>
       <CardBody>
@@ -29,49 +31,7 @@ export const ChartCardYellow = ({ color, data, icon, label }: ChartCardProps) =>
             alignItems: 'center',
           }}
         >
-          <CircleIconYellow>{icon}</CircleIconYellow>
-          <DotsLoader />
-        </Box>
-        <Label>{label}</Label>
-      </CardBody>
-      <LineCardChart color={color} data={data} />
-    </CardContent>
-  );
-};
-
-export const ChartCardGreen = ({ color, data, icon, label }: ChartCardProps) => {
-  return (
-    <CardContent>
-      <CardBody>
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <CircleIconGreen>{icon}</CircleIconGreen>
-          <DotsLoader />
-        </Box>
-        <Label>{label}</Label>
-      </CardBody>
-      <LineCardChart color={color} data={data} />
-    </CardContent>
-  );
-};
-
-export const ChartCardRed = ({ color, data, icon, label }: ChartCardProps) => {
-  return (
-    <CardContent>
-      <CardBody>
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <CircleIconRed>{icon}</CircleIconRed>
+          <CircleIcon bg={iconBackground}>{icon}</CircleIcon>
           <DotsLoader />
         </Box>
         <Label>{label}</Label>

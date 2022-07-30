@@ -8,11 +8,7 @@ import {
 } from '@domain/admin/admin.styles';
 import { CardContent } from '@domain/admin/components/card-content/card-content.component';
 import { LineChart } from '@domain/admin/components/charts/line-chart/line-chart.component';
-import {
-  ResumeCardGreen,
-  ResumeCardRed,
-  ResumeCardYellow,
-} from '@domain/admin/components/resume-card/resume-card.component';
+import { ResumeCard } from '@domain/admin/components/resume-card/resume-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
@@ -46,8 +42,16 @@ export const Renevue = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCardGreen icon={<AiOutlineRise />} label="Vendas" />
-        <ResumeCardRed icon={<AiOutlineWarning />} label="Reembolsado" />
+        <ResumeCard
+          iconBackground="success"
+          icon={<AiOutlineRise />}
+          label="Vendas"
+        />
+        <ResumeCard
+          iconBackground="error"
+          icon={<AiOutlineWarning />}
+          label="Reembolsado"
+        />
       </Box>
 
       <CardTitle>Receitas</CardTitle>
@@ -60,9 +64,17 @@ export const Renevue = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ResumeCardGreen icon={<AiOutlineRise />} label="Total de vendas" />
-        <ResumeCardRed icon={<AiOutlineWarning />} label="Reembolsado" />
-        <ResumeCardYellow icon={<AiOutlineAppstore />} label="% Reembolsados" />
+        <ResumeCard
+          iconBackground="success"
+          icon={<AiOutlineRise />}
+          label="Total de vendas"
+        />
+        <ResumeCard
+          iconBackground="error"
+          icon={<AiOutlineWarning />}
+          label="Reembolsado"
+        />
+        <ResumeCard icon={<AiOutlineAppstore />} label="% Reembolsados" />
       </Box>
 
       <CardContent
