@@ -19,6 +19,7 @@ import { CreatePackage } from '@domain/dashboard/products/create-package/create-
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
 import { VideoClass } from '@domain/dashboard/products/video-class/video-class.page';
+import { PersonPage } from '@domain/dashboard/account/edit-account/person-data/person-data.page';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -43,6 +44,8 @@ export const DASHBOARD_ROUTES = {
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
   MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
   PAYMENT: '/payment/:productId',
+  ACCOUNT_INFO: '/dashboard/edit-account/person-data',
+  ACCOUNT_INVITES: '/dashboard/edit-account/invites',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -75,6 +78,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
     [DASHBOARD_ROUTES.PAYMENT]: <Payment />,
     [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
+    [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
   };
 
   return <>{components[route]}</>;
