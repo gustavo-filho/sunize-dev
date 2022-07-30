@@ -70,7 +70,7 @@ export const Container = styled.div<Props>`
 export const Content = styled.div`
   > main {
     max-width: 1440px;
-    padding: 4rem 7%;
+    padding: 10rem 7%;
     margin: 0 auto;
     display: flex;
   }

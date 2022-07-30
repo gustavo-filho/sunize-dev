@@ -8,12 +8,12 @@ export const Container = styled.div`
   padding: 0 6%;
 
   > h2 {
+    margin-bottom: 32px;
     font-weight: 200;
     font-size: 28px;
     line-height: 38px;
     color: white;
     font-family: 'Nunito', sans-serif;
-    padding-top: 32px;
   }
 
   > h3 {
@@ -26,11 +26,10 @@ export const Container = styled.div`
 
   > p {
     font-size: 20px;
-    line-height: 27px;
+    font-weight: 400;
     color: #818181;
-    margin-top: 10px;
-    margin-bottom: 3rem;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins',sans-serif;
+    margin-bottom: 50px;
   }
 
   .balance {

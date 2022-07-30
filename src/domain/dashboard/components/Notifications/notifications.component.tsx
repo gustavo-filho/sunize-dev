@@ -8,7 +8,7 @@ import {
   NotiticationsContainer,
   MessageWithoutNotification,
 } from '@domain/dashboard/components/Notifications/notifications.styles';
-import { FaRegBell } from 'react-icons/fa';
+import { FaRegBell, FaBell } from 'react-icons/fa';
 import NotificationAffiliate from './Components/NotificationAffiliate/notificationAffiliate.component';
 import NotificationCoProduction from './Components/NotificationCoProduction/notificationCoProduction.component';
 import { useAppSelector } from '../../../../store/hooks';
@@ -18,7 +18,6 @@ export const Notifications = () => {
   const [isVisible, setIsVisible] = useState(false);
   const notificationsContainerRef = useRef<HTMLDivElement>(null);
   const notifications = useAppSelector(notificationsSelector);
-  const notifyTest = 1;
   const totalOfNotifications =
     notifications?.affiliates?.length ??
     0 + notifications?.coProduction?.length ??
@@ -30,16 +29,17 @@ export const Notifications = () => {
       onClick={() => setIsVisible(!isVisible)}
     >
       <BellNotification>
+
+      {totalOfNotifications !== 0 && (
         <>
-          <FaRegBell className={totalOfNotifications !== 0 ? "shine" : ""} />
-          {totalOfNotifications !== 0 && (
+          <FaBell className={"shine"} />
             <span>
               <p>{totalOfNotifications}</p>
             </span>
-          )}
         </>
+        )}
 
-        {notifyTest < 1 && (
+        {totalOfNotifications == 0 && (
           <>
             <FaRegBell />
           </>
@@ -86,9 +86,13 @@ export const Notifications = () => {
                 <NotificationCoProduction key={k} {...v} />
               ))}
 
-            <MessageWithoutNotification>
-              <strong>Você não tem nenhuma notificação.</strong>
-            </MessageWithoutNotification>
+
+            {totalOfNotifications == 0 && (
+              <MessageWithoutNotification>
+                <strong>Você não tem nenhuma notificação.</strong>
+              </MessageWithoutNotification>
+            )}
+
           </NotiticationsContainer>
         </AnimatePresence>
       )}

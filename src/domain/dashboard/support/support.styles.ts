@@ -7,23 +7,23 @@ export const Container = styled.div`
   margin: 60px auto 0px auto;
   padding: 0 6%;
   > h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 32px;
     font-weight: 200;
     font-size: 28px;
-    line-height: 38px;
-    font-family: 'Poppins', sans-serif;
+    line-height: 27px;
     color: #ffffff;
+    font-family: 'Nunito',sans-serif;
   }
   > p {
     font-size: 20px;
-    line-height: 27px;
+    font-weight: 400;
     color: #818181;
-    margin-bottom: 3rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins',sans-serif;
+    margin-bottom: 50px;
   }
   @media screen and (max-width: 950px) {
     & {
-      padding-top: 20px;
+      margin: 60px auto 0px auto;
       overflow-x: hidden;
     }
   }
@@ -34,7 +34,7 @@ export const Contact = styled.div`
   strong {
     display: block;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 22px;
     line-height: 38px;
     font-weight: 120;

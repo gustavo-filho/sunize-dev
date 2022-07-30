@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Container = styled.div<Props>`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -35,7 +35,7 @@ export const Container = styled.div<Props>`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 2%;
+    padding: 1rem 1.5rem;
     color: #f5f5f5;
     footer {
       display: flex;
@@ -60,7 +60,7 @@ export const Container = styled.div<Props>`
       align-items: center;
     }
     > div {
-      flex: 0.3;
+      flex: 0.3 1 0%;
       footer {
         display: none;
       }
@@ -89,7 +89,7 @@ export const CountTime = styled.main`
   > div {
     span {
       font-weight: 700;
-      font-size: 3rem;
+      font-size: 2.3rem;
     }
   }
   > span {

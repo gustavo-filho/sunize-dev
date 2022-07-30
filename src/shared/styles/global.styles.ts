@@ -27,8 +27,11 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Nunito', sans-serif;
         font-weight: 300;
     }
-    h1, h2, h3, h4, h5, h6, strong {
+    h1, h2, h3, h4, h5, h6 {
         font-weight: 300;
+    }
+    strong {
+        font-weight: 700;
     }
     button { 
         cursor: pointer;
