@@ -1,11 +1,10 @@
-import { Error, Content, Container } from './default-input.styles';
+import { InputComponentData } from '@shared/components/DefaultInput/default-input.types';
 import { useField } from 'formik';
 import { useCallback, useRef, useState } from 'react';
-import InputMask, { ReactInputMask } from 'react-input-mask';
 import { FiAlertCircle } from 'react-icons/fi';
-import { InputComponentData } from '@shared/components/DefaultInput/default-input.types';
-import { AiOutlineEye } from 'react-icons/ai';
+import InputMask, { ReactInputMask } from 'react-input-mask';
 import { HandlePasswordButton } from '../HandlePasswordButton/HandlePasswordButton';
+import { Container, Content, Error } from './default-input.styles';
 
 export const DefaultInput = ({
   text,
@@ -24,7 +23,7 @@ export const DefaultInput = ({
   const [typeInput, setTypeInput] = useState(type)
 
   const handleChangeInputType = () => {
-    const newTypePassword = typeInput == 'password' ? 'text' : 'password';
+    const newTypePassword = typeInput === 'password' ? 'text' : 'password';
     setTypeInput(newTypePassword)
   }
 

@@ -1,19 +1,19 @@
-import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
-import { Formik } from 'formik';
-import { useCallback, useEffect, useState } from 'react';
-import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
-import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
-import { BiEnvelope } from 'react-icons/bi';
-import { ASYNC_SIGN_IN, userSelector } from '@domain/auth/user/user.store';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { UserAuthProps } from '@domain/auth/user/user.types';
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
-import { schema } from '@domain/auth/login/login.validation';
+import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
 import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
-import { useHistory } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { schema } from '@domain/auth/login/login.validation';
+import { ASYNC_SIGN_IN, userSelector } from '@domain/auth/user/user.store';
+import { UserAuthProps } from '@domain/auth/user/user.types';
+import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
+import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
 import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
+import { Formik } from 'formik';
+import Cookies from 'js-cookie';
+import { useCallback, useEffect } from 'react';
+import { BiEnvelope } from 'react-icons/bi';
+import { useHistory } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();

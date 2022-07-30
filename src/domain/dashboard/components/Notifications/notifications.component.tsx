@@ -1,18 +1,18 @@
-import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
 
+import { notificationsSelector } from '@domain/dashboard/components/Notifications/notifications.store';
 import {
-  Container,
   BellNotification,
-  NotiticationsContainer,
+  Container,
   MessageWithoutNotification,
+  NotiticationsContainer,
 } from '@domain/dashboard/components/Notifications/notifications.styles';
-import { FaRegBell, FaBell } from 'react-icons/fa';
+import { FaBell, FaRegBell } from 'react-icons/fa';
+import { useAppSelector } from '../../../../store/hooks';
 import NotificationAffiliate from './Components/NotificationAffiliate/notificationAffiliate.component';
 import NotificationCoProduction from './Components/NotificationCoProduction/notificationCoProduction.component';
-import { useAppSelector } from '../../../../store/hooks';
-import { notificationsSelector } from '@domain/dashboard/components/Notifications/notifications.store';
 
 export const Notifications = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,17 +29,16 @@ export const Notifications = () => {
       onClick={() => setIsVisible(!isVisible)}
     >
       <BellNotification>
-
-      {totalOfNotifications !== 0 && (
-        <>
-          <FaBell className={"shine"} />
+        {totalOfNotifications !== 0 && (
+          <>
+            <FaBell className={'shine'} />
             <span>
               <p>{totalOfNotifications}</p>
             </span>
-        </>
+          </>
         )}
 
-        {totalOfNotifications == 0 && (
+        {totalOfNotifications === 0 && (
           <>
             <FaRegBell />
           </>
@@ -86,13 +85,11 @@ export const Notifications = () => {
                 <NotificationCoProduction key={k} {...v} />
               ))}
 
-
-            {totalOfNotifications == 0 && (
+            {totalOfNotifications === 0 && (
               <MessageWithoutNotification>
                 <strong>Você não tem nenhuma notificação.</strong>
               </MessageWithoutNotification>
             )}
-
           </NotiticationsContainer>
         </AnimatePresence>
       )}
