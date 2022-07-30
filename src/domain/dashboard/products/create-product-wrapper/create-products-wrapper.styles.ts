@@ -6,11 +6,9 @@ export const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     color: 'white',
-
     maxWidth: '1640px',
     margin: '60px auto 0px auto',
     padding: '0 6%',
-    
   },
   main: {
     width: '95%',
@@ -23,6 +21,15 @@ export const useStyles = makeStyles({
     lineHeight: '27px',
     color: '#ffffff',
     fontFamily: 'Nunito',
+    fontStyle: 'normal',
+  },
+  subtitle: {
+    fontSize: '20px',
+    fontWeight: 400,
+    color: '#818181',
+    marginBottom: '50px',
+    fontFamily: 'sans-serif',
+    fontStyle: 'normal',
   },
   mainContent: {
     width: '100%',

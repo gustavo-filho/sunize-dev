@@ -77,6 +77,7 @@ export const Container = styled.div`
     line-height: 27px;
     color: #ffffff;
     font-family: 'Nunito',sans-serif;
+    margin-left: 30px;
   }
 
   > p {
@@ -85,6 +86,7 @@ export const Container = styled.div`
     color: #818181;
     font-family: 'Poppins',sans-serif;
     margin-bottom: 50px;
+    margin-left: 30px;
   }
 
   > a {

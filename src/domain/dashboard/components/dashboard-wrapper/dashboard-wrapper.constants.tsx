@@ -1,24 +1,27 @@
-import { Dashboard } from '@domain/dashboard/dashboard.page';
-import { MyProducts } from '@domain/dashboard/products/my-products/my-products.page';
-import { Support } from '@domain/dashboard/support/support.page';
-import { CreatedProducts } from '@domain/dashboard/products/created-products/created-products.page';
-import { CreateProduct } from '@domain/dashboard/products/create-product/create-product.page';
-import { ProductsOfAffiliates } from '@domain/dashboard/products/affiliates/products-of-affiliates';
-import { SaleRecord } from '@domain/dashboard/sales/sale-record/sale-record.page';
-import { CurrentBalance } from '@domain/dashboard/balance/current-balance/current.balance.page';
+import { PersonInvitesPage } from '@domain/dashboard/account/edit-account/invites/invites.page';
+import { PersonNotificationPage } from '@domain/dashboard/account/edit-account/notification/notification.page';
+import { PersonPage } from '@domain/dashboard/account/edit-account/person-data/person-data.page';
+import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { AccountStatements } from '@domain/dashboard/balance/account-statements';
-import { Market } from '@domain/dashboard/market/market-page-index';
+import { CurrentBalance } from '@domain/dashboard/balance/current-balance/current.balance.page';
+import { Dashboard } from '@domain/dashboard/dashboard.page';
+import { EBooks } from '@domain/dashboard/market/components/ebook/ebook.component';
 import { Recent } from '@domain/dashboard/market/components/recent/recent-component';
 import { Subscriptions } from '@domain/dashboard/market/components/subscriptions/subscriptions.component';
-import { EBooks } from '@domain/dashboard/market/components/ebook/ebook.component';
-import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
+import { Market } from '@domain/dashboard/market/market-page-index';
 import { Payment } from '@domain/dashboard/paymet/paymet.component';
-import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
+import { ProductsOfAffiliates } from '@domain/dashboard/products/affiliates/products-of-affiliates';
 import { CreatePackage } from '@domain/dashboard/products/create-package/create-package.page';
+import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
+import { CreateProduct } from '@domain/dashboard/products/create-product/create-product.page';
+import { CreatedProducts } from '@domain/dashboard/products/created-products/created-products.page';
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
+import { MyProducts } from '@domain/dashboard/products/my-products/my-products.page';
 import { VideoClass } from '@domain/dashboard/products/video-class/video-class.page';
+import { SaleRecord } from '@domain/dashboard/sales/sale-record/sale-record.page';
+import { Support } from '@domain/dashboard/support/support.page';
 
 export const DASHBOARD_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -43,6 +46,9 @@ export const DASHBOARD_ROUTES = {
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
   MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
   PAYMENT: '/payment/:productId',
+  ACCOUNT_INFO: '/dashboard/edit-account/person-data',
+  ACCOUNT_INVITES: '/dashboard/edit-account/invites',
+  ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -75,6 +81,9 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
     [DASHBOARD_ROUTES.PAYMENT]: <Payment />,
     [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
+    [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
+    [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,
+    [DASHBOARD_ROUTES.ACCOUNT_NOTIFICATIONS]: <PersonNotificationPage />,
   };
 
   return <>{components[route]}</>;

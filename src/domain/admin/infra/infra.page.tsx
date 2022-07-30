@@ -6,10 +6,7 @@ import {
   MainContent,
   RightButton,
 } from '@domain/admin/admin.styles';
-import {
-  ChartCardRed,
-  ChartCardYellow,
-} from '@domain/admin/components/chart-card/chart-card.component';
+import { ChartCard } from '@domain/admin/components/chart-card/chart-card.component';
 import { Box } from '@mui/material';
 import { useMedia } from '@shared/hooks/useMedia';
 import { useState } from 'react';
@@ -37,21 +34,22 @@ export const Infra = () => {
           flexWrap: mobile ? 'wrap' : 'initial',
         }}
       >
-        <ChartCardYellow
+        <ChartCard
           data={INFRA_MOCK.CPU}
           color="#9b5de5"
           icon={<BsCpu />}
           label="Utilização da CPU"
         />
-        <ChartCardYellow
+        <ChartCard
           data={INFRA_MOCK.MEMORY}
           color="#f15bb5"
           icon={<VscServer />}
           label="Utilização da memória"
         />
-        <ChartCardRed
+        <ChartCard
           data={INFRA_MOCK.DOWNTIME}
           color="#ef233c"
+          iconBackground="error"
           icon={<VscPulse />}
           label="Taxa de inatividade"
         />

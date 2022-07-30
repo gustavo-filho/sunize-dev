@@ -125,6 +125,17 @@ export const Header = () => {
                 <li onClick={() => setIsOpenBoxInfo(false)}>
                   <Button
                     variant="text"
+                    onClick={() => history.push('/dashboard')}
+                  >
+                    <span>
+                      <FaHome />
+                      Dashboard
+                    </span>
+                  </Button>
+                  </li>
+                <li onClick={() => setIsOpenBoxInfo(false)}>
+                  <Button
+                    variant="text"
                     onClick={() => {
                       dispatch(SIGN_OUT());
                     }}

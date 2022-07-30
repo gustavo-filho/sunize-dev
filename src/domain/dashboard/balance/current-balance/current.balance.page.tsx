@@ -19,6 +19,7 @@ export function CurrentBalance(): JSX.Element {
   const [modalAddAccount, setModalAddAccount] = useState(false)
   const [isShowBalance, setIsShowBalance] = useState(true)
   const [isShowRelease, setIsShowRelease] = useState(true)
+  const [modalTransfer, setModalTransfer] = useState(false)
   const [isShowAvailable, setIsShowAvailable] = useState(true)
   const [bankingAccounts, setBankingAccounts] = useState<IBankingAccountsType[]>([])
   const [loading, setLoading] = useState(false)
@@ -157,11 +158,23 @@ export function CurrentBalance(): JSX.Element {
           {totalBallanceComponent('Saldo Total')}
           {futureReleases('Lançamentos Futuro')}
           {availableForWithdrawal('Disponível para Saque')}
-          {componentDailyWithdrawal('Deseja receber saques diários?')}
+
+
+              <button
+        onClick={() =>
+          bankingAccounts.length
+            ? setModalTransfer(true)
+            : toast.error('Você não possui nenhuma conta bancária cadastrada.')}
+        className="btnTransfer"
+      >
+        Transfira agora
+      </button>
         </div>
       </div>
     )
   }
+
+
 
   function alignAccounts(): JSX.Element {
     return (

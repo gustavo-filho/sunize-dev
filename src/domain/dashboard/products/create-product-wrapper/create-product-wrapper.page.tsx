@@ -11,7 +11,8 @@ export const CreateProductWrapper = () => {
     <div className={classes.container}>
       <div className={classes.main}>
         <div className={classes.titleBox}>
-          <h2 className={classes.title}>O que deseja criar?</h2>
+          <h1 className={classes.title}>O que deseja criar?</h1>
+          <h2 className={classes.subtitle}>Nesta seção você poderá criar cursos onlines e/ou pacotes de cursos.</h2>
         </div>
 
         <div className={classes.mainContent}>
