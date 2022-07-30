@@ -14,24 +14,27 @@ import {
   FaEnvelope,
   FaKey,
   FaPhoneAlt,
-  FaUser
+  FaUser,
 } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import {
-  AvatarContainer,
   BoxWrapper,
   ButtonPassword,
   Container,
   ContainerBox,
+  LinkTab,
+  Navigation,
+} from '../edit-account.styles';
+
+import {
+  AvatarContainer,
   FormBottom,
   FormGroup,
   FormPassword,
   FormsTop,
-  LinkTab,
-  Navigation
-} from '../edit-account.styles';
+} from './person-data.styles';
 
 import { schemaData, schemaPassword } from './schemas';
 

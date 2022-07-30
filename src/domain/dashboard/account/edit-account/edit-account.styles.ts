@@ -1,6 +1,6 @@
+import { shade } from 'polished';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Container = styled.section`
   width: 100%;
@@ -64,7 +64,7 @@ interface LinkTabProps {
 export const LinkTab = styled(Link)<LinkTabProps>`
   font-size: 18px;
   color: rgba(0, 0, 0, 1);
-  background-color: ${(props) => !props.active && "transparent"} !important;
+  background-color: ${props => !props.active && 'transparent'} !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
 `;
@@ -80,59 +80,6 @@ export const BoxWrapper = styled.div`
 
   @media (max-width: 380px) {
     padding: 10px;
-  }
-`;
-
-export const FormGroup = styled.div`
-  label {
-    color: rgba(132, 132, 132, 1);
-    margin-bottom: 8px;
-    margin-top: 16px;
-    display: block;
-  }
-
-  .alignCenter {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    padding-left: 10px;
-    background: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    height: 44px;
-    color: rgba(71, 71, 71, 1);
-    font-size: 16px;
-
-    &::placeholder {
-      color: rgba(132, 132, 132, 1);
-    }
-  }
-
-  select {
-    color: rgba(71, 71, 71, 1);
-  }
-
-  textarea {
-    height: 155px;
-    resize: none;
-    padding: 12px;
-  }
-
-  small {
-    color: rgba(132, 132, 132, 1);
-    font-size: 12;
-  }
-
-  > p {
-    color: #be0a0a;
-    opacity: 0.89;
-    font-size: 15px;
   }
 `;
 
@@ -158,152 +105,6 @@ export const Navigation = styled.div`
         background-color: rgb(39, 41, 61);
         text-align: center;
       }
-    }
-  }
-`;
-
-export const FormsTop = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 1250px) {
-    flex-direction: column;
-  }
-`;
-
-export const AvatarContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    position: relative;
-    width: 80%;
-    padding-top: 80%;
-    border: 2px dashed #ddd;
-    border-radius: 50%;
-    margin: 0 auto;
-
-    svg {
-      font-size: 10rem;
-      color: #ddd;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    img {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-
-    label {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      background: #df8b2b;
-      border: 0;
-      cursor: pointer;
-      border-radius: 50%;
-      right: 2%;
-      bottom: 2%;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.2s ease;
-
-      :hover {
-        background-color: ${shade(0.1, '#df8b2b')};
-      }
-
-      input {
-        display: none;
-      }
-
-      svg {
-        color: #f5f5f5;
-        font-size: 2rem;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    div {
-      label {
-        width: 70px;
-        height: 70px;
-
-        svg {
-          font-size: 1.5rem;
-        }
-      }
-    }
-  }
-
-  @media (max-width: 650px) {
-    div {
-      label {
-        width: 60px;
-        height: 60px;
-        right: -0.5rem;
-        bottom: -0.5rem;
-      }
-
-      svg {
-        font-size: 5rem;
-      }
-    }
-  }
-
-  @media (max-width: 650px) {
-    div {
-      label {
-        width: 60px;
-        height: 60px;
-        right: -0.5rem;
-        bottom: -0.5rem;
-      }
-
-      svg {
-        font-size: 5rem;
-      }
-    }
-  }
-`;
-
-export const FormPassword = styled.div`
-  flex: 1;
-  margin-top: 0.4rem;
-`;
-
-export const FormBottom = styled.div`
-  width: 100%;
-
-  button {
-    margin-top: 2rem;
-    cursor: pointer;
-    width: 100%;
-    background: #df8b2b;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 10px 0;
-    align-self: flex-end;
-    border: 0;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-
-    &:hover {
-      background: ${shade(0.2, '#df8b2b')};
     }
   }
 `;
@@ -405,4 +206,92 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
+`;
+
+export const NotificationSingle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    color: #848484;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  main {
+    display: flex;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #848484;
+
+      label {
+        cursor: pointer;
+        margin-left: 0.7rem;
+      }
+
+      input {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  div:last-child {
+    margin-left: 1.5rem;
+  }
+
+  @media (max-width: 500px) {
+    main {
+      text-align: left;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    div:last-child {
+      margin-left: 0rem;
+      margin-top: 0.7rem;
+    }
+  }
+`;
+
+export const ButtonSave = styled.div`
+  .btn {
+    width: 100%;
+    font-size: 14px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;
+  }
+
+  .btn-green {
+    background: #df8b2b;
+    background-color: ${shade(0.1, '#df8b2b')};
+    transition: background-color 0.2s ease;
+    color: #fff;
+  }
+
+  .btn-green:hover {
+    background-color: ${shade(0.3, '#df8b2b')};
+    color: #fff;
+  }
+`;
+
+export const PaginationContainer = styled.div`
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  border: 2px solid #1f1f2b;
 `;

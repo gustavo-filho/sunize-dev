@@ -1,4 +1,5 @@
 import { PersonInvitesPage } from '@domain/dashboard/account/edit-account/invites/invites.page';
+import { PersonNotificationPage } from '@domain/dashboard/account/edit-account/notification/notification.page';
 import { PersonPage } from '@domain/dashboard/account/edit-account/person-data/person-data.page';
 import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { AccountStatements } from '@domain/dashboard/balance/account-statements';
@@ -47,6 +48,7 @@ export const DASHBOARD_ROUTES = {
   PAYMENT: '/payment/:productId',
   ACCOUNT_INFO: '/dashboard/edit-account/person-data',
   ACCOUNT_INVITES: '/dashboard/edit-account/invites',
+  ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -81,6 +83,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
     [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
     [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,
+    [DASHBOARD_ROUTES.ACCOUNT_NOTIFICATIONS]: <PersonNotificationPage />,
   };
 
   return <>{components[route]}</>;

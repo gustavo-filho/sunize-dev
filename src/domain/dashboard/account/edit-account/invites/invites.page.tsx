@@ -1,4 +1,3 @@
-import { PaginationContainer } from '@domain/admin/production/production.styles';
 import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
@@ -8,16 +7,14 @@ import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import {
   BoxWrapper,
+  ButtonSave,
   Container,
   LinkTab,
   Navigation,
-} from '../edit-account.styles';
-import {
-  Bottonsave,
-  Indicated,
-  InviteLink,
   NotificationSingle,
-} from './invites.styles';
+  PaginationContainer,
+} from '../edit-account.styles';
+import { Indicated, InviteLink } from './invites.styles';
 
 export const PersonInvitesPage = () => {
   const user = useAppSelector(userSelector);
@@ -168,11 +165,11 @@ export const PersonInvitesPage = () => {
           </main>
         </NotificationSingle>
 
-        <Bottonsave>
+        <ButtonSave>
           <button onClick={handleSubmit} className="btn btn-green">
             Salvar
           </button>
-        </Bottonsave>
+        </ButtonSave>
 
         <Indicated>
           <h2>Pessoas que você indicou</h2>
