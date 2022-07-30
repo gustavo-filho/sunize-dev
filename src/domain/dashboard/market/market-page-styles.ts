@@ -23,8 +23,10 @@ export const Container = styled.div`
   }
   @media screen and (max-width: 950px) {
     & {
-      padding-top: 20px;
-      overflow-x: hidden;
+      max-width: 1640px;
+      width: 100%;
+      margin: 60px auto 0px auto;
+      padding: 0 6%;
     }
   }
 `

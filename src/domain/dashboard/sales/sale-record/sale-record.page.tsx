@@ -153,7 +153,7 @@ export const SaleRecord = () => {
         <h2>Registros de Vendas</h2>
         <p>Tenha controle total sobre o seu desempenho em nossa plataforma.</p>
         <Center>
-          <div style={{ backgroundColor: '#27293d', width: '95%' }}>
+          <div style={{ backgroundColor: '#27293d', marginRight: '5px', width: '100%' }}>
             <h3>Relatório de Vendas</h3>
             <Formik
               initialValues={{

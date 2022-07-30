@@ -11,6 +11,7 @@ export const Container = styled.header`
   width: 100%;
   border-bottom: 2px solid #c37331;
   /* overflow: hidden; */
+  border-bottom: 2px solid #c37331;
 `;
 
 export const LogoAndBars = styled.div`
@@ -22,9 +23,10 @@ export const LogoAndBars = styled.div`
     margin: 0 1rem;
   }
 
-  img {
-    padding-right: 30px;
-    width: 200px;
+  @media (min-width: 768px) {
+    > img {
+      width: 200px;
+    }
   }
 
   @media (max-width: 500px) {

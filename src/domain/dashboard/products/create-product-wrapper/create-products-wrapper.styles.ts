@@ -5,17 +5,18 @@ export const useStyles = makeStyles({
   container: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'center',
     color: 'white',
+    maxWidth: '1640px',
     margin: '60px auto 0px auto',
+    padding: '0 6%',
   },
   main: {
-    width: '80%',
+    width: '95%',
   },
   titleBox: {},
   title: {
-    fontWeight: 200,
     marginBottom: '32px',
+    fontWeight: 200,
     fontSize: '28px',
     lineHeight: '27px',
     color: '#ffffff',
@@ -61,7 +62,7 @@ export const useStyles = makeStyles({
     },
     width: '25%',
     ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
-      width: '200px',
+      width: '215px',
       margin: 'auto',
       marginBottom: '30px',
     },

@@ -6,6 +6,7 @@ export interface InputComponentData
     extends InputHTMLAttributes<HTMLInputElement> {
     text?: string
     mask?: string
+    handleShowPassword?: boolean;
     formatChars?: {
         [key: string | number]: string
     }

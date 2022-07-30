@@ -65,9 +65,10 @@ export const Divisor = styled.div`
 `;
 
 export const Container = styled.div`
-  max-width: 1500px;
-  margin: 60px auto 0px auto;
-  padding: 0 6%;
+    max-width: 1640px;
+    width: 100%;
+    margin: 60px auto 0px auto;
+    padding: 0 6%;
 
   > h2 {
     margin-bottom: 32px;

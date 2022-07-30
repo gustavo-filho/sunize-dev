@@ -18,7 +18,7 @@ export const Container = styled.div`
     }
     span {
       text-transform: uppercase;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: white;
       font-weight: 700;
     }

@@ -11,6 +11,7 @@ export const Container = styled.header`
   width: 100%;
   border-bottom: 2px solid #c37331;
   /* overflow: hidden; */
+  border-bottom: 2px solid #c37331;
 `;
 
 export const LogoAndBars = styled.div`

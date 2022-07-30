@@ -4,11 +4,15 @@ import { useCallback, useRef, useState } from 'react';
 import InputMask, { ReactInputMask } from 'react-input-mask';
 import { FiAlertCircle } from 'react-icons/fi';
 import { InputComponentData } from '@shared/components/DefaultInput/default-input.types';
+import { AiOutlineEye } from 'react-icons/ai';
+import { HandlePasswordButton } from '../HandlePasswordButton/HandlePasswordButton';
 
 export const DefaultInput = ({
   text,
   icon: Icon,
   mode = 'dark',
+  type,
+  handleShowPassword = false,
   ...props
 }: InputComponentData) => {
   const [inputProps, meta] = useField<any>(props as any);
@@ -16,6 +20,13 @@ export const DefaultInput = ({
   const [filled, setFilled] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const inputMaskRef = useRef<ReactInputMask>(null);
+
+  const [typeInput, setTypeInput] = useState(type)
+
+  const handleChangeInputType = () => {
+    const newTypePassword = typeInput == 'password' ? 'text' : 'password';
+    setTypeInput(newTypePassword)
+  }
 
   const onBlur = useCallback(() => {
     setFocused(false);
@@ -56,6 +67,7 @@ export const DefaultInput = ({
           ) : (
             <input
               style={{ color: 'white' }}
+              type={typeInput}
               id={props.id || props.name}
               {...inputProps}
               {...props}
@@ -68,6 +80,11 @@ export const DefaultInput = ({
               <FiAlertCircle color="#ff5252" size={20} />
             </Error>
           )}
+
+          {!meta.error && handleShowPassword && (
+            <HandlePasswordButton onClick={handleChangeInputType} typePassword={typeInput} id="handleShowPasswdBttn" />
+          )}
+
         </Container>
       </div>
     </Content>

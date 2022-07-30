@@ -44,19 +44,20 @@ export const Description = styled.div`
 
     span:nth-of-type(1) {
       margin: 0.2rem 0;
-      padding: 0.1rem 0.3rem;
+      padding: 0.3rem 0.5rem;
       border-radius: 0.5rem;
-      background-color: #0a215b;
-      color: white;
+      background-color: #e5fbef;
+      border: 0.3px solid #4ee693;
+      color: #4d4c4c;
     }
     span:nth-of-type(2) {
       margin: 0.2rem 0;
       max-width: 65px;
-      padding: 0.1rem 0.3rem;
+      padding: 0.2rem 0.4rem;
+      text-align: center;
       border-radius: 0.5rem;
-      background-color: #e5fbef;
-      color: #4d4c4c;
-      border: 0.3px solid #4ee693;
+      background-color: #0a215b;
+      color: white;
     }
   }
   h2 {

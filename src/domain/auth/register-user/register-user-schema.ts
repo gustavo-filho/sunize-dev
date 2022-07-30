@@ -8,6 +8,6 @@ export const schema = yup.object().shape({
         .required('Telefone obrigatório')
         .min(15, 'Telefone inválido'),
     password: yup.string()
-        .required('Senha obrigatória')
-        .matches(/^(?=.*[0-9])(?=.*[a-zA-Z]).{7,}$/, 'Senha muito fraca'),
+        .required('Senha obrigatória'),
+        /* .matches(/^(?=.*[0-9])(?=.*[a-zA-Z]).{7,}$/, 'Senha muito fraca') - Validação se a senha é em alfanumérico! */
 })

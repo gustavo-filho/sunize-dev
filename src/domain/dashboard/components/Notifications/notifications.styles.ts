@@ -30,7 +30,7 @@ export const BellNotification = styled.div`
     }
   }
   .shine {
-    animation: shine 0.5 forwards 0s normal;
+    animation: shine 0.3 forwards 0s normal;
   }
 
   span {
