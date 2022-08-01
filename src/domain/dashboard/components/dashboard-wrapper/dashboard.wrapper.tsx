@@ -33,7 +33,7 @@ export const DashboardWrapper = () => {
         {shouldShowSideBar(pathname) &&
           (!mobile ? <SideBar /> : sidebar.isOpen && <SideBar />)}
 
-        <div style={{ padding: '2rem 0', width: '100%' }}>
+        <div style={{ paddingTop: '2rem', width: '100%' }}>
           <DashboardWrapperConstants route={pathname} />
         </div>
       </div>

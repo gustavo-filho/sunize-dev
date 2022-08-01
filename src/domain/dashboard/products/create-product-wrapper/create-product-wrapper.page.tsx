@@ -1,7 +1,6 @@
 import { useStyles } from '@domain/dashboard/products/create-product-wrapper/create-products-wrapper.styles';
 import CourseImage from '../assets/images/course.png';
 import PackageImage from '../assets/images/pacote.png';
-import Ebook from '../assets/images/ebook.png';
 import { Link } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 
@@ -12,7 +11,9 @@ export const CreateProductWrapper = () => {
       <div className={classes.main}>
         <div className={classes.titleBox}>
           <h1 className={classes.title}>O que deseja criar?</h1>
-          <h2 className={classes.subtitle}>Nesta seção você poderá criar cursos onlines e/ou pacotes de cursos.</h2>
+          <h2 className={classes.subtitle}>
+            Nesta seção você poderá criar cursos onlines e/ou pacotes de cursos.
+          </h2>
         </div>
 
         <div className={classes.mainContent}>

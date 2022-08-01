@@ -7,5 +7,8 @@ export const useStyles = makeStyles({
     height: '100%',
     backgroundColor: theme.colors.darkBlue,
     color: theme.colors.textGray,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
 });

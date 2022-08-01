@@ -18,6 +18,9 @@ export const LogoAndBars = styled.div`
   display: flex;
   align-items: center;
   margin-left: 20px;
+  > img {
+    padding: 0 1rem;
+  }
 
   div {
     margin: 0 1rem;

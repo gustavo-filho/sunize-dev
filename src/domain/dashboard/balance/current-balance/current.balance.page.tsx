@@ -1,73 +1,90 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '@shared/services/api';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { Container, AddAccount, Value } from './current.balance.styles'
+import { Container, AddAccount, Value } from './current.balance.styles';
 import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../store/hooks';
 import { WithdrawalAccounts } from '../withdrawal-accounts/withdraw-accounts-component';
 import { ballanceValuesType } from '../types/current-ballance-values.type';
 import { IBankingAccountsType } from '../types/current-ballance-banking-accounts.type';
 import { wrapperNavigation } from '../components/wrapper-navigation.component';
-import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
+// import {
+//   FormControl,
+//   FormControlLabel,
+//   Radio,
+//   RadioGroup,
+//   Typography,
+// } from '@mui/material';
 import { AccountComponentModal } from '../components/accountComponentModal/account-component-modal';
 import { listBanks } from '../config/list-banks';
 
 export function CurrentBalance(): JSX.Element {
   const user = useAppSelector(userSelector);
-  const [modalAddAccount, setModalAddAccount] = useState(false)
-  const [isShowBalance, setIsShowBalance] = useState(true)
-  const [isShowRelease, setIsShowRelease] = useState(true)
-  const [modalTransfer, setModalTransfer] = useState(false)
-  const [isShowAvailable, setIsShowAvailable] = useState(true)
-  const [bankingAccounts, setBankingAccounts] = useState<IBankingAccountsType[]>([])
-  const [loading, setLoading] = useState(false)
+  const [modalAddAccount, setModalAddAccount] = useState(false);
+  const [isShowBalance, setIsShowBalance] = useState(true);
+  const [isShowRelease, setIsShowRelease] = useState(true);
+  const [, setModalTransfer] = useState(false);
+  const [isShowAvailable, setIsShowAvailable] = useState(true);
+  const [bankingAccounts, setBankingAccounts] = useState<
+    IBankingAccountsType[]
+  >([]);
+  const [loading, setLoading] = useState(false);
   const [balanceValues, setBalanceValues] = useState<ballanceValuesType>({
     balance: 0,
     release: 0,
     available: 0,
-  })
+  });
 
   const getBankingAccounts = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     await api
       .get(`users/${user.data.id}/safe2pay/sub-accounts`, {
         headers: { 'sunize-access-token': user.data.access_token },
       })
-      .then((response) => {
+      .then(response => {
         const bank = listBanks.find(
-          (element: { name: string, value: string | number }) =>
+          (element: { name: string; value: string | number }) =>
             element.value === Number(response.data.data.BankData.Bank),
-        )
-        response.data.data.BankData.Bankname = bank?.name
-        setBankingAccounts([response.data.data])
-        setLoading(false)
+        );
+        response.data.data.BankData.Bankname = bank?.name;
+        setBankingAccounts([response.data.data]);
+        setLoading(false);
       })
       .catch(() => {
-        setLoading(false)
-      })
-  }, [user.data.access_token, user.data.id])
+        setLoading(false);
+      });
+  }, [user.data.access_token, user.data.id]);
 
   useEffect(() => {
-    getBankingAccounts()
-    api.get(`users/balance/${user.data.id}`).then((res) => {
-      const balance = {
-        balance: res.data.data.AmountReceived,
-        release: res.data.data.AmountPreviewTotal,
-        available: res.data.data.AmountAvailableToday,
-      }
-      setBalanceValues(balance)
-    })
-      .catch((error: any) => {
-        console.log('error', error)
-        if (error.response.data.message !== 'Você deve cadastrar os seus dados da Safe2Pay') {
-          toast.error('Tivemos um problema na requisição do seu Saldo, favor entre em contato com o suporte')
-        } else {
-          toast.error('Favor realizar o cadastro da sua conta bancária, clicando no botão abaixo: "Adicionar novas contas..."')
-        }
+    getBankingAccounts();
+    api
+      .get(`users/balance/${user.data.id}`)
+      .then(res => {
+        const balance = {
+          balance: res.data.data.AmountReceived,
+          release: res.data.data.AmountPreviewTotal,
+          available: res.data.data.AmountAvailableToday,
+        };
+        setBalanceValues(balance);
       })
-  }, [getBankingAccounts, user.data.id])
+      .catch((error: any) => {
+        console.log('error', error);
+        if (
+          error.response.data.message !==
+          'Você deve cadastrar os seus dados da Safe2Pay'
+        ) {
+          toast.error(
+            'Tivemos um problema na requisição do seu Saldo, favor entre em contato com o suporte',
+          );
+        } else {
+          toast.error(
+            'Favor realizar o cadastro da sua conta bancária, clicando no botão abaixo: "Adicionar novas contas..."',
+          );
+        }
+      });
+  }, [getBankingAccounts, user.data.id]);
 
   function totalBallanceComponent(labelDisplayed: string): JSX.Element {
     return (
@@ -82,13 +99,13 @@ export function CurrentBalance(): JSX.Element {
         <Value show={isShowBalance}>
           {!isShowBalance
             ? balanceValues.balance.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }) ?? 'Indisponível'
+                style: 'currency',
+                currency: 'BRL',
+              }) ?? 'Indisponível'
             : ''}
         </Value>
       </div>
-    )
+    );
   }
 
   function futureReleases(labelDisplayed: string): JSX.Element {
@@ -103,13 +120,13 @@ export function CurrentBalance(): JSX.Element {
         <Value show={isShowRelease}>
           {!isShowRelease
             ? balanceValues.release.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }) ?? 'Indisponível'
+                style: 'currency',
+                currency: 'BRL',
+              }) ?? 'Indisponível'
             : ''}
         </Value>
       </div>
-    )
+    );
   }
 
   function availableForWithdrawal(labelDisplayed: string): JSX.Element {
@@ -124,32 +141,32 @@ export function CurrentBalance(): JSX.Element {
         <Value show={isShowAvailable}>
           {!isShowAvailable
             ? balanceValues.available.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }) ?? 'Indisponível'
+                style: 'currency',
+                currency: 'BRL',
+              }) ?? 'Indisponível'
             : ''}
         </Value>
       </div>
-    )
+    );
   }
 
-  function componentDailyWithdrawal(labelDisplayed: string): JSX.Element {
-    return (
-      <FormControl>
-        <p>{labelDisplayed}</p>
-        <RadioGroup
-          style={{ marginTop: '-30px' }}
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          defaultValue="false"
-        >
-          <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="true" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Sim</Typography>} />
-          <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="false" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Não</Typography>} />
-        </RadioGroup>
-      </FormControl>
-    )
-  }
+  // function componentDailyWithdrawal(labelDisplayed: string): JSX.Element {
+  //   return (
+  //     <FormControl>
+  //       <p>{labelDisplayed}</p>
+  //       <RadioGroup
+  //         style={{ marginTop: '-30px' }}
+  //         row
+  //         aria-labelledby="demo-row-radio-buttons-group-label"
+  //         name="row-radio-buttons-group"
+  //         defaultValue="false"
+  //       >
+  //         <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="true" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Sim</Typography>} />
+  //         <FormControlLabel style={{ height: '2px', marginTop: '35px' }} value="false" control={<Radio style={{ color: '#818181', height: '2px' }} />} label={<Typography style={{ marginTop: '35px' }}>Não</Typography>} />
+  //       </RadioGroup>
+  //     </FormControl>
+  //   )
+  // }
 
   function ballanceComponent(): JSX.Element {
     return (
@@ -159,22 +176,22 @@ export function CurrentBalance(): JSX.Element {
           {futureReleases('Lançamentos Futuro')}
           {availableForWithdrawal('Disponível para Saque')}
 
-
-              <button
-        onClick={() =>
-          bankingAccounts.length
-            ? setModalTransfer(true)
-            : toast.error('Você não possui nenhuma conta bancária cadastrada.')}
-        className="btnTransfer"
-      >
-        Transfira agora
-      </button>
+          <button
+            onClick={() =>
+              bankingAccounts.length
+                ? setModalTransfer(true)
+                : toast.error(
+                    'Você não possui nenhuma conta bancária cadastrada.',
+                  )
+            }
+            className="btnTransfer"
+          >
+            Transfira agora
+          </button>
         </div>
       </div>
-    )
+    );
   }
-
-
 
   function alignAccounts(): JSX.Element {
     return (
@@ -196,7 +213,7 @@ export function CurrentBalance(): JSX.Element {
           </span>
         )}
       </div>
-    )
+    );
   }
 
   function addAccount(): JSX.Element {
@@ -208,7 +225,7 @@ export function CurrentBalance(): JSX.Element {
           </button>
         )}
       </AddAccount>
-    )
+    );
   }
 
   function accountComponentModal(): JSX.Element {
@@ -218,7 +235,7 @@ export function CurrentBalance(): JSX.Element {
         setModal={setModalAddAccount}
         updateModal={false}
       />
-    )
+    );
   }
 
   return (
@@ -226,8 +243,7 @@ export function CurrentBalance(): JSX.Element {
       <h2>Saldo e Extratos</h2>
 
       <p>
-        Informações sobre seu saldo disponível e extratos dos saques
-        realizados.
+        Informações sobre seu saldo disponível e extratos dos saques realizados.
       </p>
 
       {wrapperNavigation()}
@@ -243,7 +259,6 @@ export function CurrentBalance(): JSX.Element {
       <CopyrightFooter limitWidth={1100} />
 
       {accountComponentModal()}
-
     </Container>
-  )
+  );
 }
