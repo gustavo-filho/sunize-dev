@@ -14,7 +14,7 @@ export const Container = styled.div`
   padding-bottom: 1rem;
   background-color: #1f1f2b;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 14px;
   transition: box-shadow 0.2s;
   text-align: left;
   display: inline-block;
@@ -72,6 +72,7 @@ export const Container = styled.div`
     }
     a:nth-of-type(1) {
       background-color: #1e7cb4;
+      margin-top: 2rem;
       &:hover {
         background-color: ${shade(0.2, '#1e7cb4')};
       }
@@ -89,13 +90,6 @@ export const Container = styled.div`
       }
     }
     a:nth-of-type(4) {
-      background-color: #c27c2c;
-      &:hover {
-        background-color: ${shade(0.2, '#C27C2C')};
-      }
-    }
-
-    a.#c27c2cBtn {
       background-color: #c27c2c;
       &:hover {
         background-color: ${shade(0.2, '#C27C2C')};
@@ -153,8 +147,8 @@ export const Status = styled.span<StatusProps>`
     status === 'IN_UPDATE'
       ? styleTypes.IN_UPDATE
       : status === 'IN_PRODUCTION'
-      ? styleTypes.IN_PRODUCTION
-      : status === 'APPROVED'
-      ? styleTypes.PUBLISHED
-      : styleTypes.UNPUBLISHED}
+        ? styleTypes.IN_PRODUCTION
+        : status === 'APPROVED'
+          ? styleTypes.PUBLISHED
+          : styleTypes.UNPUBLISHED}
 `;

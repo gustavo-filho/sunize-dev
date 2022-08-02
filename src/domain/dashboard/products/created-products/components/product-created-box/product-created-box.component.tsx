@@ -15,30 +15,37 @@ interface Product {
 
 export const ProductCreatedBox = ({ product }: Product) => {
   return (
-    <Container key={product.id}>
-      <div>
-        <img src={product.image ? product.image : Photograph} alt="Produto" />
-        <Status status={product.status} />
-        {product.charge_type === 'RECURRENT' && (
-          <Status status={'ASSINATURA'} />
-        )}
-      </div>
+    <Link
+      to={
+        product.product_type === 'ONLINE_COURSE'
+          ? `/video-aula/${product.id}`
+          : `/dashboard/download`
+      }
+    >
+      <Container key={product.id}>
+        <div>
+          <img src={product.image ? product.image : Photograph} alt="Produto" />
+          <Status status={product.status} />
+          {product.charge_type === 'RECURRENT' && (
+            <Status status={'ASSINATURA'} />
+          )}
+        </div>
 
-      <strong>{product.title}</strong>
+        <strong>{product.title}</strong>
 
-      <div>
-        <Link to={`/dashboard/informacoes-gerais/manage/${product.id}`}>
-          Informações Gerais
-        </Link>
-        <Link to={`/dashboard/alunos/${product.id}`}>Meus alunos</Link>
-
-        {product.product_type === 'ONLINE_COURSE' && (
-          <Link to={`/dashboard/produtos-criados/${product.id}/gerenciar`}>
-            Adicionar seções e aulas
+        <div>
+          <Link to={`/dashboard/informacoes-gerais/manage/${product.id}`}>
+            Informações Gerais
           </Link>
-        )}
+          <Link to={`/dashboard/alunos/${product.id}`}>Meus alunos</Link>
 
-        {product.product_type === 'ONLINE_COURSE' ? (
+          {product.product_type === 'ONLINE_COURSE' && (
+            <Link to={`/dashboard/produtos-criados/${product.id}/gerenciar`}>
+              Adicionar seções e aulas
+            </Link>
+          )}
+
+          {/* {product.product_type === 'ONLINE_COURSE' ? (
           <Link
             to={
               product.product_type === 'ONLINE_COURSE'
@@ -59,8 +66,9 @@ export const ProductCreatedBox = ({ product }: Product) => {
           >
             Visualizar eBook
           </Link>
-        )}
-      </div>
-    </Container>
+        )} */}
+        </div>
+      </Container>
+    </Link>
   );
 };

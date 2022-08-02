@@ -10,25 +10,34 @@ import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/c
 import { Loader } from '@shared/components/loader/loader.component';
 import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import {
-  ASYNC_GET_PRODUCTS,
-  productSelector,
-} from '@domain/dashboard/products/products.store';
-import { useEffect } from 'react';
+
+import { useCallback, useEffect, useState } from 'react';
 import { userSelector } from '@domain/auth/user/user.store';
+import { api } from '@shared/services/api';
 
 export const MyProducts = () => {
+  const [products, setProducts] = useState([]);
+
   const user = useAppSelector(userSelector);
-  const products: any = useAppSelector(productSelector);
+
+  const getProducts = useCallback(async () => {
+    const response = await api.get(
+      `/users/${user.data.id}/products-purcharsed`,
+    );
+
+    setProducts(response.data);
+  }, [setProducts]);
+
+  // const products = useAppSelector(productSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.data.id }));
-  }, [dispatch, user.data.id]);
+    getProducts();
+  }, []);
 
   return (
     <>
-      {products.isLoading ? (
+      {!products ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>
@@ -51,16 +60,19 @@ export const MyProducts = () => {
                 Produtos Criados
               </LinksProducts>
             </div>
+
             <BoxWrapper>
-              {products.data.length
-                ? products.data.map((product: any, index: any) => (
-                    <ProductBox
-                      key={product.data.product.id}
-                      productOwnerId={product.data.product.owner_id}
-                      product={product.data.product}
-                    />
-                  ))
-                : !products.data[0] && <p>Você não tem nenhum produto.</p>}
+              {products.length > 0 ? (
+                products.map((product: any, index: any) => (
+                  <ProductBox
+                    key={product.data.product.id}
+                    productOwnerId={product.data.product.owner_id}
+                    product={product.data.product}
+                  />
+                ))
+              ) : (
+                <p>Você não tem nenhum produto.</p>
+              )}
             </BoxWrapper>
 
             {/*{totalPages > 1 && (*/}

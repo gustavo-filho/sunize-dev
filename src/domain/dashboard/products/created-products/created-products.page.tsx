@@ -1,17 +1,20 @@
 import {
   Container,
+  AnimationContainer,
   BoxWrapper,
   LinksProducts,
-  AnimationContainer,
+  PaginationContainer,
 } from './created-products.styles';
 import { Link } from 'react-router-dom';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { ProductCreatedBox } from '@domain/dashboard/products/created-products/components/product-created-box/product-created-box.component';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+
 import {
   ASYNC_GET_PRODUCTS,
   productSelector,
 } from '@domain/dashboard/products/products.store';
+
 import { useEffect } from 'react';
 import { userSelector } from '@domain/auth/user/user.store';
 
@@ -26,6 +29,7 @@ interface Product {
 
 export const CreatedProducts = () => {
   const products = useAppSelector(productSelector).data;
+
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector).data;
 
@@ -43,6 +47,7 @@ export const CreatedProducts = () => {
           <LinksProducts to="/dashboard/meus-produtos">Produtos</LinksProducts>
           <Link to="/dashboard/meus-produtos/criados">Produtos Criados</Link>
         </div>
+
         <BoxWrapper>
           {products[0] ? (
             products.map((product: Product) => (

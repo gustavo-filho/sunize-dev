@@ -7,8 +7,7 @@ import { toast } from 'react-toastify';
 export const ASYNC_GET_PRODUCTS = createAsyncThunk(
   'PRODUCTS/GET_PRODUCTS',
   async ({ userId }: { userId: number }) => {
-    const response = await api.get(`/users/${userId}/products-purcharsed`);
-
+    const response = await api.get(`/users/${userId}/products`);
     return response.data;
   },
 );
@@ -44,20 +43,25 @@ const productsReducer = createSlice({
       state.data = action.payload.data;
       state.isLoading = false;
     });
+
     builder.addCase(ASYNC_GET_PRODUCTS.pending, (state, action) => {
       state.isLoading = true;
     });
+
     builder.addCase(ASYNC_GET_PRODUCTS.rejected, (state, action) => {
       state.isLoading = false;
       toast.error('Erro ao carregar produtos');
     });
+
     builder.addCase(ASYNC_GET_CATEGORIES.fulfilled, (state, action) => {
       state.categories = action.payload.data;
     });
+
     builder.addCase(ASYNC_GET_AFFILIATES.fulfilled, (state, action) => {
       state.affiliatesProducts.data = action.payload.data;
       state.affiliatesProducts.totalPages = action.payload.totalPages;
     });
+
   },
   initialState: {
     data: [],
