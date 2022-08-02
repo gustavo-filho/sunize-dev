@@ -93,6 +93,7 @@ export const PersonInvitesPage = () => {
           <LinkTab to="/dashboard/edit-account/person-data">
             Dados pessoais
           </LinkTab>
+          <LinkTab to="/dashboard/edit-account/documents">Documentos</LinkTab>
           <LinkTab to="/dashboard/edit-account/notification">
             Notificações
           </LinkTab>

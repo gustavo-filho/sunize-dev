@@ -93,6 +93,7 @@ export const PersonNotificationPage = () => {
           <LinkTab to="/dashboard/edit-account/person-data">
             Dados pessoais
           </LinkTab>
+          <LinkTab to="/dashboard/edit-account/documents">Documentos</LinkTab>
           <LinkTab active to="/dashboard/edit-account/notification">
             Notificações
           </LinkTab>

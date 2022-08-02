@@ -1,3 +1,4 @@
+import { DocumentsPage } from '@domain/dashboard/account/edit-account/documents/documents.page';
 import { PersonInvitesPage } from '@domain/dashboard/account/edit-account/invites/invites.page';
 import { PersonNotificationPage } from '@domain/dashboard/account/edit-account/notification/notification.page';
 import { PersonPage } from '@domain/dashboard/account/edit-account/person-data/person-data.page';
@@ -49,6 +50,7 @@ export const DASHBOARD_ROUTES = {
   ACCOUNT_INFO: '/dashboard/edit-account/person-data',
   ACCOUNT_INVITES: '/dashboard/edit-account/invites',
   ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
+  ACCOUNT_DOCUMENTS: '/dashboard/edit-account/documents',
 };
 
 interface DashboardWrapperConstantsProps {
@@ -84,6 +86,7 @@ export const DashboardWrapperConstants = ({
     [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
     [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,
     [DASHBOARD_ROUTES.ACCOUNT_NOTIFICATIONS]: <PersonNotificationPage />,
+    [DASHBOARD_ROUTES.ACCOUNT_DOCUMENTS]: <DocumentsPage />,
   };
 
   return <>{components[route]}</>;
