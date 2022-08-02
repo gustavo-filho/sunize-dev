@@ -1,15 +1,15 @@
-import React, { useRef } from 'react'
-import { FaImage } from 'react-icons/fa'
-import { useParams } from 'react-router-dom'
+import React, { useRef } from 'react';
+import { FaImage } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
 import LockSafe from '../../paymet/assets/lock-safe.png';
-import { Container, Img, ProductImage, Voucher } from './product-card.styles'
-import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component'
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
+import { Container, Img, ProductImage, Voucher } from './product-card.styles';
+import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 
 export function ProductCard(): JSX.Element {
-  const { product, applyVoucher, voucherApplied, removeVoucher } = usePayment()
-  const { productId } = useParams<{ productId: string }>()
-  const inputVoucherRef = useRef<HTMLInputElement>(null)
+  const { product, applyVoucher, voucherApplied, removeVoucher } = usePayment();
+  const { productId } = useParams();
+  const inputVoucherRef = useRef<HTMLInputElement>(null);
 
   return (
     <Container>
@@ -35,7 +35,7 @@ export function ProductCard(): JSX.Element {
               <button
                 type="button"
                 onClick={() => {
-                  removeVoucher()
+                  removeVoucher();
                 }}
               >
                 X
@@ -51,7 +51,7 @@ export function ProductCard(): JSX.Element {
               onClick={() =>
                 applyVoucher({
                   voucher: inputVoucherRef.current?.value ?? '',
-                  productId,
+                  productId: String(productId),
                 })
               }
             >
@@ -92,5 +92,5 @@ export function ProductCard(): JSX.Element {
         )}
       </Voucher>
     </Container>
-  )
+  );
 }

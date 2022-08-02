@@ -1,25 +1,25 @@
-import { Container } from './video-class-header.styles';
-import Hamburger from 'hamburger-react';
+import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
+import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
 import {
   BoxInfo,
   LogoAndBars,
   UserInfo,
 } from '@domain/dashboard/components/Header/header.styles';
-import Logo from '@shared/assets/images/LogoLetter.png';
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
 import { Notifications } from '@domain/dashboard/components/Notifications/notifications.component';
-import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
-import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { Button } from '@mui/material';
-import { MdDashboard } from 'react-icons/md';
-import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
-import { useMedia } from '@shared/hooks/useMedia';
-import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
 import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
+import { Button } from '@mui/material';
+import Logo from '@shared/assets/images/LogoLetter.png';
+import { useMedia } from '@shared/hooks/useMedia';
+import Hamburger from 'hamburger-react';
+import { useState } from 'react';
+import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
+import { Container } from './video-class-header.styles';
 
 export const VideoClassHeader = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
@@ -27,7 +27,7 @@ export const VideoClassHeader = () => {
   const user = useAppSelector(userSelector);
   const sidebar = useAppSelector(sideBarSelector);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
@@ -78,10 +78,7 @@ export const VideoClassHeader = () => {
               <ul>
                 {user.data.account_type === 'ADMIN' && (
                   <li onClick={() => setIsOpenBoxInfo(false)}>
-                    <Button
-                      variant="text"
-                      onClick={() => history.push('/admin')}
-                    >
+                    <Button variant="text" onClick={() => navigate('/admin')}>
                       <span>
                         <FaHome />
                         Admin
@@ -93,7 +90,7 @@ export const VideoClassHeader = () => {
                   <Button
                     variant="text"
                     onClick={() =>
-                      history.push('/dashboard/edit-account/person-data')
+                      navigate('/dashboard/edit-account/person-data')
                     }
                   >
                     <span>
@@ -105,7 +102,7 @@ export const VideoClassHeader = () => {
                 <li onClick={() => setIsOpenBoxInfo(false)}>
                   <Button
                     variant="text"
-                    onClick={() => history.push('/dashboard/my-content')}
+                    onClick={() => navigate('/dashboard/my-content')}
                   >
                     <span>
                       <MdDashboard />

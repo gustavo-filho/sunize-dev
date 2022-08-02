@@ -1,26 +1,23 @@
-import { Route, useHistory } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { INITIAL_LOGIN, userSelector } from '@domain/auth/user/user.store';
-import { useCallback, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
-import { DashboardWrapper } from '@domain/dashboard/components/dashboard-wrapper/dashboard.wrapper';
-import { AdminWrapper } from '@domain/admin/components/admin-wrapper/admin.wrapper';
+import Cookies from 'js-cookie';
+import { useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 interface PrivateRouteWrapperProps {
-  path: string;
   isAdmin?: boolean;
+  layout: React.ComponentType;
 }
 
 export const PrivateRouteWrapper = ({
-  path,
   isAdmin = false,
-  ...rest
+  layout: Layout,
 }: PrivateRouteWrapperProps) => {
   const user = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   if (Cookies.get('@Sunize:user')) {
     const userData = JSON.parse(Cookies.get('@Sunize:user') ?? '');
@@ -33,32 +30,32 @@ export const PrivateRouteWrapper = ({
     }
 
     if (!hasPermission) {
-      history.push('/login');
+      navigate('/login');
     }
 
     if (isAdmin && userData.account_type !== 'ADMIN') {
-      history.push('/login');
+      navigate('/login');
     }
   } else {
-    history.push('/login');
+    navigate('/login');
   }
 
   //TODO: VERIFICAR SE O CÓDIGO DE ERRO É 401, SE SIM DESLOGAR
   const fetchData = useCallback(() => {
     api.get(`${API_ROUTES.USER.NAME.BY_ID}/${user.data.id}`).catch(() => {
       Cookies.set('@Sunize:user', '');
-      history.push('/login');
+      navigate('/login');
     });
-  }, [history, user.data.id]);
+  }, [navigate, user.data.id]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
   useEffect(() => {
     if (user.data.name === '') {
-      history.push('/login');
+      navigate('/login');
     }
-  }, [history, user.data]);
+  }, [navigate, user.data]);
 
-  return <Route exact {...rest} path={path} component={isAdmin ? AdminWrapper : DashboardWrapper} />;
+  return <Layout />;
 };

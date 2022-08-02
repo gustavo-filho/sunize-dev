@@ -12,13 +12,13 @@ import { Formik } from 'formik';
 import Cookies from 'js-cookie';
 import { useCallback, useEffect } from 'react';
 import { BiEnvelope } from 'react-icons/bi';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSubmit = useCallback(
     (values: UserAuthProps) => {
@@ -28,10 +28,10 @@ export const LoginPage = () => {
           password: values.password,
         }),
       ).then(() => {
-        history.push('/dashboard');
+        navigate('/dashboard');
       });
     },
-    [dispatch, history],
+    [dispatch, navigate],
   );
 
   useEffect(() => {
@@ -40,11 +40,11 @@ export const LoginPage = () => {
 
       if (userData.name) {
         api.get(`${API_ROUTES.USER.NAME.BY_ID}/${userData.id}`).then(() => {
-          history.push('/dashboard');
+          navigate('/dashboard');
         });
       }
     }
-  }, [history]);
+  }, [navigate]);
 
   return (
     <AuthRouteWrapper>
