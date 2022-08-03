@@ -12,7 +12,7 @@ import {
 } from 'react-icons/ai';
 import { FiBox } from 'react-icons/fi';
 import { MdGroup, MdGroups, MdOutlineCreateNewFolder } from 'react-icons/md';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { useAppSelector } from '../../../../store/hooks';
 import { sideBarSelector } from '@domain/dashboard/components/side-bar/side-bar.store';
@@ -21,7 +21,7 @@ export const SideBar = () => {
   const { pathname } = useLocation();
   const sidebar = useAppSelector(sideBarSelector);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <SideBarContainer collapsed={!sidebar.isOpen}>
@@ -29,28 +29,28 @@ export const SideBar = () => {
         <MenuItem
           active={pathname === DASHBOARD_ROUTES.DASHBOARD}
           icon={<VscGraphLine />}
-          onClick={() => history.push(DASHBOARD_ROUTES.DASHBOARD)}
+          onClick={() => navigate(DASHBOARD_ROUTES.DASHBOARD)}
         >
           Dashboard
         </MenuItem>
         <SubMenu title="Produtos" icon={<AiOutlineInbox />}>
           <MenuItem
             icon={<FiBox />}
-            onClick={() => history.push(DASHBOARD_ROUTES.MY_PRODUCTS)}
+            onClick={() => navigate(DASHBOARD_ROUTES.MY_PRODUCTS)}
             active={pathname === DASHBOARD_ROUTES.MY_PRODUCTS}
           >
             Meus produtos
           </MenuItem>
           <MenuItem
             icon={<MdOutlineCreateNewFolder />}
-            onClick={() => history.push(DASHBOARD_ROUTES.CREATE_PRODUCT)}
+            onClick={() => navigate(DASHBOARD_ROUTES.CREATE_PRODUCT)}
             active={pathname === DASHBOARD_ROUTES.CREATE_PRODUCT}
           >
             Criar produto
           </MenuItem>
           <MenuItem
             icon={<MdGroup />}
-            onClick={() => history.push(DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES)}
+            onClick={() => navigate(DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES)}
             active={pathname === DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES}
           >
             Produtos afiliados
@@ -59,7 +59,7 @@ export const SideBar = () => {
 
         <MenuItem
           icon={<AiOutlineShoppingCart />}
-          onClick={() => history.push(DASHBOARD_ROUTES.SALE_RECORD)}
+          onClick={() => navigate(DASHBOARD_ROUTES.SALE_RECORD)}
           active={pathname === DASHBOARD_ROUTES.SALE_RECORD}
         >
           Vendas
@@ -67,7 +67,7 @@ export const SideBar = () => {
 
         <MenuItem
           icon={<MdGroups />}
-          onClick={() => history.push(DASHBOARD_ROUTES.AFFILIATES)}
+          onClick={() => navigate(DASHBOARD_ROUTES.AFFILIATES)}
           active={pathname === DASHBOARD_ROUTES.AFFILIATES}
         >
           Afiliados
@@ -75,14 +75,14 @@ export const SideBar = () => {
 
         <MenuItem
           icon={<AiFillShop />}
-          onClick={() => history.push(DASHBOARD_ROUTES.MARKET)}
+          onClick={() => navigate(DASHBOARD_ROUTES.MARKET)}
           active={pathname === DASHBOARD_ROUTES.MARKET}
         >
           Mercado
         </MenuItem>
         <MenuItem
           icon={<AiFillBank />}
-          onClick={() => history.push(DASHBOARD_ROUTES.BALANCE)}
+          onClick={() => navigate(DASHBOARD_ROUTES.BALANCE)}
           active={
             pathname === DASHBOARD_ROUTES.BALANCE ||
             pathname === DASHBOARD_ROUTES.EXTRACT_BALANCE
@@ -92,7 +92,7 @@ export const SideBar = () => {
         </MenuItem>
         <MenuItem
           icon={<AiOutlineQuestionCircle />}
-          onClick={() => history.push(DASHBOARD_ROUTES.SUPPORT)}
+          onClick={() => navigate(DASHBOARD_ROUTES.SUPPORT)}
           active={pathname === DASHBOARD_ROUTES.SUPPORT}
         >
           Suporte

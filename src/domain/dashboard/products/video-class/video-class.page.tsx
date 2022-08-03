@@ -2,12 +2,8 @@
 
 import { VideoClassSidebar } from '@domain/dashboard/products/video-class/components/video-class-sidebar/video-class-sidebar.component';
 
-import {
-  useStyles,
-  StyledTabs,
-  StyledTab,
-  CommentButton,
-} from './video-class.styles';
+import { Avatar, Box, Button, TextField } from '@mui/material';
+import { theme } from '@shared/styles/theme.constants';
 import React, { useState } from 'react';
 import {
   AiOutlineCheckCircle,
@@ -19,11 +15,9 @@ import {
   AiOutlineLike,
   AiOutlineRight,
 } from 'react-icons/ai';
-import { theme } from '@shared/styles/theme.constants';
-import { Avatar, Box, Button, TextField } from '@mui/material';
-import Thumbnail from './assets/images/youtube-video-thumbnail.jpeg';
 import ReactStars from 'react-rating-stars-component';
-import { margin } from 'polished';
+import Thumbnail from './assets/images/youtube-video-thumbnail.jpeg';
+import { StyledTab, StyledTabs, useStyles } from './video-class.styles';
 
 export const VideoClass = () => {
   const classes = useStyles();

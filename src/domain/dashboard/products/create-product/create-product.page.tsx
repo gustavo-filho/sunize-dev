@@ -17,7 +17,7 @@ import { api } from '@shared/services/api';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { userSelector } from '@domain/auth/user/user.store';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { round } from 'lodash';
 import { schema } from './create-product.validation';
 import { Dropzone } from '@domain/dashboard/products/components/dropzone/dropzone.component';
@@ -30,7 +30,7 @@ import {
 
 export const CreateProduct = () => {
   const user = useAppSelector(userSelector).data;
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const categories = useAppSelector(productSelector).categories;
@@ -77,7 +77,7 @@ export const CreateProduct = () => {
             },
           );
 
-          history.push(`/dashboard/meus-produtos/criados`);
+          navigate(`/dashboard/meus-produtos/criados`);
           actions.setSubmitting(false);
         })
         .catch(err => {
@@ -88,7 +88,7 @@ export const CreateProduct = () => {
           actions.setSubmitting(false);
         });
     },
-    [image.uploadedFiles, user.id, user.access_token, history],
+    [image.uploadedFiles, user.id, user.access_token, navigate],
   );
 
   const validate = useCallback((values: any) => {

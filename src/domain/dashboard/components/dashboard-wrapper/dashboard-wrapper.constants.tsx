@@ -11,7 +11,6 @@ import { Recent } from '@domain/dashboard/market/components/recent/recent-compon
 import { Subscriptions } from '@domain/dashboard/market/components/subscriptions/subscriptions.component';
 import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
 import { Market } from '@domain/dashboard/market/market-page-index';
-import { Payment } from '@domain/dashboard/paymet/paymet.component';
 import { ProductsOfAffiliates } from '@domain/dashboard/products/affiliates/products-of-affiliates';
 import { CreatePackage } from '@domain/dashboard/products/create-package/create-package.page';
 import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
@@ -46,48 +45,36 @@ export const DASHBOARD_ROUTES = {
   MARKET_SUBSCRIPTIONS: '/dashboard/mercado/assinaturas',
   MARKET_EBOOKS: '/dashboard/mercado/ebooks',
   MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
-  PAYMENT: '/payment/:productId',
   ACCOUNT_INFO: '/dashboard/edit-account/person-data',
   ACCOUNT_INVITES: '/dashboard/edit-account/invites',
   ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
   ACCOUNT_DOCUMENTS: '/dashboard/edit-account/documents',
 };
 
-interface DashboardWrapperConstantsProps {
-  route: string;
-}
-
-export const DashboardWrapperConstants = ({
-  route,
-}: DashboardWrapperConstantsProps) => {
-  const components: { [key: string]: JSX.Element } = {
-    [DASHBOARD_ROUTES.DASHBOARD]: <Dashboard />,
-    [DASHBOARD_ROUTES.MY_PRODUCTS]: <MyProducts />,
-    [DASHBOARD_ROUTES.MY_CONTENT]: <MyContent />,
-    [DASHBOARD_ROUTES.MY_PACKAGES]: <MyPackages />,
-    [DASHBOARD_ROUTES.SUPPORT]: <Support />,
-    [DASHBOARD_ROUTES.CREATED_PRODUCTS]: <CreatedProducts />,
-    [DASHBOARD_ROUTES.CREATE_COURSE]: <CreateProduct />,
-    [DASHBOARD_ROUTES.CREATE_PACKAGE]: <CreatePackage />,
-    [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProductWrapper />,
-    [DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES]: <ProductsOfAffiliates />,
-    [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
-    [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
-    [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
-    [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
-    [DASHBOARD_ROUTES.MARKET]: <Market />,
-    [DASHBOARD_ROUTES.MARKET_RECENT]: <Recent />,
-    [DASHBOARD_ROUTES.MARKET_COURSES]: <Market />,
-    [DASHBOARD_ROUTES.MARKET_SUBSCRIPTIONS]: <Subscriptions />,
-    [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
-    [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
-    [DASHBOARD_ROUTES.PAYMENT]: <Payment />,
-    [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
-    [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
-    [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,
-    [DASHBOARD_ROUTES.ACCOUNT_NOTIFICATIONS]: <PersonNotificationPage />,
-    [DASHBOARD_ROUTES.ACCOUNT_DOCUMENTS]: <DocumentsPage />,
-  };
-
-  return <>{components[route]}</>;
+export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
+  [DASHBOARD_ROUTES.DASHBOARD]: <Dashboard />,
+  [DASHBOARD_ROUTES.MY_PRODUCTS]: <MyProducts />,
+  [DASHBOARD_ROUTES.MY_CONTENT]: <MyContent />,
+  [DASHBOARD_ROUTES.MY_PACKAGES]: <MyPackages />,
+  [DASHBOARD_ROUTES.SUPPORT]: <Support />,
+  [DASHBOARD_ROUTES.CREATED_PRODUCTS]: <CreatedProducts />,
+  [DASHBOARD_ROUTES.CREATE_COURSE]: <CreateProduct />,
+  [DASHBOARD_ROUTES.CREATE_PACKAGE]: <CreatePackage />,
+  [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProductWrapper />,
+  [DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES]: <ProductsOfAffiliates />,
+  [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
+  [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
+  [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
+  [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
+  [DASHBOARD_ROUTES.MARKET]: <Market />,
+  [DASHBOARD_ROUTES.MARKET_RECENT]: <Recent />,
+  [DASHBOARD_ROUTES.MARKET_COURSES]: <Market />,
+  [DASHBOARD_ROUTES.MARKET_SUBSCRIPTIONS]: <Subscriptions />,
+  [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
+  [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
+  [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
+  [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
+  [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,
+  [DASHBOARD_ROUTES.ACCOUNT_NOTIFICATIONS]: <PersonNotificationPage />,
+  [DASHBOARD_ROUTES.ACCOUNT_DOCUMENTS]: <DocumentsPage />,
 };

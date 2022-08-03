@@ -1,38 +1,54 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { LandingPage } from '@domain/landing/landing.page';
-import { LoginPage } from '@domain/auth/login/login.page';
+import { ADMIN_COMPONENTS, ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import { AdminWrapper } from '@domain/admin/components/admin-wrapper/admin.wrapper';
 import { ForgotPassword } from '@domain/auth/forgot-password/forgot-password.page';
-import { PrivateRouteWrapper } from './private-route.wrapper';
-import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
-import { PaymentProvider } from '@domain/dashboard/paymet/utils/usePaymet.component';
-import { Payment } from '@domain/dashboard/paymet/paymet.component';
-import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
-import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
+import { LoginPage } from '@domain/auth/login/login.page';
 import { LoadingPage } from '@domain/auth/register-user/loading-page/loading-page.index';
+import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
+import {
+  DASHBOARD_COMPONENTS,
+  DASHBOARD_ROUTES,
+} from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
+import { DashboardWrapper } from '@domain/dashboard/components/dashboard-wrapper/dashboard.wrapper';
+import { Payment } from '@domain/dashboard/paymet/paymet.component';
+import { PaymentProvider } from '@domain/dashboard/paymet/utils/usePaymet.component';
+import { LandingPage } from '@domain/landing/landing.page';
 import { RefundPage } from '@domain/refund/refund-page.index';
+import { BrowserRouter, Route, Routes as Switch } from 'react-router-dom';
+import { PrivateRouteWrapper } from './private-route.wrapper';
 
 export const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Route path="/login" exact component={LoginPage} />
-      <Route path="/register" exact component={RegisterComponent} />
-      <Route path="/forgot-pass" exact component={ForgotPassword} />
-      <Route path="/loading" exact component={LoadingPage} />
-      <Route path="/refund" exact component={RefundPage} />
-      <PrivateRouteWrapper path={DASHBOARD_ROUTES.DASHBOARD} />
-      <PrivateRouteWrapper path={DASHBOARD_ROUTES.MY_PRODUCTS} />
-      <PrivateRouteWrapper path={DASHBOARD_ROUTES.SUPPORT} />
-      <PrivateRouteWrapper path={DASHBOARD_ROUTES.BALANCE} />
-      <PrivateRouteWrapper path={DASHBOARD_ROUTES.MARKET} />
-      <PrivateRouteWrapper isAdmin path={ADMIN_ROUTES.ADMIN} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterComponent />} />
+      <Route path="/forgot-pass" element={<ForgotPassword />} />
+      <Route path="/loading" element={<LoadingPage />} />
+      <Route path="/refund" element={<RefundPage />} />
+      <Route
+        path="/dashboard"
+        element={<PrivateRouteWrapper layout={DashboardWrapper} />}
+      >
+        {Object.entries(DASHBOARD_ROUTES).map(([item, route]) => (
+          <Route path={route} element={DASHBOARD_COMPONENTS[route]} />
+        ))}
+      </Route>
+      <Route
+        path="/admin"
+        element={<PrivateRouteWrapper isAdmin layout={AdminWrapper} />}
+      >
+        {Object.entries(ADMIN_ROUTES).map(([item, route]) => (
+          <Route path={route} element={ADMIN_COMPONENTS[route]} />
+        ))}
+      </Route>
+
       <Route
         path="/payment/:productId"
-        component={() => (
+        element={
           <PaymentProvider>
             <Payment />
           </PaymentProvider>
-        )}
+        }
       />
     </Switch>
   </BrowserRouter>

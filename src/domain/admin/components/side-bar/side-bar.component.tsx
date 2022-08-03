@@ -18,7 +18,7 @@ import {
 } from 'react-icons/vsc';
 import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../../store/hooks';
 import { ADMIN_ROUTES } from '../admin-wrapper/admin-wrapper.constants';
 import './side-bar.styles.css';
@@ -27,7 +27,7 @@ export const SideBar = () => {
   const { pathname } = useLocation();
   const sidebar = useAppSelector(sideBarSelector);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <SideBarContainer collapsed={!sidebar.isOpen}>
@@ -35,7 +35,7 @@ export const SideBar = () => {
         <MenuItem
           active={pathname === ADMIN_ROUTES.ADMIN}
           icon={<VscGraphLine />}
-          onClick={() => history.push(ADMIN_ROUTES.ADMIN)}
+          onClick={() => navigate(ADMIN_ROUTES.ADMIN)}
         >
           Estatísticas
         </MenuItem>
@@ -43,14 +43,14 @@ export const SideBar = () => {
           <MenuItem
             active={pathname === ADMIN_ROUTES.FINANCIAL_RENEVUE}
             icon={<AiOutlineShop />}
-            onClick={() => history.push(ADMIN_ROUTES.FINANCIAL_RENEVUE)}
+            onClick={() => navigate(ADMIN_ROUTES.FINANCIAL_RENEVUE)}
           >
             Receita
           </MenuItem>
           <MenuItem
             active={pathname === ADMIN_ROUTES.FINANCIAL_TRANSACTIONS}
             icon={<VscGraph />}
-            onClick={() => history.push(ADMIN_ROUTES.FINANCIAL_TRANSACTIONS)}
+            onClick={() => navigate(ADMIN_ROUTES.FINANCIAL_TRANSACTIONS)}
           >
             Transações
           </MenuItem>
@@ -61,14 +61,14 @@ export const SideBar = () => {
               pathname === ADMIN_ROUTES.REFUNDS_REJECTED
             }
             icon={<HiOutlineReceiptRefund />}
-            onClick={() => history.push(ADMIN_ROUTES.REFUNDS_PENDING)}
+            onClick={() => navigate(ADMIN_ROUTES.REFUNDS_PENDING)}
           >
             Reembolsos
           </MenuItem>
           <MenuItem
             active={pathname === ADMIN_ROUTES.FINANCIAL_CHECKOUT}
             icon={<AiOutlineFundProjectionScreen />}
-            onClick={() => history.push(ADMIN_ROUTES.FINANCIAL_CHECKOUT)}
+            onClick={() => navigate(ADMIN_ROUTES.FINANCIAL_CHECKOUT)}
           >
             Checkout
           </MenuItem>
@@ -81,7 +81,7 @@ export const SideBar = () => {
               pathname === ADMIN_ROUTES.PRODUCTS_REJECTED
             }
             icon={<VscWorkspaceTrusted />}
-            onClick={() => history.push(ADMIN_ROUTES.PRODUCTS_PENDING)}
+            onClick={() => navigate(ADMIN_ROUTES.PRODUCTS_PENDING)}
           >
             Revisões de Produtos
           </MenuItem>
@@ -92,7 +92,7 @@ export const SideBar = () => {
               pathname === ADMIN_ROUTES.DOCUMENTS_REJECTED
             }
             icon={<AiOutlineFileSearch />}
-            onClick={() => history.push(ADMIN_ROUTES.DOCUMENTS_PENDING)}
+            onClick={() => navigate(ADMIN_ROUTES.DOCUMENTS_PENDING)}
           >
             Revisão de Documentos
           </MenuItem>
@@ -102,7 +102,7 @@ export const SideBar = () => {
               pathname === ADMIN_ROUTES.EMPLOYEES_CONTROL
             }
             icon={<VscOrganization />}
-            onClick={() => history.push(ADMIN_ROUTES.USERS_CONTROL)}
+            onClick={() => navigate(ADMIN_ROUTES.USERS_CONTROL)}
           >
             Controle de Usuários
           </MenuItem>
@@ -113,7 +113,7 @@ export const SideBar = () => {
               pathname === ADMIN_ROUTES.COMPLAINTS_REJECTED
             }
             icon={<VscReport />}
-            onClick={() => history.push(ADMIN_ROUTES.COMPLAINTS_PENDING)}
+            onClick={() => navigate(ADMIN_ROUTES.COMPLAINTS_PENDING)}
           >
             Central de Denúncias
           </MenuItem>
@@ -121,7 +121,7 @@ export const SideBar = () => {
         <MenuItem
           active={pathname === ADMIN_ROUTES.INFRA}
           icon={<VscServer />}
-          onClick={() => history.push(ADMIN_ROUTES.INFRA)}
+          onClick={() => navigate(ADMIN_ROUTES.INFRA)}
         >
           Infraestrutura
         </MenuItem>
