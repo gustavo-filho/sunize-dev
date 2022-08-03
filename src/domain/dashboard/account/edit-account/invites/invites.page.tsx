@@ -3,15 +3,12 @@ import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/c
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
 import { api } from '@shared/services/api';
 import { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../store/hooks';
 import {
   BoxWrapper,
-  ButtonSave,
   Container,
   LinkTab,
   Navigation,
-  NotificationSingle,
   PaginationContainer,
 } from '../edit-account.styles';
 import { Indicated, InviteLink } from './invites.styles';
@@ -19,9 +16,6 @@ import { Indicated, InviteLink } from './invites.styles';
 export const PersonInvitesPage = () => {
   const user = useAppSelector(userSelector);
   const [totalPages] = useState(5);
-
-  const [fieldNotification, setFieldNotification] = useState(false);
-  const [indication, setIndication] = useState(false);
 
   const [inviteLink, setInviteLink] = useState('');
 
@@ -40,8 +34,6 @@ export const PersonInvitesPage = () => {
   const getInvites = useCallback(async () => {
     try {
       const { data } = await api.get(`/users/${user.data.id}/invites`);
-      setFieldNotification(data.data.notification_sales_invite);
-      setIndication(data.data.notification_invite);
       setInviteLink(
         `${window.location.origin}/register?has_link=true&hash_link=${data.data.hash_link}`,
       );
@@ -54,20 +46,6 @@ export const PersonInvitesPage = () => {
     getInvites();
   }, [getInvites]);
 
-  const handleSubmit = async () => {
-    try {
-      await api.post(`/users/${user.data.id}/invites`, {
-        notification_invite: indication,
-        notification_sales_invite: fieldNotification,
-      });
-      toast.success(
-        'Suas configurações de convites foram alteradas com sucesso',
-      );
-    } catch (error) {
-      toast.error('Não foi possível alterar as configurações de convites');
-    }
-  };
-
   // const getIndications = async () => {
   //   try {
   //     const res = await api.get(`/users/${user.data.id}/invites-by-user`)
@@ -76,14 +54,6 @@ export const PersonInvitesPage = () => {
   //     console.error(e)
   //   }
   // }
-
-  const handleChange = (value: any) => {
-    setFieldNotification(value);
-  };
-
-  const handleIndicationChange = (value: any) => {
-    setIndication(value);
-  };
 
   return (
     <Container>
@@ -110,67 +80,6 @@ export const PersonInvitesPage = () => {
           <input value={inviteLink} disabled />
           <button onClick={handleCopyToClipboard}>{textTransfer}</button>
         </InviteLink>
-
-        <NotificationSingle>
-          <h1>Deseja habilitar notificações de indicação?</h1>
-          <main>
-            <div>
-              <input
-                name="indication"
-                id="indication"
-                type="radio"
-                checked={indication}
-                onChange={() => handleIndicationChange(true)}
-              />
-              <label htmlFor="indication">Sim</label>
-            </div>
-
-            <div>
-              <input
-                name="indication"
-                id="indication"
-                type="radio"
-                checked={!indication}
-                onChange={() => handleIndicationChange(false)}
-              />
-
-              <label htmlFor="indication">Não</label>
-            </div>
-          </main>
-        </NotificationSingle>
-
-        <NotificationSingle>
-          <h1>Deseja habilitar notificações de vendas por indicação?</h1>
-          <main>
-            <div>
-              <input
-                name="sales_indication"
-                id="sales_indication"
-                type="radio"
-                checked={fieldNotification}
-                onChange={() => handleChange(true)}
-              />
-              <label htmlFor="sales_indication">Sim</label>
-            </div>
-
-            <div>
-              <input
-                name="sales_indication"
-                id="sales_indication"
-                type="radio"
-                checked={!fieldNotification}
-                onChange={() => handleChange(false)}
-              />
-              <label htmlFor="sales_indication">Não</label>
-            </div>
-          </main>
-        </NotificationSingle>
-
-        <ButtonSave>
-          <button onClick={handleSubmit} className="btn btn-green">
-            Salvar
-          </button>
-        </ButtonSave>
 
         <Indicated>
           <h2>Pessoas que você indicou</h2>
