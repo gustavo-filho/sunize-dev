@@ -11,13 +11,17 @@ import {
   Navigation,
   PaginationContainer,
 } from '../edit-account.styles';
+import { IndicatedBox } from './components/indicated-box/indicated-box.component';
 import { Indicated, InviteLink } from './invites.styles';
 
 export const PersonInvitesPage = () => {
   const user = useAppSelector(userSelector);
-  const [totalPages] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [page, setPage] = useState(0);
 
   const [inviteLink, setInviteLink] = useState('');
+  const [usersInvited, setUsersInvited] = useState([]);
 
   const [offset, setOffset] = useState(0);
 
@@ -46,14 +50,30 @@ export const PersonInvitesPage = () => {
     getInvites();
   }, [getInvites]);
 
-  // const getIndications = async () => {
-  //   try {
-  //     const res = await api.get(`/users/${user.data.id}/invites-by-user`)
-  //     console.log(res)
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
+  const getIndications = useCallback(async () => {
+    try {
+      const { data } = await api.get(`/users/${user.data.id}/invites-by-user`, {
+        params: {
+          page,
+          paginate: 6,
+        },
+      });
+
+      if (data.success) {
+        setUsersInvited(data.data);
+
+        if (totalPages !== data.totalPages) setTotalPages(data.totalPages);
+        if (totalUsers !== data.totalItems) setTotalUsers(data.totalItems);
+        if (data.currentPage !== page) setPage(data.currentPage);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user, totalPages, totalUsers, page]);
+
+  useEffect(() => {
+    getIndications();
+  }, [getIndications]);
 
   return (
     <Container>
@@ -85,21 +105,27 @@ export const PersonInvitesPage = () => {
           <h2>Pessoas que você indicou</h2>
 
           <section>
-            {/* {indications.map((v, k) => (
-              <IndicatedBox key={k} image={v.image} userName={v.userName} />
-            ))} */}
+            {usersInvited.map(
+              (user: { name: string; photo: string | null }) => (
+                <IndicatedBox
+                  key={`${user.name}-list`}
+                  photo={user.photo}
+                  name={user.name}
+                />
+              ),
+            )}
           </section>
 
-          {/* {totalPages > 1 && ( */}
-          <PaginationContainer>
-            <Pagination
-              style={{ backgroundColor: '#27293d' }}
-              totalPages={totalPages}
-              offset={offset}
-              setOffset={setOffset}
-            />
-          </PaginationContainer>
-          {/* )} */}
+          {totalPages > 1 && (
+            <PaginationContainer>
+              <Pagination
+                style={{ backgroundColor: '#27293d' }}
+                totalPages={totalPages}
+                offset={offset}
+                setOffset={setOffset}
+              />
+            </PaginationContainer>
+          )}
         </Indicated>
 
         <CopyrightFooter />
