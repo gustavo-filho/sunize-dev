@@ -1,10 +1,10 @@
 import { api } from '@shared/services/api';
 import { Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiEnvelope, BiUser } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
 import { MdOutlineContactMail } from 'react-icons/md';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ButtonComponent } from './component/button-component/button-component.index';
 import { InputComponent } from './component/input-component/input-component';
@@ -14,11 +14,19 @@ import { WrapperAuth } from './wrapper/wrapper-component.index';
 
 export function RegisterComponent(): JSX.Element {
   const [document, setDocument] = useState('');
+  const [indicationHash, setIndicationHash] = useState('');
   const navigate = useNavigate();
   const chooseMaskDocument = (documentLength: number) => {
     if (documentLength < 15) return '999.999.999-99?';
     return '99.999.999/9999-99';
   };
+
+  let [searchParams] = useSearchParams();
+  useEffect(() => {
+    let has_link = searchParams.get('has_link');
+    let hash_link = searchParams.get('hash_link');
+    if (has_link && hash_link) setIndicationHash(hash_link);
+  }, [searchParams]);
 
   async function handleSubmit(values: any): Promise<void> {
     try {
@@ -28,6 +36,8 @@ export function RegisterComponent(): JSX.Element {
         phone: values.phone,
         password: values.password,
         cpf: values.cpf,
+        has_link: !!indicationHash,
+        hash_link: indicationHash,
       });
       toast.success('Conta cadastrada com sucesso, favor realizar o login!');
       navigate('/login');
