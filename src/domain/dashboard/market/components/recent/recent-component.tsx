@@ -78,14 +78,13 @@ export function Recent(): JSX.Element {
                         </NavLink>
                     </li>*/}
                     <li>
-                        <NavLink to="/dashboard/mercado/cursos" activeClassName="active">
+                        <NavLink to="/dashboard/mercado/cursos">
                             <b>Cursos</b>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
                             to="/dashboard/mercado/assinaturas"
-                            activeClassName="active"
                         >
                             <b>Assinaturas</b>
                         </NavLink>
@@ -93,7 +92,6 @@ export function Recent(): JSX.Element {
                     <li>
                         <NavLink
                             to="/dashboard/mercado/top-comissoes"
-                            activeClassName="active"
                         >
                             <b>Top Comissões</b>
                         </NavLink>

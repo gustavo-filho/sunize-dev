@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Switch, Route } from 'react-router-dom'
+import { NavLink, Routes as Switch, Route } from 'react-router-dom'
 import { Recent } from './components/recent/recent-component'
 import { EBooks } from './components/ebook/ebook.component';
 import { Courses } from './components/courses/courses.component'
@@ -87,14 +87,13 @@ export function Market(): JSX.Element {
                         </NavLink>
                         </li>*/}
                     <li>
-                        <NavLink to="/dashboard/mercado/cursos" activeClassName="active">
+                        <NavLink to="/dashboard/mercado/cursos" >
                             <b>Cursos</b>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
                             to="/dashboard/mercado/assinaturas"
-                            activeClassName="active"
                         >
                             <b>Assinaturas</b>
                         </NavLink>
@@ -102,7 +101,6 @@ export function Market(): JSX.Element {
                     <li>
                         <NavLink
                             to="/dashboard/mercado/top-comissoes"
-                            activeClassName="active"
                         >
                             <b>Top Comissões</b>
                         </NavLink>
@@ -111,12 +109,12 @@ export function Market(): JSX.Element {
             </Filter>
             <ProductWrapper>
                 <Switch>
-                    <Route path="/dashboard/mercado" exact component={Courses} />
-                    <Route path="/dashboard/mercado/cursos" component={Courses} />
-                    <Route path="/dashboard/mercado/recentes" component={Recent} />
-                    <Route path="/dashboard/mercado/assinaturas" component={Subscriptions} />
-                    <Route path="/dashboard/mercado/ebooks" component={EBooks} />
-                    <Route path="/dashboard/mercado/top-comissoes" component={TopCommissions} />
+                    <Route path="/dashboard/mercado"  element={<Courses />} />
+                    <Route path="/dashboard/mercado/cursos" element={<Courses />} />
+                    <Route path="/dashboard/mercado/recentes" element={<Recent />} />
+                    <Route path="/dashboard/mercado/assinaturas" element={<Subscriptions />} />
+                    <Route path="/dashboard/mercado/ebooks" element={<EBooks />} />
+                    <Route path="/dashboard/mercado/top-comissoes" element={<TopCommissions />} />
                 </Switch>
             </ProductWrapper>
             <CopyrightFooter limitWidth={1030} />

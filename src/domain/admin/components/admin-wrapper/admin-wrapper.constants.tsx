@@ -24,7 +24,7 @@ export const ADMIN_ROUTES = {
   FINANCIAL_RENEVUE: '/admin/financeiro/receitas',
   FINANCIAL_TRANSACTIONS: '/admin/financeiro/transacoes',
   FINANCIAL_CHECKOUT: '/admin/financeiro/checkout',
-  
+
   REFUNDS_PENDING: '/admin/producao/reembolsos/pendentes',
   REFUNDS_APPROVED: '/admin/producao/reembolsos/aprovados',
   REFUNDS_REJECTED: '/admin/producao/reembolsos/rejeitados',
@@ -47,41 +47,31 @@ export const ADMIN_ROUTES = {
   INFRA: '/admin/infraestrutura',
 };
 
-interface AdminWrapperConstantsProps {
-  route: string;
-}
+export const ADMIN_COMPONENTS = {
+  [ADMIN_ROUTES.ADMIN]: <Admin />,
 
-export const AdminWrapperConstants = ({
-  route,
-}: AdminWrapperConstantsProps) => {
-  const components: { [key: string]: JSX.Element } = {
-    [ADMIN_ROUTES.ADMIN]: <Admin />,
+  [ADMIN_ROUTES.FINANCIAL_RENEVUE]: <Renevue />,
+  [ADMIN_ROUTES.FINANCIAL_TRANSACTIONS]: <Transactions />,
+  [ADMIN_ROUTES.FINANCIAL_CHECKOUT]: <Checkout />,
 
-    [ADMIN_ROUTES.FINANCIAL_RENEVUE]: <Renevue />,
-    [ADMIN_ROUTES.FINANCIAL_TRANSACTIONS]: <Transactions />,
-    [ADMIN_ROUTES.FINANCIAL_CHECKOUT]: <Checkout />,
+  [ADMIN_ROUTES.REFUNDS_PENDING]: <RefundsPending />,
+  [ADMIN_ROUTES.REFUNDS_APPROVED]: <RefundsApproved />,
+  [ADMIN_ROUTES.REFUNDS_REJECTED]: <RefundsRejected />,
 
-    [ADMIN_ROUTES.REFUNDS_PENDING]: <RefundsPending />,
-    [ADMIN_ROUTES.REFUNDS_APPROVED]: <RefundsApproved />,
-    [ADMIN_ROUTES.REFUNDS_REJECTED]: <RefundsRejected />,
+  [ADMIN_ROUTES.PRODUCTS_PENDING]: <ProductsPending />,
+  [ADMIN_ROUTES.PRODUCTS_APPROVED]: <ProductsApproved />,
+  [ADMIN_ROUTES.PRODUCTS_REJECTED]: <ProductsRejected />,
 
-    [ADMIN_ROUTES.PRODUCTS_PENDING]: <ProductsPending />,
-    [ADMIN_ROUTES.PRODUCTS_APPROVED]: <ProductsApproved />,
-    [ADMIN_ROUTES.PRODUCTS_REJECTED]: <ProductsRejected />,
+  [ADMIN_ROUTES.USERS_CONTROL]: <UsersControl />,
+  [ADMIN_ROUTES.EMPLOYEES_CONTROL]: <EmployeesControl />,
 
-    [ADMIN_ROUTES.USERS_CONTROL]: <UsersControl />,
-    [ADMIN_ROUTES.EMPLOYEES_CONTROL]: <EmployeesControl />,
+  [ADMIN_ROUTES.DOCUMENTS_PENDING]: <DocumentsPending />,
+  [ADMIN_ROUTES.DOCUMENTS_APPROVED]: <DocumentsApproved />,
+  [ADMIN_ROUTES.DOCUMENTS_REJECTED]: <DocumentsRejected />,
 
-    [ADMIN_ROUTES.DOCUMENTS_PENDING]: <DocumentsPending />,
-    [ADMIN_ROUTES.DOCUMENTS_APPROVED]: <DocumentsApproved />,
-    [ADMIN_ROUTES.DOCUMENTS_REJECTED]: <DocumentsRejected />,
+  [ADMIN_ROUTES.COMPLAINTS_PENDING]: <ComplaintsPending />,
+  [ADMIN_ROUTES.COMPLAINTS_APPROVED]: <ComplaintsApproved />,
+  [ADMIN_ROUTES.COMPLAINTS_REJECTED]: <ComplaintsRejected />,
 
-    [ADMIN_ROUTES.COMPLAINTS_PENDING]: <ComplaintsPending />,
-    [ADMIN_ROUTES.COMPLAINTS_APPROVED]: <ComplaintsApproved />,
-    [ADMIN_ROUTES.COMPLAINTS_REJECTED]: <ComplaintsRejected />,
-
-    [ADMIN_ROUTES.INFRA]: <Infra />,
-  };
-
-  return <>{components[route]}</>;
+  [ADMIN_ROUTES.INFRA]: <Infra />,
 };

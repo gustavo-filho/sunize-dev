@@ -11,7 +11,7 @@ import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 
 export function BankSlip(): JSX.Element {
     const user = useAppSelector(userSelector);
-    const { productId } = useParams<{ productId: string }>()
+    const { productId } = useParams()
     const { voucherApplied } = usePayment()
     const [bankSlipLink, setBankSlipLink] = useState('')
     const [statusDescription, setStatusDescription] = useState('')

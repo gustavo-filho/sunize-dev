@@ -13,7 +13,7 @@ import { Button } from '@mui/material';
 import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 import {
   sideBarSelector,
@@ -26,7 +26,7 @@ export const Header = () => {
   const mobile = useMedia('(max-width: 700px)');
   const user = useAppSelector(userSelector);
   const sidebar = useAppSelector(sideBarSelector);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -50,11 +50,9 @@ export const Header = () => {
           }}
         />
 
-
-          <LogoAndBars>
-            <img src={Logo} alt="Sunize" />
-          </LogoAndBars>
-
+        <LogoAndBars>
+          <img src={Logo} alt="Sunize" />
+        </LogoAndBars>
       </div>
 
       <UserInfo>
@@ -82,10 +80,7 @@ export const Header = () => {
             <BoxInfo>
               <ul>
                 <li onClick={() => setIsOpenBoxInfo(false)}>
-                  <Button
-                    variant="text"
-                    onClick={() => history.push('/dashboard')}
-                  >
+                  <Button variant="text" onClick={() => navigate('/dashboard')}>
                     <span>
                       <FaHome />
                       Dashboard
@@ -96,7 +91,7 @@ export const Header = () => {
                   <Button
                     variant="text"
                     onClick={() =>
-                      history.push('/dashboard/edit-account/person-data')
+                      navigate('/dashboard/edit-account/person-data')
                     }
                   >
                     <span>
