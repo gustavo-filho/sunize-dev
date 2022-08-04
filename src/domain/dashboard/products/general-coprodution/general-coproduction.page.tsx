@@ -72,7 +72,7 @@ export const CoProductionPage = () => {
 
   const getProductionData = useCallback(async () => {
     try {
-      const response = await api.get(`/products/${productId}`);
+      const response = await api.get(`products/${productId}`);
       setProduct(response.data.data);
       setCoProductorTax(response.data.data.product.co_productor_tax);
     } catch (err) {
@@ -90,7 +90,8 @@ export const CoProductionPage = () => {
 
   useEffect(() => {
     getProductionData();
-  }, [getProductionData]);
+    getCoproductionData();
+  }, [getProductionData, getCoproductionData]);
 
   async function handleSubmit() {
     try {

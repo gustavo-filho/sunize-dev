@@ -20,6 +20,7 @@ import { Input } from '@shared/components/input/input.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import InputMasked from '../input-masked/input-masked.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Error } from '@domain/admin/production/products-review/components/product-box-pending/product-box-pending.styles';
 
 export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
   const user = useAppSelector(userSelector).data;
@@ -52,8 +53,8 @@ export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
       await delay(1000);
 
       dataChanged();
-    } catch (err) {
-      toast.error('Erro ao atribuir comissão para o co-produtor.');
+    } catch (err: any) {
+      toast.error(err.response.data.message);
       handleCloseModal();
     }
   }

@@ -42,18 +42,18 @@ const ModalConfirmDelete: React.FC<Props> = ({
     } else {
       setIsErrored(false);
       handleCloseModal();
+    }
 
-      const response = await api.delete(`user/${user.id}/coProducer`, {
+    try {
+      await api.delete(`user/${user.id}/coProducer`, {
         data: {
           userID: data.id,
         },
       });
 
-      toast.success(response.data.success);
-    }
-    try {
+      toast.success('Co-produtor removido com sucesso!');
     } catch (err) {
-      toast.error('Erro ao deletar produto');
+      toast.error('Erro ao deletar co-produtor');
       dataChanged();
     }
 
@@ -82,7 +82,7 @@ const ModalConfirmDelete: React.FC<Props> = ({
               </p>
 
               <InputNoLib
-                style={{ backgroundColor: "#27293D"}}
+                style={{ backgroundColor: '#27293D' }}
                 icon={FaTrashAlt}
                 placeholder="Digite o nome exatamente como acima"
                 onChange={(e: any) => setInputValue(e.target.value)}
