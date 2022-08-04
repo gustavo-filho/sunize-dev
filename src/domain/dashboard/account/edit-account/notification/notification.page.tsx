@@ -12,7 +12,7 @@ import {
   ContainerBox,
   LinkTab,
   Navigation,
-  NotificationSingle,
+  NotificationSingle
 } from '../edit-account.styles';
 
 export const PersonNotificationPage = () => {
@@ -33,6 +33,21 @@ export const PersonNotificationPage = () => {
   useEffect(() => {
     getUserData();
   }, [getUserData]);
+
+  const getInvites = useCallback(async () => {
+    try {
+      const { data } = await api.get(`/users/${user.data.id}/invites`);
+      setFieldNotification(data.data.notification_sales_invite);
+      setIndication(data.data.notification_invite);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    getInvites();
+  }, [getInvites]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [affiliationRequest, setAffiliationRequest] = useState<
@@ -47,6 +62,11 @@ export const PersonNotificationPage = () => {
     undefined,
   );
 
+  const [indication, setIndication] = useState<undefined | boolean>(false);
+  const [fieldNotification, setFieldNotification] = useState<
+    undefined | boolean
+  >(false);
+
   useEffect(() => {
     if (userData) {
       setAffiliationRequest(userData.notifications.affiliation_request);
@@ -55,6 +75,17 @@ export const PersonNotificationPage = () => {
       setProducerSale(userData.notifications.producer_sale);
     }
   }, [userData]);
+
+  const changeInviteNotification = useCallback(async () => {
+    try {
+      await api.post(`/users/${user.data.id}/invites`, {
+        notification_invite: indication,
+        notification_sales_invite: fieldNotification,
+      });
+    } catch (error) {
+      toast.error('Não foi possível alterar as configurações de convites');
+    }
+  }, [user, indication, fieldNotification]);
 
   const onSubmit = useCallback(async () => {
     setIsSubmitting(true);
@@ -70,6 +101,7 @@ export const PersonNotificationPage = () => {
 
     try {
       const { data } = await api.put(`users/${user.data.id}`, dataForm);
+      await changeInviteNotification();
 
       if (data.success) toast.success(data.message);
     } catch (err: any) {
@@ -83,6 +115,7 @@ export const PersonNotificationPage = () => {
     affiliationRequest,
     producerSale,
     user,
+    changeInviteNotification,
   ]);
 
   return (
@@ -208,6 +241,61 @@ export const PersonNotificationPage = () => {
                     defaultChecked={!producerSale}
                   />
                   <label htmlFor="producer_sale_false">Não</label>
+                </div>
+              </main>
+            </NotificationSingle>
+
+            <NotificationSingle>
+              <h1>Deseja habilitar notificações de indicação?</h1>
+              <main>
+                <div>
+                  <input
+                    name="indication"
+                    id="indication"
+                    type="radio"
+                    checked={indication}
+                    onChange={() => setIndication(true)}
+                  />
+                  <label htmlFor="indication">Sim</label>
+                </div>
+
+                <div>
+                  <input
+                    name="indication"
+                    id="indication"
+                    type="radio"
+                    checked={!indication}
+                    onChange={() => setIndication(false)}
+                  />
+
+                  <label htmlFor="indication">Não</label>
+                </div>
+              </main>
+            </NotificationSingle>
+
+            <NotificationSingle>
+              <h1>Deseja habilitar notificações de vendas por indicação?</h1>
+              <main>
+                <div>
+                  <input
+                    name="sales_indication"
+                    id="sales_indication"
+                    type="radio"
+                    checked={fieldNotification}
+                    onChange={() => setFieldNotification(true)}
+                  />
+                  <label htmlFor="sales_indication">Sim</label>
+                </div>
+
+                <div>
+                  <input
+                    name="sales_indication"
+                    id="sales_indication"
+                    type="radio"
+                    checked={!fieldNotification}
+                    onChange={() => setFieldNotification(false)}
+                  />
+                  <label htmlFor="sales_indication">Não</label>
                 </div>
               </main>
             </NotificationSingle>
