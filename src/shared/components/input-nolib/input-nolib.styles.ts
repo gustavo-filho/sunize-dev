@@ -9,15 +9,14 @@ interface ContainerProps {
 
 export const Content = styled.div`
   position: relative;
-  
-  /* margin-top: 2rem; */
+  margin-top: 2rem;
 
   div + div {
     margin-bottom: 2rem;
   }
 
-  .field {
-    margin-bottom: 10px;
+  > div {
+    margin-bottom: 15px;
 
     label {
       color: #848484;
@@ -40,7 +39,8 @@ export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
   width: 100%;
   height: 50px;
-  background-color: #fff;
+  background-color: #27293D;
+  border: none;
   border: 1px solid #c2c2c2;
   font-size: 18px;
   color: #070707;
@@ -52,31 +52,25 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
 
-  ${({ isFocused }) =>
-    !!isFocused &&
-    css`
-      border-color: #e7af07;
-    `}
-
   > svg {
     margin-right: 12px;
     color: #c2c2c2;
 
     ${({ isFilled }) =>
-      !!isFilled &&
-      css`
+    !!isFilled &&
+    css`
         color: #e7af07;
       `}
 
     ${({ isErrored }) =>
-      !!isErrored &&
-      css`
+    !!isErrored &&
+    css`
         color: #ff5252;
       `}
 
     ${({ isFocused }) =>
-      !!isFocused &&
-      css`
+    !!isFocused &&
+    css`
         color: #e7af07;
       `}
   }
@@ -85,6 +79,12 @@ export const Container = styled.div<ContainerProps>`
     !!isErrored &&
     css`
       border-color: #ff5252;
+    `}
+
+  ${({ isFocused }) =>
+    !!isFocused &&
+    css`
+      border-color: #e7af07;
     `}
 
   &::placeholder {

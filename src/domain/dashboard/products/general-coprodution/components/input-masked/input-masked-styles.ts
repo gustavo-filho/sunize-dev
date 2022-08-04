@@ -1,23 +1,22 @@
-import styled, { css } from 'styled-components'
-import { Tooltip } from '../Tooltip/tooltip.component'
+import { Tooltip } from '@shared/components/Tooltip/tooltip.component';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
-  isFocused: number
-  isFilled: number
-  isErrored: number
+  isFocused: number;
+  isFilled: number;
+  isErrored: number;
 }
 
 export const Content = styled.div`
   position: relative;
-  
-  /* margin-top: 2rem; */
+  margin-top: 1rem;
 
   div + div {
     margin-bottom: 2rem;
   }
 
   .field {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 
     label {
       color: #848484;
@@ -34,16 +33,16 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
   width: 100%;
   height: 50px;
-  background-color: #fff;
-  border: 1px solid #c2c2c2;
+  background-color: rgb(30, 31, 50);
+  border: 1px solid rgb(67, 66, 72);
   font-size: 18px;
-  color: #070707;
+  color: rgb(209, 209, 209);
   font-weight: 500;
   padding: 0 17px;
   outline: 0;
@@ -55,7 +54,7 @@ export const Container = styled.div<ContainerProps>`
   ${({ isFocused }) =>
     !!isFocused &&
     css`
-      border-color: #e7af07;
+      border-color: #c2c2c2;
     `}
 
   > svg {
@@ -65,7 +64,7 @@ export const Container = styled.div<ContainerProps>`
     ${({ isFilled }) =>
       !!isFilled &&
       css`
-        color: #e7af07;
+        color: #c2c2c2;
       `}
 
     ${({ isErrored }) =>
@@ -77,7 +76,7 @@ export const Container = styled.div<ContainerProps>`
     ${({ isFocused }) =>
       !!isFocused &&
       css`
-        color: #e7af07;
+        color: #c2c2c2;
       `}
   }
 
@@ -100,8 +99,9 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100%;
     font-size: 16px;
+    color: #fff;
   }
-`
+`;
 
 export const Error = styled(Tooltip)`
   height: 20px;
@@ -118,4 +118,4 @@ export const Error = styled(Tooltip)`
       border-color: #ff5252 transparent;
     }
   }
-`
+`;

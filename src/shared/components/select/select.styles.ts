@@ -1,3 +1,4 @@
+import Select from "react-select"
 import styled, { css } from 'styled-components';
 
 interface ContainerProps {
@@ -23,17 +24,21 @@ export const Container = styled.div<ContainerProps>`
     border: 1px solid #c2c2c2;
 
     ${({ heightSelect }) =>
-      !!heightSelect &&
-      css`
+    !!heightSelect &&
+    css`
         height: ${heightSelect + 'px'};
       `}
 
     ${({ isErrored }) =>
-      isErrored &&
-      css`
+    isErrored &&
+    css`
         border: 1px solid rgb(255, 82, 82);
       `}
   }
+`;
+
+export const SelectContainer = styled(Select)`
+  z-index: 100 !important; //fix opacity problem of select dropdown
 `;
 
 export const Note = styled.div<NoteProps>`

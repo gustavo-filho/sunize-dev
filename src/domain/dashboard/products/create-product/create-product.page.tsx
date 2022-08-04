@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // @ts-nocheck
 
 import selectImage from '../assets/images/select-image.png';
@@ -43,20 +44,18 @@ export const CreateProduct = () => {
   }, [dispatch]);
 
   const onSubmit = useCallback(
-    (values: any, actions: any) => {
+    async (values: any, actions: any) => {
       const value = round(values.price, 2);
       const dadosForm = new FormData();
+
       dadosForm.append('title', values.title);
       dadosForm.append('description', values.description);
       dadosForm.append('currency', values.currency);
-      // @ts-ignore
       dadosForm.append('price', value);
       dadosForm.append('product_type', 'ONLINE_COURSE');
       dadosForm.append('charge_type', values.charge_type);
-
-      // @ts-ignore
       dadosForm.append('categories', [values.category]);
-      // @ts-ignore
+
       dadosForm.append('commission', 0);
       dadosForm.append(
         'membership_period',
@@ -65,28 +64,25 @@ export const CreateProduct = () => {
       image.uploadedFiles[0] &&
         dadosForm.append('image', image.uploadedFiles[0].file);
 
-      api
-        .post(`users/${user.id}/products`, dadosForm, {
-          headers: { 'sunize-access-token': user.access_token },
-        })
-        .then(response => {
-          toast.success(
-            'O curso foi enviado para análise, aguarde nossa resposta.',
-            {
-              position: 'top-right',
-            },
-          );
+      try {
+        await api.post(`users/${user.id}/products`, dadosForm);
 
-          navigate(`/dashboard/meus-produtos/criados`);
-          actions.setSubmitting(false);
-        })
-        .catch(err => {
-          toast.error('Ocorreu um erro ao tentar enviar o produto.', {
+        toast.success(
+          'O curso foi enviado para análise, aguarde nossa resposta.',
+          {
             position: 'top-right',
-          });
+          },
+        );
 
-          actions.setSubmitting(false);
+        navigate(`/dashboard/meus-produtos/criados`);
+        actions.setSubmitting(false);
+      } catch (err) {
+        toast.error('Ocorreu um erro ao tentar enviar o produto.', {
+          position: 'top-right',
         });
+
+        actions.setSubmitting(false);
+      }
     },
     [image.uploadedFiles, user.id, user.access_token, navigate],
   );

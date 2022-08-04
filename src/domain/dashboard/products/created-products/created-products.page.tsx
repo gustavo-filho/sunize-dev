@@ -3,7 +3,6 @@ import {
   AnimationContainer,
   BoxWrapper,
   LinksProducts,
-  PaginationContainer,
 } from './created-products.styles';
 import { Link } from 'react-router-dom';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';

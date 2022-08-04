@@ -8,6 +8,11 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Nunito', sans-serif;
     }
+    input, textarea {
+        color: #FFF;
+        outline: 0;   
+        border: 0;
+    }
     html {
         @media (max-width: 1080px) {
             font-size: 93.75%;
@@ -28,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 300;
     }
     h1, h2, h3, h4, h5, h6 {
+        color: #FFF;
         font-weight: 300;
     }
     strong {
