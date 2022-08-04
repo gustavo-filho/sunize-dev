@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { STORE_DOMAIN } from '../../../store/store.constants';
-import { RootState } from '../../../store/store';
 import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
-import { UserAuthProps } from './user.types';
-import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
+import { RootState } from '../../../store/store';
+import { STORE_DOMAIN } from '../../../store/store.constants';
+import { UserAuthProps } from './user.types';
 
 export const ASYNC_SIGN_IN = createAsyncThunk(
   'USER/SIGN_IN',
@@ -60,7 +60,7 @@ const userReducer = createSlice({
       account_type: '',
       id: 0,
       access_token: '',
-      photo: ''
+      photo: '',
     },
     loading: false,
     error: {},
@@ -75,9 +75,23 @@ const userReducer = createSlice({
         state.data = JSON.parse(Cookies.get('@Sunize:user') ?? '');
     },
     SIGN_OUT: state => {
-      Cookies.set('@Sunize:user', '')
-      state.data = userReducer.getInitialState().data
-    }
+      Cookies.set('@Sunize:user', '');
+      state.data = userReducer.getInitialState().data;
+    },
+    UPDATE_PHOTO: state => {
+      if (Cookies.get('@Sunize:photo')) {
+        state.data = {
+          ...state.data,
+          photo: Cookies.get('@Sunize:photo') ?? '',
+        };
+
+        const oldUser = JSON.parse(Cookies.get('@Sunize:user') ?? '');
+        if (oldUser) {
+          oldUser.photo = state.data.photo;
+          Cookies.set('@Sunize:user', JSON.stringify(oldUser));
+        }
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(ASYNC_SIGN_IN.pending, (state, action) => {

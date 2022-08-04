@@ -1,7 +1,6 @@
 import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import InputMasked from '@shared/components/input-masked/input-masked.component';
 import { Input } from '@shared/components/input/input.component';
 import { api } from '@shared/services/api';
 import { addDays } from 'date-fns';
@@ -18,7 +17,8 @@ import {
 } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
+import InputMasked from '../components/input-masked/input-masked.component';
 import {
   BoxWrapper,
   ButtonPassword,
@@ -40,6 +40,8 @@ import { schemaData, schemaPassword } from './schemas';
 
 export const PersonPage = () => {
   const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
+
   const [userData, setUserData] = useState<null | any>(null);
 
   const handleAvatar = useCallback(
@@ -50,13 +52,19 @@ export const PersonPage = () => {
         dataPhoto.append('photo', photo);
         try {
           const response = await api.put(`users/${user.data.id}`, dataPhoto);
-          const newPhoto = response.data.photo;
-          Cookies.set('@Sunize:photo', newPhoto, {
-            expires: addDays(new Date(), 3),
-            secure: process.env.NODE_ENV === 'production',
-          });
-          if (response.data.success)
-            toast.success('Foto alterada com sucesso!');
+          if (response.data.success) {
+            const newPhoto = response.data.photo;
+            Cookies.set('@Sunize:photo', newPhoto, {
+              expires: addDays(new Date(), 3),
+              secure: process.env.NODE_ENV === 'production',
+            });
+
+            dispatch({
+              type: 'USER/UPDATE_PHOTO',
+            });
+          }
+
+          toast.success('Foto alterada com sucesso!');
         } catch (err: any) {
           let error = err.response.data.message;
           toast.error(error);
@@ -65,7 +73,7 @@ export const PersonPage = () => {
         toast.error('A imagem não foi selecionada');
       }
     },
-    [user],
+    [user, dispatch],
   );
 
   const onSubmitPassword = useCallback(
@@ -249,6 +257,7 @@ export const PersonPage = () => {
                       icon={FaUser}
                       placeholder="Digite seu nome completo"
                       disabled
+                      style={{ color: '#fff' }}
                     />
                     <Input
                       name="email"
@@ -256,6 +265,7 @@ export const PersonPage = () => {
                       icon={FaEnvelope}
                       placeholder="Seu email"
                       disabled
+                      style={{ color: '#fff' }}
                     />
 
                     <InputMasked
