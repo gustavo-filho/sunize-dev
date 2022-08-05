@@ -1,7 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import { useAppSelector } from '../../../../store/hooks';
 import { useParams } from 'react-router-dom';
 import { userSelector } from '@domain/auth/user/user.store';
@@ -21,6 +17,7 @@ import {
   SectionOption,
   PaymentMethod,
   Error,
+  LoaderContainer,
 } from './general-checkout.styles';
 
 import { CustomCheckoutData, Product } from '@shared/types/types';
@@ -29,10 +26,11 @@ import { Link } from 'react-router-dom';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Field, Form, Formik } from 'formik';
 import { CustomCheckoutSchema } from './general-checkout.validate';
+
 import InputMasked from '@shared/components/input-masked/input-masked.component';
+
 import { CustomSelectMulti } from '@shared/components/CustomSelectMulti/custom-select-multi.component';
 import { Loader } from '@shared/components/loader/loader.component';
-import { LoaderContainer } from '../general-information/general-information.styles';
 
 export const GeneralCheckoutPage = () => {
   const { id: productId } = useParams();
@@ -45,52 +43,45 @@ export const GeneralCheckoutPage = () => {
   const [isScarcity, setIsScarcity] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
   const [isUpsell, setIsUpsell] = useState(false);
-  const [messageSelect, setMessageSelect] = useState(false);
-  const [linkSelect, setLink] = useState(false);
+
+  const [showInput, setShowInput] = useState(true);
+
   const [isPhone, setIsPhone] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
-  const [isGenderNeeded, setIdGenderNeeded] = useState(false);
   const [customCheckout, setCustomCheckout] = useState<CustomCheckoutData>();
   const [isLoading, setIsLoading] = useState<any>(true);
   const [phone, setPhone] = useState<string>('');
 
-  const [productCheckout, setProductCheckout] = useState<any>({});
-
   const getUserData = useCallback(async () => {
-    const { data } = await api.get(
-      `users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
+    const response = await api.get(
+      `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
     );
-    setUserData(data);
-  }, []);
+
+    setUserData(response.data.data);
+  }, [user.id]);
 
   const getProductData = useCallback(async () => {
-    const { data } = await api.get(`products/${productId}`);
-    setProductData(data);
-
-    console.log(data);
-  }, []);
+    const response = await api.get(`/products/${productId}`);
+    setProductData(response.data.data);
+  }, [productId]);
 
   const getCheckoutProduct = useCallback(async () => {
-    const response = await api.get(`checkout/${productId}`);
+    const response = await api.get(`/checkout/${productId}`);
 
     setCustomCheckout(response.data.data);
     setIsLoading('success');
 
     if (customCheckout) {
-      setProductCheckout(customCheckout);
       setIsPhone(customCheckout.phone.allowed);
       setIsScarcity(customCheckout.allow_time.allowed);
       setIsNotification(
         customCheckout.notifications.people_buy_product_today.allowed,
       );
-      setMessageSelect(customCheckout.page_purchase.message !== 'false');
-      setLink(customCheckout.page_purchase.url !== 'false');
       setPhone(customCheckout.phone.phone_number || '');
       setIsUpsell(customCheckout.allow_orderbump.allowed);
-      setIdGenderNeeded(customCheckout.need_type_gender);
       setIsPopup(customCheckout.allow_popup.allowed);
     }
-  }, []);
+  }, [customCheckout, productId]);
 
   useEffect(() => {
     getProductData();
@@ -102,7 +93,7 @@ export const GeneralCheckoutPage = () => {
     try {
       setPhone(values.phone_number);
 
-      await api.post(`checkout/${user.id}/${productId}`, {
+      await api.post(`/checkout/${user.id}/${productId}`, {
         options_pay: values.options_pay,
         text_product_allow: 'vai pfv me ajuda',
         product_allow: values.product_allow === 'true',
@@ -186,8 +177,8 @@ export const GeneralCheckoutPage = () => {
           message: values.phone_message,
         },
         page_purchase: {
-          url: linkSelect ? values.page_purchase_url : 'false',
-          message: messageSelect ? values.page_purchase_message : 'false',
+          url: !showInput ? values.page_purchase_url : 'false',
+          message: showInput ? values.page_purchase_message : 'false',
         },
         allow_popup: {
           allowed: values.popup_allowed === 'true',
@@ -276,6 +267,10 @@ export const GeneralCheckoutPage = () => {
                     : 'false',
                   options_pay: customCheckout.options_pay,
                   need_type_gender: customCheckout.need_type_gender,
+                  timer_allowed:
+                    customCheckout.allow_time.allowed === true
+                      ? 'true'
+                      : 'false',
                   timer_time: customCheckout.allow_time.time,
                   notification_allowed:
                     customCheckout.notifications.people_buy_product_today
@@ -298,11 +293,11 @@ export const GeneralCheckoutPage = () => {
                   phone_allowed: customCheckout.phone.allowed.toString(),
                   phone_number: phone,
                   phone_message: customCheckout.phone.text,
-                  page_purchase: messageSelect ? 'true' : 'false',
-                  page_purchase_url: linkSelect
+                  page_purchase: showInput ? 'true' : 'false',
+                  page_purchase_url: !showInput
                     ? customCheckout.page_purchase.url
                     : '',
-                  page_purchase_message: messageSelect
+                  page_purchase_message: showInput
                     ? customCheckout.page_purchase.message
                     : 'Obrigado por comprar o meu produto!',
                   popup_allowed:
@@ -313,7 +308,8 @@ export const GeneralCheckoutPage = () => {
                     customCheckout.allow_popup.type_of_discount?.discount || 0,
                   purchaser_sex: 'false',
                   abandoned_purchases_voucher_allowed:
-                    productCheckout?.abandoned_purchases_voucher?.allowed,
+                    customCheckout.abandoned_purchases_voucher.allowed ||
+                    'false',
                 }}
                 validateOnChange
                 validationSchema={CustomCheckoutSchema}
@@ -787,15 +783,13 @@ export const GeneralCheckoutPage = () => {
                               id="page_purchase_message"
                               value="true"
                               onClick={() => {
-                                setMessageSelect(true);
-                                setLink(false);
+                                setShowInput(true);
                               }}
                             />
                             <label
                               htmlFor="page_purchase_message"
                               onClick={() => {
-                                setMessageSelect(true);
-                                setLink(false);
+                                setShowInput(true);
                               }}
                             >
                               Mensagem
@@ -809,15 +803,13 @@ export const GeneralCheckoutPage = () => {
                               id="page_purchase_link"
                               value="false"
                               onClick={() => {
-                                setLink(true);
-                                setMessageSelect(false);
+                                setShowInput(false);
                               }}
                             />
                             <label
                               htmlFor="page_purchase_link"
                               onClick={() => {
-                                setLink(true);
-                                setMessageSelect(false);
+                                setShowInput(false);
                               }}
                             >
                               Link
@@ -827,7 +819,7 @@ export const GeneralCheckoutPage = () => {
 
                         <SectionOption>
                           <div className="inputBox">
-                            {messageSelect && (
+                            {showInput && (
                               <>
                                 <label htmlFor="purchasePageMessage">
                                   Mensagem Personalizada
@@ -840,20 +832,13 @@ export const GeneralCheckoutPage = () => {
                                 />
                               </>
                             )}
-                            {linkSelect && (
+
+                            {!showInput && (
                               <>
                                 <label htmlFor="purchasePageLink">
                                   Link Personalizado
-                                  {errors.page_purchase_url &&
-                                    touched.page_purchase_url && (
-                                      <>
-                                        <br />
-                                        <Error>
-                                          {errors.page_purchase_url}
-                                        </Error>
-                                      </>
-                                    )}
                                 </label>
+
                                 <Field
                                   type="text"
                                   name="page_purchase_url"

@@ -41,7 +41,7 @@ export const Container = styled.div`
     > a {
       font-size: 18px;
       color: rgba(0, 0, 0, 1);
-      background-color: #27293d;
+      background-color: #f5f5f5;
       padding: 16px 22px 12px 22px;
       border-radius: 4px 4px 0 0;
     }
@@ -87,26 +87,40 @@ export const BoxWrapper = styled.div`
     width: 100%;
 
     button {
-      cursor: pointer;
-      width: 100%;
-      background: rgba(194, 124, 44, 0.9);
-      color: #ffffff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      padding: 14px 0;
-      margin-top: 2rem;
-      border: 0;
-      border-radius: 4px;
-      transition: background 0.2s ease;
 
-      &:hover {
-        background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
-      }
+    margin-bottom: 0.5rem;
+
+    cursor: pointer;
+    width: 250px;
+    height: 40px;
+    background: rgba(194, 124, 44, 0.9);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    margin-top: 2rem;
+    border: 0;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    &:hover {
+      background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
     }
   }
+}
 
   > a {
     margin: 0 1rem;
+  }
+
+  .nocoproductor {
+    color: #818181;
+    margin-top: 1px;
   }
 
   @media (max-width: 995px) {
@@ -119,6 +133,36 @@ export const BoxWrapper = styled.div`
 
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
+  }
+`
+
+export const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1f1f2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    animation: jumps 2s ease infinite;
+  }
+
+  @keyframes jumps {
+    0% {
+      transform: translateY(-0.5rem);
+    }
+
+    50% {
+      transform: translateY(0.5rem);
+    }
+
+    100% {
+      transform: translateY(-0.5rem);
+    }
   }
 `
 
@@ -309,7 +353,7 @@ export const OptionSingle = styled.div`
       border: 2px solid #c27c2c;
     }
   }
-  
+
   h1 {
     color: #ffffff;
     font-size: 1.2rem;

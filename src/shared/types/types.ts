@@ -122,6 +122,15 @@ export interface Product {
   title: string;
 }
 
+export interface GoalData {
+  name: string
+  qtd_sales: number
+  type: string
+  comission: number
+  id: string
+  deleted: boolean
+}
+
 export interface SalesReport {
   boletos?: {
     boletos_gerado: number;

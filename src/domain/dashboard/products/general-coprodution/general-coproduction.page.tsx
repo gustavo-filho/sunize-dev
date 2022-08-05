@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
@@ -24,6 +23,7 @@ import {
   LinkNonActive,
   Wrapper,
 } from './general-coproduction.styles';
+
 import { ModalAddCoproductor } from './components/modal-add-coproductor/modal-add-coproductor.component';
 
 interface DataModalAddCoProductor {
@@ -68,7 +68,7 @@ export const CoProductionPage = () => {
     } else {
       setDataModalAddCoProductor({} as DataModalAddCoProductor);
     }
-  }, []);
+  }, [dataModalAddCoProductor, setDataModalAddCoProductor, user.id, user.name]);
 
   const getProductionData = useCallback(async () => {
     try {
@@ -78,7 +78,7 @@ export const CoProductionPage = () => {
     } catch (err) {
       toast.error('Não foi possível obter os dados do produto');
     }
-  }, []);
+  }, [productId]);
 
   const getCoproductionData = useCallback(async () => {
     const response = await api.get(
@@ -86,12 +86,12 @@ export const CoProductionPage = () => {
     );
 
     setCoproducers(response.data.data);
-  }, []);
+  }, [user.id, productId]);
 
   useEffect(() => {
     getProductionData();
     getCoproductionData();
-  }, [getProductionData, getCoproductionData]);
+  }, [getCoproductionData, getProductionData]);
 
   async function handleSubmit() {
     try {
@@ -200,7 +200,7 @@ export const CoProductionPage = () => {
                       placeholder="Insira a comissão do co-produtor"
                       value={coProductorTax}
                       onChange={e => {
-                        setCoProductorTax(Number(e.target.value));
+                        setCoProductorTax(e.target.value as any);
                       }}
                     />
                   </OptionSingle>

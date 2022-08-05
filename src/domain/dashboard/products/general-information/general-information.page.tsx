@@ -56,11 +56,11 @@ export function GeneralInformationPage() {
   const getProduct = useCallback(async () => {
     const response = await api.get(`products/${productId}`);
     setProduct(response.data.data.product);
-  }, []);
+  }, [setProduct]);
 
   useEffect(() => {
     getProduct();
-  }, [getProduct]);
+  }, []);
 
   async function handleEbookChange(event: ChangeEvent<HTMLInputElement>) {
     try {
