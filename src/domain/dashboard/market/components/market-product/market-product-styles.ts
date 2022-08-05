@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
-import { ModalProps } from './interfaces/imodal-props-type'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
+import { ModalProps } from './interfaces/imodal-props-type';
 
 export const Container = styled.div`
   position: relative;
@@ -43,7 +43,7 @@ export const Container = styled.div`
     display: block;
     margin-bottom: 10px;
   }
-`
+`;
 
 export const Img = styled.div`
   max-width: 100%;
@@ -63,7 +63,7 @@ export const Img = styled.div`
       color: #ccc;
     }
   }
-`
+`;
 
 export const CardInformation = styled.div`
   padding: 0.5rem;
@@ -89,7 +89,7 @@ export const CardInformation = styled.div`
     color: rgba(220, 152, 75, 1);
     font-size: 1rem;
   }
-`
+`;
 
 export const Modal = styled.div<ModalProps>`
   ${({ modal }) =>
@@ -100,7 +100,7 @@ export const Modal = styled.div<ModalProps>`
       : css`
           display: none;
         `}
-`
+`;
 
 export const EmptyImage = styled.section`
   width: 100%;
@@ -116,7 +116,7 @@ export const EmptyImage = styled.section`
     font-size: 2rem;
     color: #4b4b4b;
   }
-`
+`;
 
 export const ContentModal = styled.div`
   position: fixed;
@@ -207,6 +207,14 @@ export const ContentModal = styled.div`
         &:hover {
           background-color: ${shade(0.2, '#007733')};
         }
+
+        &.terms {
+          color: #626262 !important;
+          background: transparent;
+          &:hover {
+            background: transparent;
+          }
+        }
       }
       strong {
         color: black;
@@ -244,7 +252,7 @@ export const ContentModal = styled.div`
       right: 5px;
     }
   }
-`
+`;
 
 export const CloseButton = styled.button`
   font-size: 0;
@@ -269,7 +277,7 @@ export const CloseButton = styled.button`
   :focus {
     outline: black solid 2px;
   }
-`
+`;
 
 export const Divisor = styled.div`
   display: flex;
@@ -290,7 +298,7 @@ export const Divisor = styled.div`
     margin-bottom: 12px;
     padding-bottom: 4px;
   }
-`
+`;
 
 export const Overlay = styled.div`
   position: fixed;
@@ -300,11 +308,11 @@ export const Overlay = styled.div`
   background-color: rgba(56, 70, 110, 0.5);
   width: 100vw;
   height: 100vh;
-`
+`;
 
 export const DepositionsContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
   margin-bottom: 50px;
-`
+`;
