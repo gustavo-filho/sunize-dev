@@ -297,7 +297,7 @@ export const GeneralCheckoutPage = () => {
                   page_purchase_url: !showInput
                     ? customCheckout.page_purchase.url
                     : '',
-                  page_purchase_message: showInput
+                  page_purchase_message: !showInput
                     ? customCheckout.page_purchase.message
                     : 'Obrigado por comprar o meu produto!',
                   popup_allowed:
