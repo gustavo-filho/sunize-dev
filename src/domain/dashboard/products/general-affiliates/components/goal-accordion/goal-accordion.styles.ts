@@ -140,7 +140,7 @@ export const Header = styled.header`
       }
 
       p {
-        margin-top: -1rem;
+        margin-top: -1.1rem;
         color: #878787;
         font-size: 13px;
       }
