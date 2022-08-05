@@ -76,6 +76,7 @@ export const Header = styled.header`
   position: relative;
   z-index: 1;
   cursor: pointer;
+  background-color: #fff;
   display: flex;
   padding: 20px 12px;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -139,7 +140,7 @@ export const Header = styled.header`
       }
 
       p {
-        margin-top: 2px;
+        margin-top: -1rem;
         color: #878787;
         font-size: 13px;
       }
@@ -171,6 +172,106 @@ export const Header = styled.header`
     }
   }
 `
+
+// export const Header = styled.header`
+//   position: relative;
+//   z-index: 1;
+//   cursor: pointer;
+//   display: flex;
+//   padding: 20px 12px;
+//   border-radius: 0.5rem 0.5rem 0 0;
+//   justify-content: space-between;
+//   align-items: center;
+//   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
+//   width: 100%;
+//   transition: box-shadow 0.3s ease;
+
+//   background-color: rgb(30, 31, 50);
+
+//   :hover {
+//     box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.35);
+//   }
+
+//   div:first-child {
+//     width: 100%;
+
+//     > button {
+//       background-color: transparent;
+//       border: 0;
+//       cursor: pointer;
+//       color: #FFF;
+//       font-size: 1.05rem;
+//       font-weight: 600;
+//     }
+
+//     img {
+//       width: 46px;
+//       height: 46px;
+//       border-radius: 6px;
+//       margin: 0 32px;
+//     }
+
+//     > h3 {
+//       width: 46px;
+//       height: 46px;
+//       border-radius: 6px;
+//       margin: 0 32px;
+//       background-color: #ccc;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+
+//       svg {
+//         color: #777;
+//       }
+//     }
+//   }
+
+//   > div {
+//     display: flex;
+
+//     div {
+//       display: flex;
+//       flex-direction: column;
+
+//       strong {
+//         color: #FFF;
+//         font-size: 17px;
+//       }
+
+//       p {
+//         margin-top: 2px;
+//         color: #878787;
+//         font-size: 13px;
+//       }
+//     }
+//   }
+
+//   a {
+//     color: #373737;
+//     font-size: 17px;
+//     margin-right: 32px;
+//   }
+
+//   @media (max-width: 768px) {
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+
+//     div {
+//       flex-direction: column;
+//       align-items: center;
+
+//       img {
+//         margin: 0 0 8px 0;
+//       }
+//     }
+
+//     a {
+//       margin: 8px 0 16px 0;
+//     }
+//   }
+// `
 
 export const Accordion = styled.main<AccordionProps>`
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
