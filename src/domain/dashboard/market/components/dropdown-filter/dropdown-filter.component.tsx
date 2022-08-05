@@ -1,101 +1,95 @@
-
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu } from 'antd';
+import 'antd/dist/antd.css';
 import { PropsDropDownFilter } from '../../interfaces/iprops-dropdown-filter.type';
 import { Container } from './dropdown-filter.style';
-
 export function DropdownFilter({
   setSelectedOrder,
   setSelectedFilter,
   categories,
 }: PropsDropDownFilter) {
+  const style = {
+    color: 'gray',
+    cursor: 'pointer',
+  };
+
   const orderMenu = (
     <Menu
       className="menuDropDown"
       style={{
-        height: '130px',
+        minHeight: '130px',
         overflow: 'auto',
         backgroundColor: '#27293d',
       }}
-    >
-      <Menu.Item
-        key="1"
-        style={{
-          color: 'gray',
-        }}
-        onClick={() => {
-          setSelectedOrder('')
-        }}
-      >
-        -
-      </Menu.Item>
-      <Menu.Item
-        key="2"
-        style={{
-          color: 'gray',
-        }}
-        onClick={() => {
-          setSelectedOrder('topToBottom')
-        }}
-      >
-        Do maior preço ao menor
-      </Menu.Item>
-      <Menu.Item
-        key="3"
-        style={{
-          color: 'gray',
-        }}
-        onClick={() => {
-          setSelectedOrder('bottomToTop')
-        }}
-      >
-        Do menor preço ao maior
-      </Menu.Item>
-    </Menu>
-  )
+      items={[
+        {
+          key: '1',
+          label: '-',
+          onClick: () => {
+            setSelectedOrder('-');
+          },
+          style,
+        },
+        {
+          key: '2',
+          label: 'Do maior preço ao menor',
+          onClick: () => {
+            setSelectedOrder('topToBottom');
+          },
+          style,
+        },
+        {
+          key: '3',
+          label: 'Do menor preço ao maior',
+          onClick: () => {
+            setSelectedOrder('bottomToTop');
+          },
+          style,
+        },
+      ]}
+    />
+  );
 
   const filterMenu = (
     <Menu
       className="menuDropDown"
       style={{
-        height: '250px',
-        overflow: 'scroll',
+        minHeight: '130px',
+        overflow: 'auto',
         color: 'white',
         backgroundColor: '#27293d',
       }}
-    >
-      <Menu.Item
-        key="1"
-        style={{
-          color: 'gray',
-        }}
-        onClick={() => {
-          setSelectedFilter('')
-        }}
-      >
-        -
-      </Menu.Item>
+      items={[
+        {
+          key: '1',
+          label: '-',
+          onClick: () => {
+            setSelectedFilter('');
+          },
+          style,
+        },
 
-      {categories &&
-        categories.map((category: any) => (
-          <Menu.Item
-            key={category.title}
-            style={{
-              color: 'gray',
-            }}
-            onClick={() => {
-              setSelectedFilter(category.title)
-            }}
-          >
-            {category.title}
-          </Menu.Item>
-        ))}
-    </Menu>
-  )
+        ...(categories || []).map(category => {
+          return {
+            key: category.title,
+            label: category.title,
+            onClick: () => {
+              setSelectedFilter(category.title);
+            },
+            style,
+          };
+        }),
+      ]}
+    />
+  );
 
   return (
     <Container>
-      <Dropdown overlay={orderMenu} className="dropDownAnt">
+      <Dropdown
+        overlay={orderMenu}
+        className="dropDownAnt"
+        placement="bottomLeft"
+      >
         <Button
           className="menuDropDown"
           style={{
@@ -108,7 +102,11 @@ export function DropdownFilter({
           <DownOutlined />
         </Button>
       </Dropdown>
-      <Dropdown overlay={filterMenu} className="dropDownAnt">
+      <Dropdown
+        overlay={filterMenu}
+        className="dropDownAnt"
+        placement="bottomLeft"
+      >
         <Button
           className="menuDropDown"
           style={{
@@ -122,5 +120,5 @@ export function DropdownFilter({
         </Button>
       </Dropdown>
     </Container>
-  )
+  );
 }

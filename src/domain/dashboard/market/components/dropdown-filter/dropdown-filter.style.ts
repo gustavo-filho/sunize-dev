@@ -5,6 +5,7 @@ export const Container = styled.div`
     width: 120px;
     height: 30px;
   }
+
   margin-bottom: 1rem;
   margin-top: -2rem;
 
