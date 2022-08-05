@@ -105,7 +105,7 @@ export function Market(): JSX.Element {
       </Filter>
       <ProductWrapper>
         <Switch>
-          <Route index element={<Courses search={search} />} />
+          <Route path="/" element={<Courses search={search} />} />
           <Route path="cursos" element={<Courses search={search} />} />
           <Route path="recentes" element={<Recent search={search} />} />
           <Route

@@ -6,10 +6,6 @@ import { AffiliatesPage } from '@domain/dashboard/affiliates/affiliates.page';
 import { AccountStatements } from '@domain/dashboard/balance/account-statements';
 import { CurrentBalance } from '@domain/dashboard/balance/current-balance/current.balance.page';
 import { Dashboard } from '@domain/dashboard/dashboard.page';
-import { EBooks } from '@domain/dashboard/market/components/ebook/ebook.component';
-import { Recent } from '@domain/dashboard/market/components/recent/recent-component';
-import { Subscriptions } from '@domain/dashboard/market/components/subscriptions/subscriptions.component';
-import { TopCommissions } from '@domain/dashboard/market/components/top-commissions/top-commissions.component';
 import { Market } from '@domain/dashboard/market/market-page-index';
 import { ProductsOfAffiliates } from '@domain/dashboard/products/affiliates/products-of-affiliates';
 import { CreatePackage } from '@domain/dashboard/products/create-package/create-package.page';
@@ -40,11 +36,6 @@ export const DASHBOARD_ROUTES = {
   BALANCE: '/dashboard/saldo',
   EXTRACT_BALANCE: '/dashboard/saldo/extrato',
   MARKET: '/dashboard/mercado/*',
-  // MARKET_RECENT: '/dashboard/mercado/recentes',
-  // MARKET_COURSES: '/dashboard/mercado/cursos',
-  // MARKET_SUBSCRIPTIONS: '/dashboard/mercado/assinaturas',
-  // MARKET_EBOOKS: '/dashboard/mercado/ebooks',
-  // MARKET_TOPCOMMISSIONS: '/dashboard/mercado/top-comissoes',
   ACCOUNT_INFO: '/dashboard/edit-account/person-data',
   ACCOUNT_INVITES: '/dashboard/edit-account/invites',
   ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
@@ -67,11 +58,6 @@ export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
   [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,
   [DASHBOARD_ROUTES.EXTRACT_BALANCE]: <AccountStatements />,
   [DASHBOARD_ROUTES.MARKET]: <Market />,
-  // [DASHBOARD_ROUTES.MARKET_RECENT]: <Recent />,
-  // [DASHBOARD_ROUTES.MARKET_COURSES]: <Market />,
-  // [DASHBOARD_ROUTES.MARKET_SUBSCRIPTIONS]: <Subscriptions />,
-  // [DASHBOARD_ROUTES.MARKET_EBOOKS]: <EBooks />,
-  // [DASHBOARD_ROUTES.MARKET_TOPCOMMISSIONS]: <TopCommissions />,
   [DASHBOARD_ROUTES.VIDEO_CLASS]: <VideoClass />,
   [DASHBOARD_ROUTES.ACCOUNT_INFO]: <PersonPage />,
   [DASHBOARD_ROUTES.ACCOUNT_INVITES]: <PersonInvitesPage />,

@@ -75,8 +75,8 @@ export const SideBar = () => {
 
         <MenuItem
           icon={<AiFillShop />}
-          onClick={() => navigate(DASHBOARD_ROUTES.MARKET)}
-          active={pathname === DASHBOARD_ROUTES.MARKET}
+          onClick={() => navigate(DASHBOARD_ROUTES.MARKET.split('/*')[0])}
+          active={pathname === DASHBOARD_ROUTES.MARKET.split('/*')[0]}
         >
           Mercado
         </MenuItem>
