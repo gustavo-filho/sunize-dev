@@ -1,9 +1,8 @@
-import React from 'react'
 
-import { Menu, Dropdown, Button } from 'antd'
-import { Container } from './dropdown-filter.style';
-import { DownOutlined } from '@ant-design/icons'
+import { DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Menu } from 'antd';
 import { PropsDropDownFilter } from '../../interfaces/iprops-dropdown-filter.type';
+import { Container } from './dropdown-filter.style';
 
 export function DropdownFilter({
   setSelectedOrder,
@@ -15,7 +14,7 @@ export function DropdownFilter({
       className="menuDropDown"
       style={{
         height: '130px',
-        overflow: 'scroll',
+        overflow: 'auto',
         backgroundColor: '#27293d',
       }}
     >
