@@ -11,17 +11,13 @@ import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import InputNoLib from '@shared/components/input-nolib/input-nolib.component';
 import { api } from '@shared/services/api';
 
-interface Props {
+interface IModalProps {
   data: any;
   setData: Dispatch<SetStateAction<any>>;
   dataChanged: Function;
 }
 
-const ModalConfirmDelete: React.FC<Props> = ({
-  data,
-  setData,
-  dataChanged,
-}) => {
+const ModalConfirmDelete = ({ data, setData, dataChanged }: IModalProps) => {
   const user = useAppSelector(userSelector).data;
 
   const [inputValue, setInputValue] = useState('');
@@ -49,12 +45,14 @@ const ModalConfirmDelete: React.FC<Props> = ({
         data: {
           userID: data.id,
         },
+        headers: { 'sunize-access-token': user.access_token },
       });
 
       toast.success('Co-produtor removido com sucesso!');
+
+      dataChanged();
     } catch (err) {
       toast.error('Erro ao deletar co-produtor');
-      dataChanged();
     }
 
     setStatusSubmit('');

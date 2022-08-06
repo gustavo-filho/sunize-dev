@@ -58,8 +58,8 @@ export const GeneralAffiliatesPage = () => {
     try {
       const response = await api.get(`/sales-target/${user.id}/${productId}`);
       setGoals(response.data.data);
-    } catch (err) {
-      // toast.error('Não foi possível localizar as metas deste produto.');
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
   }, [productId, user.id]);
 
@@ -70,11 +70,17 @@ export const GeneralAffiliatesPage = () => {
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
     try {
-      await api.put(`/users/${user.id}/products/${productId}`, {
-        system_affiliate: values.affiliate_system === 'true',
-        commission: defaultCommission,
-        affiliate_tax: defaultTax,
-      });
+      await api.put(
+        `/users/${user.id}/products/${productId}`,
+        {
+          system_affiliate: values.affiliate_system === 'true',
+          commission: defaultCommission,
+          affiliate_tax: defaultTax,
+        },
+        {
+          headers: { 'sunize-access-token': user.access_token },
+        },
+      );
 
       toast.success('Dados atualizados com sucesso!');
     } catch (err) {
@@ -133,7 +139,11 @@ export const GeneralAffiliatesPage = () => {
                 >
                   Cupons
                 </LinkNonActive>
-                <Link to="/">Afiliados</Link>
+
+                <Link to={`/dashboard/informacoes-gerais/pixel/${productId}`}>
+                  Afiliados
+                </Link>
+
                 <LinkNonActive
                   to={`/dashboard/informacoes-gerais/pixel/${productId}`}
                 >
@@ -254,7 +264,6 @@ export const GeneralAffiliatesPage = () => {
                 )}
 
                 <h1 className="terms">Termos de uso de afiliação</h1>
-
                 <TermsEditor />
               </BoxWrapper>
 

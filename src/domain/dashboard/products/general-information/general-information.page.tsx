@@ -54,7 +54,7 @@ export function GeneralInformationPage() {
   const [textTransfer, setTextTransfer] = useState('Copiar link');
 
   const getProduct = useCallback(async () => {
-    const response = await api.get(`products/${productId}`);
+    const response = await api.get(`/products/${productId}`);
     setProduct(response.data.data.product);
   }, [setProduct]);
 
@@ -87,15 +87,18 @@ export function GeneralInformationPage() {
           dataForm.append('ebook', event.target.files[0]);
 
           await api.put(
-            `users/${user.id}/products/${productId}/ebook-upload`,
+            `/users/${user.id}/products/${productId}/ebook-upload`,
             dataForm,
+            {
+              headers: { 'sunize-access-token': user.access_token },
+            },
           );
 
           event.target.files && setFileSelected(event.target.files[0].name);
         }
       }
-    } catch (err) {
-      toast.error('Erro ao atualizar o ebook');
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
   }
 
@@ -105,7 +108,9 @@ export function GeneralInformationPage() {
         const data = new FormData();
         data.append('image', event.target.files[0]);
 
-        await api.put(`users/${user.id}/products/${productId}`, data);
+        await api.put(`/users/${user.id}/products/${productId}`, data, {
+          headers: { 'sunize-access-token': user.access_token },
+        });
 
         toast.success('Imagem atualizada com sucesso!');
       }
@@ -118,18 +123,24 @@ export function GeneralInformationPage() {
     try {
       const value = round(values.price, 2);
 
-      await api.put(`users/${user.id}/products/${productId}`, {
-        title: values.title,
-        description: values.description,
-        price: value,
-        commission: values.commission ?? 0,
-        system_affiliate: values.affiliate_system === 'true',
-        membership_period: values.subscription_time,
-      });
+      await api.put(
+        `/users/${user.id}/products/${productId}`,
+        {
+          title: values.title,
+          description: values.description,
+          price: value,
+          commission: values.commission ?? 0,
+          system_affiliate: values.affiliate_system === 'true',
+          membership_period: values.subscription_time,
+        },
+        {
+          headers: { 'sunize-access-token': user.access_token },
+        },
+      );
 
       toast.success('Produto atualizado com sucesso!');
     } catch (err: any) {
-      toast.error('Erro ao atualizar produto!');
+      toast.error(err.response.data.message);
     }
   }
 
@@ -151,13 +162,13 @@ export function GeneralInformationPage() {
       ) : (
         <Container>
           <h1>
-            Gerenciar{' '}
+            Gerenciar
             {product && product.product_type === 'EBOOK' ? 'eBook' : 'Produto'}
           </h1>
 
           <h2>
             Aqui você tem o controle de todas as informações e configurações de
-            seu{' '}
+            seu
             {product && product.product_type === 'EBOOK' ? 'eBook' : 'produto'}.
           </h2>
 

@@ -1,58 +1,73 @@
-import { userSelector } from '@domain/auth/user/user.store';
-
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
 
 import { Container, Modal } from './modal-delete-confirmation.styles';
-import { GoalData } from '@shared/types/types';
+
+import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../../../../store/hooks';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 
+interface VoucherData {
+  discount_percentage: number;
+  discount_fixed: number;
+  code: string;
+  deadline: string;
+  id: string;
+  type_discount: string;
+}
+
 interface IModalProps {
-  data: GoalData[];
-  setData: Dispatch<SetStateAction<GoalData[]>>;
-  goal: GoalData;
+  data: VoucherData[];
+  setData: Dispatch<SetStateAction<VoucherData[]>>;
+  voucher: VoucherData;
   isVisible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
+  productId: string;
 }
 
 export const ModalDeleteConfirmation = ({
   data,
   setData,
-  goal,
+  voucher,
   setVisible,
   isVisible,
+  productId,
 }: IModalProps) => {
   const user = useAppSelector(userSelector).data;
 
-  const handleCloseModal = useCallback(() => {
-    setVisible(false);
-    setStatusSubmit('');
-  }, [setVisible]);
-
   const [statusSubmit, setStatusSubmit] = useState('');
 
-  const handleSubmit = useCallback(async () => {
+  function handleCloseModal() {
+    setVisible(false);
+    setStatusSubmit('');
+  }
+
+  async function handleSubmit() {
     setStatusSubmit('loading');
 
-    const newGoals = data.filter(
-      (filterGoal: any) => filterGoal.id !== goal.id,
+    const newLinks = data.filter(
+      filterLink => filterLink.code !== voucher.code,
     );
 
     try {
-      await api.delete(`/sales-target/${user.id}/${goal.id}`);
+      await api.delete(
+        `/users/${user.id}/products/${productId}/vouchers/${voucher.id}`,
+      );
 
-      setData(newGoals);
+      setData(newLinks);
 
-      toast.success('Meta removida com sucesso!');
-    } catch {
-      toast.error('Algo deu errado.');
+      toast.success('Cupom removido com sucesso!');
+
+      setStatusSubmit('');
+      handleCloseModal();
+    } catch (err: any) {
+      toast.error(err.response.data.message);
+      handleCloseModal();
     }
-    handleCloseModal();
-  }, [data, goal.id, handleCloseModal, setData, user.id]);
+  }
 
   return (
     <>
@@ -69,7 +84,7 @@ export const ModalDeleteConfirmation = ({
                   <FaTimes />
                 </button>
 
-                <strong>Você está removendo uma meta de afiliado.</strong>
+                <strong>Você está removendo um cupom.</strong>
 
                 <footer>
                   <button type="button" onClick={handleCloseModal}>

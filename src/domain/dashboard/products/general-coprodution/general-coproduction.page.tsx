@@ -95,9 +95,15 @@ export const CoProductionPage = () => {
 
   async function handleSubmit() {
     try {
-      await api.post(`products/${productId}/co-producer-tax/${user.id}`, {
-        tax: coProductorTax,
-      });
+      await api.post(
+        `products/${productId}/co-producer-tax/${user.id}`,
+        {
+          tax: coProductorTax,
+        },
+        {
+          headers: { 'sunize-access-token': user.access_token },
+        },
+      );
 
       toast.success('Taxa de co-produtor atualizada com sucesso!');
     } catch (err) {

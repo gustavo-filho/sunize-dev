@@ -8,6 +8,7 @@ export const Container = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
+  z-index: 4;
   background-color: rgba(0, 0, 0, 0.3);
 `
 
@@ -23,8 +24,6 @@ export const Modal = styled(motion.main)`
   border-radius: 1rem;
   background-color: #27293d;
   position: relative;
-
-  z-index: 999 !important;
 
   > button {
     cursor: pointer;
@@ -82,8 +81,6 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
 
-  z-index: 999 !important;
-  
   form {
     width: 100%;
 
@@ -119,7 +116,7 @@ export const Content = styled.div`
 export const OptionSingle = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   width: 100%;
   margin-bottom: 1rem;
 
@@ -139,6 +136,7 @@ export const OptionSingle = styled.div`
     .fInput {
       margin-bottom: 1rem !important;
     }
+
   }
 
   h1 {

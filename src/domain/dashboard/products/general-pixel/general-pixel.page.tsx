@@ -71,11 +71,17 @@ export function GeneralPixelPage() {
     }
 
     try {
-      await api.post(`/user/${user.id}/pixel/${productId}`, {
-        userId: user.id,
-        type: activePixel.id,
-        content: contentPixel,
-      });
+      await api.post(
+        `/user/${user.id}/pixel/${productId}`,
+        {
+          userId: user.id,
+          type: activePixel.id,
+          content: contentPixel,
+        },
+        {
+          headers: { 'sunize-access-token': user.access_token },
+        },
+      );
 
       toast.success('Pixel atualizado com sucesso!');
     } catch (err: any) {

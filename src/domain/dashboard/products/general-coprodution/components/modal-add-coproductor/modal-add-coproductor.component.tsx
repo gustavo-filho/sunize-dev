@@ -38,12 +38,18 @@ export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
     }
 
     try {
-      await api.post(`user/${user.id}/coProducer`, {
-        coProducerEmail: values.email,
-        productId: productId,
-        contractTime: values.contractTime,
-        tax: Number(values.commission),
-      });
+      await api.post(
+        `/user/${user.id}/coProducer`,
+        {
+          coProducerEmail: values.email,
+          productId: productId,
+          contractTime: values.contractTime,
+          tax: Number(values.commission),
+        },
+        {
+          headers: { 'sunize-access-token': user.access_token },
+        },
+      );
 
       toast.success(
         'O co-produtor foi convidado para participar deste seu projeto incrível.',

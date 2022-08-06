@@ -87,114 +87,120 @@ export const GeneralCheckoutPage = () => {
     getProductData();
     getUserData();
     getCheckoutProduct();
-  }, [getCheckoutProduct, getProductData, getUserData]);
+  }, []);
 
   async function handleCheckoutUpdate(values: any) {
     try {
       setPhone(values.phone_number);
 
-      await api.post(`/checkout/${user.id}/${productId}`, {
-        options_pay: values.options_pay,
-        text_product_allow: 'vai pfv me ajuda',
-        product_allow: values.product_allow === 'true',
-        sale_permission: values.sale_permission === 'true',
-        allow_time: {
-          allowed: values.timer_allowed === 'true',
-          time: values.timer_time,
-        },
-        need_type_gender: values.need_type_gender,
-        allow_random_message: {
-          allowed: values.random_message_allowed || false,
-          time: values.random_message_time,
-        },
-        allow_warnings: {
-          allowed: values.warnings_allowed || false,
-        },
-        notifications: {
-          people_buy_product_today: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas compraram esse produto hoje',
-            text: 'pessoas compraram esse produto hoje',
-            qtd_max: values.notification_number,
+      await api.post(
+        `/checkout/${user.id}/${productId}`,
+        {
+          options_pay: values.options_pay,
+          text_product_allow: 'vai pfv me ajuda',
+          product_allow: values.product_allow === 'true',
+          sale_permission: values.sale_permission === 'true',
+          allow_time: {
+            allowed: values.timer_allowed === 'true',
+            time: values.timer_time,
           },
-          people_buy_product_week: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas compraram esse produto esta semana',
-            text: 'pessoas compraram esse produto esta semana',
-            qtd_max: values.notification_number,
+          need_type_gender: values.need_type_gender,
+          allow_random_message: {
+            allowed: values.random_message_allowed || false,
+            time: values.random_message_time,
           },
-          people_buy_product_moment: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas acabaram de comprar esse produto',
-            text: 'pessoas acabaram de comprar esse produto',
-            qtd_max: values.notification_number,
+          allow_warnings: {
+            allowed: values.warnings_allowed || false,
           },
-          people_just_bought_product: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas compraram este produto incrível',
-            text: 'pessoas compraram este produto incrível',
-            qtd_max: values.notification_number,
+          notifications: {
+            people_buy_product_today: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas compraram esse produto hoje',
+              text: 'pessoas compraram esse produto hoje',
+              qtd_max: values.notification_number,
+            },
+            people_buy_product_week: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas compraram esse produto esta semana',
+              text: 'pessoas compraram esse produto esta semana',
+              qtd_max: values.notification_number,
+            },
+            people_buy_product_moment: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas acabaram de comprar esse produto',
+              text: 'pessoas acabaram de comprar esse produto',
+              qtd_max: values.notification_number,
+            },
+            people_just_bought_product: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas compraram este produto incrível',
+              text: 'pessoas compraram este produto incrível',
+              qtd_max: values.notification_number,
+            },
+            people_buy_product_incrible: {
+              allowed: false,
+              text: 'compraram na última hora. Aproveite!',
+              qtd_max: values.notification_number,
+            },
+            people_buy_product_in_last_hour: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas compraram este produto na última hora',
+              text: 'pessoas compraram este produto na última hora',
+              qtd_max: values.notification_number,
+            },
+            people_buy_product_in_few_minutes: {
+              allowed:
+                values.notification_text ===
+                'XX pessoas compraram este produto nos últimos minutos',
+              text: 'pessoas compraram este produto nos últimos minutos',
+              qtd_max: values.notification_number,
+            },
           },
-          people_buy_product_incrible: {
+          allow_orderbump: {
+            allowed: values.orderbump_allowed === 'true',
+            product: values.orderbump_product,
+          },
+          color_header: {
+            allowed: true,
+            color: values.color_header_color,
+          },
+          background_color: {
+            allowed: true,
+            color: values.background_color_color,
+          },
+          phone: {
+            allowed: values.phone_allowed === 'true',
+            number: values.phone,
+            message: values.phone_message,
+          },
+          page_purchase: {
+            url: !showInput ? values.page_purchase_url : 'false',
+            message: showInput ? values.page_purchase_message : 'false',
+          },
+          allow_popup: {
+            allowed: values.popup_allowed === 'true',
+            type_of_discount: {
+              discount: values.popup_discount || 10,
+            },
+          },
+          abandoned_purchases_voucher: {
             allowed: false,
-            text: 'compraram na última hora. Aproveite!',
-            qtd_max: values.notification_number,
-          },
-          people_buy_product_in_last_hour: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas compraram este produto na última hora',
-            text: 'pessoas compraram este produto na última hora',
-            qtd_max: values.notification_number,
-          },
-          people_buy_product_in_few_minutes: {
-            allowed:
-              values.notification_text ===
-              'XX pessoas compraram este produto nos últimos minutos',
-            text: 'pessoas compraram este produto nos últimos minutos',
-            qtd_max: values.notification_number,
+            message: 'compre comigo',
           },
         },
-        allow_orderbump: {
-          allowed: values.orderbump_allowed === 'true',
-          product: values.orderbump_product,
+        {
+          headers: { 'sunize-access-token': user.access_token },
         },
-        color_header: {
-          allowed: true,
-          color: values.color_header_color,
-        },
-        background_color: {
-          allowed: true,
-          color: values.background_color_color,
-        },
-        phone: {
-          allowed: values.phone_allowed === 'true',
-          number: values.phone,
-          message: values.phone_message,
-        },
-        page_purchase: {
-          url: !showInput ? values.page_purchase_url : 'false',
-          message: showInput ? values.page_purchase_message : 'false',
-        },
-        allow_popup: {
-          allowed: values.popup_allowed === 'true',
-          type_of_discount: {
-            discount: values.popup_discount || 10,
-          },
-        },
-        abandoned_purchases_voucher: {
-          allowed: false,
-          message: 'compre comigo',
-        },
-      });
+      );
 
       toast.success('Informações salvas com sucesso!');
-    } catch (err) {
-      toast.error('Erro ao salvar as informações!');
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
   }
 
@@ -215,6 +221,7 @@ export const GeneralCheckoutPage = () => {
             >
               Gerenciar
             </LinkNonActive>
+
             <Link to={`/dashboard/informacoes-gerais/checkout/${productId}`}>
               Checkout
             </Link>
@@ -243,11 +250,13 @@ export const GeneralCheckoutPage = () => {
             >
               Cupons
             </LinkNonActive>
+
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/affiliates/${productId}`}
             >
               Afiliados
             </LinkNonActive>
+
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/pixel/${productId}`}
             >
