@@ -2,6 +2,7 @@ import { userSelector } from '@domain/auth/user/user.store';
 import { Loader } from '@shared/components/loader/loader.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import { api } from '@shared/services/api';
+import { Input } from 'antd';
 import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../../../../store/hooks';
@@ -77,6 +78,27 @@ export const Perfil = ({ userData }: UserProps) => {
     [user.access_token, user.id, userData.user?.id],
   );
 
+  const onChangeTax = useCallback(
+    async (type: string, value: any) => {
+      try {
+        await api.put(
+          `admin/${user.id}/users/${userData.user.id}`,
+          {
+            [type]: Number(value),
+          },
+          {
+            headers: { 'sunize-access-token': user.access_token },
+          },
+        );
+
+        toast('A taxa do usuário foi alterada.');
+      } catch (err: any) {
+        toast.error(err.response.data.message);
+      }
+    },
+    [user.access_token, user.id, userData.user?.id],
+  );
+
   return (
     <>
       {!userData.user ? (
@@ -120,6 +142,26 @@ export const Perfil = ({ userData }: UserProps) => {
 
             <button onClick={blockUser}>Bloquear conta</button>
             <button onClick={unblockUser}>Desbloquear conta</button>
+
+            <div style={{ margin: '2px' }}>
+              <p>Taxa de produtor:</p>
+              <Input
+                name="taxProducer"
+                type="number"
+                defaultValue={userData.user?.taxProducer || 0}
+                onChange={e => onChangeTax('taxProducer', e.target.value)}
+              />
+            </div>
+
+            <div style={{ margin: '2px' }}>
+              <p>Taxa de convidante:</p>
+              <Input
+                name="taxInviting"
+                type="number"
+                defaultValue={userData.user?.taxInviting || 0}
+                onChange={e => onChangeTax('taxInviting', e.target.value)}
+              />
+            </div>
 
             <p>Cargo do usuário:</p>
 

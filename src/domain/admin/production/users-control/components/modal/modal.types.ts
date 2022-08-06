@@ -27,6 +27,8 @@ export interface User {
   affiliates: any[];
   account_type: string;
   blocked_access: boolean;
+  taxProducer?: number;
+  taxInviting?: number;
 }
 
 export interface UserData {
