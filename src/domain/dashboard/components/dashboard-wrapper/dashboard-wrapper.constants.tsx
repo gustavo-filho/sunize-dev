@@ -20,6 +20,7 @@ import { GeneralAffiliatesPage } from '@domain/dashboard/products/general-affili
 import { GeneralCheckoutPage } from '@domain/dashboard/products/general-checkout/general-checkout.page';
 import { CoProductionPage } from '@domain/dashboard/products/general-coprodution/general-coproduction.page';
 import { GeneralInformationPage } from '@domain/dashboard/products/general-information/general-information.page';
+import { GeneralPixelPage } from '@domain/dashboard/products/general-pixel/general-pixel.page';
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
 import { MyProducts } from '@domain/dashboard/products/my-products/my-products.page';
@@ -57,6 +58,7 @@ export const DASHBOARD_ROUTES = {
   GENERAL_CHECKOUT: '/dashboard/informacoes-gerais/checkout/:id',
   GENERAL_COPRODUCTION: '/dashboard/informacoes-gerais/coproduction/:id',
   GENERAL_AFFILIATES: '/dashboard/informacoes-gerais/affiliates/:id',
+  GENERAL_PIXEL: '/dashboard/informacoes-gerais/pixel/:id',
 };
 
 export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
@@ -74,6 +76,7 @@ export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
   [DASHBOARD_ROUTES.GENERAL_CHECKOUT]: <GeneralCheckoutPage />,
   [DASHBOARD_ROUTES.GENERAL_COPRODUCTION]: <CoProductionPage />,
   [DASHBOARD_ROUTES.GENERAL_AFFILIATES]: <GeneralAffiliatesPage />,
+  [DASHBOARD_ROUTES.GENERAL_PIXEL]: <GeneralPixelPage />,
   [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
   [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
   [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,

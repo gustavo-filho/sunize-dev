@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 
 export const Container = styled.form`
-  margin-top: 10px;
+  max-width: 100%;
+
+  color: #000;
 
   .textEditor {
     height: 300px;
   }
 
   button {
-    margin-left: auto;
     margin-top: 1rem;
   }
 `

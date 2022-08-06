@@ -17,9 +17,8 @@ import {
   BoxWrapper,
   LoaderContainer,
   OptionSingle,
-  Wrapper,
-  Terms,
 } from './general-affiliates.styles';
+
 import { Loader } from '@shared/components/loader/loader.component';
 import InputMasked from './components/input-masked/input-masked.component';
 import { FaPercentage, FaPlus } from 'react-icons/fa';
@@ -235,32 +234,26 @@ export const GeneralAffiliatesPage = () => {
                   )}
                 />
 
-                <Wrapper>
-                  <h1>
-                    Metas de afiliados
-                    <button onClick={toggleModal}>
-                      Adicionar <FaPlus />
-                    </button>
-                  </h1>
-                  {goals.length ? (
-                    goals.map(goal => (
-                      <GoalAccordion
-                        key={goal.id}
-                        goals={goals}
-                        goal={goal}
-                        setGoals={setGoals}
-                      />
-                    ))
-                  ) : (
-                    <p>Você não tem nenhuma meta ainda.</p>
-                  )}
-                </Wrapper>
+                <h1>
+                  Metas de afiliados
+                  <span onClick={toggleModal}>
+                    Adicionar <FaPlus />
+                  </span>
+                </h1>
+                {goals.length ? (
+                  goals.map(goal => (
+                    <GoalAccordion
+                      key={goal.id}
+                      goals={goals}
+                      goal={goal}
+                      setGoals={setGoals}
+                    />
+                  ))
+                ) : (
+                  <p>Você não tem nenhuma meta ainda.</p>
+                )}
 
-                <Terms>
-                  <h1 className="terms" style={{ marginLeft: '25px' }}>
-                    Termos de uso de afiliação
-                  </h1>
-                </Terms>
+                <h1 className="terms">Termos de uso de afiliação</h1>
 
                 <TermsEditor />
               </BoxWrapper>
@@ -277,7 +270,7 @@ export const GeneralAffiliatesPage = () => {
           </>
         )
       ) : (
-        <h1>TESTE...</h1>
+        <h1>Carregando...</h1>
       )}
     </>
   );

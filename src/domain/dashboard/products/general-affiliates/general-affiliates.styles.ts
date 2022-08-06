@@ -2,97 +2,8 @@ import styled from 'styled-components'
 import { shade } from 'polished'
 import { Link } from 'react-router-dom'
 
-export const Terms = styled.div`
-  margin-top: 0.5rem;
-
-  width: 100%;
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #FFF;
-    margin-top: 1rem;
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  overflow: auto;
-  position: relative;
-  z-index: 1 !important;
-  
-  cursor: pointer;
-
-  margin-top: 0.2rem;
-
-  h1 {
-    font-weight: 600;
-    color: #FFF;
-    font-size: 28px;
-    text-align: center;
-    line-height: 27px;
-  }
-
-  p {
-    margin-top: 30px;
-    color: #818181;
-    font-size: 16px;
-    margin-left: 50px;
-    font-family: 'Nonito', sans-serif;
-  }
-
-  .terms {
-    margin-top: 125px;
-    font-family: 'Nonito', sans-serif;
-  }
-
-  button {
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    width: 8rem;
-    height: auto;
-    background: rgba(194, 124, 44, 0.9);
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-
-    margin-left: 360px;
-    margin-top: -25px; 
-    
-    border: 0;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
-    &:hover {
-      background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
-    }
-  }
-`
-
 export const Container = styled.div`
   max-width: 1640px;
-  max-height: auto;
-  
   margin: 60px auto 0px auto;
   padding: 0 6%;
   animation: animeTop 0.6s ease;
@@ -130,7 +41,7 @@ export const Container = styled.div`
     > a {
       font-size: 18px;
       color: rgba(0, 0, 0, 1);
-      background-color: #27293d;
+      background-color: #f5f5f5;
       padding: 16px 22px 12px 22px;
       border-radius: 4px 4px 0 0;
     }
@@ -191,20 +102,10 @@ export const BoxWrapper = styled.div`
   background-color: #27293d;
   padding: 50px;
   border-radius: 0 20px 20px 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
 
-  .buyLink {
-    margin: auto;
-    margin-top: 2rem;
-  }
-
-  form {
-    width: 100%;
-
-    button {
-
-    margin-bottom: 0.5rem;
-
+  .button {
+    margin-bottom: 2rem;
     cursor: pointer;
     width: 250px;
     height: 40px;
@@ -218,24 +119,59 @@ export const BoxWrapper = styled.div`
     border-radius: 4px;
     transition: background 0.2s ease;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
     &:hover {
       background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
     }
   }
-}
+
+  .terms {
+    margin-top: 2rem;
+  }
+
+  & + div {
+    margin-top: 2rem;
+    border-top-left-radius: 20px;
+  }
+
+  > h1 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+
+    > span {
+      cursor: pointer;
+      margin-left: 0.6rem;
+      background: rgba(194, 124, 44, 0.9);
+      border-radius: 0.3rem;
+      color: white;
+      padding: 0.3rem;
+      font-size: 0.9rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+
+      :hover {
+        background-color: ${shade(-0.2, '#fff')};
+      }
+
+      > svg {
+        margin-left: 0.3rem;
+      }
+    }
+  }
 
   > a {
     margin: 0 1rem;
   }
 
-  .nocoproductor {
-    color: #818181;
-    margin-top: 1px;
+  > p {
+    color: #ccc;
+    margin-top: 1rem;
+    font-size: 1rem;
   }
 
   @media (max-width: 995px) {
@@ -248,6 +184,7 @@ export const BoxWrapper = styled.div`
 
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
+    padding: 2rem 1rem;
   }
 `
 
