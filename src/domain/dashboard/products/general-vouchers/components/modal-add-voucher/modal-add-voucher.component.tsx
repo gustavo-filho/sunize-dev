@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Form, Formik } from 'formik';
 
 import { Container, Modal, Content } from './modal-add-voucher.styles';

@@ -7,17 +7,22 @@ export const Container = styled.div``
 export const Modal = styled(motion.main)`
   padding: 1rem;
   padding-bottom: 2.2rem;
-  color: #4b4b4b;
+  color: #fff;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 95%;
   max-width: 600px;
   border-radius: 1rem;
-  background-color: white;
   position: fixed;
   z-index: 2;
   box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.3);
+
+  background-color: rgb(30, 31, 50);
+
+left: 50% !important;
+top: 50% !important;
+transform: translate(-50%, -50%) !important;
 
   > button {
     cursor: pointer;

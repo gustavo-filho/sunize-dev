@@ -46,35 +46,6 @@ export const GeneralVouchersPage = () => {
     setProduct(response.data.data);
   }, [productId]);
 
-  async function handleApiPost() {
-    const date = dataModalAddVoucher.deadline.split('-') as any;
-    const formatedDate = new Date(date[0], date[1] - 1, date[2]).toISOString();
-    try {
-      const body: Partial<VoucherData> = {
-        code: dataModalAddVoucher.code,
-        type_discount: dataModalAddVoucher.type_discount,
-        deadline: formatedDate,
-      };
-      const descontIsPercentage =
-        dataModalAddVoucher.type_discount === 'percentage';
-
-      if (descontIsPercentage)
-        body.discount_percentage = dataModalAddVoucher.discount_percentage;
-      else body.discount_fixed = dataModalAddVoucher.discount_fixed;
-
-      const { data } = await api.post(
-        `/users/${user.id}/products/${productId}/vouchers`,
-        body,
-      );
-
-      setVouchers([...vouchers, data.data]);
-
-      toast.success('Cupom adicionado com sucesso!');
-    } catch (err: any) {
-      toast.error(err.response.data.message);
-    }
-  }
-
   useEffect(() => {
     getVouchers();
     getProduct();

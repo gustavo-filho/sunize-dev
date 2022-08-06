@@ -22,8 +22,13 @@ export const Modal = styled(motion.main)`
   width: 95%;
   max-width: 700px;
   border-radius: 1rem;
-  background-color: #27293d;
   position: relative;
+
+  background-color: rgb(30, 31, 50);
+
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
   > button {
     cursor: pointer;
