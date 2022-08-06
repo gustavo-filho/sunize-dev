@@ -24,7 +24,7 @@ export const Modal = styled(motion.main)`
   background-color: #27293d;
   position: relative;
 
-  z-index: 2 !important;
+  z-index: 999 !important;
 
   > button {
     cursor: pointer;
@@ -82,6 +82,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
 
+  z-index: 999 !important;
   form {
     width: 100%;
 

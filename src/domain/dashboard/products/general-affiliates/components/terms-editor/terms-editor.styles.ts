@@ -7,11 +7,17 @@ export const Container = styled.form`
   button {
     margin-top: 1rem;
   }
+
+  .sun-editor .se-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 0 !important;
+}
 `
 
 export const Sun = styled(SunEditor)`
-  .se-container {
-    font-family: "Nonito", sans-serif;
+  .sun-editor .se-container {
     z-index: 0 !important;
   }
 `
