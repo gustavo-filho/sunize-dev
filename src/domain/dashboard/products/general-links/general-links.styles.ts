@@ -1,6 +1,5 @@
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -34,8 +33,32 @@ export const Container = styled.div`
     font-family: 'Nonito', sans-serif;
     margin-bottom: 50px;
   }
-`
 
+  .links {
+    margin-bottom: 12px;
+
+    > a {
+      font-size: 18px;
+      color: rgba(0, 0, 0, 1);
+      background-color: #f5f5f5;
+      padding: 16px 22px 12px 22px;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .links {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+    }
+    > a {
+      font-size: 13px;
+      position: relative;
+      top: 2px;
+    }
+  }
+`
 export const Navigation = styled.div`
   margin-bottom: 12px;
 
@@ -64,7 +87,6 @@ export const Navigation = styled.div`
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
-  color: rgba(0, 0, 0, 1);
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
@@ -84,19 +106,17 @@ export const BoxWrapper = styled.div`
     border-top-left-radius: 20px;
   }
 
-  h1 {
-    margin-left: -60rem;
+  > h1 {
     color: #fff;
     font-size: 1.4rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    justify-content: center;
 
     > span {
       cursor: pointer;
       margin-left: 0.6rem;
-      background-color: #0e1943;
+      background-color: #c27c2c;
       border-radius: 0.3rem;
       color: white;
       padding: 0.3rem;
@@ -108,7 +128,7 @@ export const BoxWrapper = styled.div`
       transition: background-color 0.3s ease;
 
       :hover {
-        background-color: ${shade(-0.2, '#0e1943')};
+        background-color: #a46925;
       }
 
       > svg {
@@ -117,8 +137,17 @@ export const BoxWrapper = styled.div`
     }
   }
 
+  > h2 {
+    color: #848484;
+  }
+
   > a {
     margin: 0 1rem;
+  }
+
+  > p {
+    margin-top: 1rem;
+    font-size: 1rem;
   }
 
   @media (max-width: 995px) {
@@ -134,78 +163,6 @@ export const BoxWrapper = styled.div`
     padding: 2rem 1rem;
   }
 `
-
-export const ProductLogo = styled.div`
-  width: 100%;
-  max-width: 200px;
-  max-height: 150px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1rem;
-  position: relative;
-
-  img {
-    display: block;
-    width: 100%;
-    border-radius: 1rem;
-  }
-
-  > div {
-    width: 100%;
-    max-width: 500px;
-    padding-top: 60%;
-    background-color: #ddd;
-    position: relative;
-    border-radius: 1rem;
-
-    > svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7rem;
-      color: #4b4b4b;
-    }
-  }
-
-  label {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: #df8b2b;
-    border: 0;
-    cursor: pointer;
-    border-radius: 50%;
-    right: -1rem;
-    bottom: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.2s ease;
-
-    :hover {
-      background-color: ${shade(0.1, '#c27c2c')};
-    }
-
-    input {
-      display: none;
-    }
-
-    svg {
-      color: white;
-      font-size: 1.4rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    > div > svg {
-      font-size: 4rem;
-    }
-  }
-`
-
 export const LoaderContainer = styled.div`
   position: absolute;
   top: 0;

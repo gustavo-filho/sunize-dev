@@ -8,21 +8,22 @@ interface AccordionProps {
 export const Container = styled.div`
   margin-bottom: 1rem;
   position: relative;
-  width: 100%;
 `
 
 export const Buttons = styled.div`
   button {
+
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 125px;
     height: 50px;
     font-size: 1.1rem;
     border: 0;
     border-radius: 0.4rem;
     transition: background-color 0.3s ease;
+    margin-left: 10px;
 
     :focus {
       outline: 2px solid black;
@@ -72,9 +73,9 @@ export const Buttons = styled.div`
 
 export const Header = styled.header`
   position: relative;
-  z-index: 0;
+  z-index: 1;
   cursor: pointer;
-  background-color: #27293d;
+  background-color: #fff;
   display: flex;
   padding: 20px 12px;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -83,6 +84,8 @@ export const Header = styled.header`
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
   width: 100%;
   transition: box-shadow 0.3s ease;
+
+  background-color: rgb(30, 31, 50);
 
   :hover {
     box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.35);
@@ -95,7 +98,7 @@ export const Header = styled.header`
       background-color: transparent;
       border: 0;
       cursor: pointer;
-      color: #0f1c4d;
+      color: #FFF;
       font-size: 1.05rem;
       font-weight: 600;
     }
@@ -131,7 +134,7 @@ export const Header = styled.header`
       flex-direction: column;
 
       strong {
-        color: #ccc;
+        color: #FFF;
         font-size: 17px;
       }
 
@@ -168,11 +171,8 @@ export const Header = styled.header`
     }
   }
 `
-
 export const Accordion = styled.main<AccordionProps>`
-  z-index: 0;
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
-  background-color: #27293d;
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
@@ -186,6 +186,8 @@ export const Accordion = styled.main<AccordionProps>`
 `
 
 export const AccordionContent = styled.div`
+  background-color: rgb(30, 31, 50);
+
   padding: 1rem 1rem 2.5rem;
 
   form {
@@ -210,6 +212,7 @@ export const AccordionContent = styled.div`
       border-radius: 0.5rem;
       transition: background-color 0.2s ease;
       border: 0;
+      outline: 0;
 
       :hover {
         background-color: ${shade(0.25, '#c27c2c')};
@@ -220,7 +223,7 @@ export const AccordionContent = styled.div`
 
 export const Permissions = styled.section`
   h1 {
-    color: #0e1943;
+    color: #FFF;
     font-size: 1.3rem;
     margin-top: 1.5rem;
   }
@@ -239,108 +242,6 @@ export const FormGroup = styled.div`
 
   label {
     font-size: 1rem;
-    color: #0e1943;
-  }
-`
-
-export const OptionSingle = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  margin-bottom: 1rem;
-
-  .phoneLabel {
-    margin-left: 2rem;
-  }
-
-  .inputBox {
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-
-    input {
-      margin-left: 0rem !important;
-    }
-
-    .fInput {
-      margin-bottom: 1rem !important;
-    }
-
-  }
-
-  h1 {
-    margin-right: auto;
-    color: #4b4b4b;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  main {
-    display: flex;
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: #848484;
-
-      & + div {
-        margin-left: 1rem;
-      }
-
-      label {
-        cursor: pointer;
-        margin-left: 0.7rem;
-      }
-
-      input[type='radio'] {
-        cursor: pointer;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-
-  div:last-child {
-    margin-left: 1.5rem;
-  }
-
-  > select {
-    cursor: pointer;
-    width: 100%;
-    max-width: 240px;
-    height: 42px;
-    border: 2px solid #f5f5f5;
-    padding-left: 0.5rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    color: #4b4b4b;
-    font-weight: 600;
-    transition: border 0.2s ease;
-
-    :focus {
-      border: 2px solid #c27c2c;
-    }
-  }
-
-  @media (max-width: 970px) {
-    main {
-      text-align: left;
-      flex-direction: column;
-      align-items: flex-start;
-
-      div {
-        & + div {
-          margin-left: 0rem;
-          margin-top: 0.6rem;
-        }
-      }
-
-      div:last-child {
-        margin-left: 0rem;
-      }
-    }
+    color: #FFF;
   }
 `

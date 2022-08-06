@@ -162,8 +162,7 @@ export function GeneralInformationPage() {
       ) : (
         <Container>
           <h1>
-            Gerenciar
-            {product && product.product_type === 'EBOOK' ? 'eBook' : 'Produto'}
+            Gerenciar&nbsp;{product && product.product_type === 'EBOOK' ? 'eBook' : 'Produto'}
           </h1>
 
           <h2>

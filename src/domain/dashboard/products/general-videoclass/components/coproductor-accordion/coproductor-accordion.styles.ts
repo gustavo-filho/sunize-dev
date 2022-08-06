@@ -22,7 +22,6 @@ export const Buttons = styled.div`
     border: 0;
     border-radius: 0.4rem;
     transition: background-color 0.3s ease;
-    margin-left: 10px;
 
     :focus {
       outline: 2px solid black;
@@ -84,48 +83,31 @@ export const Header = styled.header`
   width: 100%;
   transition: box-shadow 0.3s ease;
 
-  background-color: rgb(30, 31, 50);
+  div:first-child {
+    width: 100%;
+  }
 
   :hover {
     box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.35);
   }
 
-  div:first-child {
-    width: 100%;
-
-    > button {
-      background-color: transparent;
-      border: 0;
-      cursor: pointer;
-      color: #FFF;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-
-    img {
-      width: 46px;
-      height: 46px;
-      border-radius: 6px;
-      margin: 0 32px;
-    }
-
-    > h3 {
-      width: 46px;
-      height: 46px;
-      border-radius: 6px;
-      margin: 0 32px;
-      background-color: #ccc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        color: #777;
-      }
-    }
+  > button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    color: #0f1c4d;
+    font-size: 1.05rem;
+    font-weight: 600;
   }
 
-  > div {
+  img {
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+    margin: 0 32px;
+  }
+
+  div {
     display: flex;
 
     div {
@@ -133,7 +115,7 @@ export const Header = styled.header`
       flex-direction: column;
 
       strong {
-        color: #FFF;
+        color: #0f1c4d;
         font-size: 17px;
       }
 
@@ -170,8 +152,11 @@ export const Header = styled.header`
     }
   }
 `
+
 export const Accordion = styled.main<AccordionProps>`
+  border-top: 1px solid #ccc;
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
+  background-color: white;
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
@@ -185,8 +170,6 @@ export const Accordion = styled.main<AccordionProps>`
 `
 
 export const AccordionContent = styled.div`
-  background-color: rgb(30, 31, 50);
-
   padding: 1rem 1rem 2.5rem;
 
   form {
@@ -211,7 +194,6 @@ export const AccordionContent = styled.div`
       border-radius: 0.5rem;
       transition: background-color 0.2s ease;
       border: 0;
-      outline: 0;
 
       :hover {
         background-color: ${shade(0.25, '#c27c2c')};
@@ -222,7 +204,7 @@ export const AccordionContent = styled.div`
 
 export const Permissions = styled.section`
   h1 {
-    color: #FFF;
+    color: #0e1943;
     font-size: 1.3rem;
     margin-top: 1.5rem;
   }
@@ -241,6 +223,6 @@ export const FormGroup = styled.div`
 
   label {
     font-size: 1rem;
-    color: #FFF;
+    color: #0e1943;
   }
 `

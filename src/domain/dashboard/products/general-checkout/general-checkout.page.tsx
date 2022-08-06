@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppSelector } from '../../../../store/hooks';
 import { useParams } from 'react-router-dom';
 import { userSelector } from '@domain/auth/user/user.store';

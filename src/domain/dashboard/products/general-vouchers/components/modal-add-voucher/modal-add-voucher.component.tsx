@@ -31,50 +31,13 @@ export const ModalAddVoucher = ({
     toggleModal();
   }
 
-  // const handleSubmit = useCallback(
-  //   async (values: any) => {
-  //     if (values.type_discount === 'fixed') {
-  //       if (price - values.discount_fixed >= 10) {
-  //         try {
-  //           setData(values);
-  //           handleCloseModal();
-  //         } catch (error) {
-  //           toast.error('Houve um problema');
-  //           handleCloseModal();
-  //         }
-  //       } else {
-  //         toast.error(
-  //           'O preço final do produto deve ser de no mínimo R$ 10,00',
-  //         );
-  //       }
-  //     } else {
-  //       if (price - (price * values.discount_percentage) / 100 >= 10) {
-  //         try {
-  //           setData(values);
-  //           handleCloseModal();
-  //         } catch (error) {
-  //           toast.error('Houve um problema');
-  //           handleCloseModal();
-  //         }
-  //       } else {
-  //         toast.error(
-  //           'O preço final do produto deve ser de no mínimo R$ 10,00',
-  //         );
-  //       }
-  //     }
-  //   },
-  //   [handleCloseModal, price, setData],
-  // );
-
   async function handleSubmit(values: any) {
     if (values.type_discount === 'fixed') {
       if (price - values.discount_fixed >= 10) {
         try {
           setData(values);
-          handleCloseModal();
         } catch (error) {
           toast.error('Houve um problema');
-          handleCloseModal();
         }
       } else {
         toast.error('O preço final do produto deve ser de no mínimo R$ 10,00');
@@ -83,16 +46,15 @@ export const ModalAddVoucher = ({
       if (price - (price * values.discount_percentage) / 100 >= 10) {
         try {
           setData(values);
-          handleCloseModal();
         } catch (error) {
           toast.error('Houve um problema');
-          handleCloseModal();
         }
       } else {
         toast.error('O preço final do produto deve ser de no mínimo R$ 10,00');
-        handleCloseModal();
       }
     }
+
+    handleCloseModal();
   }
 
   return (
