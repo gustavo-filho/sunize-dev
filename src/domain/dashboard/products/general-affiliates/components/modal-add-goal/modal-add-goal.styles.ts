@@ -8,7 +8,6 @@ export const Container = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 4;
   background-color: rgba(0, 0, 0, 0.3);
 `
 
@@ -24,6 +23,8 @@ export const Modal = styled(motion.main)`
   border-radius: 1rem;
   background-color: #27293d;
   position: relative;
+
+  z-index: 2 !important;
 
   > button {
     cursor: pointer;

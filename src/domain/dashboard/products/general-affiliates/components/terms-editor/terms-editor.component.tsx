@@ -3,10 +3,9 @@ import { userSelector } from '@domain/auth/user/user.store';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../../../store/hooks';
-import { Container } from './terms-editor.styles';
+import { Container, Sun } from './terms-editor.styles';
 import { toast } from 'react-toastify';
 
-import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
 export function TermsEditor() {
@@ -56,20 +55,19 @@ export function TermsEditor() {
   return (
     <Container>
       {oldTerms ? (
-        <SunEditor
-          getSunEditorInstance={getSunEditorInstance}
-          defaultValue={oldTerms && oldTerms}
-          onChange={handleChange}
-          name="terms"
-        />
+          <Sun
+            getSunEditorInstance={getSunEditorInstance}
+            defaultValue={oldTerms && oldTerms}
+            onChange={handleChange}
+          />
       ) : (
-        <SunEditor
-          getSunEditorInstance={getSunEditorInstance}
-          defaultValue={oldTerms && oldTerms}
-          onChange={handleChange}
-          name="terms"
-        />
+          <Sun
+            getSunEditorInstance={getSunEditorInstance}
+            defaultValue={oldTerms && oldTerms}
+            onChange={handleChange}
+          />
       )}
+
       <button className="button" onClick={submitTerms}>
         Salvar termos
       </button>
