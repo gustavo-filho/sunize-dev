@@ -12,15 +12,13 @@ export const Container = styled.div`
 `
 
 export const Buttons = styled.div`
-  margin-top: 1rem;
-
   button {
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 40px;
+    height: 50px;
     font-size: 1.1rem;
     border: 0;
     border-radius: 0.4rem;
@@ -66,7 +64,7 @@ export const Buttons = styled.div`
 
       & + button {
         margin-left: 0;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
       }
     }
   }
@@ -74,9 +72,9 @@ export const Buttons = styled.div`
 
 export const Header = styled.header`
   position: relative;
-  z-index: 1;
+  z-index: 0;
   cursor: pointer;
-  background-color: #fff;
+  background-color: #27293d;
   display: flex;
   padding: 20px 12px;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -85,8 +83,6 @@ export const Header = styled.header`
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
   width: 100%;
   transition: box-shadow 0.3s ease;
-
-  background-color: rgb(30, 31, 50);
 
   :hover {
     box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.35);
@@ -99,7 +95,7 @@ export const Header = styled.header`
       background-color: transparent;
       border: 0;
       cursor: pointer;
-      color: #FFF;
+      color: #0f1c4d;
       font-size: 1.05rem;
       font-weight: 600;
     }
@@ -135,12 +131,12 @@ export const Header = styled.header`
       flex-direction: column;
 
       strong {
-        color: #FFF;
+        color: #ccc;
         font-size: 17px;
       }
 
       p {
-        margin-top: -1.1rem;
+        margin-top: 2px;
         color: #878787;
         font-size: 13px;
       }
@@ -173,109 +169,10 @@ export const Header = styled.header`
   }
 `
 
-// export const Header = styled.header`
-//   position: relative;
-//   z-index: 1;
-//   cursor: pointer;
-//   display: flex;
-//   padding: 20px 12px;
-//   border-radius: 0.5rem 0.5rem 0 0;
-//   justify-content: space-between;
-//   align-items: center;
-//   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
-//   width: 100%;
-//   transition: box-shadow 0.3s ease;
-
-//   background-color: rgb(30, 31, 50);
-
-//   :hover {
-//     box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.35);
-//   }
-
-//   div:first-child {
-//     width: 100%;
-
-//     > button {
-//       background-color: transparent;
-//       border: 0;
-//       cursor: pointer;
-//       color: #FFF;
-//       font-size: 1.05rem;
-//       font-weight: 600;
-//     }
-
-//     img {
-//       width: 46px;
-//       height: 46px;
-//       border-radius: 6px;
-//       margin: 0 32px;
-//     }
-
-//     > h3 {
-//       width: 46px;
-//       height: 46px;
-//       border-radius: 6px;
-//       margin: 0 32px;
-//       background-color: #ccc;
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-
-//       svg {
-//         color: #777;
-//       }
-//     }
-//   }
-
-//   > div {
-//     display: flex;
-
-//     div {
-//       display: flex;
-//       flex-direction: column;
-
-//       strong {
-//         color: #FFF;
-//         font-size: 17px;
-//       }
-
-//       p {
-//         margin-top: 2px;
-//         color: #878787;
-//         font-size: 13px;
-//       }
-//     }
-//   }
-
-//   a {
-//     color: #373737;
-//     font-size: 17px;
-//     margin-right: 32px;
-//   }
-
-//   @media (max-width: 768px) {
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-
-//     div {
-//       flex-direction: column;
-//       align-items: center;
-
-//       img {
-//         margin: 0 0 8px 0;
-//       }
-//     }
-
-//     a {
-//       margin: 8px 0 16px 0;
-//     }
-//   }
-// `
-
 export const Accordion = styled.main<AccordionProps>`
+  z-index: 0;
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
-  background-color: rgb(30, 31, 50);
+  background-color: #27293d;
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
@@ -369,6 +266,7 @@ export const OptionSingle = styled.div`
     .fInput {
       margin-bottom: 1rem !important;
     }
+
   }
 
   h1 {
