@@ -186,7 +186,7 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
             <p className="description">{product.description}</p>
           </Divisor>
 
-          {hasAffiliate && (
+          {hasAffiliate && terms.length > 1 && (
             <Divisor>
               <h1>Termos de Afiliação</h1>
               <p
