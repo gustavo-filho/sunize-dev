@@ -52,7 +52,7 @@ export const UserInfo = styled.div`
   align-items: center;
 
   .userName {
-    margin-top: 0px;
+    margin: 0px;
   }
 
   .container-user {
