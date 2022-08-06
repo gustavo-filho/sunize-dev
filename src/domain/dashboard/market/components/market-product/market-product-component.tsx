@@ -27,6 +27,21 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
   const [modal, setModal] = useState(false);
   const [avaliations, setAvaliations] = useState([]) as any;
   const [hasAffiliate, setHasAffiliate] = useState(false);
+  const [terms, setTerms] = useState('');
+
+  const getTerms = useCallback(async () => {
+    const { data } = await api.get(
+      `users/${user.data.id}/products/terms/${product.id}`,
+    );
+
+    if (data.success) {
+      setTerms(data.data);
+    }
+  }, [user, product]);
+
+  useEffect(() => {
+    getTerms();
+  }, [getTerms]);
 
   useEffect(() => {
     async function getAvaliations() {
@@ -161,12 +176,6 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
                   <button type="button" onClick={requestAffiliation}>
                     Solicitar afiliação
                   </button>
-                  <span>
-                    Ao continuar, você concorda com os{' '}
-                    <a className="terms" href="/#" target="_blank">
-                      termos de uso
-                    </a>.
-                  </span>
                 </>
               )}
             </div>
@@ -176,6 +185,16 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
             <h1>Sobre o Curso</h1>
             <p className="description">{product.description}</p>
           </Divisor>
+
+          {hasAffiliate && (
+            <Divisor>
+              <h1>Termos de Afiliação</h1>
+              <p
+                className="description"
+                dangerouslySetInnerHTML={{ __html: terms }}
+              />
+            </Divisor>
+          )}
 
           <Divisor>
             <h1>Avaliações</h1>

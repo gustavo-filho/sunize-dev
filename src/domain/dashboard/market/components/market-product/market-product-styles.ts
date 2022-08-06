@@ -290,6 +290,12 @@ export const Divisor = styled.div`
     @media (max-width: 500px) {
       max-width: 300px;
     }
+
+    &.description {
+      > p {
+        margin: 0;
+      }
+    }
   }
   h1 {
     color: #0e1943;
