@@ -1,12 +1,20 @@
 import { userSelector } from '@domain/auth/user/user.store';
+import InputMasked from '@shared/components/input-masked/input-masked.component';
 import { Loader } from '@shared/components/loader/loader.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import { api } from '@shared/services/api';
+import { Form, Formik } from 'formik';
 import { useCallback } from 'react';
+import { FaPercentage } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../../../../../../store/hooks';
 import { UserData } from '../../modal.types';
-import { Actions, Container, LoaderContainer } from './perfil.styles';
+import {
+  Actions,
+  Container,
+  LoaderContainer,
+  TaxInputs,
+} from './perfil.styles';
 
 interface UserProps {
   userData: UserData;
@@ -77,6 +85,34 @@ export const Perfil = ({ userData }: UserProps) => {
     [user.access_token, user.id, userData.user?.id],
   );
 
+  const handleChangeTax = useCallback(
+    async ({
+      taxProducer,
+      taxInviting,
+    }: {
+      taxProducer: number;
+      taxInviting: number;
+    }) => {
+      try {
+        await api.put(
+          `admin/${user.id}/users/${userData.user.id}`,
+          {
+            taxProducer,
+            taxInviting,
+          },
+          {
+            headers: { 'sunize-access-token': user.access_token },
+          },
+        );
+
+        toast('A taxa do usuário foi alterada.');
+      } catch (err: any) {
+        toast.error(err.response.data.message);
+      }
+    },
+    [user.access_token, user.id, userData.user?.id],
+  );
+
   return (
     <>
       {!userData.user ? (
@@ -121,39 +157,81 @@ export const Perfil = ({ userData }: UserProps) => {
             <button onClick={blockUser}>Bloquear conta</button>
             <button onClick={unblockUser}>Desbloquear conta</button>
 
-            <p>Cargo do usuário:</p>
-
-            <SingleSelect
-              options={[
-                {
-                  label: 'Usuário',
-                  value: 'USER',
-                },
-                {
-                  label: 'Assistente',
-                  value: 'ASSISTENT',
-                },
-                {
-                  label: 'Administrador',
-                  value: 'ADMIN',
-                },
-              ]}
-              placeholder={
-                userData.user.account_type === 'USER'
-                  ? 'Usuário'
-                  : userData.user.account_type === 'ASSISTENT'
-                  ? 'Assistente'
-                  : userData.user.account_type === 'ADMIN'
-                  ? 'Administrador'
-                  : undefined
-              }
-              onChange={({ value }) => onChange(value)}
-              customTheme={{
-                primary25: 'rgba(236, 153, 58, 0.25)',
-                primary50: 'rgba(236, 153, 58, 0.5)',
-                primary: 'rgba(236, 153, 58, 1)',
+            <Formik
+              onSubmit={handleChangeTax}
+              initialValues={{
+                taxInviting: userData.user.taxInviting || 0,
+                taxProducer: userData.user.taxProducer || 0,
               }}
+              render={({ values, setFieldValue }) => (
+                <Form>
+                  <TaxInputs>
+                    <InputMasked
+                      name="taxProducer"
+                      text="Taxa de produtor:"
+                      mask="9"
+                      icon={FaPercentage}
+                      placeholder="Insira a taxa do produtor"
+                      value={values.taxProducer}
+                      onChange={e =>
+                        setFieldValue('taxProducer', e.target.value)
+                      }
+                    />
+
+                    <InputMasked
+                      name="taxInviting"
+                      text="Taxa de convidante:"
+                      mask="9"
+                      icon={FaPercentage}
+                      placeholder="Insira a taxa do produtor"
+                      value={values.taxInviting}
+                      onChange={e =>
+                        setFieldValue('taxInviting', e.target.value)
+                      }
+                    />
+                  </TaxInputs>
+                  <button type="submit" className="submit">
+                    Salvar taxas
+                  </button>
+                </Form>
+              )}
             />
+
+            <div style={{ marginTop: '12px' }}>
+              <p>Cargo do usuário:</p>
+
+              <SingleSelect
+                options={[
+                  {
+                    label: 'Usuário',
+                    value: 'USER',
+                  },
+                  {
+                    label: 'Assistente',
+                    value: 'ASSISTENT',
+                  },
+                  {
+                    label: 'Administrador',
+                    value: 'ADMIN',
+                  },
+                ]}
+                placeholder={
+                  userData.user.account_type === 'USER'
+                    ? 'Usuário'
+                    : userData.user.account_type === 'ASSISTENT'
+                    ? 'Assistente'
+                    : userData.user.account_type === 'ADMIN'
+                    ? 'Administrador'
+                    : undefined
+                }
+                onChange={({ value }) => onChange(value)}
+                customTheme={{
+                  primary25: 'rgba(236, 153, 58, 0.25)',
+                  primary50: 'rgba(236, 153, 58, 0.5)',
+                  primary: 'rgba(236, 153, 58, 1)',
+                }}
+              />
+            </div>
           </Actions>
         </Container>
       )}
