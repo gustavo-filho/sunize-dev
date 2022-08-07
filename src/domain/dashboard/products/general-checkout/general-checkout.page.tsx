@@ -58,7 +58,7 @@ export const GeneralCheckoutPage = () => {
   const [customCheckout, setCustomCheckout] = useState<CustomCheckoutData>();
   const [isLoading, setIsLoading] = useState<any>(true);
   const [phone, setPhone] = useState<string>('');
-  const [setProductCheckout] = useState<any>({});
+  const [, setProductCheckout] = useState<any>({});
 
   useEffect(() => {
     async function getCustomCheckout() {
@@ -178,7 +178,7 @@ export const GeneralCheckoutPage = () => {
             },
             phone: {
               allowed: values.phone_allowed === 'true',
-              number: values.phone,
+              number: values.phone.phone_number,
               message: values.phone_message,
             },
             page_purchase: {
