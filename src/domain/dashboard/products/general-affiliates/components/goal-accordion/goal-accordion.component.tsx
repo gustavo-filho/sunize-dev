@@ -73,10 +73,11 @@ export const GoalAccordion = ({ goal, setGoals, goals }: any) => {
       setGoals(newGoals);
 
       toast.success('Alterações salvas com sucesso');
-    } catch (err) {
-      toast.error('Não foi possível salvar as alterações');
-      closeAccordion();
+    } catch (err: any) {
+      toast.error(err.response.data.message);
     }
+
+    closeAccordion();
   }
 
   return (
