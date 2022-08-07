@@ -39,6 +39,10 @@ export const Container = styled.div<ContainerProps>`
 export const SelectContainer = styled(Select)`
   z-index: 100 !important;
 
+  .select__placeholder {
+    color: #FFF !important;
+  }
+
   .select_menu {
     color: #FFF;
     background-color: #27293D !important;
