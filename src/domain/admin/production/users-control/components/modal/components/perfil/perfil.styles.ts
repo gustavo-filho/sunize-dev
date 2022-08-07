@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ export const Container = styled.div`
       background-color: ${shade(0.3, '#c27c2c')};
     }
   }
-`
+`;
 
 export const Actions = styled.div`
   strong {
@@ -79,7 +79,7 @@ export const Actions = styled.div`
     }
   }
 
-  button:nth-of-type(2) {
+  button:nth-of-type(2), button.submit {
     cursor: pointer;
     background-color: ${shade(0.2, '#1de9b6')};
     color: white;
@@ -94,7 +94,7 @@ export const Actions = styled.div`
       background-color: ${shade(0.4, '#1de9b6')};
     }
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -124,4 +124,10 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
+
+export const TaxInputs = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;

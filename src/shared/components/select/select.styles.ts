@@ -10,7 +10,7 @@ interface NoteProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   span {
     display: block;
