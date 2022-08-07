@@ -47,9 +47,9 @@ export const SingleSelect: React.FC<Props> = ({
       ...theme,
       colors: {
         ...theme.colors,
-        primary25: 'rgba(194, 124, 44, 0.25)',
-        primary50: 'rgba(194, 124, 44, 0.5)',
-        primary: 'rgba(194, 124, 44, 1)',
+        primary25: 'rgba(186, 107, 17, 0.25)',
+        primary50: 'rgba(190, 106, 9, 0.5)',
+        primary: '#ac6008',
       },
     };
   }, []);
@@ -75,11 +75,12 @@ export const SingleSelect: React.FC<Props> = ({
         styles={{
           control: base => ({
             ...base,
+            color: '#fff',
             backgroundColor: 'rgb(30, 31, 50)',
           }),
           singleValue: (provided: any) => ({
             ...provided,
-            color: 'white',
+            color: '#fff',
           }),
         }}
         noOptionsMessage={({ inputValue }) => 'Sem opções'}

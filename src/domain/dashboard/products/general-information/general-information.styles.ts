@@ -130,8 +130,8 @@ export const BoxWrapper = styled.div`
 
 export const ProductImage = styled.div`
   width: 100%;
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 300px;
+  max-height: 300px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -140,7 +140,8 @@ export const ProductImage = styled.div`
 
   img {
     display: block;
-    width: 100%;
+    width: 300px;
+    height: 300px;
     border-radius: 1rem;
   }
 

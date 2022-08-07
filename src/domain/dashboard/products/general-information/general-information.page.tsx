@@ -162,7 +162,8 @@ export function GeneralInformationPage() {
       ) : (
         <Container>
           <h1>
-            Gerenciar&nbsp;{product && product.product_type === 'EBOOK' ? 'eBook' : 'Produto'}
+            Gerenciar&nbsp;
+            {product && product.product_type === 'EBOOK' ? 'eBook' : 'Produto'}
           </h1>
 
           <h2>
@@ -237,7 +238,12 @@ export function GeneralInformationPage() {
                 <Form>
                   <ProductImage>
                     {product.image ? (
-                      <img src={product.image} alt={product.image} />
+                      <img
+                        src={product.image}
+                        alt={product.image}
+                        width={300}
+                        height={300}
+                      />
                     ) : (
                       <div>
                         <FaImage />

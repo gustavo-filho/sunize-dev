@@ -55,7 +55,7 @@ export const CoProductionPage = () => {
 
   const [product, setProduct] = useState({} as any);
   const [coProducers, setCoproducers] = useState<CoProducerData[]>([]);
-  const [coProductorTax, setCoProductorTax] = useState(0);
+  const [coProductorTax, setCoProductorTax] = useState('0');
 
   const user = useAppSelector(userSelector).data;
 
@@ -72,9 +72,10 @@ export const CoProductionPage = () => {
 
   const getProductionData = useCallback(async () => {
     try {
-      const response = await api.get(`products/${productId}`);
+      const response = await api.get(`/products/${productId}`);
+
       setProduct(response.data.data);
-      setCoProductorTax(response.data.data.product.co_productor_tax);
+      setCoProductorTax(response.data.data.product.co_productor_tax.toString());
     } catch (err) {
       toast.error('Não foi possível obter os dados do produto');
     }
@@ -98,7 +99,7 @@ export const CoProductionPage = () => {
       await api.post(
         `products/${productId}/co-producer-tax/${user.id}`,
         {
-          tax: coProductorTax,
+          tax: Number(coProductorTax),
         },
         {
           headers: { 'sunize-access-token': user.access_token },

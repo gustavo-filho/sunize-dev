@@ -60,8 +60,9 @@ export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
       dataChanged();
     } catch (err: any) {
       toast.error(err.response.data.message);
-      handleCloseModal();
     }
+
+    handleCloseModal();
   }
 
   return (

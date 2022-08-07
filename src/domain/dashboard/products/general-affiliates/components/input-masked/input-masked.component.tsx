@@ -1,19 +1,20 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { useField } from 'formik'
+import React, { useCallback, useRef, useState } from 'react';
+import { useField } from 'formik';
 import InputMask, {
   Props as InputProps,
   ReactInputMask,
-} from 'react-input-mask'
+} from 'react-input-mask';
 
-import { Container, Content, Error } from './input-masked-styles'
-import { FiAlertCircle } from 'react-icons/fi'
+import { Container, Content, Error } from './input-masked-styles';
+import { FiAlertCircle } from 'react-icons/fi';
 
 interface InputData extends InputProps {
-  mask: string
-  labelPosition?: 'left' | 'center' | 'right'
-  disabled?: boolean
-  text: string
-  icon?: React.ComponentType
+  mask: string;
+  maskChar?: string | null;
+  labelPosition?: 'left' | 'center' | 'right';
+  disabled?: boolean;
+  text: string;
+  icon?: React.ComponentType;
 }
 
 const InputMasked: React.FC<InputData> = ({
@@ -24,23 +25,23 @@ const InputMasked: React.FC<InputData> = ({
   icon: Icon,
   ...rest
 }) => {
-  const [inputProps, meta] = useField(rest as any)
-  const id = rest.id || rest.name
-  const [focused, setFocused] = useState(false)
-  const [filled, setFilled] = useState(false)
-  const inputRef = useRef<ReactInputMask>(null)
+  const [inputProps, meta] = useField(rest as any);
+  const id = rest.id || rest.name;
+  const [focused, setFocused] = useState(false);
+  const [filled, setFilled] = useState(false);
+  const inputRef = useRef<ReactInputMask>(null);
 
   const onFocus = useCallback(() => {
-    setFocused(true)
-  }, [])
+    setFocused(true);
+  }, []);
 
   const onBlur = useCallback(() => {
-    setFocused(false)
+    setFocused(false);
 
     if (inputRef.current) {
-      setFilled(!!inputRef.current.props.value ?? '')
+      setFilled(!!inputRef.current.props.value ?? '');
     }
-  }, [inputRef])
+  }, [inputRef]);
 
   return (
     <Content>
@@ -65,6 +66,7 @@ const InputMasked: React.FC<InputData> = ({
             {...inputProps}
             mask={mask}
             id={id}
+            maskChar={null}
             disabled={disabled}
             {...rest}
           />
@@ -77,7 +79,7 @@ const InputMasked: React.FC<InputData> = ({
         </Container>
       </div>
     </Content>
-  )
-}
+  );
+};
 
-export default InputMasked
+export default InputMasked;

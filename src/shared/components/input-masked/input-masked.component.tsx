@@ -9,6 +9,7 @@ import { Container, Content, Error } from './input-masked-styles'
 import { FiAlertCircle } from 'react-icons/fi'
 
 interface InputData extends InputProps {
+  name?: string;
   mask: string
   labelPosition?: 'left' | 'center' | 'right'
   disabled?: boolean

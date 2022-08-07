@@ -15,19 +15,21 @@ export function TermsEditor() {
 
   const user = useAppSelector(userSelector).data;
 
+  const [loading, setLoading] = useState(false);
+
   const [terms, setTerms] = useState('');
   const [oldTerms, setOldTerms] = useState('');
 
-  const getSunEditorInstance = (sunEditor: any) => {
-    editor.current = sunEditor;
-  };
-
   const getTerms = useCallback(async () => {
+    setLoading(true);
+
     const response = await api.get(
       `/users/${user.id}/products/terms/${productId}`,
     );
 
     setOldTerms(response.data.data);
+
+    setLoading(false);
   }, [productId, user.id]);
 
   useEffect(() => {
@@ -53,24 +55,18 @@ export function TermsEditor() {
   }
 
   return (
-    <Container>
-      {oldTerms ? (
-          <Sun
-            getSunEditorInstance={getSunEditorInstance}
-            defaultValue={oldTerms && oldTerms}
-            onChange={handleChange}
-          />
+    <>
+      {loading ? (
+        <h1>Carregando...</h1>
       ) : (
-          <Sun
-            getSunEditorInstance={getSunEditorInstance}
-            defaultValue={oldTerms && oldTerms}
-            onChange={handleChange}
-          />
-      )}
+        <Container>
+          <Sun setContents={oldTerms} onChange={handleChange} />
 
-      <button className="button" onClick={submitTerms}>
-        Salvar termos
-      </button>
-    </Container>
+          <button className="button" onClick={submitTerms}>
+            Salvar termos
+          </button>
+        </Container>
+      )}
+    </>
   );
 }

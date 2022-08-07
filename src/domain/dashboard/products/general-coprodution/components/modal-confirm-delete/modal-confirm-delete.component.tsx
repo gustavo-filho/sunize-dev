@@ -34,7 +34,7 @@ const ModalConfirmDelete = ({ data, setData, dataChanged }: IModalProps) => {
 
     if (inputValue !== data.name) {
       setIsErrored(true);
-      toast.error('Nome informado incorretamente!');
+      return toast.error('Nome informado incorretamente!');
     } else {
       setIsErrored(false);
       handleCloseModal();

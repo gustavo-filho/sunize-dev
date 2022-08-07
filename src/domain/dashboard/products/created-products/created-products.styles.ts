@@ -46,7 +46,7 @@ export const AnimationContainer = styled.div`
     font-weight: 400;
     color: rgba(129, 129, 129, 1);
     margin-bottom: 50px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   .links {

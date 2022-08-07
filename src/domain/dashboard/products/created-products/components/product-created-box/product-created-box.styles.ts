@@ -48,7 +48,7 @@ export const Container = styled.div`
 
     img {
       width: 100%;
-      height: 225px;
+      height: 300px;
       display: block;
       border-radius: 14px 14px 0 0;
       margin-bottom: 10px;

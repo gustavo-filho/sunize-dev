@@ -23,7 +23,7 @@ import {
   FaPercentage,
 } from 'react-icons/fa';
 import { FiAlertCircle } from 'react-icons/fi';
-import { schema } from '../modal-add-voucher/modal-add-voucher.validate';
+import { voucherSchema } from './voucher-accordion.validate';
 import { Input } from '@shared/components/input/input.component';
 import { round } from 'lodash';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
@@ -72,54 +72,62 @@ export const VoucherAccordion = ({
     }
   }, [isVisible]);
 
-  async function handleSubmit(values: any) {
-    const date = values.deadline.split('-') as any;
-    const formatedDate = new Date(date[0], date[1] - 1, date[2]);
+  const onSubmit = useCallback(
+    async (values: any) => {
+      const date = values.deadline.split('-') as any;
+      const formatedDate = new Date(date[0], date[1] - 1, date[2]);
 
-    const newVouchers = vouchers.map((voucherFiltered: any) => {
-      if (voucherFiltered.id === voucher.id)
-        return {
-          ...voucher,
+      const newVouchers = vouchers.map((voucherFiltered: any) => {
+        if (voucherFiltered.id === voucher.id)
+          return {
+            ...voucher,
+            code: values.code,
+            type_discount: values.type_of_discount,
+            deadline: values.deadLine,
+            discount_percentage: values.discount_percentage,
+            discount_fixed: values.discount_percentage,
+          };
+        return voucherFiltered;
+      });
+      try {
+        const body = {
           code: values.code,
           type_discount: values.type_of_discount,
-          deadline: values.deadLine,
-          discount_percentage: values.discount_percentage,
-          discount_fixed: values.discount_percentage,
+          deadline: formatedDate,
         };
-      return voucherFiltered;
-    });
+        if (values.type_of_discount === 'percentage')
+          Object.assign(body, {
+            discount_percentage: values.discount_percentage,
+          });
+        else
+          Object.assign(body, {
+            discount_fixed: values.discount_percentage,
+          });
 
-    try {
-      const body = {
-        code: values.code,
-        type_discount: values.type_of_discount,
-        deadline: formatedDate,
-      };
-      if (values.type_of_discount === 'percentage') {
-        Object.assign(body, {
-          discount_percentage: values.discount_percentage,
-        });
-      } else {
-        Object.assign(body, {
-          discount_fixed: values.discount_percentage,
-        });
-
-        const response = await api.put(
+        const { data } = await api.put(
           `/users/${user.id}/products/${productId}/vouchers/${voucher.id}`,
           body,
           {
             headers: { 'sunize-access-token': user.access_token },
           },
         );
-
         setVouchers(newVouchers);
-        toast.success(response.data.data.message);
+        toast.success(data.message);
+      } catch {
+        toast.error('Algo deu errado');
       }
-    } catch {
-      toast.error('Algo deu errado');
       closeAccordion();
-    }
-  }
+    },
+    [
+      closeAccordion,
+      productId,
+      setVouchers,
+      voucher,
+      vouchers,
+      user.access_token,
+      user.id,
+    ],
+  );
 
   return (
     <>
@@ -153,9 +161,9 @@ export const VoucherAccordion = ({
         <Accordion ref={accordionRef} height={accordionHeight}>
           <AccordionContent>
             <Formik
-              validationSchema={schema}
+              validationSchema={voucherSchema}
               validateOnChange
-              onSubmit={handleSubmit}
+              onSubmit={onSubmit}
               initialValues={{
                 code: voucher.code,
                 discount_percentage: voucher.discount_percentage,
@@ -204,6 +212,7 @@ export const VoucherAccordion = ({
                           )
                     }
                     readOnly={true}
+                    formNoValidate
                     text="Preço com desconto"
                     icon={FaDollarSign}
                   />

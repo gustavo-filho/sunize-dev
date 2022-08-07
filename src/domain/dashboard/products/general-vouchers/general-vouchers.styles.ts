@@ -23,14 +23,14 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Nonito', sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
 
   > h2 {
     font-size: 20px;
     font-weight: 400;
     color: #818181;
-    font-family: 'Nonito', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 50px;
   }
 

@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import { shade } from 'polished'
 import { Link } from 'react-router-dom'
 
+export const TaxContainer = styled.div`
+`
+
 export const Container = styled.div`
   max-width: 1640px;
   margin: 60px auto 0px auto;

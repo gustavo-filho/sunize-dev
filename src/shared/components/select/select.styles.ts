@@ -21,7 +21,6 @@ export const Container = styled.div<ContainerProps>`
   }
 
   > div > div:nth-of-type(1) {
-    border: 1px solid #c2c2c2;
 
     ${({ heightSelect }) =>
     !!heightSelect &&
@@ -38,7 +37,17 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const SelectContainer = styled(Select)`
-  z-index: 100 !important; //fix opacity problem of select dropdown
+  z-index: 100 !important;
+
+  .select_menu {
+    color: #FFF;
+    background-color: #27293D !important;
+  }
+
+  .select__menu {
+    color: #FFF;
+    background-color: #27293D !important;
+  }
 `;
 
 export const Note = styled.div<NoteProps>`

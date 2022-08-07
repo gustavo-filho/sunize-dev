@@ -72,7 +72,7 @@ export const Buttons = styled.div`
 
 export const Header = styled.header`
   position: relative;
-  z-index: 1;
+  z-index: 0;
   cursor: pointer;
   background-color: #fff;
   display: flex;

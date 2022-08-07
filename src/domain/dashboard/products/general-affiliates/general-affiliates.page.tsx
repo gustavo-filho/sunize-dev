@@ -10,6 +10,7 @@ import { ModalAddGoal } from './components/modal-add-goal/modal-add-goal.compone
 import { GoalAccordion } from './components/goal-accordion/goal-accordion.component';
 
 import { Field, Form, Formik } from 'formik';
+
 import {
   Container,
   Navigation,
@@ -17,15 +18,16 @@ import {
   BoxWrapper,
   LoaderContainer,
   OptionSingle,
+  TaxContainer,
 } from './general-affiliates.styles';
 
 import { Loader } from '@shared/components/loader/loader.component';
-import InputMasked from './components/input-masked/input-masked.component';
 import { FaPercentage, FaPlus } from 'react-icons/fa';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Link } from 'react-router-dom';
 import { TermsEditor } from './components/terms-editor/terms-editor.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import InputMasked from './components/input-masked/input-masked.component';
 
 export const GeneralAffiliatesPage = () => {
   const user = useAppSelector(userSelector).data;
@@ -39,20 +41,23 @@ export const GeneralAffiliatesPage = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [goals, setGoals] = useState<GoalData[]>([]);
-  const [defaultTax, setDefaultTax] = useState(0);
-  const [defaultCommission, setDefaultCommission] = useState(0);
+
+  const [defaultTax, setDefaultTax] = useState('0');
+  const [defaultCommission, setDefaultCommission] = useState('0');
 
   const getProduct = useCallback(async () => {
     try {
       const response = await api.get(`/products/${productId}`);
+
       setProduct(response.data.data);
-      setIsAffiliateSystemEnabled(product.system_affiliate);
-      setDefaultTax(0);
-      setDefaultCommission(product.commission ?? 0);
+
+      setIsAffiliateSystemEnabled(response.data.data.product.system_affiliate);
+      setDefaultTax(response.data.data.product.affiliate_tax.toString());
+      setDefaultCommission(response.data.data.product.commission.toString());
     } catch (err) {
       toast.error('Não foi possível obter os dados do produto');
     }
-  }, [product.commission, product.system_affiliate, productId]);
+  }, [productId]);
 
   const getSalesTarget = useCallback(async () => {
     try {
@@ -65,8 +70,11 @@ export const GeneralAffiliatesPage = () => {
 
   useEffect(() => {
     getProduct();
+  }, [getProduct]);
+
+  useEffect(() => {
     getSalesTarget();
-  }, [getProduct, getSalesTarget]);
+  }, [getSalesTarget]);
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
     try {
@@ -199,9 +207,9 @@ export const GeneralAffiliatesPage = () => {
                         </main>
 
                         {isAffiliateSystemEnabled && (
-                          <>
+                          <TaxContainer>
                             <InputMasked
-                              name="commission"
+                              name="test"
                               text="Porcentagem de afiliação"
                               mask="99"
                               icon={FaPercentage}
@@ -222,7 +230,7 @@ export const GeneralAffiliatesPage = () => {
                                 setDefaultTax(e.target.value as any)
                               }
                             />
-                          </>
+                          </TaxContainer>
                         )}
                       </OptionSingle>
                       {isSubmitting ? (

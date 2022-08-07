@@ -1,11 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useAppSelector } from '../../../../store/hooks';
-import { useParams } from 'react-router-dom';
-import { userSelector } from '@domain/auth/user/user.store';
-import { api } from '@shared/services/api';
-import { toast } from 'react-toastify';
-
+import { Form, Formik, Field } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import {
   Container,
   Navigation,
@@ -21,193 +17,201 @@ import {
   LoaderContainer,
 } from './general-checkout.styles';
 
+import { userSelector } from '@domain/auth/user/user.store';
+import { useAppSelector } from '../../../../store/hooks';
+
+import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
 import { CustomCheckoutData, Product } from '@shared/types/types';
-import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { Link } from 'react-router-dom';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { Field, Form, Formik } from 'formik';
-import { CustomCheckoutSchema } from './general-checkout.validate';
-
+import { api } from '@shared/services/api';
+import { toast } from 'react-toastify';
 import InputMasked from '@shared/components/input-masked/input-masked.component';
-
 import { CustomSelectMulti } from '@shared/components/CustomSelectMulti/custom-select-multi.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { CustomCheckoutSchema } from './general-checkout.validate';
+import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Loader } from '@shared/components/loader/loader.component';
 
 export const GeneralCheckoutPage = () => {
-  const { id: productId } = useParams();
-
   const user = useAppSelector(userSelector).data;
 
-  const [userData, setUserData] = useState({} as any);
-  const [productData, setProductData] = useState({} as any);
+  const { id: productId } = useParams();
+
+  const { data: userProducts } = useFetch(
+    `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
+    {
+      headers: { 'sunize-access-token': user.id },
+    },
+  );
+
+  const { data: productData } = useFetch(`products/${productId}`, {
+    headers: { 'sunize-access-token': user.id },
+  });
 
   const [isScarcity, setIsScarcity] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
   const [isUpsell, setIsUpsell] = useState(false);
-
-  const [showInput, setShowInput] = useState(true);
-
+  const [messageSelect, setMessageSelect] = useState(false);
+  const [linkSelect, setLink] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
+  const [, setIdGenderNeeded] = useState(false);
   const [customCheckout, setCustomCheckout] = useState<CustomCheckoutData>();
   const [isLoading, setIsLoading] = useState<any>(true);
   const [phone, setPhone] = useState<string>('');
+  const [setProductCheckout] = useState<any>({});
 
-  const getUserData = useCallback(async () => {
-    const response = await api.get(
-      `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
-    );
+  useEffect(() => {
+    async function getCustomCheckout() {
+      try {
+        const response = await api.get(`/checkout/${productId}`, {
+          headers: { 'sunize-access-token': user.access_token },
+        });
+        setCustomCheckout(response.data.data);
+        setIsLoading('success');
+      } catch {
+        setIsLoading('failed');
+      }
+    }
+    getCustomCheckout();
+  }, [productId, user.access_token, user.id]);
 
-    setUserData(response.data.data);
-  }, [user.id]);
-
-  const getProductData = useCallback(async () => {
-    const response = await api.get(`/products/${productId}`);
-    setProductData(response.data.data);
-  }, [productId]);
-
-  const getCheckoutProduct = useCallback(async () => {
-    const response = await api.get(`/checkout/${productId}`);
-
-    setCustomCheckout(response.data.data);
-    setIsLoading('success');
-
+  useEffect(() => {
     if (customCheckout) {
+      setProductCheckout(customCheckout);
       setIsPhone(customCheckout.phone.allowed);
       setIsScarcity(customCheckout.allow_time.allowed);
       setIsNotification(
         customCheckout.notifications.people_buy_product_today.allowed,
       );
+      setMessageSelect(customCheckout.page_purchase.message !== 'false');
+      setLink(customCheckout.page_purchase.url !== 'false');
       setPhone(customCheckout.phone.phone_number || '');
       setIsUpsell(customCheckout.allow_orderbump.allowed);
+      setIdGenderNeeded(customCheckout.need_type_gender);
       setIsPopup(customCheckout.allow_popup.allowed);
     }
-  }, [customCheckout, productId]);
+  }, [customCheckout, setProductCheckout]);
 
-  useEffect(() => {
-    getProductData();
-    getUserData();
-    getCheckoutProduct();
-  }, []);
-
-  async function handleCheckoutUpdate(values: any) {
-    try {
-      setPhone(values.phone_number);
-
-      await api.post(
-        `/checkout/${user.id}/${productId}`,
-        {
-          options_pay: values.options_pay,
-          text_product_allow: 'vai pfv me ajuda',
-          product_allow: values.product_allow === 'true',
-          sale_permission: values.sale_permission === 'true',
-          allow_time: {
-            allowed: values.timer_allowed === 'true',
-            time: values.timer_time,
-          },
-          need_type_gender: values.need_type_gender,
-          allow_random_message: {
-            allowed: values.random_message_allowed || false,
-            time: values.random_message_time,
-          },
-          allow_warnings: {
-            allowed: values.warnings_allowed || false,
-          },
-          notifications: {
-            people_buy_product_today: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas compraram esse produto hoje',
-              text: 'pessoas compraram esse produto hoje',
-              qtd_max: values.notification_number,
+  const onSubmit = useCallback(
+    async (values: any) => {
+      try {
+        setPhone(values.phone_number);
+        await api.post(
+          `/checkout/${user.id}/${productId}`,
+          {
+            options_pay: values.options_pay,
+            text_product_allow: 'vai pfv me ajuda',
+            product_allow: values.product_allow === 'true',
+            sale_permission: values.sale_permission === 'true',
+            allow_time: {
+              allowed: values.timer_allowed === 'true',
+              time: values.timer_time,
             },
-            people_buy_product_week: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas compraram esse produto esta semana',
-              text: 'pessoas compraram esse produto esta semana',
-              qtd_max: values.notification_number,
+            need_type_gender: values.need_type_gender,
+            allow_random_message: {
+              allowed: values.random_message_allowed || false,
+              time: values.random_message_time,
             },
-            people_buy_product_moment: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas acabaram de comprar esse produto',
-              text: 'pessoas acabaram de comprar esse produto',
-              qtd_max: values.notification_number,
+            allow_warnings: {
+              allowed: values.warnings_allowed || false,
             },
-            people_just_bought_product: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas compraram este produto incrível',
-              text: 'pessoas compraram este produto incrível',
-              qtd_max: values.notification_number,
+            notifications: {
+              people_buy_product_today: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram esse produto hoje',
+                text: 'pessoas compraram esse produto hoje',
+                qtd_max: values.notification_number,
+              },
+              people_buy_product_week: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram esse produto esta semana',
+                text: 'pessoas compraram esse produto esta semana',
+                qtd_max: values.notification_number,
+              },
+              people_buy_product_moment: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas acabaram de comprar esse produto',
+                text: 'pessoas acabaram de comprar esse produto',
+                qtd_max: values.notification_number,
+              },
+              people_just_bought_product: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram este produto incrível',
+                text: 'pessoas compraram este produto incrível',
+                qtd_max: values.notification_number,
+              },
+              people_buy_product_incrible: {
+                allowed: false,
+                text: 'compraram na última hora. Aproveite!',
+                qtd_max: values.notification_number,
+              },
+              people_buy_product_in_last_hour: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram este produto na última hora',
+                text: 'pessoas compraram este produto na última hora',
+                qtd_max: values.notification_number,
+              },
+              people_buy_product_in_few_minutes: {
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram este produto nos últimos minutos',
+                text: 'pessoas compraram este produto nos últimos minutos',
+                qtd_max: values.notification_number,
+              },
             },
-            people_buy_product_incrible: {
+            allow_orderbump: {
+              allowed: values.orderbump_allowed === 'true',
+              product: values.orderbump_product,
+            },
+            color_header: {
+              allowed: true,
+              color: values.color_header_color,
+            },
+            background_color: {
+              allowed: true,
+              color: values.background_color_color,
+            },
+            phone: {
+              allowed: values.phone_allowed === 'true',
+              number: values.phone,
+              message: values.phone_message,
+            },
+            page_purchase: {
+              message: messageSelect ? values.page_purchase_message : 'false',
+              url: linkSelect ? values.page_purchase_url : 'false',
+            },
+            allow_popup: {
+              allowed: values.popup_allowed === 'true',
+              type_of_discount: {
+                discount: values.popup_discount || 10,
+              },
+            },
+            abandoned_purchases_voucher: {
               allowed: false,
-              text: 'compraram na última hora. Aproveite!',
-              qtd_max: values.notification_number,
-            },
-            people_buy_product_in_last_hour: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas compraram este produto na última hora',
-              text: 'pessoas compraram este produto na última hora',
-              qtd_max: values.notification_number,
-            },
-            people_buy_product_in_few_minutes: {
-              allowed:
-                values.notification_text ===
-                'XX pessoas compraram este produto nos últimos minutos',
-              text: 'pessoas compraram este produto nos últimos minutos',
-              qtd_max: values.notification_number,
+              message: 'compre comigo',
             },
           },
-          allow_orderbump: {
-            allowed: values.orderbump_allowed === 'true',
-            product: values.orderbump_product,
+          {
+            headers: { 'sunize-access-token': user.access_token },
           },
-          color_header: {
-            allowed: true,
-            color: values.color_header_color,
-          },
-          background_color: {
-            allowed: true,
-            color: values.background_color_color,
-          },
-          phone: {
-            allowed: values.phone_allowed === 'true',
-            number: values.phone,
-            message: values.phone_message,
-          },
-          page_purchase: {
-            url: !showInput ? values.page_purchase_url : 'false',
-            message: showInput ? values.page_purchase_message : 'false',
-          },
-          allow_popup: {
-            allowed: values.popup_allowed === 'true',
-            type_of_discount: {
-              discount: values.popup_discount || 10,
-            },
-          },
-          abandoned_purchases_voucher: {
-            allowed: false,
-            message: 'compre comigo',
-          },
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
-      );
+        );
 
-      toast.success('Informações salvas com sucesso!');
-    } catch (err: any) {
-      toast.error(err.response.data.message);
-    }
-  }
+        toast.success('Informações salvas com sucesso!');
+      } catch (error: any) {
+        toast.error(error.response.data.message);
+      }
+    },
+    [linkSelect, messageSelect, productId, user.access_token, user.id],
+  );
 
   return (
     <>
-      {!productData ? (
+      {isLoading !== 'success' ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>
@@ -222,25 +226,23 @@ export const GeneralCheckoutPage = () => {
             >
               Gerenciar
             </LinkNonActive>
-
             <Link to={`/dashboard/informacoes-gerais/checkout/${productId}`}>
               Checkout
             </Link>
-
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/coproduction/${productId}`}
             >
               Coprodução
             </LinkNonActive>
 
-            {productData && productData.product_type !== 'EBOOK' && (
-              <LinkNonActive
-                to={`/dashboard/informacoes-gerais/video-class/${productId}`}
-              >
-                Video Aula
-              </LinkNonActive>
-            )}
-
+            {productData &&
+              productData.data.product.product_type !== 'EBOOK' && (
+                <LinkNonActive
+                  to={`/dashboard/informacoes-gerais/video-class/${productId}`}
+                >
+                  Video Aula
+                </LinkNonActive>
+              )}
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/links/${productId}`}
             >
@@ -251,13 +253,11 @@ export const GeneralCheckoutPage = () => {
             >
               Cupons
             </LinkNonActive>
-
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/affiliates/${productId}`}
             >
               Afiliados
             </LinkNonActive>
-
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/pixel/${productId}`}
             >
@@ -268,7 +268,7 @@ export const GeneralCheckoutPage = () => {
             {isLoading === true && <DotsLoader />}{' '}
             {isLoading === 'success' && customCheckout && (
               <Formik
-                onSubmit={handleCheckoutUpdate}
+                onSubmit={onSubmit}
                 initialValues={{
                   product_allow:
                     customCheckout.product_allow === true ? 'true' : 'false',
@@ -303,11 +303,11 @@ export const GeneralCheckoutPage = () => {
                   phone_allowed: customCheckout.phone.allowed.toString(),
                   phone_number: phone,
                   phone_message: customCheckout.phone.text,
-                  page_purchase: showInput ? 'true' : 'false',
-                  page_purchase_url: !showInput
+                  page_purchase: messageSelect ? 'true' : 'false',
+                  page_purchase_url: linkSelect
                     ? customCheckout.page_purchase.url
                     : '',
-                  page_purchase_message: !showInput
+                  page_purchase_message: messageSelect
                     ? customCheckout.page_purchase.message
                     : 'Obrigado por comprar o meu produto!',
                   popup_allowed:
@@ -318,8 +318,7 @@ export const GeneralCheckoutPage = () => {
                     customCheckout.allow_popup.type_of_discount?.discount || 0,
                   purchaser_sex: 'false',
                   abandoned_purchases_voucher_allowed:
-                    customCheckout.abandoned_purchases_voucher.allowed ||
-                    'false',
+                    customCheckout.abandoned_purchases_voucher.allowed,
                 }}
                 validateOnChange
                 validationSchema={CustomCheckoutSchema}
@@ -474,21 +473,26 @@ export const GeneralCheckoutPage = () => {
                           <>
                             <SectionOption>
                               <label className="phoneLabel">
-                                Número de telefone
+                                Telefone celular
                               </label>
-
+                              {errors.orderbump_allowed &&
+                                touched.orderbump_allowed && (
+                                  <>
+                                    <Error>{errors.orderbump_allowed}</Error>
+                                  </>
+                                )}
                               <InputMasked
+                                text=""
                                 className="phoneInput"
                                 name="phone_number"
                                 value={phone}
                                 onChange={e => {
                                   setPhone(e.target.value);
+                                  setFieldValue('phone', e.target.value);
                                 }}
-                                text=""
                                 mask="+99 (99) 99999-9999"
                               />
                             </SectionOption>
-
                             <SectionOption>
                               <label className="phoneLabel">Mensagem</label>
                               <Field type="text" name="phone_message" />
@@ -735,7 +739,7 @@ export const GeneralCheckoutPage = () => {
                               )}
                             <Field
                               name="orderbump_product"
-                              options={userData.data
+                              options={userProducts.data
                                 .filter(
                                   (product: Product) =>
                                     product.id !== Number(productId),
@@ -791,15 +795,17 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="page_purchase"
                               id="page_purchase_message"
-                              value="true"
+                              value="false"
                               onClick={() => {
-                                setShowInput(true);
+                                setMessageSelect(true);
+                                setLink(false);
                               }}
                             />
                             <label
                               htmlFor="page_purchase_message"
                               onClick={() => {
-                                setShowInput(true);
+                                setMessageSelect(true);
+                                setLink(false);
                               }}
                             >
                               Mensagem
@@ -811,15 +817,17 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="page_purchase"
                               id="page_purchase_link"
-                              value="false"
+                              value="true"
                               onClick={() => {
-                                setShowInput(false);
+                                setLink(true);
+                                setMessageSelect(false);
                               }}
                             />
                             <label
                               htmlFor="page_purchase_link"
                               onClick={() => {
-                                setShowInput(false);
+                                setLink(true);
+                                setMessageSelect(false);
                               }}
                             >
                               Link
@@ -829,7 +837,7 @@ export const GeneralCheckoutPage = () => {
 
                         <SectionOption>
                           <div className="inputBox">
-                            {showInput && (
+                            {messageSelect && (
                               <>
                                 <label htmlFor="purchasePageMessage">
                                   Mensagem Personalizada
@@ -842,13 +850,20 @@ export const GeneralCheckoutPage = () => {
                                 />
                               </>
                             )}
-
-                            {!showInput && (
+                            {linkSelect && (
                               <>
                                 <label htmlFor="purchasePageLink">
                                   Link Personalizado
+                                  {errors.page_purchase_url &&
+                                    touched.page_purchase_url && (
+                                      <>
+                                        <br />
+                                        <Error>
+                                          {errors.page_purchase_url}
+                                        </Error>
+                                      </>
+                                    )}
                                 </label>
-
                                 <Field
                                   type="text"
                                   name="page_purchase_url"
@@ -859,6 +874,70 @@ export const GeneralCheckoutPage = () => {
                           </div>
                         </SectionOption>
                       </OptionSingle>
+
+                      {/* <OptionSingle>
+                      <h1>Informar o gênero na hora da compra</h1>
+                      <main>
+                        <div>
+                          <Field
+                            type="radio"
+                            name="need_type_gender"
+                            id="producer_sale_true"
+                            value="true"
+                            onClick={() => setIdGenderNeeded(true)}
+                          />
+                          <label
+                            htmlFor="producer_sale_true"
+                            onClick={() => setIdGenderNeeded(true)}
+                          >
+                            Sim
+                          </label>
+                        </div>
+  
+                        <div>
+                          <Field
+                            type="radio"
+                            name="need_type_gender"
+                            id="producer_sale_false"
+                            value="false"
+                            onClick={() => setIdGenderNeeded(false)}
+                          />
+                          <label
+                            htmlFor="producer_sale_false"
+                            onClick={() => setIdGenderNeeded(false)}
+                          >
+                            Não
+                          </label>
+                        </div>
+                      </main>
+                    </OptionSingle> */}
+                      {/* <OptionSingle>
+                      <h1>
+                        Divulgar dados do comprador para emissão de nota fiscal
+                        para o afiliado/coprodutor
+                      </h1>
+                      <main>
+                        <div>
+                          <Field
+                            type="radio"
+                            name="purchaser_data"
+                            id="purchaser_data_true"
+                            value="true"
+                          />
+                          <label htmlFor="purchaser_data_true">Sim</label>
+                        </div>
+  
+                        <div>
+                          <Field
+                            type="radio"
+                            name="purchaser_data"
+                            id="purchaser_data_false"
+                            value="false"
+                          />
+                          <label htmlFor="purchaser_data_false">Não</label>
+                        </div>
+                      </main>
+                    </OptionSingle> */}
 
                       <W100>
                         <FormGroup>

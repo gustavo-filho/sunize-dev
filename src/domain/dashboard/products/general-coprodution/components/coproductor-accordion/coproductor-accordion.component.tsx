@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Form, Formik, Field } from 'formik';
 import { FaEnvelope, FaPercentage, FaUser } from 'react-icons/fa';
 import { FiAlertCircle, FiEdit } from 'react-icons/fi';
@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 import { format, parseISO } from 'date-fns';
 import ModalConfirmDelete from '../modal-confirm-delete/modal-confirm-delete.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import InputMasked from '../input-masked/input-masked.component';
+import InputMask from '../input-masked/input-masked.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import { Input } from '@shared/components/input/input.component';
 
@@ -203,13 +203,13 @@ export const CoProductorAccordion = ({ coProducer, dataChanged }: Props) => {
                     isErrored={!!errors.contractTime}
                   />
 
-                  <InputMasked
+                  {/* <InputMasked
                     name="commission"
                     text="Comissão (%)"
                     mask="99"
                     icon={FaPercentage}
                     placeholder="Insira a comissão do co-produtor"
-                  />
+                  /> */}
 
                   <Permissions>
                     <h1>Permissões</h1>
