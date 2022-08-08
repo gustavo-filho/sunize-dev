@@ -187,13 +187,13 @@ export function GeneralInformationPage() {
               Coprodução
             </LinkNonActive>
 
-            {product && product.product_type !== 'EBOOK' && (
+            {/* {product && product.product_type !== 'EBOOK' && (
               <LinkNonActive
                 to={`/dashboard/informacoes-gerais/video-class/${productId}`}
               >
                 Video Aula
               </LinkNonActive>
-            )}
+            )} */}
 
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/links/${productId}`}
@@ -402,7 +402,10 @@ export function GeneralInformationPage() {
 
             <SellLink>
               <label>Utilize este link para realizar as suas vendas:</label>
-              <input value={`${product.link_sales}/${product.id}`} disabled />
+              <input
+                value={`${window.location.origin}/payment/${product.id}`}
+                disabled
+              />
               <button onClick={handleCopyToClipboard}>{textTransfer}</button>
             </SellLink>
           </BoxWrapper>

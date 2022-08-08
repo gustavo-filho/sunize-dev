@@ -86,13 +86,13 @@ export const GeneralLinksPage = () => {
               Coprodução
             </LinkNonActive>
 
-            {product && product.product_type !== 'EBOOK' && (
+            {/* {product && product.product_type !== 'EBOOK' && (
               <LinkNonActive
                 to={`/dashboard/informacoes-gerais/video-class/${productId}`}
               >
                 Video Aula
               </LinkNonActive>
-            )}
+            )} */}
             <Link to={`/dashboard/informacoes-gerais/links/${productId}`}>
               Material de divulgação
             </Link>

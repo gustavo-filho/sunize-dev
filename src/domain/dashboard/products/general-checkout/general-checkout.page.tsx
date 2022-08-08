@@ -20,7 +20,6 @@ import {
 import { userSelector } from '@domain/auth/user/user.store';
 import { useAppSelector } from '../../../../store/hooks';
 
-import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
 import { CustomCheckoutData, Product } from '@shared/types/types';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
@@ -36,22 +35,17 @@ export const GeneralCheckoutPage = () => {
 
   const { id: productId } = useParams();
 
-  const { data: userProducts } = useFetch(
-    `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
-    {
-      headers: { 'sunize-access-token': user.id },
-    },
-  );
-
-  const { data: productData } = useFetch(`products/${productId}`, {
-    headers: { 'sunize-access-token': user.id },
-  });
+  const [product, setProduct] = useState([] as any);
 
   const [isScarcity, setIsScarcity] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
   const [isUpsell, setIsUpsell] = useState(false);
+
+  const [showInput, setShowInput] = useState('false');
+
   const [messageSelect, setMessageSelect] = useState(false);
   const [linkSelect, setLink] = useState(false);
+
   const [isPhone, setIsPhone] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [, setIdGenderNeeded] = useState(false);
@@ -66,6 +60,7 @@ export const GeneralCheckoutPage = () => {
         const response = await api.get(`/checkout/${productId}`, {
           headers: { 'sunize-access-token': user.access_token },
         });
+
         setCustomCheckout(response.data.data);
         setIsLoading('success');
       } catch {
@@ -76,26 +71,54 @@ export const GeneralCheckoutPage = () => {
   }, [productId, user.access_token, user.id]);
 
   useEffect(() => {
+    async function getProduct() {
+      try {
+        const response = await api.get(
+          `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
+          {
+            headers: { 'sunize-access-token': user.id },
+          },
+        );
+
+        setProduct(response.data.data);
+
+        setIsLoading('success');
+      } catch (err) {
+        setIsLoading('failed');
+      }
+    }
+
+    getProduct();
+  }, [user.id]);
+
+  useEffect(() => {
     if (customCheckout) {
+      setIsLoading('starting');
+
       setProductCheckout(customCheckout);
       setIsPhone(customCheckout.phone.allowed);
       setIsScarcity(customCheckout.allow_time.allowed);
+
       setIsNotification(
         customCheckout.notifications.people_buy_product_today.allowed,
       );
+
       setMessageSelect(customCheckout.page_purchase.message !== 'false');
       setLink(customCheckout.page_purchase.url !== 'false');
-      setPhone(customCheckout.phone.phone_number || '');
+      setPhone(String(customCheckout.phone.phone_number) || '');
       setIsUpsell(customCheckout.allow_orderbump.allowed);
       setIdGenderNeeded(customCheckout.need_type_gender);
       setIsPopup(customCheckout.allow_popup.allowed);
+      setMessageSelect(customCheckout.page_purchase.message !== 'false');
+
+      setShowInput(messageSelect ? 'true' : 'false');
+      setIsLoading('success');
     }
-  }, [customCheckout, setProductCheckout]);
+  }, [customCheckout, linkSelect, messageSelect, setProductCheckout]);
 
   const onSubmit = useCallback(
     async (values: any) => {
       try {
-        setPhone(values.phone_number);
         await api.post(
           `/checkout/${user.id}/${productId}`,
           {
@@ -117,9 +140,7 @@ export const GeneralCheckoutPage = () => {
             },
             notifications: {
               people_buy_product_today: {
-                allowed:
-                  values.notification_text ===
-                  'XX pessoas compraram esse produto hoje',
+                allowed: isNotification,
                 text: 'pessoas compraram esse produto hoje',
                 qtd_max: values.notification_number,
               },
@@ -178,12 +199,12 @@ export const GeneralCheckoutPage = () => {
             },
             phone: {
               allowed: values.phone_allowed === 'true',
-              number: values.phone.phone_number,
+              number: phone,
               message: values.phone_message,
             },
             page_purchase: {
-              message: messageSelect ? values.page_purchase_message : 'false',
               url: linkSelect ? values.page_purchase_url : 'false',
+              message: messageSelect ? values.page_purchase_message : 'false',
             },
             allow_popup: {
               allowed: values.popup_allowed === 'true',
@@ -206,7 +227,15 @@ export const GeneralCheckoutPage = () => {
         toast.error(error.response.data.message);
       }
     },
-    [linkSelect, messageSelect, productId, user.access_token, user.id],
+    [
+      isNotification,
+      linkSelect,
+      messageSelect,
+      phone,
+      productId,
+      user.access_token,
+      user.id,
+    ],
   );
 
   return (
@@ -235,14 +264,15 @@ export const GeneralCheckoutPage = () => {
               Coprodução
             </LinkNonActive>
 
-            {productData &&
+            {/* {productData &&
               productData.data.product.product_type !== 'EBOOK' && (
                 <LinkNonActive
                   to={`/dashboard/informacoes-gerais/video-class/${productId}`}
                 >
                   Video Aula
                 </LinkNonActive>
-              )}
+              )} */}
+
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/links/${productId}`}
             >
@@ -301,7 +331,7 @@ export const GeneralCheckoutPage = () => {
                   background_color_allowed: true,
                   background_color_color: customCheckout.background_color.color,
                   phone_allowed: customCheckout.phone.allowed.toString(),
-                  phone_number: phone,
+                  phone_number: customCheckout.phone.phone_number,
                   phone_message: customCheckout.phone.text,
                   page_purchase: messageSelect ? 'true' : 'false',
                   page_purchase_url: linkSelect
@@ -326,6 +356,7 @@ export const GeneralCheckoutPage = () => {
                 {({
                   errors,
                   touched,
+                  values,
                   isSubmitting,
                   isValid,
                   setFieldValue,
@@ -486,7 +517,7 @@ export const GeneralCheckoutPage = () => {
                                 className="phoneInput"
                                 name="phone_number"
                                 value={phone}
-                                onChange={e => {
+                                onChange={(e: any) => {
                                   setPhone(e.target.value);
                                   setFieldValue('phone', e.target.value);
                                 }}
@@ -562,12 +593,16 @@ export const GeneralCheckoutPage = () => {
                               name="notification_allowed"
                               id="notification_allowed_true"
                               value="true"
-                              onClick={() => setIsNotification(true)}
+                              onClick={() => {
+                                setIsNotification(true);
+                              }}
                             />
 
                             <label
                               htmlFor="notification_allowed_true"
-                              onClick={() => setIsNotification(true)}
+                              onClick={() => {
+                                setIsNotification(true);
+                              }}
                             >
                               Sim
                             </label>
@@ -579,16 +614,21 @@ export const GeneralCheckoutPage = () => {
                               name="notification_allowed"
                               id="notification_allowed_false"
                               value="false"
-                              onClick={() => setIsNotification(false)}
+                              onClick={() => {
+                                setIsNotification(false);
+                              }}
                             />
                             <label
                               htmlFor="random_message_false"
-                              onClick={() => setIsNotification(false)}
+                              onClick={() => {
+                                setIsNotification(false);
+                              }}
                             >
                               Não
                             </label>
                           </div>
                         </main>
+
                         {isNotification && (
                           <SectionOption>
                             <h1>Número de pessoas (intervalo aleatório)</h1>
@@ -739,7 +779,7 @@ export const GeneralCheckoutPage = () => {
                               )}
                             <Field
                               name="orderbump_product"
-                              options={userProducts.data
+                              options={product
                                 .filter(
                                   (product: Product) =>
                                     product.id !== Number(productId),
@@ -795,10 +835,11 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="page_purchase"
                               id="page_purchase_message"
-                              value="false"
+                              value={showInput === 'true' ? 'false' : 'true'}
                               onClick={() => {
                                 setMessageSelect(true);
                                 setLink(false);
+                                setShowInput('true');
                               }}
                             />
                             <label
@@ -806,6 +847,7 @@ export const GeneralCheckoutPage = () => {
                               onClick={() => {
                                 setMessageSelect(true);
                                 setLink(false);
+                                setShowInput('true');
                               }}
                             >
                               Mensagem
@@ -817,10 +859,12 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="page_purchase"
                               id="page_purchase_link"
-                              value="true"
+                              value={showInput === 'false' ? 'false' : 'true'}
                               onClick={() => {
                                 setLink(true);
                                 setMessageSelect(false);
+
+                                setShowInput('false');
                               }}
                             />
                             <label
@@ -828,6 +872,7 @@ export const GeneralCheckoutPage = () => {
                               onClick={() => {
                                 setLink(true);
                                 setMessageSelect(false);
+                                setShowInput('false');
                               }}
                             >
                               Link
@@ -837,7 +882,7 @@ export const GeneralCheckoutPage = () => {
 
                         <SectionOption>
                           <div className="inputBox">
-                            {messageSelect && (
+                            {showInput === 'true' ? (
                               <>
                                 <label htmlFor="purchasePageMessage">
                                   Mensagem Personalizada
@@ -849,8 +894,7 @@ export const GeneralCheckoutPage = () => {
                                   className="fInput"
                                 />
                               </>
-                            )}
-                            {linkSelect && (
+                            ) : (
                               <>
                                 <label htmlFor="purchasePageLink">
                                   Link Personalizado
@@ -871,6 +915,42 @@ export const GeneralCheckoutPage = () => {
                                 />
                               </>
                             )}
+
+                            {/* {messageSelect && (
+                              <>
+                                <label htmlFor="purchasePageMessage">
+                                  Mensagem Personalizada
+                                </label>
+                                <Field
+                                  type="text"
+                                  name="page_purchase_message"
+                                  id="purchasePageMessage"
+                                  className="fInput"
+                                />
+                              </>
+                            )}
+
+                            {linkSelect && (
+                              <>
+                                <label htmlFor="purchasePageLink">
+                                  Link Personalizado
+                                  {errors.page_purchase_url &&
+                                    touched.page_purchase_url && (
+                                      <>
+                                        <br />
+                                        <Error>
+                                          {errors.page_purchase_url}
+                                        </Error>
+                                      </>
+                                    )}
+                                </label>
+                                <Field
+                                  type="text"
+                                  name="page_purchase_url"
+                                  id="purchasePageLink"
+                                />
+                              </>
+                            )} */}
                           </div>
                         </SectionOption>
                       </OptionSingle>

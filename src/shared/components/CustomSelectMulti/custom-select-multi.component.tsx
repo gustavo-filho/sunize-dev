@@ -15,7 +15,7 @@ interface ICustomSelectProps extends FieldProps {
   noOptionsMessage?: string;
 }
 
-export const CustomSelectMulti = ({
+const CustomSelectMulti = ({
   className,
   placeholder,
   field,
@@ -24,8 +24,6 @@ export const CustomSelectMulti = ({
   isMulti = false,
   noOptionsMessage,
 }: ICustomSelectProps) => {
-  console.log(noOptionsMessage);
-  console.log(field);
   const onChange = (option: OptionType | OptionsType) => {
     form.setFieldValue(
       field.name,
@@ -59,3 +57,5 @@ export const CustomSelectMulti = ({
     />
   );
 };
+
+export { CustomSelectMulti };
