@@ -145,7 +145,10 @@ export function GeneralInformationPage() {
   }
 
   const handleCopyToClipboard = useCallback(() => {
-    navigator.clipboard.writeText(product.link_sales);
+    navigator.clipboard.writeText(
+      `${window.location.origin}/payment/${product.id}`,
+    );
+
     setTextTransfer('Link copiado!');
 
     setTimeout(() => {
