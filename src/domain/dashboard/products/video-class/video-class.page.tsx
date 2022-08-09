@@ -18,10 +18,21 @@ import {
 import ReactStars from 'react-rating-stars-component';
 import Thumbnail from './assets/images/youtube-video-thumbnail.jpeg';
 import { StyledTab, StyledTabs, useStyles } from './video-class.styles';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import {
+  CREATE_COMMENT,
+  REPLY_RESPONSE,
+  videoClassSelector,
+} from '@domain/dashboard/products/video-class/video-class.store';
+import { userSelector } from '@domain/auth/user/user.store';
 
 export const VideoClass = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const videoClass = useAppSelector(videoClassSelector);
+  const { comments, files } = videoClass;
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector).data;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -213,89 +224,42 @@ export const VideoClass = () => {
         )}
         {value === 2 && (
           <div style={{ width: '90%', marginTop: '1rem' }}>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid #eee',
-                padding: '1rem',
-              }}
-            >
-              <p style={{ display: 'flex', alignItems: 'center' }}>
-                <AiOutlineFileImage
-                  color={'white'}
-                  style={{ marginRight: '0.5rem' }}
-                />
-                Arquivo 1
-              </p>
-              <Button startIcon={<AiOutlineDownload />} variant={'contained'}>
-                Fazer download
-              </Button>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1rem',
-                borderBottom: '1px solid #eee',
-              }}
-            >
-              <p style={{ display: 'flex', alignItems: 'center' }}>
-                <AiOutlineFilePdf
-                  color={'white'}
-                  style={{ marginRight: '0.5rem' }}
-                />
-                Arquivo 2
-              </p>
-              <Button startIcon={<AiOutlineDownload />} variant={'contained'}>
-                Fazer download
-              </Button>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid #eee',
-                padding: '1rem',
-              }}
-            >
-              <p style={{ display: 'flex', alignItems: 'center' }}>
-                <AiOutlineFileImage
-                  color={'white'}
-                  style={{ marginRight: '0.5rem' }}
-                />
-                Arquivo 3
-              </p>
-              <Button startIcon={<AiOutlineDownload />} variant={'contained'}>
-                Fazer download
-              </Button>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1rem',
-              }}
-            >
-              <p style={{ display: 'flex', alignItems: 'center' }}>
-                <AiOutlineFilePdf
-                  color={'white'}
-                  style={{ marginRight: '0.5rem' }}
-                />
-                Arquivo 4
-              </p>
-              <Button startIcon={<AiOutlineDownload />} variant={'contained'}>
-                Fazer download
-              </Button>
-            </div>
+            {files.map((el, i) => {
+              return (
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderBottom:
+                      i === files.length - 1 ? 'none' : '1px solid #eee',
+                    padding: '1rem',
+                  }}
+                >
+                  <p style={{ display: 'flex', alignItems: 'center' }}>
+                    {el.type === 'image' ? (
+                      <AiOutlineFileImage
+                        color={'white'}
+                        style={{ marginRight: '0.5rem' }}
+                      />
+                    ) : (
+                      <AiOutlineFilePdf
+                        color={'white'}
+                        style={{ marginRight: '0.5rem' }}
+                      />
+                    )}
+                    {el.title}
+                  </p>
+                  <Button
+                    startIcon={<AiOutlineDownload />}
+                    variant={'contained'}
+                  >
+                    Fazer download
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         )}
         {value === 1 && (
@@ -312,6 +276,17 @@ export const VideoClass = () => {
           >
             <Box
               component={'form'}
+              onSubmit={e => {
+                e.preventDefault();
+                dispatch(
+                  CREATE_COMMENT({
+                    author: user.name,
+                    comment: e.target[0].value,
+                    date: new Date(),
+                    id: comments.length,
+                  }),
+                );
+              }}
               style={{
                 padding: '1rem 0',
                 display: 'flex',
@@ -343,143 +318,163 @@ export const VideoClass = () => {
                 multiline
                 maxRows={4}
               />
-              <Button variant={'contained'}>Comentar</Button>
+              <Button type={'submit'} variant={'contained'}>
+                Comentar
+              </Button>
             </Box>
-            <div
-              style={{
-                width: '100%',
-                marginTop: '1rem',
-                border: '1px solid #666',
-                borderRadius: '5px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                padding: '1rem',
-              }}
-            >
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div
-                  style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-                >
-                  <Avatar />
+
+            {comments.map(comment => {
+              return (
+                <>
                   <div
                     style={{
+                      width: '100%',
+                      marginTop: '1rem',
+                      border: '1px solid #666',
+                      borderRadius: '5px',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '0.2rem',
+                      gap: '1rem',
+                      padding: '1rem',
                     }}
                   >
-                    <p>autor</p>
-                    <p style={{ color: theme.colors.yellow }}>
-                      texto da mensagem - 9 dias atrás
-                    </p>
+                    <div
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '1rem',
+                        }}
+                      >
+                        <Avatar />
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0.2rem',
+                          }}
+                        >
+                          <p>{comment.author}</p>
+                          <p style={{ color: theme.colors.yellow }}>
+                            {comment.comment} - {comment.date.toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            color: '#666',
+                            gap: '0.2rem',
+                          }}
+                        >
+                          5 <AiOutlineLike />
+                        </div>{' '}
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            color: '#666',
+                            gap: '0.2rem',
+                          }}
+                        >
+                          10 <AiOutlineComment />
+                        </div>
+                      </div>
+                    </div>
+                    <Box
+                      component={'form'}
+                      onSubmit={e => {
+                        e.preventDefault();
+                        dispatch(
+                          REPLY_RESPONSE({
+                            author: user.name,
+                            comment: e.target[0].value,
+                            date: new Date(),
+                            id: comment.id,
+                          }),
+                        );
+
+                        console.log({ e });
+                      }}
+                      style={{
+                        padding: '1rem 0',
+                        display: 'flex',
+                        gap: '1rem',
+                        alignItems: 'center',
+                      }}
+                      sx={{
+                        '& .MuiFormControl-root': {
+                          width: '100%',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          color: 'white !important',
+                          borderColor: 'white !important',
+                        },
+                        '& .MuiInputLabel-root': { color: 'white !important' },
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(194, 124, 44, 1) !important',
+                        },
+                        '& .MuiButton-root': {
+                          background: `${theme.colors.yellow} !important`,
+                          height: '100% !important',
+                        },
+                      }}
+                    >
+                      <Avatar />
+                      <TextField
+                        id="outlined-multiline-flexible"
+                        label="Responder..."
+                        multiline
+                        maxRows={4}
+                      />
+                      <Button type={'submit'} variant={'contained'}>
+                        Responder
+                      </Button>
+                    </Box>
+                    {comment.responses.map(response => {
+                      return (
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1rem',
+                          }}
+                        >
+                          <Avatar />
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '0.2rem',
+                            }}
+                          >
+                            <p>{response.author}</p>
+                            <p style={{ color: theme.colors.yellow }}>
+                              {response.comment} -{' '}
+                              {response.date.toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: '#666',
-                      gap: '0.2rem',
-                    }}
-                  >
-                    5 <AiOutlineLike />
-                  </div>{' '}
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: '#666',
-                      gap: '0.2rem',
-                    }}
-                  >
-                    10 <AiOutlineComment />
-                  </div>
-                </div>
-              </div>
-              <Box
-                component={'form'}
-                style={{
-                  padding: '1rem 0',
-                  display: 'flex',
-                  gap: '1rem',
-                  alignItems: 'center',
-                }}
-                sx={{
-                  '& .MuiFormControl-root': {
-                    width: '100%',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white !important',
-                    borderColor: 'white !important',
-                  },
-                  '& .MuiInputLabel-root': { color: 'white !important' },
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'rgba(194, 124, 44, 1) !important',
-                  },
-                  '& .MuiButton-root': {
-                    background: `${theme.colors.yellow} !important`,
-                    height: '100% !important',
-                  },
-                }}
-              >
-                <Avatar />
-                <TextField
-                  id="outlined-multiline-flexible"
-                  label="Responder..."
-                  multiline
-                  maxRows={4}
-                />
-                <Button variant={'contained'}>Responder</Button>
-              </Box>
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-              >
-                <Avatar />
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.2rem',
-                  }}
-                >
-                  <p>autor</p>
-                  <p style={{ color: theme.colors.yellow }}>
-                    texto da mensagem - 10 dias atrás
-                  </p>
-                </div>
-              </div>
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-              >
-                <Avatar />
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.2rem',
-                  }}
-                >
-                  <p>autor</p>
-                  <p style={{ color: theme.colors.yellow }}>
-                    texto da mensagem - 16 dias atrás
-                  </p>
-                </div>
-              </div>
-            </div>
+                </>
+              );
+            })}
           </div>
         )}
       </div>

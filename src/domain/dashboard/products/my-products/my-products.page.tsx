@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Loader } from '@shared/components/loader/loader.component';
 import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { useAppSelector } from '../../../../store/hooks';
 
 import { useCallback, useEffect, useState } from 'react';
 import { userSelector } from '@domain/auth/user/user.store';
@@ -26,14 +26,11 @@ export const MyProducts = () => {
     );
 
     setProducts(response.data);
-  }, [setProducts]);
-
-  // const products = useAppSelector(productSelector);
-  const dispatch = useAppDispatch();
+  }, [user.data.id]);
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <>

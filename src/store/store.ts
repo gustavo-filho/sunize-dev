@@ -6,6 +6,7 @@ import notificationsReducer from '@domain/dashboard/components/Notifications/not
 import userReducer from '../domain/auth/user/user.store';
 import { createLogger } from 'redux-logger';
 import { userListener } from '../domain/auth/user/user.store.middlewares';
+import videoClassReducer from '@domain/dashboard/products/video-class/video-class.store';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     products: productsReducer,
     sidebar: sideBarReducer,
     notifications: notificationsReducer,
+    videoClass: videoClassReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware()
