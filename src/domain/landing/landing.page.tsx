@@ -1,37 +1,35 @@
-import {
-  Container,
-  Main,
-  Section,
-  CardsWrapper,
-  Card,
-  ConversionColumn,
-  ExperienceThumbColumn,
-  ExperienceColumn,
-  CardBenefits,
-  BenefitsColumn,
-  FaqColumn,
-  GlobalPageStyle,
-} from './landing.styles';
+import { Footer } from '@domain/landing/components/Footer/footer.component';
 import { Header } from '@domain/landing/components/Header/header.component';
-import TaxImage from '@shared/assets/images/tax1.png';
-import PriorityImage from '@shared/assets/images/prior.png';
-import SecImage from '@shared/assets/images/sec.png';
-import ProductImage from '@shared/assets/images/product.png';
-import ConversationImage from '@shared/assets/images/conv.png';
 import BenefitsImage from '@shared/assets/images/benefits.webp';
 import CheckoutImage from '@shared/assets/images/check-out.png';
+import ConversationImage from '@shared/assets/images/conv.png';
 import CreateProductImage from '@shared/assets/images/create-product-image.png';
+import PriorityImage from '@shared/assets/images/prior.png';
+import ProductImage from '@shared/assets/images/product.png';
+import SecImage from '@shared/assets/images/sec.png';
+import TaxImage from '@shared/assets/images/tax1.png';
+import { Accordion } from '@shared/components/Accordion/accordion.component';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { GrSend } from 'react-icons/gr';
-import { Accordion } from '@shared/components/Accordion/accordion.component';
-import { Footer } from '@domain/landing/components/Footer/footer.component';
 import { Link } from 'react-router-dom';
 import { ScrollReveal } from './components/ScrollReveal/scrollReveal.component';
+import {
+  BenefitsColumn,
+  Card,
+  CardBenefits,
+  CardsWrapper,
+  Container,
+  ConversionColumn,
+  ExperienceColumn,
+  ExperienceThumbColumn,
+  FaqColumn,
+  Main,
+  Section,
+} from './landing.styles';
 
 export const LandingPage = () => {
   return (
     <Container id="section-main">
-      <GlobalPageStyle />
       <Header />
 
       <Main>

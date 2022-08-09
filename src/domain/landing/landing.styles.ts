@@ -1,36 +1,6 @@
-import styled, { css, createGlobalStyle } from 'styled-components';
+import { theme } from '@shared/styles/theme.constants';
+import styled, { css } from 'styled-components';
 import { SectionProps } from './landing.types';
-import { theme } from '@shared/styles/theme.constants'
-
-export const GlobalPageStyle = createGlobalStyle`
-  body {
-    ::-webkit-scrollbar {
-      width: 7px;
-    }
-
-    /* Trackbar */
-    ::-webkit-scrollbar-track {
-      background: #1f1f2b;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #c27c2c;
-      border-radius: 7px;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(194, 124, 44);
-    }
-
-    @media (max-width: 500px) {
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-    }
-  }
-`;
 
 export const Container = styled.div`
   background-color: #f1f1f1;
@@ -39,9 +9,9 @@ export const Container = styled.div`
   [data-scroll] {
     /* opacity: 0; */
     opacity: 1;
-    transition: .5s;
+    transition: 0.5s;
   }
-  [data-scroll="left"] {
+  [data-scroll='left'] {
     /* transform: translate3d(-100px, 0, 0); */
     transform: translate3d(0px, 0, 0);
   }
@@ -122,7 +92,7 @@ export const Section = styled.section<SectionProps>`
 
     mark {
       background-color: transparent;
-      color: #eaa73d ;
+      color: #eaa73d;
       display: block;
       margin-top: -11px !important;
       padding: 0px;
@@ -296,7 +266,7 @@ export const ConversionColumn = styled.div`
         margin-top: -18px;
       }
     }
-    
+
     p {
       line-height: 1.5em;
     }

@@ -16,6 +16,33 @@ export const GlobalStyle = createGlobalStyle`
             font-size: 87.5%;
         }
     } 
+    body {
+        ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    /* Trackbar */
+    ::-webkit-scrollbar-track {
+      background: #1f1f2b;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #c27c2c;
+      border-radius: 7px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(194, 124, 44);
+    }
+
+    @media (max-width: 500px) {
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+    }
     a {
       text-decoration: none;
     }
