@@ -22,6 +22,26 @@ export const LoginSection = styled.aside`
   @media (min-width: 500px) {
     padding: 0 80px 40px;
   }
+
+  ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    /* Trackbar */
+    ::-webkit-scrollbar-track {
+      background: #1f1f2b;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #c27c2c;
+      border-radius: 7px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(194, 124, 44);
+    }
 `;
 
 export const BackgroundPlace = styled.div`
