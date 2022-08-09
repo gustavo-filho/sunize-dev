@@ -22,6 +22,7 @@ import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import InputMask from '../input-masked/input-masked.component';
 import { SingleSelect } from '@shared/components/select/select.component';
 import { Input } from '@shared/components/input/input.component';
+import InputMasked from '../input-masked/input-masked.component';
 
 interface User {
   id: number;
@@ -203,13 +204,13 @@ export const CoProductorAccordion = ({ coProducer, dataChanged }: Props) => {
                     isErrored={!!errors.contractTime}
                   />
 
-                  {/* <InputMasked
+                  <InputMasked
                     name="commission"
                     text="Comissão (%)"
                     mask="99"
                     icon={FaPercentage}
                     placeholder="Insira a comissão do co-produtor"
-                  /> */}
+                  />
 
                   <Permissions>
                     <h1>Permissões</h1>

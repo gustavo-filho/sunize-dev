@@ -141,13 +141,13 @@ export const CoProductionPage = () => {
             >
               Coprodução
             </Link>
-            {product && product.product_type !== 'EBOOK' && (
+            {/* {product && product.product_type !== 'EBOOK' && (
               <LinkNonActive
                 to={`/dashboard/informacoes-gerais/video-class/${productId}`}
               >
                 Video Aula
               </LinkNonActive>
-            )}
+            )} */}
             <LinkNonActive
               to={`/dashboard/informacoes-gerais/links/${productId}`}
             >

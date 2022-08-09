@@ -54,6 +54,9 @@ export interface CustomCheckoutData {
     message?: 'compre comigo';
   };
   notifications: {
+    isActive: boolean;
+    notificationNumberMin: any;
+    notificationNumberMax: any;
     people_buy_product_in_few_minutes: {
       allowed: boolean;
     };
@@ -123,12 +126,12 @@ export interface Product {
 }
 
 export interface GoalData {
-  name: string
-  qtd_sales: number
-  type: string
-  comission: number
-  id: string
-  deleted: boolean
+  name: string;
+  qtd_sales: number;
+  type: string;
+  comission: number;
+  id: string;
+  deleted: boolean;
 }
 
 export interface SalesReport {

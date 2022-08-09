@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik, Field } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -38,7 +39,7 @@ export const GeneralCheckoutPage = () => {
   const [product, setProduct] = useState([] as any);
 
   const [isScarcity, setIsScarcity] = useState(false);
-  const [isNotification, setIsNotification] = useState(false);
+  const [isNotification, setIsNotification] = useState('false');
   const [isUpsell, setIsUpsell] = useState(false);
 
   const [showInput, setShowInput] = useState('false');
@@ -46,8 +47,12 @@ export const GeneralCheckoutPage = () => {
   const [messageSelect, setMessageSelect] = useState(false);
   const [linkSelect, setLink] = useState(false);
 
+  const [notificationNumberMin, setNotificationNumberMin] = useState('1');
+  const [notificationNumberMax, setNotificationNumberMax] = useState('10');
+
   const [isPhone, setIsPhone] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
+
   const [, setIdGenderNeeded] = useState(false);
   const [customCheckout, setCustomCheckout] = useState<CustomCheckoutData>();
   const [isLoading, setIsLoading] = useState<any>(true);
@@ -99,10 +104,6 @@ export const GeneralCheckoutPage = () => {
       setIsPhone(customCheckout.phone.allowed);
       setIsScarcity(customCheckout.allow_time.allowed);
 
-      setIsNotification(
-        customCheckout.notifications.people_buy_product_today.allowed,
-      );
-
       setMessageSelect(customCheckout.page_purchase.message !== 'false');
       setLink(customCheckout.page_purchase.url !== 'false');
       setPhone(String(customCheckout.phone.phone_number) || '');
@@ -110,14 +111,28 @@ export const GeneralCheckoutPage = () => {
       setIdGenderNeeded(customCheckout.need_type_gender);
       setIsPopup(customCheckout.allow_popup.allowed);
       setMessageSelect(customCheckout.page_purchase.message !== 'false');
-
       setShowInput(messageSelect ? 'true' : 'false');
+
+      setIsNotification(
+        customCheckout.notifications.isActive ? 'true' : 'false',
+      );
+
+      setNotificationNumberMin(
+        customCheckout.notifications.notificationNumberMin,
+      );
+
+      setNotificationNumberMax(
+        customCheckout.notifications.notificationNumberMax,
+      );
+
       setIsLoading('success');
     }
   }, [customCheckout, linkSelect, messageSelect, setProductCheckout]);
 
   const onSubmit = useCallback(
     async (values: any) => {
+      console.log(values);
+
       try {
         await api.post(
           `/checkout/${user.id}/${productId}`,
@@ -139,9 +154,14 @@ export const GeneralCheckoutPage = () => {
               allowed: values.warnings_allowed || false,
             },
             notifications: {
+              isActive: isNotification,
+              notificationNumberMin: values.notification_number_min,
+              notificationNumberMax: values.notification_number_max,
               people_buy_product_today: {
-                allowed: isNotification,
-                text: 'pessoas compraram esse produto hoje',
+                allowed:
+                  values.notification_text ===
+                  'pessoas acabaram de comprar esse produto',
+                text: 'pessoas que compraram o produto hoje',
                 qtd_max: values.notification_number,
               },
               people_buy_product_week: {
@@ -166,7 +186,9 @@ export const GeneralCheckoutPage = () => {
                 qtd_max: values.notification_number,
               },
               people_buy_product_incrible: {
-                allowed: false,
+                allowed:
+                  values.notification_text ===
+                  'XX pessoas compraram este produto na última hora',
                 text: 'compraram na última hora. Aproveite!',
                 qtd_max: values.notification_number,
               },
@@ -334,12 +356,13 @@ export const GeneralCheckoutPage = () => {
                   phone_number: customCheckout.phone.phone_number,
                   phone_message: customCheckout.phone.text,
                   page_purchase: messageSelect ? 'true' : 'false',
-                  page_purchase_url: linkSelect
+
+                  page_purchase_url: showInput
                     ? customCheckout.page_purchase.url
-                    : '',
-                  page_purchase_message: messageSelect
+                    : customCheckout.page_purchase.url,
+                  page_purchase_message: !showInput
                     ? customCheckout.page_purchase.message
-                    : 'Obrigado por comprar o meu produto!',
+                    : customCheckout.page_purchase.message,
                   popup_allowed:
                     customCheckout.allow_popup.allowed === true
                       ? 'true'
@@ -592,16 +615,18 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="notification_allowed"
                               id="notification_allowed_true"
-                              value="true"
+                              value={
+                                isNotification === 'true' ? 'false' : 'true'
+                              }
                               onClick={() => {
-                                setIsNotification(true);
+                                setIsNotification('true');
                               }}
                             />
 
                             <label
                               htmlFor="notification_allowed_true"
                               onClick={() => {
-                                setIsNotification(true);
+                                setIsNotification('true');
                               }}
                             >
                               Sim
@@ -613,15 +638,17 @@ export const GeneralCheckoutPage = () => {
                               type="radio"
                               name="notification_allowed"
                               id="notification_allowed_false"
-                              value="false"
+                              value={
+                                isNotification === 'false' ? 'false' : 'true'
+                              }
                               onClick={() => {
-                                setIsNotification(false);
+                                setIsNotification('false');
                               }}
                             />
                             <label
                               htmlFor="random_message_false"
                               onClick={() => {
-                                setIsNotification(false);
+                                setIsNotification('false');
                               }}
                             >
                               Não
@@ -629,7 +656,7 @@ export const GeneralCheckoutPage = () => {
                           </div>
                         </main>
 
-                        {isNotification && (
+                        {isNotification === 'true' ? (
                           <SectionOption>
                             <h1>Número de pessoas (intervalo aleatório)</h1>
                             <div>
@@ -637,16 +664,28 @@ export const GeneralCheckoutPage = () => {
                                 type="number"
                                 name="notification_number_min"
                                 id="notification_number_min"
-                                defaultValue={1}
-                                min={1}
+                                defaultValue={notificationNumberMin}
+                                onChange={(e: any) => {
+                                  setNotificationNumberMin(e.target.value);
+                                  setFieldValue(
+                                    'notification_number_min',
+                                    e.target.value,
+                                  );
+                                }}
                               />
                               <h1>até</h1>
                               <Field
                                 type="number"
                                 name="notification_number_max"
                                 id="notification_number_max"
-                                defaultValue={10}
-                                min={1}
+                                defaultValue={notificationNumberMax}
+                                onChange={(e: any) => {
+                                  setNotificationNumberMax(e.target.value);
+                                  setFieldValue(
+                                    'notification_number_max',
+                                    e.target.value,
+                                  );
+                                }}
                               />
                             </div>
 
@@ -656,27 +695,70 @@ export const GeneralCheckoutPage = () => {
                               name="notification_text"
                               id="notification_text"
                             >
-                              <option value="XX pessoas compraram esse produto hoje">
+                              <option
+                                value="pessoas compraram esse produto hoje"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_buy_product_today.allowed
+                                }
+                              >
                                 XX pessoas compraram esse produto hoje
                               </option>
-                              <option value="XX pessoas compraram esse produto esta semana">
+
+                              <option
+                                value="XX pessoas compraram esse produto esta semana"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_buy_product_week.allowed
+                                }
+                              >
                                 XX pessoas compraram esse produto esta semana
                               </option>
-                              <option value="XX pessoas acabaram de comprar esse produto">
+
+                              <option
+                                value="XX pessoas acabaram de comprar esse produto"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_buy_product_moment.allowed
+                                }
+                              >
                                 XX pessoas acabaram de comprar esse produto
                               </option>
-                              <option value="XX pessoas compraram este produto incrível">
+
+                              <option
+                                value="XX pessoas compraram este produto incrível"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_just_bought_product.allowed
+                                }
+                              >
                                 XX pessoas compraram este produto incrível
                               </option>
-                              <option value="XX pessoas compraram este produto na última hora">
+
+                              <option
+                                value="XX pessoas compraram este produto na última hora"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_buy_product_in_last_hour.allowed
+                                }
+                              >
                                 XX pessoas compraram este produto na última hora
                               </option>
-                              <option value="XX pessoas compraram este produto nos últimos minutos">
+
+                              <option
+                                value="XX pessoas compraram este produto nos últimos minutos"
+                                selected={
+                                  customCheckout.notifications
+                                    .people_buy_product_in_few_minutes.allowed
+                                }
+                              >
                                 XX pessoas compraram este produto nos últimos
                                 minutos
                               </option>
                             </Field>
                           </SectionOption>
+                        ) : (
+                          <> </>
                         )}
                       </OptionSingle>
 
@@ -863,7 +945,6 @@ export const GeneralCheckoutPage = () => {
                               onClick={() => {
                                 setLink(true);
                                 setMessageSelect(false);
-
                                 setShowInput('false');
                               }}
                             />
@@ -890,6 +971,11 @@ export const GeneralCheckoutPage = () => {
                                 <Field
                                   type="text"
                                   name="page_purchase_message"
+                                  value={
+                                    values.page_purchase_message === 'false'
+                                      ? 'Obrigado por comprar conosco!'
+                                      : values.page_purchase_message
+                                  }
                                   id="purchasePageMessage"
                                   className="fInput"
                                 />
@@ -911,6 +997,11 @@ export const GeneralCheckoutPage = () => {
                                 <Field
                                   type="text"
                                   name="page_purchase_url"
+                                  value={
+                                    values.page_purchase_url === 'false'
+                                      ? ''
+                                      : values.page_purchase_url
+                                  }
                                   id="purchasePageLink"
                                 />
                               </>
@@ -929,7 +1020,6 @@ export const GeneralCheckoutPage = () => {
                                 />
                               </>
                             )}
-
                             {linkSelect && (
                               <>
                                 <label htmlFor="purchasePageLink">
