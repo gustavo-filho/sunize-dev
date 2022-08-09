@@ -1,10 +1,10 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
 
-import ImgBackground from '../../assets/images/BackgroundPage2.png'
-import ImgBackgroundForm from '../../assets/images/BackgroundFormLogin.png'
-import LineBottomTitle from '../../assets/images/LineBottomLoginTitle.png'
+import ImgBackground from '../../assets/images/BackgroundPage2.png';
+import ImgBackgroundForm from '../../assets/images/BackgroundFormLogin.png';
+import LineBottomTitle from '../../assets/images/LineBottomLoginTitle.png';
 
 export const LoginSection = styled.aside`
   width: 100%;
@@ -21,7 +21,27 @@ export const LoginSection = styled.aside`
   @media (min-width: 500px) {
     padding: 0 80px 40px;
   }
-`
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Trackbar */
+  ::-webkit-scrollbar-track {
+    background: #1f1f2b;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #c27c2c;
+    border-radius: 7px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(194, 124, 44);
+  }
+`;
 
 export const BackgroundPlace = styled.div`
   background-image: url(${ImgBackground});
@@ -32,7 +52,7 @@ export const BackgroundPlace = styled.div`
   background-size: cover;
   width: calc(100vw - 500px);
   height: 100vh;
-`
+`;
 
 export const Title = styled.h2`
   color: #fff;
@@ -56,7 +76,7 @@ export const Title = styled.h2`
   @media screen and (min-width: 768px) {
     margin-bottom: 65px;
   }
-`
+`;
 
 export const SubTitle = styled.p`
   color: #fff;
@@ -64,7 +84,7 @@ export const SubTitle = styled.p`
   line-height: 17px;
   margin-top: 16px;
   margin-bottom: 0;
-`
+`;
 
 export const ActionLink = styled(Link)`
   text-decoration: none;
@@ -85,14 +105,14 @@ export const ActionLink = styled(Link)`
   &:hover {
     color: ${shade(-0.2, '#c27c2c')};
   }
-`
+`;
 
 export const Image = styled.img`
   margin-top: 50px;
   margin-bottom: 42px;
   width: 100%;
   max-width: 353px;
-`
+`;
 
 export const Footer = styled.footer`
   color: #a5a6a9;
@@ -103,4 +123,4 @@ export const Footer = styled.footer`
     display: block;
     font-size: 14px;
   }
-`
+`;
