@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 
 import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 import {
   BoxWrapper,
@@ -27,9 +27,16 @@ import GoogleAdsImage from '../../../../shared/assets/images/adwords.png';
 import GoogleAnalyticsImage from '../../../../shared/assets/images/googleanalytics.png';
 import { Loader } from '@shared/components/loader/loader.component';
 import { Link } from 'react-router-dom';
+import {
+  ASYNC_GET_PRODUCT,
+  productSelector,
+} from '../products.store';
 
 export function GeneralPixelPage() {
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector(userSelector).data;
+  const product = useAppSelector(productSelector).data as any;
 
   const { id: productId } = useParams();
 
@@ -39,12 +46,6 @@ export function GeneralPixelPage() {
 
   const [, setChangeTypePixel] = useState({});
   const [contentPixel, setContentPixel] = useState('');
-  const [product, setProduct] = useState({} as any);
-
-  const getProduct = useCallback(async () => {
-    const response = await api.get(`/products/${productId}`);
-    setProduct(response.data.data);
-  }, [productId]);
 
   const handleClickTypePixel = useCallback(
     async ({ target }: any) => {
@@ -90,18 +91,18 @@ export function GeneralPixelPage() {
   }
 
   useEffect(() => {
-    getProduct();
+    dispatch(ASYNC_GET_PRODUCT({ productId: String(productId) }));
 
     handleClickTypePixel({
       target: {
         id: activePixel.id,
       },
     });
-  }, [getProduct, activePixel.id, handleClickTypePixel]);
+  }, [activePixel.id, dispatch, handleClickTypePixel, productId]);
 
   return (
     <>
-      {!product.product?.title ? (
+      {!product ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>

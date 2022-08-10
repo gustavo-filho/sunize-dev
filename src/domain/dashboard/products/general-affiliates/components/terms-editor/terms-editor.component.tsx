@@ -1,6 +1,6 @@
 import { api } from '@shared/services/api';
 import { userSelector } from '@domain/auth/user/user.store';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../../../store/hooks';
 import { Container, Sun } from './terms-editor.styles';
@@ -9,8 +9,6 @@ import { toast } from 'react-toastify';
 import 'suneditor/dist/css/suneditor.min.css';
 
 export function TermsEditor() {
-  const editor = useRef();
-
   const { id: productId } = useParams();
 
   const user = useAppSelector(userSelector).data;

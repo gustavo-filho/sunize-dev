@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik, Field } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -19,7 +18,7 @@ import {
 } from './general-checkout.styles';
 
 import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 import { CustomCheckoutData, Product } from '@shared/types/types';
 import { api } from '@shared/services/api';
@@ -30,13 +29,15 @@ import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import { CustomCheckoutSchema } from './general-checkout.validate';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Loader } from '@shared/components/loader/loader.component';
+import {
+  ASYNC_GET_PRODUCT,
+  productSelector,
+} from '../products.store';
 
 export const GeneralCheckoutPage = () => {
   const user = useAppSelector(userSelector).data;
 
   const { id: productId } = useParams();
-
-  const [product, setProduct] = useState([] as any);
 
   const [isScarcity, setIsScarcity] = useState(false);
   const [isNotification, setIsNotification] = useState('false');
@@ -75,26 +76,12 @@ export const GeneralCheckoutPage = () => {
     getCustomCheckout();
   }, [productId, user.access_token, user.id]);
 
+  const product = useAppSelector(productSelector).data as any;
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    async function getProduct() {
-      try {
-        const response = await api.get(
-          `/users/${user.id}/products?page=0&paginate=5&type=ONE_TIME`,
-          {
-            headers: { 'sunize-access-token': user.id },
-          },
-        );
-
-        setProduct(response.data.data);
-
-        setIsLoading('success');
-      } catch (err) {
-        setIsLoading('failed');
-      }
-    }
-
-    getProduct();
-  }, [user.id]);
+    dispatch(ASYNC_GET_PRODUCT({ productId: String(productId) }));
+  }, [dispatch, productId]);
 
   useEffect(() => {
     if (customCheckout) {
@@ -131,8 +118,6 @@ export const GeneralCheckoutPage = () => {
 
   const onSubmit = useCallback(
     async (values: any) => {
-      console.log(values);
-
       try {
         await api.post(
           `/checkout/${user.id}/${productId}`,

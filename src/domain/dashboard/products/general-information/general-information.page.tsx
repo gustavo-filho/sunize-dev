@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Product } from '@shared/types/types';
 import { userSelector } from '@domain/auth/user/user.store';
 import { Loader } from '@shared/components/loader/loader.component';
 import { api } from '@shared/services/api';
@@ -39,28 +37,25 @@ import { FiCamera } from 'react-icons/fi';
 import { matchStrings } from '@shared/utils/matchStrings';
 import { TextArea } from '@shared/components/text-area/text-area.component';
 
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { ASYNC_GET_PRODUCT, productSelector } from '../products.store';
 
 export function GeneralInformationPage() {
   const { id: productId } = useParams();
 
-  const [product, setProduct] = useState<Product>({} as Product);
-
   const [canDownload, setCanDownload] = useState(false);
   const [fileSelected, setFileSelected] = useState('');
 
-  const user = useAppSelector(userSelector).data;
-
   const [textTransfer, setTextTransfer] = useState('Copiar link');
 
-  const getProduct = useCallback(async () => {
-    const response = await api.get(`/products/${productId}`);
-    setProduct(response.data.data.product);
-  }, [setProduct]);
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector(userSelector).data;
+  const product = useAppSelector(productSelector).data as any;
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    dispatch(ASYNC_GET_PRODUCT({ productId: String(productId) }));
+  }, [dispatch, productId]);
 
   async function handleEbookChange(event: ChangeEvent<HTMLInputElement>) {
     try {
@@ -154,11 +149,11 @@ export function GeneralInformationPage() {
     setTimeout(() => {
       setTextTransfer('Copiar link');
     }, 3000);
-  }, []);
+  }, [product.id]);
 
   return (
     <>
-      {!product.title ? (
+      {!product ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>

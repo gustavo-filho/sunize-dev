@@ -12,7 +12,7 @@ import {
 } from './general-vouchers.styles';
 
 import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { toast } from 'react-toastify';
 import { ModalAddVoucher } from './components/modal-add-voucher/modal-add-voucher.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
@@ -20,13 +20,19 @@ import { VoucherAccordion } from './components/voucher-accordion/voucher-accordi
 import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Loader } from '@shared/components/loader/loader.component';
+import {
+  ASYNC_GET_PRODUCT,
+  productSelector,
+} from '../products.store';
 
 export const GeneralVouchersPage = () => {
   const { id: productId } = useParams();
 
-  const user = useAppSelector(userSelector).data;
+  const dispatch = useAppDispatch();
 
-  const [product, setProduct] = useState({} as any);
+  const user = useAppSelector(userSelector).data;
+  const product = useAppSelector(productSelector).data as any;
+
   const [vouchers, setVouchers] = useState<VoucherData[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -41,15 +47,10 @@ export const GeneralVouchersPage = () => {
     setVouchers(response.data.data);
   }, [productId, user.id]);
 
-  const getProduct = useCallback(async () => {
-    const response = await api.get(`/products/${productId}`);
-    setProduct(response.data.data);
-  }, [productId]);
-
   useEffect(() => {
+    dispatch(ASYNC_GET_PRODUCT({ productId: String(productId) }));
     getVouchers();
-    getProduct();
-  }, [getProduct, getVouchers]);
+  }, [getVouchers, dispatch, productId]);
 
   useEffect(() => {
     async function postApi() {
@@ -107,7 +108,7 @@ export const GeneralVouchersPage = () => {
 
   return (
     <>
-      {!product?.product?.title ? (
+      {!product ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>
