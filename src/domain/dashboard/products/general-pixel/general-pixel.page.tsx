@@ -27,14 +27,7 @@ import GoogleAdsImage from '../../../../shared/assets/images/adwords.png';
 import GoogleAnalyticsImage from '../../../../shared/assets/images/googleanalytics.png';
 import { Loader } from '@shared/components/loader/loader.component';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
-=======
-import {
-  ASYNC_GET_PRODUCT,
-  productSelector,
-} from '../products.store';
->>>>>>> cf584e3537dc2c0aa8a146acb8ff64e5666b53e5
 
 export function GeneralPixelPage() {
   const dispatch = useAppDispatch();
@@ -95,22 +88,14 @@ export function GeneralPixelPage() {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
     dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-=======
-    dispatch(ASYNC_GET_PRODUCT({ productId: String(productId) }));
->>>>>>> cf584e3537dc2c0aa8a146acb8ff64e5666b53e5
 
     handleClickTypePixel({
       target: {
         id: activePixel.id,
       },
     });
-<<<<<<< HEAD
   }, [activePixel.id, dispatch, handleClickTypePixel, user.id]);
-=======
-  }, [activePixel.id, dispatch, handleClickTypePixel, productId]);
->>>>>>> cf584e3537dc2c0aa8a146acb8ff64e5666b53e5
 
   return (
     <>
