@@ -4,6 +4,14 @@ import { RootState } from '../../../store/store';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
 
+export const ASYNC_GET_PRODUCT = createAsyncThunk(
+  'PRODUCTS/GET_PRODUCT',
+  async ({ productId }: { productId: string }) => {
+    const response = await api.get(`/products/${productId}`);
+    return response.data.data.product;
+  },
+);
+
 export const ASYNC_GET_PRODUCTS = createAsyncThunk(
   'PRODUCTS/GET_PRODUCTS',
   async ({ userId }: { userId: number }) => {
