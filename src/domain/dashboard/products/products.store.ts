@@ -61,7 +61,6 @@ const productsReducer = createSlice({
       state.affiliatesProducts.data = action.payload.data;
       state.affiliatesProducts.totalPages = action.payload.totalPages;
     });
-
   },
   initialState: {
     data: [],

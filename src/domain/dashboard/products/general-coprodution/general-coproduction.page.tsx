@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { CoProductorAccordion } from './components/coproductor-accordion/coproductor-accordion.component';
 
 import {
@@ -25,6 +25,7 @@ import {
 } from './general-coproduction.styles';
 
 import { ModalAddCoproductor } from './components/modal-add-coproductor/modal-add-coproductor.component';
+import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
 interface DataModalAddCoProductor {
   id: number;
@@ -53,11 +54,21 @@ export const CoProductionPage = () => {
   const [dataModalAddCoProductor, setDataModalAddCoProductor] =
     useState<DataModalAddCoProductor>({} as DataModalAddCoProductor);
 
-  const [product, setProduct] = useState({} as any);
   const [coProducers, setCoproducers] = useState<CoProducerData[]>([]);
   const [coProductorTax, setCoProductorTax] = useState('0');
 
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector(userSelector).data;
+  const products = useAppSelector(productSelector).data as any;
+
+  const product = products.find(
+    (product: any) => product.id === Number(productId),
+  ) as any;
+
+  useEffect(() => {
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
+  }, [dispatch, user.id]);
 
   const toggleModal = useCallback(() => {
     if (!dataModalAddCoProductor.name) {
@@ -70,17 +81,6 @@ export const CoProductionPage = () => {
     }
   }, [dataModalAddCoProductor, setDataModalAddCoProductor, user.id, user.name]);
 
-  const getProductionData = useCallback(async () => {
-    try {
-      const response = await api.get(`/products/${productId}`);
-
-      setProduct(response.data.data);
-      setCoProductorTax(response.data.data.product.co_productor_tax.toString());
-    } catch (err) {
-      toast.error('Não foi possível obter os dados do produto');
-    }
-  }, [productId]);
-
   const getCoproductionData = useCallback(async () => {
     const response = await api.get(
       `user/${user.id}/coProducer/product/${productId}`,
@@ -90,9 +90,8 @@ export const CoProductionPage = () => {
   }, [user.id, productId]);
 
   useEffect(() => {
-    getProductionData();
     getCoproductionData();
-  }, [getCoproductionData, getProductionData]);
+  }, [getCoproductionData]);
 
   async function handleSubmit() {
     try {
@@ -114,7 +113,7 @@ export const CoProductionPage = () => {
 
   return (
     <>
-      {!product?.product?.title ? (
+      {!product ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>

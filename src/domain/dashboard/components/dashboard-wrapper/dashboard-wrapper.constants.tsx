@@ -22,7 +22,6 @@ import { CoProductionPage } from '@domain/dashboard/products/general-coprodution
 import { GeneralInformationPage } from '@domain/dashboard/products/general-information/general-information.page';
 import { GeneralLinksPage } from '@domain/dashboard/products/general-links/general-links.page';
 import { GeneralPixelPage } from '@domain/dashboard/products/general-pixel/general-pixel.page';
-import { GeneralVideoClassPage } from '@domain/dashboard/products/general-videoclass/general-videoclass.page';
 import { GeneralVouchersPage } from '@domain/dashboard/products/general-vouchers/general-vouchers.page';
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
@@ -60,7 +59,6 @@ export const DASHBOARD_ROUTES = {
   GENERAL_INFORMATION: '/dashboard/informacoes-gerais/manage/:id',
   GENERAL_CHECKOUT: '/dashboard/informacoes-gerais/checkout/:id',
   GENERAL_COPRODUCTION: '/dashboard/informacoes-gerais/coproduction/:id',
-  // GENERAL_VIDEO_CLASS: '/dashboard/informacoes-gerais/video-class/:id',
   GENERAL_LINKS: '/dashboard/informacoes-gerais/links/:id',
   GENERAL_VOUCHERS: '/dashboard/informacoes-gerais/vouchers/:id',
   GENERAL_AFFILIATES: '/dashboard/informacoes-gerais/affiliates/:id',
@@ -81,7 +79,6 @@ export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
   [DASHBOARD_ROUTES.GENERAL_INFORMATION]: <GeneralInformationPage />,
   [DASHBOARD_ROUTES.GENERAL_CHECKOUT]: <GeneralCheckoutPage />,
   [DASHBOARD_ROUTES.GENERAL_COPRODUCTION]: <CoProductionPage />,
-  // [DASHBOARD_ROUTES.GENERAL_VIDEO_CLASS]: <GeneralVideoClassPage />,
   [DASHBOARD_ROUTES.GENERAL_VOUCHERS]: <GeneralVouchersPage />,
   [DASHBOARD_ROUTES.GENERAL_LINKS]: <GeneralLinksPage />,
   [DASHBOARD_ROUTES.GENERAL_AFFILIATES]: <GeneralAffiliatesPage />,

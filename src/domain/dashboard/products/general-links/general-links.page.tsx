@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -11,13 +10,14 @@ import {
 } from './general-links.styles';
 
 import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { api } from '@shared/services/api';
 import { FaPlus } from 'react-icons/fa';
 import { LinkAccordion } from './components/link-accordion/link-accordion.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { ModalAddLinks } from './components/modal-add-links/modal-add-links.component';
 import { Loader } from '@shared/components/loader/loader.component';
+import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
 interface LinkData {
   id: number;
@@ -26,19 +26,20 @@ interface LinkData {
 }
 
 export const GeneralLinksPage = () => {
+  const dispatch = useAppDispatch();
+
+  const products = useAppSelector(productSelector).data as any;
   const user = useAppSelector(userSelector).data;
 
   const { id: productId } = useParams();
 
-  const [product, setProduct] = useState({} as any);
+  const product = products.find(
+    (product: any) => product.id === Number(productId),
+  ) as any;
+  
   const [links, setLinks] = useState<LinkData[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [accordionData, setAccordionData] = useState<LinkData[]>([]);
-
-  const getProducts = useCallback(async () => {
-    const response = await api.get(`/products/${productId}`);
-    setProduct(response.data.data.product);
-  }, [productId]);
 
   const getLinks = useCallback(async () => {
     const response = await api.get(`products/links/${user.id}/${productId}`, {
@@ -48,20 +49,21 @@ export const GeneralLinksPage = () => {
   }, [productId, user.access_token, user.id]);
 
   useEffect(() => {
-    getLinks();
-    getProducts();
-  }, []);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
+  }, [dispatch, user.id]);
 
   useEffect(() => {
+    getLinks();
     setLinks(accordionData);
-  }, [accordionData]);
+  }, [getLinks, accordionData]);
 
   function toggleModal() {
     setIsModalVisible(!isModalVisible);
   }
+
   return (
     <>
-      {!product.title ? (
+      {!product ? (
         <LoaderContainer>
           <Loader />
         </LoaderContainer>
