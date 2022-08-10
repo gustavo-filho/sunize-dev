@@ -62,12 +62,16 @@ export const GeneralAffiliatesPage = () => {
     } catch (err: any) {
       toast.error(err.response.data.message);
     }
-  }, [product, productId, user.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
+  }, [dispatch, user.id]);
+
+  useEffect(() => {
     getSalesTarget();
-  }, [dispatch, user.id, getSalesTarget]);
+  }, [getSalesTarget]);
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
     if (defaultTax <= defaultCommission) {
@@ -132,7 +136,7 @@ export const GeneralAffiliatesPage = () => {
   return (
     <>
       {user ? (
-        !product?.title ? (
+        !product ? (
           <LoaderContainer>
             <Loader />
           </LoaderContainer>
