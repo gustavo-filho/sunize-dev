@@ -97,12 +97,6 @@ export const GeneralAffiliatesPage = () => {
   ]);
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
-    if (Number(defaultCommission) <= Number(defaultTax)) {
-      return toast.error(
-        'O valor da comissão não pode ser menor ou igual ao porcentagem de afiliação',
-      );
-    }
-
     try {
       await api.put(
         `/users/${user.id}/products/${productId}`,

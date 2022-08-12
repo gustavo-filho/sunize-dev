@@ -48,6 +48,12 @@ export const GeneralCheckoutPage = () => {
   const [notificationNumberMin, setNotificationNumberMin] = useState('1');
   const [notificationNumberMax, setNotificationNumberMax] = useState('10');
 
+  const [linkMessage, setLinkMessage] = useState('');
+
+  const [customMessage, setCustomMessage] = useState(
+    'Obrigado por comprar meu produto!',
+  );
+
   const [isPhone, setIsPhone] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
 
@@ -110,6 +116,14 @@ export const GeneralCheckoutPage = () => {
         customCheckout.notifications.notificationNumberMax,
       );
 
+      if (customCheckout.page_purchase.url !== 'false') {
+        setLinkMessage(String(customCheckout.page_purchase.url));
+      }
+
+      if (customCheckout.page_purchase.message !== 'false') {
+        setCustomMessage(String(customCheckout.page_purchase.message));
+      }
+
       setIsLoading('success');
     }
   }, [customCheckout, linkSelect, messageSelect, setProductCheckout]);
@@ -138,8 +152,8 @@ export const GeneralCheckoutPage = () => {
             },
             notifications: {
               isActive: isNotification,
-              notificationNumberMin: values.notification_number_min,
-              notificationNumberMax: values.notification_number_max,
+              notificationNumberMin: Number(notificationNumberMin),
+              notificationNumberMax: Number(notificationNumberMax),
               people_buy_product_today: {
                 allowed:
                   values.notification_text ===
@@ -208,8 +222,8 @@ export const GeneralCheckoutPage = () => {
               message: values.phone_message,
             },
             page_purchase: {
-              url: linkSelect ? values.page_purchase_url : 'false',
-              message: messageSelect ? values.page_purchase_message : 'false',
+              url: linkSelect ? linkMessage : 'false',
+              message: messageSelect ? customMessage : 'false',
             },
             allow_popup: {
               allowed: values.popup_allowed === 'true',
@@ -232,15 +246,7 @@ export const GeneralCheckoutPage = () => {
         toast.error(error.response.data.message);
       }
     },
-    [
-      isNotification,
-      linkSelect,
-      messageSelect,
-      phone,
-      productId,
-      user.access_token,
-      user.id,
-    ],
+    [customMessage, isNotification, linkMessage, linkSelect, messageSelect, notificationNumberMax, notificationNumberMin, phone, productId, user.access_token, user.id],
   );
 
   return (
@@ -340,12 +346,10 @@ export const GeneralCheckoutPage = () => {
                   phone_message: customCheckout.phone.text,
                   page_purchase: messageSelect ? 'true' : 'false',
 
-                  page_purchase_url: showInput
-                    ? customCheckout.page_purchase.url
-                    : customCheckout.page_purchase.url,
+                  page_purchase_url: showInput ? linkMessage : linkMessage,
                   page_purchase_message: !showInput
-                    ? customCheckout.page_purchase.message
-                    : customCheckout.page_purchase.message,
+                    ? customMessage
+                    : customMessage,
                   popup_allowed:
                     customCheckout.allow_popup.allowed === true
                       ? 'true'
@@ -647,13 +651,9 @@ export const GeneralCheckoutPage = () => {
                                 type="number"
                                 name="notification_number_min"
                                 id="notification_number_min"
-                                defaultValue={notificationNumberMin}
+                                value={notificationNumberMin}
                                 onChange={(e: any) => {
                                   setNotificationNumberMin(e.target.value);
-                                  setFieldValue(
-                                    'notification_number_min',
-                                    e.target.value,
-                                  );
                                 }}
                               />
                               <h1>até</h1>
@@ -661,13 +661,9 @@ export const GeneralCheckoutPage = () => {
                                 type="number"
                                 name="notification_number_max"
                                 id="notification_number_max"
-                                defaultValue={notificationNumberMax}
+                                value={notificationNumberMax}
                                 onChange={(e: any) => {
                                   setNotificationNumberMax(e.target.value);
-                                  setFieldValue(
-                                    'notification_number_max',
-                                    e.target.value,
-                                  );
                                 }}
                               />
                             </div>
@@ -956,8 +952,11 @@ export const GeneralCheckoutPage = () => {
                                   name="page_purchase_message"
                                   value={
                                     values.page_purchase_message === 'false'
-                                      ? 'Obrigado por comprar conosco!'
-                                      : values.page_purchase_message
+                                      ? customMessage
+                                      : customMessage
+                                  }
+                                  onChange={(e: any) =>
+                                    setCustomMessage(e.target.value)
                                   }
                                   id="purchasePageMessage"
                                   className="fInput"
@@ -983,8 +982,11 @@ export const GeneralCheckoutPage = () => {
                                   value={
                                     values.page_purchase_url === 'false'
                                       ? ''
-                                      : values.page_purchase_url
+                                      : linkMessage
                                   }
+                                  onChange={(e: any) => {
+                                    setLinkMessage(e.target.value);
+                                  }}
                                   id="purchasePageLink"
                                 />
                               </>

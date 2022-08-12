@@ -81,9 +81,16 @@ export const CoProductionPage = () => {
     }
   }, [dataModalAddCoProductor, setDataModalAddCoProductor, user.id, user.name]);
 
+  const getCoProductorTax = useCallback(async () => {
+    const tax = await api.get(`/products/${product.id}`);
+
+    setCoProductorTax(String(tax.data.data.product.co_productor_tax));
+  
+  }, [product]);
+
   const getCoproductionData = useCallback(async () => {
     const response = await api.get(
-      `user/${user.id}/coProducer/product/${productId}`,
+      `/user/${user.id}/coProducer/product/${productId}`,
     );
 
     setCoproducers(response.data.data);
@@ -91,7 +98,8 @@ export const CoProductionPage = () => {
 
   useEffect(() => {
     getCoproductionData();
-  }, [getCoproductionData]);
+    getCoProductorTax();
+  }, [getCoproductionData, getCoProductorTax]);
 
   async function handleSubmit() {
     try {
