@@ -76,11 +76,7 @@ export const GeneralCheckoutPage = () => {
   const products = useAppSelector(productSelector).data as any;
 
   const dispatch = useAppDispatch();
-
-  const product = products.find(
-    (product: any) => product.id === Number(productId),
-  ) as any;
-
+  
   useEffect(() => {
     dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
   }, [dispatch, user.id]);
@@ -848,7 +844,7 @@ export const GeneralCheckoutPage = () => {
                               )}
                             <Field
                               name="orderbump_product"
-                              options={product
+                              options={products
                                 .filter(
                                   (product: Product) =>
                                     product.id !== Number(productId),

@@ -28,16 +28,22 @@ import { Link } from 'react-router-dom';
 import { TermsEditor } from './components/terms-editor/terms-editor.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import InputMasked from './components/input-masked/input-masked.component';
-import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
+// import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
 export const GeneralAffiliatesPage = () => {
   const user = useAppSelector(userSelector).data;
 
   const { id: productId } = useParams();
 
-  const products = useAppSelector(productSelector).data as any;
+  // const products = useAppSelector(productSelector).data as any;
 
-  const [isAffiliateSystemEnabled, setIsAffiliateSystemEnabled] = useState('');
+  // const [isAffiliateSystemEnabled, setIsAffiliateSystemEnabled] =
+  //   useState('false');
+
+  const [isLoading, setIsLoading] = useState('starting');
+  const [showInput, setShowInput] = useState('false');
+
+  const [isAffiliateBoolean, setIsAffiliateBoolean] = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [goals, setGoals] = useState<GoalData[]>([]);
@@ -45,46 +51,65 @@ export const GeneralAffiliatesPage = () => {
   const [defaultTax, setDefaultTax] = useState('0');
   const [defaultCommission, setDefaultCommission] = useState('0');
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const product = products.find(
-    (product: any) => product.id === Number(productId),
-  ) as any;
+  const [product, setProduct] = useState({} as any);
+
+  // const product = products.find(
+  //   (product: any) => product.id === Number(productId),
+  // ) as any;
 
   const getSalesTarget = useCallback(async () => {
     try {
       const response = await api.get(`/sales-target/${user.id}/${productId}`);
       setGoals(response.data.data);
-
-      setIsAffiliateSystemEnabled(String(product.system_affiliate));
-      setDefaultTax(product.affiliate_tax);
-      setDefaultCommission(product.commission);
     } catch (err: any) {
       toast.error(err.response.data.message);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [productId, user.id]);
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    setIsLoading('loading');
 
-  useEffect(() => {
     getSalesTarget();
-  }, [getSalesTarget]);
+
+    async function getProduct() {
+      const response = await api.get(`/products/${productId}`);
+      setProduct(response.data.data.product);
+    }
+
+    getProduct();
+
+    // setIsAffiliateSystemEnabled(String(product.system_affiliate));
+
+    setDefaultTax(product.affiliate_tax);
+    setDefaultCommission(product.commission);
+
+    setShowInput(product.system_affiliate === true ? 'true' : 'false');
+
+    setIsLoading('success');
+  }, [
+    getSalesTarget,
+    product.affiliate_tax,
+    product.commission,
+    product.system_affiliate,
+    productId,
+  ]);
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
-    if (defaultTax <= defaultCommission) {
-      return toast.error('A taxa de afiliado deve ser maior que a comissão');
+    if (Number(defaultCommission) <= Number(defaultTax)) {
+      return toast.error(
+        'O valor da comissão não pode ser menor ou igual ao porcentagem de afiliação',
+      );
     }
 
     try {
       await api.put(
         `/users/${user.id}/products/${productId}`,
         {
-          system_affiliate: values.affiliate_system === 'true',
-          commission: defaultCommission,
-          affiliate_tax: defaultTax,
+          system_affiliate: isAffiliateBoolean,
+          commission: Number(defaultCommission),
+          affiliate_tax: Number(defaultTax),
         },
         {
           headers: { 'sunize-access-token': user.access_token },
@@ -102,41 +127,10 @@ export const GeneralAffiliatesPage = () => {
     setIsModalVisible(!isModalVisible);
   }
 
-  function changeComission(value: string) {
-    let commission = Number(value);
-    let tax = Number(defaultTax);
-
-    if (commission < tax) {
-      setDefaultCommission(value);
-    }
-
-    if (commission >= tax) {
-      setDefaultCommission(String(tax - 1));
-    }
-  }
-
-  function changeTax(value: string) {
-    let commission = Number(defaultCommission);
-    let tax = Number(value);
-
-    if (tax <= commission) {
-      setDefaultTax(String(commission + 1));
-    }
-
-    if (commission >= tax) {
-      setDefaultCommission(String(tax - 1));
-      setDefaultTax(value);
-    }
-
-    if (tax > commission) {
-      setDefaultTax(value);
-    }
-  }
-
   return (
     <>
       {user ? (
-        !product ? (
+        isLoading !== 'success' ? (
           <LoaderContainer>
             <Loader />
           </LoaderContainer>
@@ -194,9 +188,7 @@ export const GeneralAffiliatesPage = () => {
                 <Formik
                   onSubmit={handleSubmit}
                   initialValues={{
-                    affiliate_system: isAffiliateSystemEnabled
-                      ? 'true'
-                      : 'false',
+                    affiliate_system: showInput === 'true' ? 'true' : 'false',
                     commission: product.comission as any,
                     tax: defaultTax,
                   }}
@@ -210,20 +202,18 @@ export const GeneralAffiliatesPage = () => {
                               type="radio"
                               name="affiliate_system"
                               id="affiliate_system_true"
-                              value={
-                                isAffiliateSystemEnabled === 'true'
-                                  ? 'false'
-                                  : 'true'
-                              }
-                              onClick={() =>
-                                setIsAffiliateSystemEnabled('true')
-                              }
+                              value={showInput === 'true' ? 'false' : 'true'}
+                              onClick={() => {
+                                setShowInput('true');
+                                setIsAffiliateBoolean(true);
+                              }}
                             />
                             <label
                               htmlFor="affiliate_system_true"
-                              onClick={() =>
-                                setIsAffiliateSystemEnabled('true')
-                              }
+                              onClick={() => {
+                                setShowInput('true');
+                                setIsAffiliateBoolean(true);
+                              }}
                             >
                               Sim
                             </label>
@@ -234,27 +224,25 @@ export const GeneralAffiliatesPage = () => {
                               type="radio"
                               name="affiliate_system"
                               id="affiliate_system_false"
-                              value={
-                                isAffiliateSystemEnabled === 'false'
-                                  ? 'false'
-                                  : 'true'
-                              }
-                              onClick={() =>
-                                setIsAffiliateSystemEnabled('false')
-                              }
+                              value={showInput === 'false' ? 'false' : 'true'}
+                              onClick={() => {
+                                setShowInput('false');
+                                setIsAffiliateBoolean(false);
+                              }}
                             />
                             <label
                               htmlFor="affiliate_system_false"
-                              onClick={() =>
-                                setIsAffiliateSystemEnabled('false')
-                              }
+                              onClick={() => {
+                                setShowInput('false');
+                                setIsAffiliateBoolean(false);
+                              }}
                             >
                               Não
                             </label>
                           </div>
                         </main>
 
-                        {isAffiliateSystemEnabled === 'true' ? (
+                        {showInput === 'true' ? (
                           <TaxContainer>
                             <InputMasked
                               name="test"
@@ -263,7 +251,9 @@ export const GeneralAffiliatesPage = () => {
                               icon={FaPercentage}
                               placeholder="Porcentagem de afiliação"
                               value={defaultCommission}
-                              onChange={e => changeComission(e.target.value)}
+                              onChange={(e: any) =>
+                                setDefaultCommission(e.target.value)
+                              }
                             />
                             <InputMasked
                               name="tax"
@@ -272,7 +262,9 @@ export const GeneralAffiliatesPage = () => {
                               icon={FaPercentage}
                               placeholder="Porcentagem de afiliação"
                               value={defaultTax}
-                              onChange={(e: any) => changeTax(e.target.value)}
+                              onChange={(e: any) =>
+                                setDefaultTax(e.target.value)
+                              }
                             />
                           </TaxContainer>
                         ) : (
@@ -311,6 +303,7 @@ export const GeneralAffiliatesPage = () => {
                       goals={goals}
                       goal={goal}
                       setGoals={setGoals}
+                      affiliatePercentage={defaultTax}
                     />
                   ))
                 ) : (
@@ -327,6 +320,7 @@ export const GeneralAffiliatesPage = () => {
                   goals={goals}
                   toggleModal={toggleModal}
                   setGoals={setGoals}
+                  defaultCommission={defaultCommission}
                 />
               )}
             </Container>

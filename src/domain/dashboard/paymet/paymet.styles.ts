@@ -47,7 +47,7 @@ export const Container = styled.div<Props>`
       margin-bottom: 3.5rem;
     }
     h2 {
-      color: #f5f5f5;
+      color: #000;
       font-weight: 400;
       font-size: x-large;
       text-align: center;
@@ -68,6 +68,7 @@ export const Container = styled.div<Props>`
 `
 
 export const Content = styled.div`
+color: #000;
   > main {
     max-width: 1440px;
     padding: 10rem 7%;

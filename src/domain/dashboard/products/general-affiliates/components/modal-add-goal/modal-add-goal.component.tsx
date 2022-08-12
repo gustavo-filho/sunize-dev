@@ -26,10 +26,17 @@ interface IModalProps {
   setGoals: Dispatch<SetStateAction<any>>;
   goals: any;
   toggleModal: () => void;
+  defaultCommission: any;
 }
 
-export const ModalAddGoal = ({ goals, toggleModal, setGoals }: IModalProps) => {
+export const ModalAddGoal = ({
+  goals,
+  toggleModal,
+  setGoals,
+  defaultCommission,
+}: IModalProps) => {
   const user = useAppSelector(userSelector).data;
+
   const { id: productId } = useParams();
 
   const handleCloseModal = useCallback(() => {
@@ -37,6 +44,12 @@ export const ModalAddGoal = ({ goals, toggleModal, setGoals }: IModalProps) => {
   }, [toggleModal]);
 
   async function handleSubmit(values: any) {
+    if (Number(values.commision) <= Number(defaultCommission)) {
+      return toast.error(
+        'O valor da comissão não pode ser menor ou igual ao porcentagem de afiliação',
+      );
+    }
+
     try {
       const response = await api.post(`/sales-target/${user.id}/${productId}`, {
         name: values.name,
@@ -49,9 +62,7 @@ export const ModalAddGoal = ({ goals, toggleModal, setGoals }: IModalProps) => {
 
       toast.success('Cupom adicionado com sucesso!');
     } catch (err: any) {
-      toast.error(
-        'Já existe uma meta cadastrada. As informações de uma nova meta precisam ser únicas.',
-      );
+      toast.error(err.response.data.message[0]);
       handleCloseModal();
     }
   }
@@ -63,7 +74,7 @@ export const ModalAddGoal = ({ goals, toggleModal, setGoals }: IModalProps) => {
           <FaTimes />
         </button>
         <h1>
-          <FaPlusSquare /> &nbsp;Adicionando meta de afiliado&nbsp;{' '}
+          <FaPlusSquare /> &nbsp;Adicionando meta de afiliado&nbsp;
           <FaPlusSquare />
         </h1>
 

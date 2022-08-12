@@ -19,10 +19,16 @@ import {
   AccordionContent,
 } from './goal-accordion.styles';
 
-export const GoalAccordion = ({ goal, setGoals, goals }: any) => {
+export const GoalAccordion = ({
+  goal,
+  setGoals,
+  goals,
+  affiliatePercentage,
+}: any) => {
   const user = useAppSelector(userSelector).data;
 
   const accordionRef = useRef<HTMLDivElement>(null);
+
   const [accordionHeight, setAccordionHeight] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -63,7 +69,13 @@ export const GoalAccordion = ({ goal, setGoals, goals }: any) => {
     });
 
     try {
-      await api.put(`sales-target/${user.id}/${goal.id}`, {
+      if (Number(values.comission) <= Number(affiliatePercentage)) {
+        return toast.warning(
+          'Comissão não pode ser menor ou igual ao percentual de afiliado',
+        );
+      }
+
+      await api.put(`/sales-target/${user.id}/${goal.id}`, {
         name: values.name,
         qtd_sales: values.qtd_sales,
         type: values.type,

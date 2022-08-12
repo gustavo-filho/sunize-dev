@@ -5,6 +5,7 @@ export const Container = styled.div`
   /* position: absolute; */
   box-shadow: 0 0 16px 0.5px rgba(100, 100, 100, 0.2);
   border-radius: 0.5rem 0.5rem 0 0;
+  color: #000;
   header {
     background-color: #54c989;
     min-height: 7rem;
