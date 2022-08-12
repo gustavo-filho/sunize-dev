@@ -4,7 +4,7 @@ import { GoalData } from '@shared/types/types';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { useAppSelector } from '../../../../store/hooks';
 
 import { ModalAddGoal } from './components/modal-add-goal/modal-add-goal.component';
 import { GoalAccordion } from './components/goal-accordion/goal-accordion.component';
