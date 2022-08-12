@@ -9,19 +9,40 @@ import { UserAuthProps } from './user.types';
 
 export const ASYNC_SIGN_IN = createAsyncThunk(
   'USER/SIGN_IN',
-  async ({ email, password }: UserAuthProps) => {
-    const response = await api
-      .post(API_ROUTES.AUTH.SIGN_IN, {
-        email,
-        password,
-      })
-      .catch(err => {
-        toast.error(err.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-        });
-        return err;
-      });
+  async ({ email, password, access_token, code, by_pass }: UserAuthProps) => {
+    const response = code
+      ? await api
+          .post(
+            API_ROUTES.AUTH.SIGN_IN_TFA,
+            {
+              code,
+              by_pass,
+            },
+            {
+              headers: {
+                'sunize-access-token': String(access_token),
+              },
+            },
+          )
+          .catch(err => {
+            toast.error(err.response.data.message, {
+              position: 'top-right',
+              autoClose: 5000,
+            });
+            return err;
+          })
+      : await api
+          .post(API_ROUTES.AUTH.SIGN_IN, {
+            email,
+            password,
+          })
+          .catch(err => {
+            toast.error(err.response.data.message, {
+              position: 'top-right',
+              autoClose: 5000,
+            });
+            return err;
+          });
 
     return response.data;
   },

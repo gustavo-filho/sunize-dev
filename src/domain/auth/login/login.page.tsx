@@ -10,7 +10,7 @@ import { api } from '@shared/services/api';
 import { API_ROUTES } from '@shared/services/api-routes.constants';
 import { Formik } from 'formik';
 import Cookies from 'js-cookie';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BiEnvelope } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -20,18 +20,35 @@ export const LoginPage = () => {
   const user = useAppSelector(userSelector);
   const navigate = useNavigate();
 
+  const [loginData, setLoginData] = useState({
+    access_token: '',
+    tfa_enabled: false,
+  });
+
   const onSubmit = useCallback(
     (values: UserAuthProps) => {
       dispatch(
         ASYNC_SIGN_IN({
           email: values.email,
           password: values.password,
+          code: values.code,
+          access_token: loginData.access_token,
+          by_pass: values.by_pass,
         }),
-      ).then(() => {
-        navigate('/dashboard');
+      ).then(response => {
+        const require2FA = !!response.payload.tfa;
+
+        if (require2FA) {
+          setLoginData({
+            access_token: response.payload.data.access_token,
+            tfa_enabled: true,
+          });
+          return;
+        }
+        return navigate('/dashboard');
       });
     },
-    [dispatch, navigate],
+    [dispatch, navigate, loginData],
   );
 
   useEffect(() => {
@@ -60,25 +77,54 @@ export const LoginPage = () => {
           initialValues={{
             email: '',
             password: '',
+            code: '',
+            by_pass: false,
           }}
-          render={() => (
+          render={({ values, setFieldValue }) => (
             <FormContainer>
-              <DefaultInput
-                mode="dark"
-                name="email"
-                text="E-mail *"
-                icon={BiEnvelope}
-                placeholder="Digite seu e-mail"
-              />
-              <DefaultInput
-                mode="dark"
-                name="password"
-                type="password"
-                handleShowPassword={true}
-                text="Senha *"
-                icon={KeyIcon}
-                placeholder="Digite sua senha"
-              />
+              {loginData.tfa_enabled ? (
+                <>
+                  <DefaultInput
+                    mode="dark"
+                    name="code"
+                    text="Codigo de verificação*"
+                    icon={BiEnvelope}
+                    value={values.code}
+                    onChange={(e: any) => {
+                      setFieldValue('code', e.target.value);
+                    }}
+                    placeholder="Insira o codigo"
+                    autoComplete="off"
+                  />
+                  <input
+                    type="checkbox"
+                    onChange={e => setFieldValue('by_pass', e.target.checked)}
+                    id="by_pass"
+                    style={{ marginRight: '5px' }}
+                  />
+                  <label htmlFor="by_pass">Manter conectado por 30 dias!</label>
+                </>
+              ) : (
+                <>
+                  <DefaultInput
+                    mode="dark"
+                    name="email"
+                    text="E-mail *"
+                    icon={BiEnvelope}
+                    placeholder="Digite seu e-mail"
+                  />
+                  <DefaultInput
+                    mode="dark"
+                    name="password"
+                    type="password"
+                    handleShowPassword={true}
+                    text="Senha *"
+                    icon={KeyIcon}
+                    placeholder="Digite sua senha"
+                  />
+                </>
+              )}
+
               <DefaultButton loading={user.loading}>Login</DefaultButton>
             </FormContainer>
           )}
