@@ -1,35 +1,37 @@
 // @ts-nocheck
 
-import selectImage from '../assets/images/select-image.png';
-import {
-  W50,
-  OptionSingle,
-  FormGroup,
-  W100,
-  Container,
-  BoxWrapper,
-  ContainerBox,
-  Clear,
-} from './create-product.styles';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
-import { api } from '@shared/services/api';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { round } from 'lodash';
-import { schema } from './create-product.validation';
-import { Dropzone } from '@domain/dashboard/products/components/dropzone/dropzone.component';
+import selectImage from '../assets/images/select-image.png';
+import {
+  BoxWrapper,
+  Clear,
+  Container,
+  ContainerBox,
+  FormGroup,
+  OptionSingle,
+  W100,
+  W50
+} from './create-product.styles';
+
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import CurrencyInput from 'react-currency-input-field';
+import { Dropzone } from '@domain/dashboard/products/components/dropzone/dropzone.component';
 import {
   ASYNC_GET_CATEGORIES,
-  productSelector,
+  productSelector
 } from '@domain/dashboard/products/products.store';
+import { round } from 'lodash';
+import CurrencyInput from 'react-currency-input-field';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { schema } from './create-product.validation';
 
 export const CreateProduct = () => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -66,8 +68,8 @@ export const CreateProduct = () => {
         dadosForm.append('image', image.uploadedFiles[0].file);
 
       api
-        .post(`users/${user.id}/products`, dadosForm, {
-          headers: { 'sunize-access-token': user.access_token },
+        .post(`users/${user!.id}/products`, dadosForm, {
+          headers: { 'sunize-access-token': user!.access_token },
         })
         .then(response => {
           toast.success(
@@ -88,7 +90,7 @@ export const CreateProduct = () => {
           actions.setSubmitting(false);
         });
     },
-    [image.uploadedFiles, user.id, user.access_token, navigate],
+    [image.uploadedFiles, user, navigate],
   );
 
   const validate = useCallback((values: any) => {

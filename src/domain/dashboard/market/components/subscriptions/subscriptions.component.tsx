@@ -1,9 +1,8 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { Product } from '@shared/types/types';
 import { useCallback, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../store/hooks';
 import { useFetch } from '../../config/useFetch.config';
 import { ICategory } from '../../interfaces/iCategory.types';
 import { DropdownFilter } from '../dropdown-filter/dropdown-filter.component';
@@ -15,13 +14,14 @@ interface SubscriptionsProps {
 }
 
 export function Subscriptions({ search }: SubscriptionsProps): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [offset, setOffset] = useState(0);
   const [totalPages] = useState(0);
   const { data, error } = useFetch(
-    `/marketplace/${user.data.id}/?charge_type="RECURRENT"`,
+    `/marketplace/${user?.id}/?charge_type="RECURRENT"`,
     {
-      headers: { 'sunize-access-token': user.data.access_token },
+      headers: { 'sunize-access-token': user?.access_token },
     },
   );
   const [subscriptions, setSubscriptions] = useState([]);
@@ -49,10 +49,10 @@ export function Subscriptions({ search }: SubscriptionsProps): JSX.Element {
 
   const getCategories = useCallback(async () => {
     const response = await api.get('categories', {
-      headers: { 'sunize-access-token': user.data.access_token },
+      headers: { 'sunize-access-token': user!.access_token },
     });
     setCategories(response.data.data);
-  }, [user.data.access_token]);
+  }, [user]);
 
   useEffect(() => {
     if (data) {

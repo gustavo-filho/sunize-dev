@@ -2,23 +2,24 @@ import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
 import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
 import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
 import { schema } from '@domain/auth/login/login.validation';
-import { ASYNC_SIGN_IN, userSelector } from '@domain/auth/user/user.store';
-import { UserAuthProps } from '@domain/auth/user/user.types';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
-import { api } from '@shared/services/api';
-import { API_ROUTES } from '@shared/services/api-routes.constants';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { UserAuthProps } from '@shared/contexts/user-context/user.types';
 import { Formik } from 'formik';
-import Cookies from 'js-cookie';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { BiEnvelope } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { toast } from 'react-toastify';
 
 export const LoginPage = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector);
+  const { isAuthenticated, signIn } = useUser();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  if (isAuthenticated) {
+    navigate('/dashboard');
+  }
 
   const [loginData, setLoginData] = useState({
     access_token: '',
@@ -26,42 +27,25 @@ export const LoginPage = () => {
   });
 
   const onSubmit = useCallback(
-    (values: UserAuthProps) => {
-      dispatch(
-        ASYNC_SIGN_IN({
-          email: values.email,
-          password: values.password,
-          code: values.code,
-          access_token: loginData.access_token,
-          by_pass: values.by_pass,
-        }),
-      ).then(response => {
-        const require2FA = !!response.payload.tfa;
-
-        if (require2FA) {
+    async (values: UserAuthProps) => {
+      setLoading(true);
+      await signIn({
+        email: values.email,
+        password: values.password,
+      }).then(response => {
+        if (response.tfa_required) {
           setLoginData({
-            access_token: response.payload.data.access_token,
+            access_token: response.data.access_token,
             tfa_enabled: true,
           });
+          toast.success('Enviado um código de verificação para o seu e-mail');
           return;
         }
         return navigate('/dashboard');
       });
     },
-    [dispatch, navigate, loginData],
+    [navigate, signIn],
   );
-
-  useEffect(() => {
-    if (Cookies.get('@Sunize:user')) {
-      const userData = JSON.parse(Cookies.get('@Sunize:user') ?? '');
-
-      if (userData.name) {
-        api.get(`${API_ROUTES.USER.NAME.BY_ID}/${userData.id}`).then(() => {
-          navigate('/dashboard');
-        });
-      }
-    }
-  }, [navigate]);
 
   return (
     <AuthRouteWrapper>
@@ -125,7 +109,7 @@ export const LoginPage = () => {
                 </>
               )}
 
-              <DefaultButton loading={user.loading}>Login</DefaultButton>
+              <DefaultButton loading={loading}>Login</DefaultButton>
             </FormContainer>
           )}
         />

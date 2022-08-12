@@ -7,10 +7,9 @@ import { Bank } from './components/bank/bank.component';
 import { Perfil } from './components/perfil/perfil.component';
 import { Products } from './components/products/products.component';
 
-import { userSelector } from '@domain/auth/user/user.store';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../../store/hooks';
 import { Invitations } from './components/invitations/invitations.component';
 import {
   ButtonNav,
@@ -19,12 +18,12 @@ import {
   Content,
   ContentModal,
   Navigation,
-  Overlay
+  Overlay,
 } from './modal.styles';
 import { ModalProps, UserData } from './modal.types';
 
 export const Modal: React.FC<ModalProps> = ({ personId, setModal }) => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
 
   const [userData, setUserData] = useState<UserData>({} as UserData);
   const [stateNavigation, setStateNavigation] = useState('PERFIL');
@@ -35,9 +34,7 @@ export const Modal: React.FC<ModalProps> = ({ personId, setModal }) => {
 
   const getUser = useCallback(async () => {
     try {
-      const response = await api.get(
-        `admin/${user.data.id}/users/${personId}`,
-      );
+      const response = await api.get(`admin/${user?.id}/users/${personId}`);
 
       const allUsers = response.data.data;
 
@@ -47,7 +44,7 @@ export const Modal: React.FC<ModalProps> = ({ personId, setModal }) => {
 
       closeModal();
     }
-  }, [closeModal, personId, user.data.id]);
+  }, [closeModal, personId, user]);
 
   useEffect(() => {
     getUser();
@@ -103,18 +100,14 @@ export const Modal: React.FC<ModalProps> = ({ personId, setModal }) => {
             <Perfil userData={userData} closeModal={closeModal} />
           )}
           {stateNavigation === 'BANCO' && (
-            <Bank
-              user={user.data}
-              userData={userData}
-              closeModal={closeModal}
-            />
+            <Bank user={user!} userData={userData} closeModal={closeModal} />
           )}
           {stateNavigation === 'PRODUTOS' && (
             <Products userData={userData} closeModal={closeModal} />
           )}
           {stateNavigation === 'AFILIADOS' && (
             <Affiliates
-              user={user.data}
+              user={user!}
               userData={userData}
               closeModal={closeModal}
             />

@@ -2,7 +2,13 @@
 
 import { VideoClassSidebar } from '@domain/dashboard/products/video-class/components/video-class-sidebar/video-class-sidebar.component';
 
+import {
+  CREATE_COMMENT,
+  REPLY_RESPONSE,
+  videoClassSelector,
+} from '@domain/dashboard/products/video-class/video-class.store';
 import { Avatar, Box, Button, TextField } from '@mui/material';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { theme } from '@shared/styles/theme.constants';
 import React, { useState } from 'react';
 import {
@@ -16,15 +22,9 @@ import {
   AiOutlineRight,
 } from 'react-icons/ai';
 import ReactStars from 'react-rating-stars-component';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import Thumbnail from './assets/images/youtube-video-thumbnail.jpeg';
 import { StyledTab, StyledTabs, useStyles } from './video-class.styles';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import {
-  CREATE_COMMENT,
-  REPLY_RESPONSE,
-  videoClassSelector,
-} from '@domain/dashboard/products/video-class/video-class.store';
-import { userSelector } from '@domain/auth/user/user.store';
 
 export const VideoClass = () => {
   const classes = useStyles();
@@ -32,7 +32,7 @@ export const VideoClass = () => {
   const videoClass = useAppSelector(videoClassSelector);
   const { comments, files } = videoClass;
   const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

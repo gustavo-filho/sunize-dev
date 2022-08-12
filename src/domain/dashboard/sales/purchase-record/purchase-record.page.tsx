@@ -1,26 +1,25 @@
-import { useAppSelector } from '../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import useSWR from 'swr';
+import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { CancelRecurringModal } from '@domain/dashboard/sales/components/cancel-recurring-modal/cancel-recurring-modal.component';
+import { CancelRefundModal } from '@domain/dashboard/sales/components/cancel-refund-modal/cancel-refund-modal.component';
+import { ModalConfirm } from '@domain/dashboard/sales/components/modal-confirm/modal-confirm.component';
+import { DetailsModal } from '@shared/components/details-modal/details-modal.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { Field, Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
+import { FaCog } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import useSWR from 'swr';
 import {
   Card,
   Center,
-  Options,
-  FormGroup,
   Container,
-  TableContainer,
-  HeadInfo,
   Divisor,
+  FormGroup,
+  HeadInfo,
+  Options,
+  TableContainer,
 } from './purchase-record.styles';
-import { api } from '@shared/services/api';
-import { Field, Form, Formik } from 'formik';
-import { FaCog } from 'react-icons/fa';
-import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { ModalConfirm } from '@domain/dashboard/sales/components/modal-confirm/modal-confirm.component';
-import { CancelRecurringModal } from '@domain/dashboard/sales/components/cancel-recurring-modal/cancel-recurring-modal.component';
-import { DetailsModal } from '@shared/components/details-modal/details-modal.component';
-import { CancelRefundModal } from '@domain/dashboard/sales/components/cancel-refund-modal/cancel-refund-modal.component';
 
 interface Product {
   id: number;
@@ -36,7 +35,7 @@ interface Transaction {
 }
 
 export const PurchaseRecordPage = () => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
@@ -61,8 +60,8 @@ export const PurchaseRecordPage = () => {
     string | Transaction
   >('');
 
-  const { data, error } = useFetch(`users/${user.id}/transactions`, {
-    headers: { 'sunize-access-token': user.access_token },
+  const { data, error } = useFetch(`users/${user?.id}/transactions`, {
+    headers: { 'sunize-access-token': user!.access_token },
   });
 
   useEffect(() => {

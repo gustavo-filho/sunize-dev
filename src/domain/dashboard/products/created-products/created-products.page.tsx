@@ -1,21 +1,21 @@
-import {
-  Container,
-  AnimationContainer,
-  BoxWrapper,
-  LinksProducts,
-} from './created-products.styles';
-import { Link } from 'react-router-dom';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { ProductCreatedBox } from '@domain/dashboard/products/created-products/components/product-created-box/product-created-box.component';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import {
+  AnimationContainer,
+  BoxWrapper,
+  Container,
+  LinksProducts,
+} from './created-products.styles';
 
 import {
   ASYNC_GET_PRODUCTS,
   productSelector,
 } from '@domain/dashboard/products/products.store';
 
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { useEffect } from 'react';
-import { userSelector } from '@domain/auth/user/user.store';
 
 interface Product {
   id: number;
@@ -30,11 +30,11 @@ export const CreatedProducts = () => {
   const products = useAppSelector(productSelector).data;
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   return (
     <Container>

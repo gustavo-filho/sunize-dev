@@ -1,13 +1,12 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import InputMasked from '@shared/components/input-masked/input-masked.component';
 import { Loader } from '@shared/components/loader/loader.component';
 import { SingleSelect } from '@shared/components/select/select.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { useCallback } from 'react';
 import { FaPercentage } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../../../../store/hooks';
 import { UserData } from '../../modal.types';
 import {
   Actions,
@@ -22,17 +21,17 @@ interface UserProps {
 }
 
 export const Perfil = ({ userData }: UserProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const blockUser = useCallback(() => {
     api
       .put(
-        `admin/${user.id}/users/${userData.user.id}`,
+        `admin/${user!.id}/users/${userData.user!.id}`,
         {
           blocked_access: true,
         },
         {
-          headers: { 'sunize-access-token': user.access_token },
+          headers: { 'sunize-access-token': user!.access_token },
         },
       )
       .then(() => {
@@ -42,17 +41,17 @@ export const Perfil = ({ userData }: UserProps) => {
       .catch((err: any) => {
         toast.error(err.response.data.message);
       });
-  }, [user.access_token, user.id, userData]);
+  }, [user, userData]);
 
   const unblockUser = useCallback(() => {
     api
       .put(
-        `admin/${user.id}/users/${userData.user.id}`,
+        `admin/${user!.id}/users/${userData.user!.id}`,
         {
           blocked_access: false,
         },
         {
-          headers: { 'sunize-access-token': user.access_token },
+          headers: { 'sunize-access-token': user!.access_token },
         },
       )
       .then(() => {
@@ -62,18 +61,18 @@ export const Perfil = ({ userData }: UserProps) => {
       .catch((err: any) => {
         toast.error(err.response.data.message);
       });
-  }, [user.access_token, user.id, userData]);
+  }, [user, userData]);
 
   const onChange = useCallback(
     async (value: any) => {
       try {
         await api.put(
-          `admin/${user.id}/users/${userData.user.id}`,
+          `admin/${user!.id}/users/${userData.user!.id}`,
           {
             account_type: value,
           },
           {
-            headers: { 'sunize-access-token': user.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
 
@@ -82,7 +81,7 @@ export const Perfil = ({ userData }: UserProps) => {
         toast.error(err.response.data.message);
       }
     },
-    [user.access_token, user.id, userData.user?.id],
+    [user, userData],
   );
 
   const handleChangeTax = useCallback(
@@ -95,13 +94,13 @@ export const Perfil = ({ userData }: UserProps) => {
     }) => {
       try {
         await api.put(
-          `admin/${user.id}/users/${userData.user.id}`,
+          `admin/${user!.id}/users/${userData.user!.id}`,
           {
             taxProducer,
             taxInviting,
           },
           {
-            headers: { 'sunize-access-token': user.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
 
@@ -110,7 +109,7 @@ export const Perfil = ({ userData }: UserProps) => {
         toast.error(err.response.data.message);
       }
     },
-    [user.access_token, user.id, userData.user?.id],
+    [user, userData],
   );
 
   return (

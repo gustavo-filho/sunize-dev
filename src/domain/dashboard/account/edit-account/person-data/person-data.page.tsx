@@ -1,7 +1,7 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Input } from '@shared/components/input/input.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { addDays } from 'date-fns';
 import { Form, Formik } from 'formik';
@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
+import { useAppDispatch } from '../../../../../store/hooks';
 import InputMasked from '../components/input-masked/input-masked.component';
 import {
   BoxWrapper,
@@ -39,7 +39,8 @@ import {
 import { schemaData, schemaPassword } from './schemas';
 
 export const PersonPage = () => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const dispatch = useAppDispatch();
 
   const [userData, setUserData] = useState<null | any>(null);
@@ -51,7 +52,7 @@ export const PersonPage = () => {
         const dataPhoto = new FormData();
         dataPhoto.append('photo', photo);
         try {
-          const response = await api.put(`users/${user.data.id}`, dataPhoto);
+          const response = await api.put(`users/${user?.id}`, dataPhoto);
           if (response.data.success) {
             const newPhoto = response.data.photo;
             Cookies.set('@Sunize:photo', newPhoto, {
@@ -80,7 +81,7 @@ export const PersonPage = () => {
     async (values: any, { resetForm, setSubmitting }: any) => {
       try {
         setSubmitting(true);
-        const { data } = await api.put(`users/${user.data.id}/reset-password`, {
+        const { data } = await api.put(`users/${user?.id}/reset-password`, {
           password: values.password,
           newPassword: values.newPassword,
         });
@@ -106,7 +107,7 @@ export const PersonPage = () => {
         const dataForm = new FormData();
         dataForm.append('birthday', values.birth);
 
-        const { data } = await api.put(`users/${user.data.id}`, dataForm);
+        const { data } = await api.put(`users/${user?.id}`, dataForm);
         if (data.success) {
           toast.success('Dados alterados com sucesso!');
           setSubmitting(false);
@@ -121,7 +122,7 @@ export const PersonPage = () => {
 
   const getUserData = useCallback(async () => {
     try {
-      const { data } = await api.get(`users/${user.data.id}`);
+      const { data } = await api.get(`users/${user!.id}`);
       if (data) {
         setUserData(data.data);
       }
@@ -131,8 +132,8 @@ export const PersonPage = () => {
   }, [user]);
 
   useEffect(() => {
-    getUserData();
-  }, [getUserData]);
+    if (user) getUserData();
+  }, [user, getUserData]);
 
   return (
     <Container>
@@ -155,7 +156,7 @@ export const PersonPage = () => {
             <AvatarContainer>
               <div>
                 {userData && user ? (
-                  <img src={user.data.photo} alt={userData.name} />
+                  <img src={user?.photo} alt={userData.name} />
                 ) : (
                   <FiUser />
                 )}

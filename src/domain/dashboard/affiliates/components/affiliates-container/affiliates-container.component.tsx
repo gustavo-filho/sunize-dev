@@ -45,7 +45,7 @@ export const AffiliatesContainer = ({
 
   const getAffiliates = useCallback(() => {
     api
-      .get(`users/${user.id}/affiliates/true/${selectedProduct?.id}`, {
+      .get(`users/${user!.id}/affiliates/true/${selectedProduct?.id}`, {
         params: {
           page: offset,
           paginate: 10,
@@ -57,13 +57,13 @@ export const AffiliatesContainer = ({
         setTotalPages(response.data.totalPages);
         setTotalOfAffiliates(response.data.data.length);
       });
-  }, [user.id, selectedProduct?.id, offset, setTotalOfAffiliates]);
+  }, [user!.id, selectedProduct?.id, offset, setTotalOfAffiliates]);
 
   const deleteAffiliate = useCallback(
     (affiliateId: string) => {
       api
         .delete(
-          `users/${user.id}/affiliates/${affiliateId}/${selectedProduct?.id}`,
+          `users/${user!.id}/affiliates/${affiliateId}/${selectedProduct?.id}`,
         )
         .then(() => {
           toast.success('Afiliado deletado!');
@@ -73,7 +73,7 @@ export const AffiliatesContainer = ({
           toast.error(`Erro ao remover usuãrio. Erro: ${err}`);
         });
     },
-    [getAffiliates, selectedProduct?.id, user.id],
+    [getAffiliates, selectedProduct?.id, user!.id],
   );
 
   useEffect(() => {

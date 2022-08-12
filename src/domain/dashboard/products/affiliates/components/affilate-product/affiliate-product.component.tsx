@@ -67,10 +67,10 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
   const handleGetMeta = useCallback(async () => {
     setMetaVisible(!metaVisible);
     const response = await api.get(
-      `sales-target/${user.id}/${affiliateProduct.product_id}`,
+      `sales-target/${user!.id}/${affiliateProduct.product_id}`,
     );
     setMetas(response.data.data);
-  }, [affiliateProduct.product_id, metaVisible, user.id]);
+  }, [affiliateProduct.product_id, metaVisible, user!.id]);
 
   function toggleConfirmModal() {
     setIsModalConfirmationVisible(!isModalConfirmationVisible);
@@ -79,7 +79,9 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
   const handleCancelarAfiliacao = useCallback(async () => {
     try {
       await api.delete(
-        `users/${user.id}/affiliates/${affiliateProduct.id}/${affiliateProduct.product_id}`,
+        `users/${user!.id}/affiliates/${affiliateProduct.id}/${
+          affiliateProduct.product_id
+        }`,
       );
 
       const index = products.findIndex(product => {
@@ -99,24 +101,24 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
     } finally {
       console.debug('finish');
     }
-  }, [affiliateProduct.id, affiliateProduct.product_id, products, user.id]);
+  }, [affiliateProduct.id, affiliateProduct.product_id, products, user!.id]);
 
   const getCategories = useCallback(async () => {
     const response = await api.get(`products/${affiliateProduct.product_id}`, {
-      headers: { 'sunize-access-token': user.access_token },
+      headers: { 'sunize-access-token': user!.access_token },
     });
     setLinkSale(response.data.data.product.link_sales);
-  }, [affiliateProduct.product_id, user.access_token]);
+  }, [affiliateProduct.product_id, user!.access_token]);
 
   const getData = useCallback(async () => {
     const { data } = await api.get(
-      `products/links/${user.id}/${affiliateProduct.product_id}`,
+      `products/links/${user!.id}/${affiliateProduct.product_id}`,
     );
     if (data) {
       setLinks(data.data);
       setTotalPages(data.totalPages);
     }
-  }, [affiliateProduct.product_id, user.id]);
+  }, [affiliateProduct.product_id, user!.id]);
 
   useEffect(() => {
     getData();

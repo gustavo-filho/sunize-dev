@@ -1,14 +1,13 @@
-import { api } from '@shared/services/api';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
-import { useAppSelector } from '../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { toast } from 'react-toastify';
-import { Modal, Container, Complaint } from './modal-rating.styles';
-import { FaAlignJustify, FaTimes } from 'react-icons/fa';
-import { FiCheckCircle } from 'react-icons/fi';
-import { Form, Formik } from 'formik';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { TextArea } from '@shared/components/text-area/text-area.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { Form, Formik } from 'formik';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { FaAlignJustify, FaTimes } from 'react-icons/fa';
+import { FiCheckCircle } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import { Complaint, Container, Modal } from './modal-rating.styles';
 
 interface Rating {
   productName: string;
@@ -21,7 +20,8 @@ interface Props {
   setData: Dispatch<SetStateAction<any>>;
 }
 export const ModalRating = ({ data, setData }: Props) => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [statusSubmit, setStatusSubmit] = useState('');
 
   const handleCloseModal = useCallback(() => {
@@ -34,8 +34,8 @@ export const ModalRating = ({ data, setData }: Props) => {
 
       if (data) {
         try {
-          await api.post(`user/${user.data.id}/avaliations`, {
-            clientId: user.data.id,
+          await api.post(`user/${user?.id}/avaliations`, {
+            clientId: user?.id,
             productId: data.productId,
             avaliationNumber: data.ratingValue,
             description: values.description,
@@ -58,7 +58,7 @@ export const ModalRating = ({ data, setData }: Props) => {
         }
       }
     },
-    [data, handleCloseModal, user.data.id],
+    [data, handleCloseModal, user],
   );
 
   return (

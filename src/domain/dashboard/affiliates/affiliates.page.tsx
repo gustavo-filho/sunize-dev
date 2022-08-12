@@ -1,12 +1,16 @@
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
+import { AffiliatesContainer } from '@domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component';
+import { RequestAffiliateContainer } from '@domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component';
+import { SelectProduct } from '@domain/dashboard/affiliates/components/select-product/select-product.component';
+import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import {
-  Container,
-  Statistics,
-  useStyles,
-  FormGroup,
-} from './affiliates.styles';
+  ASYNC_GET_PRODUCTS,
+  productSelector,
+} from '@domain/dashboard/products/products.store';
+import { AppBar, Tab, Tabs } from '@mui/material';
+import { InputSearch } from '@shared/components/input-search/input-search.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { Product } from '@shared/types/types';
+import { Form, Formik } from 'formik';
 import {
   Dispatch,
   SetStateAction,
@@ -14,21 +18,18 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {
-  ASYNC_GET_PRODUCTS,
-  productSelector,
-} from '@domain/dashboard/products/products.store';
 import * as Yup from 'yup';
-import { AffiliatesContainer } from '@domain/dashboard/affiliates/components/affiliates-container/affiliates-container.component';
-import { RequestAffiliateContainer } from '@domain/dashboard/affiliates/components/request-affiliate-container/request-affiliate-container.component';
-import { Form, Formik } from 'formik';
-import { InputSearch } from '@shared/components/input-search/input-search.component';
-import { SelectProduct } from '@domain/dashboard/affiliates/components/select-product/select-product.component';
-import { AppBar, Tab, Tabs } from '@mui/material';
-import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import {
+  Container,
+  FormGroup,
+  Statistics,
+  useStyles,
+} from './affiliates.styles';
 
 export const AffiliatesPage = () => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
+
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
@@ -80,7 +81,7 @@ export const AffiliatesPage = () => {
         <AffiliatesContainer
           activeTab={activeTab}
           selectedProduct={selectedProduct}
-          user={user}
+          user={user!}
           setTotalOfAffiliates={setTotalOfAffiliates}
           wordToSearch={wordToSearch}
         />
@@ -97,7 +98,7 @@ export const AffiliatesPage = () => {
         <RequestAffiliateContainer
           activeTab={activeTab}
           selectedProduct={selectedProduct}
-          user={user}
+          user={user!}
           setTotalOfAffiliates={setTotalOfAffiliates}
           wordToSearch={wordToSearch}
         />
@@ -107,8 +108,8 @@ export const AffiliatesPage = () => {
   const onSubmit = useCallback(() => {}, []);
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   return (
     <Container>

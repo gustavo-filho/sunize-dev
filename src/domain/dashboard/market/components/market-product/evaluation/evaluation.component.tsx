@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { userSelector } from '@domain/auth/user/user.store';
+import { IPropsEvaluation } from '@domain/dashboard/market/interfaces/iprops-evaluation.type';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
+import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import { FiStar } from 'react-icons/fi';
-import { useAppSelector } from '../../../../../../store/hooks';
 import { Container, TotalEvaluations } from './evaluation.styles';
-import { IPropsEvaluation } from '@domain/dashboard/market/interfaces/iprops-evaluation.type';
 
 export const Evaluation: React.FC<IPropsEvaluation> = ({
   productId,
   withoutNumber,
 }) => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [evaluation, setEvaluation] = useState(0);
 
   useEffect(() => {
     api
-      .get(`/user/${user.data.id}/avaliations/${productId}`, {
-        headers: { 'sunize-access-token': user.data.access_token },
+      .get(`/user/${user?.id}/avaliations/${productId}`, {
+        headers: { 'sunize-access-token': user!.access_token },
       })
       .then(response => {
         setEvaluation(response.data.avaliationMedium);
       });
-  }, [productId, user.data.access_token, user.data.id]);
+  }, [productId, user]);
 
   return (
     <Container>
