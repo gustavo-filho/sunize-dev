@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   LoaderContainer,
   AnimationContainer,
@@ -26,7 +27,7 @@ export const MyProducts = () => {
     );
 
     setProducts(response.data);
-  }, [user.data.id]);
+  }, [setProducts]);
 
   useEffect(() => {
     getProducts();

@@ -36,6 +36,7 @@ import sunizeLogo from './assets/sunizeLogo.png';
 export function Payment() {
   // const user = useAppSelector(userSelector);
   const navigate = useNavigate();
+  
   const { productId } = useParams();
   const {
     registerProduct,
@@ -54,6 +55,7 @@ export function Payment() {
       Cookies.get(`${productId}@isClicked`) !== 'true' ? 'true' : 'false'
     }`,
   );
+
   const { data: checkoutData } = useFetch(`/checkout/${productId}`);
   const [customCheckout, setCustomCheckout] = useState<CustomCheckoutData>();
   const [timerAllowed, setTimerAllowed] = useState(false);

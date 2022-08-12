@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react';
-
-import Select from 'react-select';
-import { Container } from './select.styles';
+import { Container, SelectContainer } from './select.styles';
 
 interface Option {
   value: any;
@@ -9,7 +7,7 @@ interface Option {
   isFixed?: boolean;
   isDisabled?: boolean;
 }
-// #ec993a
+
 interface CustomTheme {
   primary25: string;
   primary50: string;
@@ -49,9 +47,9 @@ export const SingleSelect: React.FC<Props> = ({
       ...theme,
       colors: {
         ...theme.colors,
-        primary25: 'rgba(194, 124, 44, 0.25)',
-        primary50: 'rgba(194, 124, 44, 0.5)',
-        primary: 'rgba(194, 124, 44, 1)',
+        primary25: 'rgba(186, 107, 17, 0.25)',
+        primary50: 'rgba(190, 106, 9, 0.5)',
+        primary: '#ac6008',
       },
     };
   }, []);
@@ -72,8 +70,19 @@ export const SingleSelect: React.FC<Props> = ({
   return (
     <Container id={id} isErrored={Number(isErrored)} heightSelect={height}>
       {label && <span>{label}</span>}
-      {/* 'Sem opções' */}
-      <Select
+
+      <SelectContainer
+        styles={{
+          control: base => ({
+            ...base,
+            color: '#fff',
+            backgroundColor: 'rgb(30, 31, 50)',
+          }),
+          singleValue: (provided: any) => ({
+            ...provided,
+            color: '#fff',
+          }),
+        }}
         noOptionsMessage={({ inputValue }) => 'Sem opções'}
         theme={customThemeDefault || customThemeFunction}
         className="basic-single"

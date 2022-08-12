@@ -1,4 +1,7 @@
-import { ADMIN_COMPONENTS, ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import {
+  ADMIN_COMPONENTS,
+  ADMIN_ROUTES,
+} from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { AdminWrapper } from '@domain/admin/components/admin-wrapper/admin.wrapper';
 import { ForgotPassword } from '@domain/auth/forgot-password/forgot-password.page';
 import { LoginPage } from '@domain/auth/login/login.page';
@@ -25,6 +28,7 @@ export const Routes = () => (
       <Route path="/forgot-pass" element={<ForgotPassword />} />
       <Route path="/loading" element={<LoadingPage />} />
       <Route path="/refund" element={<RefundPage />} />
+      
       <Route
         path="/dashboard"
         element={<PrivateRouteWrapper layout={DashboardWrapper} />}
@@ -33,6 +37,7 @@ export const Routes = () => (
           <Route path={route} element={DASHBOARD_COMPONENTS[route]} />
         ))}
       </Route>
+
       <Route
         path="/admin"
         element={<PrivateRouteWrapper isAdmin layout={AdminWrapper} />}

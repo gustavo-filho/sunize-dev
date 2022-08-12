@@ -11,10 +11,11 @@ import { FiAlertCircle } from 'react-icons/fi';
 interface InputData extends InputProps {
   mask: string;
   maskChar?: string | null;
-  labelPosition?: 'left' | 'center' | 'right';
-  disabled?: boolean;
-  text: string;
-  icon?: React.ComponentType;
+  name?: string;
+  labelPosition?: 'left' | 'center' | 'right'
+  disabled?: boolean
+  text: string
+  icon?: React.ComponentType
 }
 
 const InputMasked: React.FC<InputData> = ({

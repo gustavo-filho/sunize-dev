@@ -9,14 +9,15 @@ interface ContainerProps {
 
 export const Content = styled.div`
   position: relative;
-  margin-top: 2rem;
+  
+  /* margin-top: 2rem; */
 
   div + div {
     margin-bottom: 2rem;
   }
 
   .field {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     label {
       color: #848484;
