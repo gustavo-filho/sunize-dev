@@ -1,6 +1,10 @@
-import { ADMIN_COMPONENTS, ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
+import {
+  ADMIN_COMPONENTS,
+  ADMIN_ROUTES,
+} from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import { AdminWrapper } from '@domain/admin/components/admin-wrapper/admin.wrapper';
 import { ForgotPassword } from '@domain/auth/forgot-password/forgot-password.page';
+import { LoginPage2FA } from '@domain/auth/login-2fa/login-2fa.page';
 import { LoginPage } from '@domain/auth/login/login.page';
 import { LoadingPage } from '@domain/auth/register-user/loading-page/loading-page.index';
 import { RegisterComponent } from '@domain/auth/register-user/register-user-page';
@@ -21,6 +25,7 @@ export const Routes = () => (
     <Switch>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/login/2fa" element={<LoginPage2FA />} />
       <Route path="/register" element={<RegisterComponent />} />
       <Route path="/forgot-pass" element={<ForgotPassword />} />
       <Route path="/loading" element={<LoadingPage />} />

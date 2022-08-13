@@ -5,21 +5,24 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState
+  useState,
 } from 'react';
 import { toast } from 'react-toastify';
 import {
   User,
+  UserAuth2FAProps,
+  UserAuth2FAResponse,
   UserAuthProps,
   UserAuthResponse,
   UserRegisterProps,
-  UserRegisterResponse
+  UserRegisterResponse,
 } from './user.types';
 
 type UserContextData = {
   isAuthenticated: boolean;
   user: User | null;
   signIn: (data: UserAuthProps) => Promise<UserAuthResponse>;
+  signIn2FA: (data: UserAuth2FAProps) => Promise<UserAuth2FAResponse>;
   signUp: (data: UserRegisterProps) => Promise<UserRegisterResponse>;
   signOut: () => void;
 };
@@ -33,9 +36,12 @@ type UserContextProviderProps = {
 export function UserContextProvider({ children }: UserContextProviderProps) {
   const user_cookies = localStorage.getItem('@Sunize:user');
   const user_data = user_cookies ? JSON.parse(user_cookies) : null;
-  user_data ?? updateJwt(user_data.access_token);
+  user_data?.access_token && updateJwt(user_data.access_token);
 
   const [user, setUser] = useState<User | null>(user_data);
+
+  const tfa_token = localStorage.getItem('@Sunize:tfa');
+  const [user2FAToken, setUser2FAToken] = useState<string | null>(tfa_token);
 
   const isAuthenticated = !!user;
 
@@ -55,26 +61,24 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }: UserAuthProps): Promise<UserAuthResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data } = await api
-          .post(API_ROUTES.AUTH.SIGN_IN, {
-            email,
-            password,
-          })
-          .catch(err => {
-            toast.error(err.response.data.message, {
-              position: 'top-right',
-              autoClose: 5000,
-            });
-            return err;
-          });
+        const { data } = await api.post(API_ROUTES.AUTH.SIGN_IN, {
+          email,
+          password,
+        });
 
-        if (data.success) {
+        if (!!data.tfa) {
+          console.log('tfa', data);
+          localStorage.setItem('@Sunize:tfa', data.data.access_token);
+          setUser2FAToken(data.data.access_token);
+        }
+
+        if (data.success && !data.tfa) {
           const user_data = data.data;
           localStorage.setItem('@Sunize:user', JSON.stringify(user_data));
           setUser(user_data);
+          updateJwt(data.data.access_token);
+          localStorage.removeItem('@Sunize:tfa');
         }
-
-        updateJwt(data.data.access_token);
 
         resolve({
           success: data.success,
@@ -82,6 +86,54 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           data: data.data,
         });
       } catch (error: any) {
+        toast.error(error.response.data.message, {
+          position: 'top-right',
+          autoClose: 5000,
+        });
+        reject({
+          success: false,
+          data: error.response.data,
+        });
+      }
+    });
+  }
+
+  async function signIn2FA({
+    code,
+    by_pass,
+  }: UserAuth2FAProps): Promise<UserAuth2FAResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await api.post(
+          API_ROUTES.AUTH.SIGN_IN_TFA,
+          {
+            code,
+            by_pass,
+          },
+          {
+            headers: {
+              'sunize-access-token': String(user2FAToken),
+            },
+          },
+        );
+
+        if (data.success) {
+          const user_data = data.data;
+          localStorage.setItem('@Sunize:user', JSON.stringify(user_data));
+          setUser(user_data);
+          updateJwt(data.data.access_token);
+          localStorage.removeItem('@Sunize:tfa');
+        }
+
+        resolve({
+          success: data.success,
+          data: data.data,
+        });
+      } catch (error: any) {
+        toast.error(error.response.data.message, {
+          position: 'top-right',
+          autoClose: 5000,
+        });
         reject({
           success: false,
           data: error.response.data,
@@ -113,6 +165,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     try {
       setUser(null);
       localStorage.removeItem('@Sunize:user');
+      window.location.href = '/login';
     } catch {
       toast.error('Erro interno, Tente novamente!');
     }
@@ -124,6 +177,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         isAuthenticated,
         user,
         signIn,
+        signIn2FA,
         signUp,
         signOut,
       }}

@@ -30,6 +30,16 @@ export interface UserAuthResponse {
   data: User;
 }
 
+export interface UserAuth2FAProps {
+  code: string;
+  by_pass?: boolean;
+}
+
+export interface UserAuth2FAResponse {
+  success: boolean;
+  data: User;
+}
+
 export interface UserRegisterProps {
   email: string;
   password: string;
