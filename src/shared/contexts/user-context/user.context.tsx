@@ -34,11 +34,11 @@ type UserContextProviderProps = {
 };
 
 export function UserContextProvider({ children }: UserContextProviderProps) {
-  const user_cookies = localStorage.getItem('@Sunize:user');
-  const user_data = user_cookies ? JSON.parse(user_cookies) : null;
-  user_data?.access_token && updateJwt(user_data.access_token);
+  // const user_cookies = localStorage.getItem('@Sunize:user');
+  // const user_data = user_cookies ? JSON.parse(user_cookies) : null;
+  // user_data?.access_token && updateJwt(user_data.access_token);
 
-  const [user, setUser] = useState<User | null>(user_data);
+  const [user, setUser] = useState<User | null>(null);
 
   const tfa_token = localStorage.getItem('@Sunize:tfa');
   const [user2FAToken, setUser2FAToken] = useState<string | null>(tfa_token);
@@ -49,8 +49,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     const user_cookies = localStorage.getItem('@Sunize:user');
     if (user_cookies) {
       const user_data = JSON.parse(user_cookies);
-      api.defaults.headers.common['sunize-access-token'] =
-        user_data.access_token;
+      updateJwt(user_data.access_token);
       setUser(user_data);
     }
   }, []);
@@ -67,7 +66,6 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         });
 
         if (!!data.tfa) {
-          console.log('tfa', data);
           localStorage.setItem('@Sunize:tfa', data.data.access_token);
           setUser2FAToken(data.data.access_token);
         }
@@ -76,7 +74,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           const user_data = data.data;
           localStorage.setItem('@Sunize:user', JSON.stringify(user_data));
           setUser(user_data);
-          updateJwt(data.data.access_token);
+          updateJwt(user_data.access_token);
           localStorage.removeItem('@Sunize:tfa');
         }
 
@@ -121,7 +119,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           const user_data = data.data;
           localStorage.setItem('@Sunize:user', JSON.stringify(user_data));
           setUser(user_data);
-          updateJwt(data.data.access_token);
+          updateJwt(user_data.access_token);
           localStorage.removeItem('@Sunize:tfa');
         }
 

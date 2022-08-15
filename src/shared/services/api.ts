@@ -11,6 +11,22 @@ export const api = axios.create({
   },
 });
 
+api.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response.status === 401) {
+      localStorage.removeItem('@Sunize:user');
+      window.location.href = '/login';
+    }
+    return error;
+  },
+);
+
 export const updateJwt = (token: string) => {
-  api.defaults.headers.common['sunize-access-token'] = token;
+  api.interceptors.request.use(config => {
+    config!.headers!['sunize-access-token'] = token;
+    return config;
+  });
 };
