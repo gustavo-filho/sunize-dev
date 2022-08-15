@@ -1,3 +1,4 @@
+import Select from "react-select"
 import styled, { css } from 'styled-components';
 
 interface ContainerProps {
@@ -20,19 +21,36 @@ export const Container = styled.div<ContainerProps>`
   }
 
   > div > div:nth-of-type(1) {
-    border: 1px solid #c2c2c2;
 
     ${({ heightSelect }) =>
-      !!heightSelect &&
-      css`
+    !!heightSelect &&
+    css`
         height: ${heightSelect + 'px'};
       `}
 
     ${({ isErrored }) =>
-      isErrored &&
-      css`
+    isErrored &&
+    css`
         border: 1px solid rgb(255, 82, 82);
       `}
+  }
+`;
+
+export const SelectContainer = styled(Select)`
+  z-index: 100 !important;
+
+  .select__placeholder {
+    color: #FFF !important;
+  }
+
+  .select_menu {
+    color: #FFF;
+    background-color: #27293D !important;
+  }
+
+  .select__menu {
+    color: #FFF;
+    background-color: #27293D !important;
   }
 `;
 

@@ -1,3 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import {
+  LoaderContainer,
+  AnimationContainer,
+  Container,
+  BoxWrapper,
+  LinksProducts,
+} from './my-products.styles';
+import { Link } from 'react-router-dom';
+
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
 import { Loader } from '@shared/components/loader/loader.component';
@@ -19,7 +29,7 @@ export const MyProducts = () => {
     const response = await api.get(`/users/${user!.id}/products-purcharsed`);
 
     setProducts(response.data);
-  }, [user]);
+  }, [user, setProducts]);
 
   useEffect(() => {
     getProducts();

@@ -12,6 +12,13 @@ import { CreatePackage } from '@domain/dashboard/products/create-package/create-
 import { CreateProductWrapper } from '@domain/dashboard/products/create-product-wrapper/create-product-wrapper.page';
 import { CreateProduct } from '@domain/dashboard/products/create-product/create-product.page';
 import { CreatedProducts } from '@domain/dashboard/products/created-products/created-products.page';
+import { GeneralAffiliatesPage } from '@domain/dashboard/products/general-affiliates/general-affiliates.page';
+import { GeneralCheckoutPage } from '@domain/dashboard/products/general-checkout/general-checkout.page';
+import { CoProductionPage } from '@domain/dashboard/products/general-coprodution/general-coproduction.page';
+import { GeneralInformationPage } from '@domain/dashboard/products/general-information/general-information.page';
+import { GeneralLinksPage } from '@domain/dashboard/products/general-links/general-links.page';
+import { GeneralPixelPage } from '@domain/dashboard/products/general-pixel/general-pixel.page';
+import { GeneralVouchersPage } from '@domain/dashboard/products/general-vouchers/general-vouchers.page';
 import { MyContent } from '@domain/dashboard/products/my-content/my-content.page';
 import { MyPackages } from '@domain/dashboard/products/my-content/my-packages/my-packages.page';
 import { MyProducts } from '@domain/dashboard/products/my-products/my-products.page';
@@ -40,6 +47,13 @@ export const DASHBOARD_ROUTES = {
   ACCOUNT_INVITES: '/dashboard/edit-account/invites',
   ACCOUNT_NOTIFICATIONS: '/dashboard/edit-account/notification',
   ACCOUNT_DOCUMENTS: '/dashboard/edit-account/documents',
+  GENERAL_INFORMATION: '/dashboard/informacoes-gerais/manage/:id',
+  GENERAL_CHECKOUT: '/dashboard/informacoes-gerais/checkout/:id',
+  GENERAL_COPRODUCTION: '/dashboard/informacoes-gerais/coproduction/:id',
+  GENERAL_LINKS: '/dashboard/informacoes-gerais/links/:id',
+  GENERAL_VOUCHERS: '/dashboard/informacoes-gerais/vouchers/:id',
+  GENERAL_AFFILIATES: '/dashboard/informacoes-gerais/affiliates/:id',
+  GENERAL_PIXEL: '/dashboard/informacoes-gerais/pixel/:id',
 };
 
 export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
@@ -53,6 +67,13 @@ export const DASHBOARD_COMPONENTS: { [key: string]: JSX.Element } = {
   [DASHBOARD_ROUTES.CREATE_PACKAGE]: <CreatePackage />,
   [DASHBOARD_ROUTES.CREATE_PRODUCT]: <CreateProductWrapper />,
   [DASHBOARD_ROUTES.PRODUCT_OF_AFFILIATES]: <ProductsOfAffiliates />,
+  [DASHBOARD_ROUTES.GENERAL_INFORMATION]: <GeneralInformationPage />,
+  [DASHBOARD_ROUTES.GENERAL_CHECKOUT]: <GeneralCheckoutPage />,
+  [DASHBOARD_ROUTES.GENERAL_COPRODUCTION]: <CoProductionPage />,
+  [DASHBOARD_ROUTES.GENERAL_VOUCHERS]: <GeneralVouchersPage />,
+  [DASHBOARD_ROUTES.GENERAL_LINKS]: <GeneralLinksPage />,
+  [DASHBOARD_ROUTES.GENERAL_AFFILIATES]: <GeneralAffiliatesPage />,
+  [DASHBOARD_ROUTES.GENERAL_PIXEL]: <GeneralPixelPage />,
   [DASHBOARD_ROUTES.SALE_RECORD]: <SaleRecord />,
   [DASHBOARD_ROUTES.BALANCE]: <CurrentBalance />,
   [DASHBOARD_ROUTES.AFFILIATES]: <AffiliatesPage />,

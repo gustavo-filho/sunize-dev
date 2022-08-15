@@ -171,7 +171,6 @@ export const OptionSingle = styled.div`
     .fInput {
       margin-bottom: 1rem !important;
     }
-
   }
 
   input[type='text'] {
@@ -189,7 +188,6 @@ export const OptionSingle = styled.div`
       border: 2px solid #c27c2c;
     }
 
-  }
   }
 
   h1 {

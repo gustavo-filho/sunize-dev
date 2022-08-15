@@ -30,6 +30,7 @@ export const Routes = () => (
       <Route path="/forgot-pass" element={<ForgotPassword />} />
       <Route path="/loading" element={<LoadingPage />} />
       <Route path="/refund" element={<RefundPage />} />
+      
       <Route
         path="/dashboard"
         element={<PrivateRouteWrapper layout={DashboardWrapper} />}
@@ -38,6 +39,7 @@ export const Routes = () => (
           <Route path={route} element={DASHBOARD_COMPONENTS[route]} />
         ))}
       </Route>
+
       <Route
         path="/admin"
         element={<PrivateRouteWrapper isAdmin layout={AdminWrapper} />}
