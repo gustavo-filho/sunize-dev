@@ -1,21 +1,21 @@
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../../../store/hooks';
-
+import { api } from '@shared/services/api';
 import { VoucherData } from '@shared/types/types';
 import { Form, Formik } from 'formik';
 import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { api } from '@shared/services/api';
 
 import {
-  Container,
-  Buttons,
-  Header,
   Accordion,
   AccordionContent,
+  Buttons,
+  Container,
+  Header,
 } from './voucher-accordion.styles';
 
-import { ModalDeleteConfirmation } from './modal-delete-confirmation/modal-delete-confirmation.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Input } from '@shared/components/input/input.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { round } from 'lodash';
 import {
   FaCalendar,
   FaDollarSign,
@@ -23,10 +23,8 @@ import {
   FaPercentage,
 } from 'react-icons/fa';
 import { FiAlertCircle } from 'react-icons/fi';
+import { ModalDeleteConfirmation } from './modal-delete-confirmation/modal-delete-confirmation.component';
 import { voucherSchema } from './voucher-accordion.validate';
-import { Input } from '@shared/components/input/input.component';
-import { round } from 'lodash';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 
 interface IVucherAccordionProps {
   voucher: VoucherData;
@@ -43,7 +41,7 @@ export const VoucherAccordion = ({
   price,
   productId,
 }: IVucherAccordionProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const accordionRef = useRef<HTMLDivElement>(null);
   const [accordionHeight, setAccordionHeight] = useState(0);
@@ -105,11 +103,8 @@ export const VoucherAccordion = ({
           });
 
         const { data } = await api.put(
-          `/users/${user.id}/products/${productId}/vouchers/${voucher.id}`,
+          `/users/${user?.id}/products/${productId}/vouchers/${voucher.id}`,
           body,
-          {
-            headers: { 'sunize-access-token': user.access_token },
-          },
         );
         setVouchers(newVouchers);
         toast.success(data.message);
@@ -118,15 +113,7 @@ export const VoucherAccordion = ({
       }
       closeAccordion();
     },
-    [
-      closeAccordion,
-      productId,
-      setVouchers,
-      voucher,
-      vouchers,
-      user.access_token,
-      user.id,
-    ],
+    [closeAccordion, productId, setVouchers, voucher, vouchers, user],
   );
 
   return (

@@ -1,15 +1,13 @@
-import { userSelector } from '@domain/auth/user/user.store';
-
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
-import { Container, Modal } from './modal-delete-confirmation.styles';
-import { GoalData } from '@shared/types/types';
-import { useAppSelector } from '../../../../../../../store/hooks';
-import { api } from '@shared/services/api';
-import { toast } from 'react-toastify';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { GoalData } from '@shared/types/types';
+import { toast } from 'react-toastify';
+import { Container, Modal } from './modal-delete-confirmation.styles';
 
 interface IModalProps {
   data: GoalData[];
@@ -26,7 +24,7 @@ export const ModalDeleteConfirmation = ({
   setVisible,
   isVisible,
 }: IModalProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const handleCloseModal = useCallback(() => {
     setVisible(false);
@@ -43,7 +41,7 @@ export const ModalDeleteConfirmation = ({
     );
 
     try {
-      await api.delete(`/sales-target/${user.id}/${goal.id}`);
+      await api.delete(`/sales-target/${user?.id}/${goal.id}`);
 
       setData(newGoals);
 
@@ -52,7 +50,7 @@ export const ModalDeleteConfirmation = ({
       toast.error('Algo deu errado.');
     }
     handleCloseModal();
-  }, [data, goal.id, handleCloseModal, setData, user.id]);
+  }, [data, goal.id, handleCloseModal, setData, user]);
 
   return (
     <>

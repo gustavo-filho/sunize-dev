@@ -1,31 +1,30 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import InputMasked from './components/input-masked/input-masked.component';
 import { Loader } from '@shared/components/loader/loader.component';
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { FaPercentage, FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import InputMasked from './components/input-masked/input-masked.component';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { CoProductorAccordion } from './components/coproductor-accordion/coproductor-accordion.component';
 
 import {
-  LoaderContainer,
-  OptionSingle,
-  Container,
   BoxWrapper,
-  Navigation,
+  Container,
   LinkNonActive,
+  LoaderContainer,
+  Navigation,
+  OptionSingle,
   Wrapper,
 } from './general-coproduction.styles';
 
-import { ModalAddCoproductor } from './components/modal-add-coproductor/modal-add-coproductor.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
+import { ModalAddCoproductor } from './components/modal-add-coproductor/modal-add-coproductor.component';
 
 interface DataModalAddCoProductor {
   id: number;
@@ -59,7 +58,7 @@ export const CoProductionPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
   const products = useAppSelector(productSelector).data as any;
 
   const product = products.find(
@@ -67,34 +66,33 @@ export const CoProductionPage = () => {
   ) as any;
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   const toggleModal = useCallback(() => {
     if (!dataModalAddCoProductor.name) {
       setDataModalAddCoProductor({
-        id: user.id,
-        name: user.name,
+        id: user?.id,
+        name: user?.name,
       } as DataModalAddCoProductor);
     } else {
       setDataModalAddCoProductor({} as DataModalAddCoProductor);
     }
-  }, [dataModalAddCoProductor, setDataModalAddCoProductor, user.id, user.name]);
+  }, [dataModalAddCoProductor, setDataModalAddCoProductor, user]);
 
   const getCoProductorTax = useCallback(async () => {
     const tax = await api.get(`/products/${product.id}`);
 
     setCoProductorTax(String(tax.data.data.product.co_productor_tax));
-  
   }, [product]);
 
   const getCoproductionData = useCallback(async () => {
     const response = await api.get(
-      `/user/${user.id}/coProducer/product/${productId}`,
+      `/user/${user?.id}/coProducer/product/${productId}`,
     );
 
     setCoproducers(response.data.data);
-  }, [user.id, productId]);
+  }, [user, productId]);
 
   useEffect(() => {
     getCoproductionData();
@@ -103,15 +101,9 @@ export const CoProductionPage = () => {
 
   async function handleSubmit() {
     try {
-      await api.post(
-        `products/${productId}/co-producer-tax/${user.id}`,
-        {
-          tax: Number(coProductorTax),
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
-      );
+      await api.post(`products/${productId}/co-producer-tax/${user?.id}`, {
+        tax: Number(coProductorTax),
+      });
 
       toast.success('Taxa de co-produtor atualizada com sucesso!');
     } catch (err) {

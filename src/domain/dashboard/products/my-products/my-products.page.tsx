@@ -1,20 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  LoaderContainer,
-  AnimationContainer,
-  Container,
-  BoxWrapper,
-  LinksProducts,
-} from './my-products.styles';
 import { Link } from 'react-router-dom';
+import {
+  AnimationContainer,
+  BoxWrapper,
+  Container,
+  LinksProducts,
+  LoaderContainer,
+} from './my-products.styles';
 
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
 import { Loader } from '@shared/components/loader/loader.component';
-import { Link } from 'react-router-dom';
-import {
-  AnimationContainer, BoxWrapper, Container, LinksProducts, LoaderContainer
-} from './my-products.styles';
 
 import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';

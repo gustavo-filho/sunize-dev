@@ -1,37 +1,31 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { api } from '@shared/services/api';
 import { GoalData } from '@shared/types/types';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../store/hooks';
 
-import { ModalAddGoal } from './components/modal-add-goal/modal-add-goal.component';
 import { GoalAccordion } from './components/goal-accordion/goal-accordion.component';
+import { ModalAddGoal } from './components/modal-add-goal/modal-add-goal.component';
 
 import { Field, Form, Formik } from 'formik';
 
 import {
-  Container,
-  Navigation,
-  LinkNonActive,
-  BoxWrapper,
-  LoaderContainer,
-  OptionSingle,
-  TaxContainer,
+  BoxWrapper, Container, LinkNonActive, LoaderContainer, Navigation, OptionSingle,
+  TaxContainer
 } from './general-affiliates.styles';
 
-import { Loader } from '@shared/components/loader/loader.component';
-import { FaPercentage, FaPlus } from 'react-icons/fa';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { Link } from 'react-router-dom';
-import { TermsEditor } from './components/terms-editor/terms-editor.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Loader } from '@shared/components/loader/loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { FaPercentage, FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import InputMasked from './components/input-masked/input-masked.component';
+import { TermsEditor } from './components/terms-editor/terms-editor.component';
 // import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
 export const GeneralAffiliatesPage = () => {
-  const user = useAppSelector(userSelector).data;
+  const {user} = useUser();
 
   const { id: productId } = useParams();
 
@@ -61,12 +55,12 @@ export const GeneralAffiliatesPage = () => {
 
   const getSalesTarget = useCallback(async () => {
     try {
-      const response = await api.get(`/sales-target/${user.id}/${productId}`);
+      const response = await api.get(`/sales-target/${user?.id}/${productId}`);
       setGoals(response.data.data);
     } catch (err: any) {
       toast.error(err.response.data.message);
     }
-  }, [productId, user.id]);
+  }, [productId, user]);
 
   useEffect(() => {
     setIsLoading('loading');
@@ -99,14 +93,11 @@ export const GeneralAffiliatesPage = () => {
   async function handleSubmit(values: any, { setSubmitting }: any) {
     try {
       await api.put(
-        `/users/${user.id}/products/${productId}`,
+        `/users/${user?.id}/products/${productId}`,
         {
           system_affiliate: isAffiliateBoolean,
           commission: Number(defaultCommission),
           affiliate_tax: Number(defaultTax),
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
         },
       );
 

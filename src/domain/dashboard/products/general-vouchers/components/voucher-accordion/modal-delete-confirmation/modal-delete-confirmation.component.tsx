@@ -4,11 +4,11 @@ import { FaTimes } from 'react-icons/fa';
 
 import { Container, Modal } from './modal-delete-confirmation.styles';
 
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../../../../store/hooks';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+
+import { useUser } from '@shared/contexts/user-context/user.context';
 
 interface VoucherData {
   discount_percentage: number;
@@ -36,7 +36,7 @@ export const ModalDeleteConfirmation = ({
   isVisible,
   productId,
 }: IModalProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser()
 
   const [statusSubmit, setStatusSubmit] = useState('');
 
@@ -54,7 +54,7 @@ export const ModalDeleteConfirmation = ({
 
     try {
       await api.delete(
-        `/users/${user.id}/products/${productId}/vouchers/${voucher.id}`,
+        `/users/${user?.id}/products/${productId}/vouchers/${voucher.id}`,
       );
 
       setData(newLinks);

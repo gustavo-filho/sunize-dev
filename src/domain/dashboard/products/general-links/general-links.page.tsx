@@ -2,22 +2,22 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import {
-  Container,
-  Navigation,
-  LinkNonActive,
   BoxWrapper,
+  Container,
+  LinkNonActive,
   LoaderContainer,
+  Navigation,
 } from './general-links.styles';
 
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { Loader } from '@shared/components/loader/loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { FaPlus } from 'react-icons/fa';
-import { LinkAccordion } from './components/link-accordion/link-accordion.component';
-import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { ModalAddLinks } from './components/modal-add-links/modal-add-links.component';
-import { Loader } from '@shared/components/loader/loader.component';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
+import { LinkAccordion } from './components/link-accordion/link-accordion.component';
+import { ModalAddLinks } from './components/modal-add-links/modal-add-links.component';
 
 interface LinkData {
   id: number;
@@ -29,28 +29,26 @@ export const GeneralLinksPage = () => {
   const dispatch = useAppDispatch();
 
   const products = useAppSelector(productSelector).data as any;
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const { id: productId } = useParams();
 
   const product = products.find(
     (product: any) => product.id === Number(productId),
   ) as any;
-  
+
   const [links, setLinks] = useState<LinkData[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [accordionData, setAccordionData] = useState<LinkData[]>([]);
 
   const getLinks = useCallback(async () => {
-    const response = await api.get(`products/links/${user.id}/${productId}`, {
-      headers: { 'sunize-access-token': user.access_token },
-    });
+    const response = await api.get(`products/links/${user?.id}/${productId}`);
     setLinks(response.data.data);
-  }, [productId, user.access_token, user.id]);
+  }, [productId, user]);
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   useEffect(() => {
     getLinks();

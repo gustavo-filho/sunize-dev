@@ -1,25 +1,24 @@
 import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../../../store/hooks';
+import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { FaEnvelope, FaLink } from 'react-icons/fa';
 import { FiAlertCircle, FiEdit } from 'react-icons/fi';
-import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
 
 import { ModalDeleteConfirmation } from '../modal-confirm-delete/modal-confirm-delete.component';
 
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Input } from '@shared/components/input/input.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import {
-  Container,
-  Buttons,
-  Header,
   Accordion,
   AccordionContent,
+  Buttons,
+  Container,
+  Header,
 } from './link-accordion.styles';
 import { schema } from './link-accordion.validate';
-import { Input } from '@shared/components/input/input.component';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 
 interface LinkData {
   id: number;
@@ -38,7 +37,7 @@ export const LinkAccordion = ({
   setLinks,
   links,
 }: ILinkAccordionProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const accordionRef = useRef<HTMLDivElement>(null);
   const [accordionHeight, setAccordionHeight] = useState(0);
@@ -80,16 +79,10 @@ export const LinkAccordion = ({
     });
 
     try {
-      await api.put(
-        `/products/links/${user.id}/${link.id}/`,
-        {
-          title: values.title,
-          link: values.link,
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
-      );
+      await api.put(`/products/links/${user?.id}/${link.id}/`, {
+        title: values.title,
+        link: values.link,
+      });
 
       setLinks(newLinks);
 
@@ -103,9 +96,7 @@ export const LinkAccordion = ({
 
   async function handleRemoveLink() {
     try {
-      await api.delete(`/products/links/${user.id}/${link.id}/`, {
-        headers: { 'sunize-access-token': user.access_token },
-      });
+      await api.delete(`/products/links/${user?.id}/${link.id}/`);
 
       links.splice(links.indexOf(link), 1);
 

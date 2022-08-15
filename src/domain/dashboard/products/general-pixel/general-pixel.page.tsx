@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 
-import { userSelector } from '@domain/auth/user/user.store';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 import {
@@ -32,7 +32,7 @@ import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 export function GeneralPixelPage() {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
   const product = useAppSelector(productSelector).data as any;
 
   const { id: productId } = useParams();
@@ -51,12 +51,12 @@ export function GeneralPixelPage() {
       setChangeTypePixel(getInfoActive);
 
       const response = await api.get(
-        `user/${user.id}/pixel/${productId}/show?type=${target.id}`,
+        `/user/${user?.id}/pixel/${productId}/show?type=${target.id}`,
       );
 
       setContentPixel(response.data.data?.content ?? '');
     },
-    [productId, user.id],
+    [productId, user?.id],
   );
 
   const handleChange = useCallback(({ target }: any) => {
@@ -70,15 +70,12 @@ export function GeneralPixelPage() {
 
     try {
       await api.post(
-        `/user/${user.id}/pixel/${productId}`,
+        `/user/${user?.id}/pixel/${productId}`,
         {
-          userId: user.id,
+          userId: user?.id,
           type: activePixel.id,
           content: contentPixel,
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
+        }
       );
 
       toast.success('Pixel atualizado com sucesso!');
@@ -88,14 +85,14 @@ export function GeneralPixelPage() {
   }
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
 
     handleClickTypePixel({
       target: {
         id: activePixel.id,
       },
     });
-  }, [activePixel.id, dispatch, handleClickTypePixel, user.id]);
+  }, [activePixel.id, dispatch, handleClickTypePixel, user]);
 
   return (
     <>

@@ -1,17 +1,16 @@
 import { api } from '@shared/services/api';
-import { userSelector } from '@domain/auth/user/user.store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../../../../../store/hooks';
-import { Container, Sun } from './terms-editor.styles';
 import { toast } from 'react-toastify';
+import { Container, Sun } from './terms-editor.styles';
 
+import { useUser } from '@shared/contexts/user-context/user.context';
 import 'suneditor/dist/css/suneditor.min.css';
 
 export function TermsEditor() {
   const { id: productId } = useParams();
 
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const [loading, setLoading] = useState(false);
 
@@ -22,13 +21,13 @@ export function TermsEditor() {
     setLoading(true);
 
     const response = await api.get(
-      `/users/${user.id}/products/terms/${productId}`,
+      `/users/${user?.id}/products/terms/${productId}`,
     );
 
     setOldTerms(response.data.data);
 
     setLoading(false);
-  }, [productId, user.id]);
+  }, [productId, user]);
 
   useEffect(() => {
     getTerms();
@@ -38,7 +37,7 @@ export function TermsEditor() {
     event.preventDefault();
 
     try {
-      await api.post(`/users/${user.id}/products/terms/${productId}`, {
+      await api.post(`/users/${user?.id}/products/terms/${productId}`, {
         terms: terms,
       });
 

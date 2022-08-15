@@ -1,23 +1,23 @@
-import {
-  Modal,
-  ContentModal,
-  Container,
-  Meta,
-  Overlay,
-  Description,
-  PaginationContainer,
-  SellLink,
-} from './affiliate-product.styles';
-import { useCallback, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../../../../store/hooks';
-import { ASYNC_GET_CATEGORIES } from '@domain/dashboard/products/products.store';
-import { format, parseISO } from 'date-fns';
-import { api } from '@shared/services/api';
-import { FaTimes, FaUnlockAlt } from 'react-icons/fa';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
-import { AnimatePresence } from 'framer-motion';
+import { ASYNC_GET_CATEGORIES } from '@domain/dashboard/products/products.store';
 import { ModalConfirmation } from '@shared/components/modal-confirmation/modal-confirmation.component';
+import { api } from '@shared/services/api';
+import { format, parseISO } from 'date-fns';
+import { AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
+import { FaTimes, FaUnlockAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { useAppDispatch } from '../../../../../../store/hooks';
+import {
+  Container,
+  ContentModal,
+  Description,
+  Meta,
+  Modal,
+  Overlay,
+  PaginationContainer,
+  SellLink
+} from './affiliate-product.styles';
 
 interface IAffiliateProduct {
   id: number;
@@ -70,7 +70,7 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
       `sales-target/${user!.id}/${affiliateProduct.product_id}`,
     );
     setMetas(response.data.data);
-  }, [affiliateProduct.product_id, metaVisible, user!.id]);
+  }, [affiliateProduct.product_id, metaVisible, user]);
 
   function toggleConfirmModal() {
     setIsModalConfirmationVisible(!isModalConfirmationVisible);
@@ -79,9 +79,7 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
   const handleCancelarAfiliacao = useCallback(async () => {
     try {
       await api.delete(
-        `users/${user!.id}/affiliates/${affiliateProduct.id}/${
-          affiliateProduct.product_id
-        }`,
+        `users/${user?.id}/affiliates/${affiliateProduct.id}/${affiliateProduct.product_id}`,
       );
 
       const index = products.findIndex(product => {
@@ -101,24 +99,24 @@ export const AffiliateProduct = (props: IAffiliateInfo) => {
     } finally {
       console.debug('finish');
     }
-  }, [affiliateProduct.id, affiliateProduct.product_id, products, user!.id]);
+  }, [affiliateProduct.id, affiliateProduct.product_id, products, user]);
 
   const getCategories = useCallback(async () => {
     const response = await api.get(`products/${affiliateProduct.product_id}`, {
-      headers: { 'sunize-access-token': user!.access_token },
+      headers: { 'sunize-access-token': user?.access_token },
     });
     setLinkSale(response.data.data.product.link_sales);
-  }, [affiliateProduct.product_id, user!.access_token]);
+  }, [affiliateProduct.product_id, user]);
 
   const getData = useCallback(async () => {
     const { data } = await api.get(
-      `products/links/${user!.id}/${affiliateProduct.product_id}`,
+      `products/links/${user?.id}/${affiliateProduct.product_id}`,
     );
     if (data) {
       setLinks(data.data);
       setTotalPages(data.totalPages);
     }
-  }, [affiliateProduct.product_id, user!.id]);
+  }, [affiliateProduct.product_id, user]);
 
   useEffect(() => {
     getData();

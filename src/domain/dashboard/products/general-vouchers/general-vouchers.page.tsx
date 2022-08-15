@@ -4,30 +4,30 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
-  Container,
-  Navigation,
-  LinkNonActive,
   BoxWrapper,
+  Container,
+  LinkNonActive,
   LoaderContainer,
+  Navigation,
 } from './general-vouchers.styles';
 
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { toast } from 'react-toastify';
-import { ModalAddVoucher } from './components/modal-add-voucher/modal-add-voucher.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { VoucherAccordion } from './components/voucher-accordion/voucher-accordion.component';
+import { Loader } from '@shared/components/loader/loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Loader } from '@shared/components/loader/loader.component';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
+import { ModalAddVoucher } from './components/modal-add-voucher/modal-add-voucher.component';
+import { VoucherAccordion } from './components/voucher-accordion/voucher-accordion.component';
 
 export const GeneralVouchersPage = () => {
   const { id: productId } = useParams();
 
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
   const products = useAppSelector(productSelector).data as any;
 
   const product = products.find(
@@ -43,16 +43,16 @@ export const GeneralVouchersPage = () => {
 
   const getVouchers = useCallback(async () => {
     const response = await api.get(
-      `/users/${user.id}/products/${productId}/vouchers`,
+      `/users/${user?.id}/products/${productId}/vouchers`,
     );
 
     setVouchers(response.data.data);
-  }, [productId, user.id]);
+  }, [productId, user]);
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
     getVouchers();
-  }, [getVouchers, dispatch, user.id]);
+  }, [getVouchers, dispatch, user]);
 
   useEffect(() => {
     async function postApi() {
@@ -77,11 +77,8 @@ export const GeneralVouchersPage = () => {
         else body.discount_fixed = dataModalAddVoucher.discount_fixed;
 
         const { data } = await api.post(
-          `/users/${user.id}/products/${productId}/vouchers`,
+          `/users/${user?.id}/products/${productId}/vouchers`,
           body,
-          {
-            headers: { 'sunize-access-token': user.access_token },
-          },
         );
 
         setVouchers([...vouchers, data.data]);
@@ -95,14 +92,7 @@ export const GeneralVouchersPage = () => {
       postApi();
       setDataModalAddVoucher({} as VoucherData);
     }
-  }, [
-    dataModalAddVoucher,
-    productId,
-    user,
-    user.access_token,
-    user.id,
-    vouchers,
-  ]);
+  }, [dataModalAddVoucher, productId, user, vouchers]);
 
   function toggleModal() {
     setIsModalVisible(!isModalVisible);

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { userSelector } from '@domain/auth/user/user.store';
 import { Loader } from '@shared/components/loader/loader.component';
 import { api } from '@shared/services/api';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
@@ -7,37 +6,38 @@ import { Link, useParams } from 'react-router-dom';
 
 import { Input } from '@shared/components/input/input.component';
 
-import {
-  Container,
-  SellLink,
-  Navigation,
-  BoxWrapper,
-  LinkNonActive,
-  ProductImage,
-  UpdateEbook,
-  NotificationSingle,
-  LoaderContainer,
-  OptionSingle,
-} from './general-information.styles';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Field, Form, Formik } from 'formik';
 import { round } from 'lodash';
 import { toast } from 'react-toastify';
-import { Field, Form, Formik } from 'formik';
+import {
+  BoxWrapper,
+  Container,
+  LinkNonActive,
+  LoaderContainer,
+  Navigation,
+  NotificationSingle,
+  OptionSingle,
+  ProductImage,
+  SellLink,
+  UpdateEbook,
+} from './general-information.styles';
 import { schema } from './general-information.validate';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 
 import {
   FaAlignLeft,
   FaBook,
+  FaBox,
   FaCheckCircle,
   FaDollarSign,
   FaImage,
-  FaBox,
 } from 'react-icons/fa';
 
-import { FiCamera } from 'react-icons/fi';
-import { matchStrings } from '@shared/utils/matchStrings';
 import { TextArea } from '@shared/components/text-area/text-area.component';
+import { matchStrings } from '@shared/utils/matchStrings';
+import { FiCamera } from 'react-icons/fi';
 
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
@@ -49,7 +49,7 @@ export function GeneralInformationPage() {
 
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
   const products = useAppSelector(productSelector).data;
 
   const [textTransfer, setTextTransfer] = useState('Copiar link');
@@ -59,8 +59,8 @@ export function GeneralInformationPage() {
   ) as any;
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   async function handleEbookChange(event: ChangeEvent<HTMLInputElement>) {
     try {
@@ -87,11 +87,8 @@ export function GeneralInformationPage() {
           dataForm.append('ebook', event.target.files[0]);
 
           await api.put(
-            `/users/${user.id}/products/${productId}/ebook-upload`,
+            `/users/${user?.id}/products/${productId}/ebook-upload`,
             dataForm,
-            {
-              headers: { 'sunize-access-token': user.access_token },
-            },
           );
 
           event.target.files && setFileSelected(event.target.files[0].name);
@@ -108,9 +105,7 @@ export function GeneralInformationPage() {
         const data = new FormData();
         data.append('image', event.target.files[0]);
 
-        await api.put(`/users/${user.id}/products/${productId}`, data, {
-          headers: { 'sunize-access-token': user.access_token },
-        });
+        await api.put(`/users/${user?.id}/products/${productId}`, data);
 
         toast.success('Imagem atualizada com sucesso!');
       }
@@ -123,20 +118,14 @@ export function GeneralInformationPage() {
     try {
       const value = round(values.price, 2);
 
-      await api.put(
-        `/users/${user.id}/products/${productId}`,
-        {
-          title: values.title,
-          description: values.description,
-          price: value,
-          commission: values.commission ?? 0,
-          system_affiliate: values.affiliate_system === 'true',
-          membership_period: values.subscription_time,
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
-      );
+      await api.put(`/users/${user?.id}/products/${productId}`, {
+        title: values.title,
+        description: values.description,
+        price: value,
+        commission: values.commission ?? 0,
+        system_affiliate: values.affiliate_system === 'true',
+        membership_period: values.subscription_time,
+      });
 
       toast.success('Produto atualizado com sucesso!');
     } catch (err: any) {

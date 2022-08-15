@@ -64,12 +64,12 @@ export const CreateProduct = () => {
         'membership_period',
         values.charge_type === 'RECURRENT' && values.charge_type,
       );
-      
+
       image.uploadedFiles[0] &&
         dadosForm.append('image', image.uploadedFiles[0].file);
 
       try {
-        await api.post(`users/${user.id}/products`, dadosForm=
+        await api.post(`users/${user.id}/products`, dadosForm);
 
         toast.success(
           'O curso foi enviado para análise, aguarde nossa resposta.',

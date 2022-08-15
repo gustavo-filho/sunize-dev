@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { userSelector } from '@domain/auth/user/user.store';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Input } from '@shared/components/input/input.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
-import { AnyAaaaRecord } from 'dns';
 import { Form, Formik } from 'formik';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 
@@ -17,9 +16,8 @@ import {
 
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../../store/hooks';
 
-import { Container, Modal, Content } from './modal-add-goal.styles';
+import { Container, Content, Modal } from './modal-add-goal.styles';
 import { schema } from './modal-add-goal.validate';
 
 interface IModalProps {
@@ -35,7 +33,7 @@ export const ModalAddGoal = ({
   setGoals,
   defaultCommission,
 }: IModalProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const { id: productId } = useParams();
 
@@ -51,12 +49,15 @@ export const ModalAddGoal = ({
     }
 
     try {
-      const response = await api.post(`/sales-target/${user.id}/${productId}`, {
-        name: values.name,
-        qtd_sales: values.qtd_sales,
-        type: values.type,
-        comission: values.commission,
-      });
+      const response = await api.post(
+        `/sales-target/${user?.id}/${productId}`,
+        {
+          name: values.name,
+          qtd_sales: values.qtd_sales,
+          type: values.type,
+          comission: values.commission,
+        },
+      );
 
       setGoals([...goals, response.data.data]);
 

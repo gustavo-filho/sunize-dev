@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { userSelector } from '@domain/auth/user/user.store';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Input } from '@shared/components/input/input.component';
 import { api } from '@shared/services/api';
@@ -9,14 +8,14 @@ import { FaPercentage, FaRegEdit, FaShoppingBag } from 'react-icons/fa';
 import { FiAlertCircle, FiEdit } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { ModalDeleteConfirmation } from '../../components/goal-accordion/modal-delete-confirmation/modal-delete-confirmation.component';
-import { useAppSelector } from '../../../../../../store/hooks';
 
+import { useUser } from '@shared/contexts/user-context/user.context';
 import {
-  Container,
-  Buttons,
-  Header,
   Accordion,
   AccordionContent,
+  Buttons,
+  Container,
+  Header,
 } from './goal-accordion.styles';
 
 export const GoalAccordion = ({
@@ -25,7 +24,7 @@ export const GoalAccordion = ({
   goals,
   affiliatePercentage,
 }: any) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const accordionRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +74,7 @@ export const GoalAccordion = ({
         );
       }
 
-      await api.put(`/sales-target/${user.id}/${goal.id}`, {
+      await api.put(`/sales-target/${user?.id}/${goal.id}`, {
         name: values.name,
         qtd_sales: values.qtd_sales,
         type: values.type,

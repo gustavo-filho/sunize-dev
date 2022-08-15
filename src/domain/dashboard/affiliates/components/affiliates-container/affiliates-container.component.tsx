@@ -1,11 +1,11 @@
 import { TabPanel } from '@domain/dashboard/affiliates/components/tab-panel/tab-panel.component';
-import { useStyles } from './affiliates-container.styles';
 import { useCallback, useEffect, useState } from 'react';
+import { useStyles } from './affiliates-container.styles';
 
+import { BoxAffiliate } from '@domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component';
+import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
-import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
-import { BoxAffiliate } from '@domain/dashboard/affiliates/components/box-affiliate/box-affiliate.component';
 
 type Affiliate = {
   id: number;
@@ -45,7 +45,7 @@ export const AffiliatesContainer = ({
 
   const getAffiliates = useCallback(() => {
     api
-      .get(`users/${user!.id}/affiliates/true/${selectedProduct?.id}`, {
+      .get(`users/${user?.id}/affiliates/true/${selectedProduct?.id}`, {
         params: {
           page: offset,
           paginate: 10,
@@ -57,7 +57,7 @@ export const AffiliatesContainer = ({
         setTotalPages(response.data.totalPages);
         setTotalOfAffiliates(response.data.data.length);
       });
-  }, [user!.id, selectedProduct?.id, offset, setTotalOfAffiliates]);
+  }, [user, selectedProduct?.id, offset, setTotalOfAffiliates]);
 
   const deleteAffiliate = useCallback(
     (affiliateId: string) => {
@@ -73,7 +73,7 @@ export const AffiliatesContainer = ({
           toast.error(`Erro ao remover usuãrio. Erro: ${err}`);
         });
     },
-    [getAffiliates, selectedProduct?.id, user!.id],
+    [getAffiliates, selectedProduct?.id, user],
   );
 
   useEffect(() => {

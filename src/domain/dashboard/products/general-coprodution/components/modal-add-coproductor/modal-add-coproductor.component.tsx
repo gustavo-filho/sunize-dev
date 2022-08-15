@@ -1,7 +1,6 @@
-import { useCallback } from 'react';
 import { Form, Formik } from 'formik';
-import { useAppSelector } from '../../../../../../store/hooks';
-import { Container, Modal, Content } from './modal-add-coproductor.styles';
+import { useCallback } from 'react';
+import { Container, Content, Modal } from './modal-add-coproductor.styles';
 
 import {
   FaEnvelope,
@@ -10,19 +9,19 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 
-import { userSelector } from '@domain/auth/user/user.store';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { api } from '@shared/services/api';
-import { delay } from '@shared/utils/delay';
-import { schema } from './modal-add-coproductor.validate';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import { Input } from '@shared/components/input/input.component';
 import { SingleSelect } from '@shared/components/select/select.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { delay } from '@shared/utils/delay';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import InputMasked from '../input-masked/input-masked.component';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { schema } from './modal-add-coproductor.validate';
 
 export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const { id: productId } = useParams();
 
@@ -38,18 +37,12 @@ export const ModalAddCoproductor = ({ data, setData, dataChanged }: any) => {
     }
 
     try {
-      await api.post(
-        `/user/${user.id}/coProducer`,
-        {
-          coProducerEmail: values.email,
-          productId: productId,
-          contractTime: values.contractTime,
-          tax: Number(values.commission),
-        },
-        {
-          headers: { 'sunize-access-token': user.access_token },
-        },
-      );
+      await api.post(`/user/${user?.id}/coProducer`, {
+        coProducerEmail: values.email,
+        productId: productId,
+        contractTime: values.contractTime,
+        tax: Number(values.commission),
+      });
 
       toast.success(
         'O co-produtor foi convidado para participar deste seu projeto incrível.',

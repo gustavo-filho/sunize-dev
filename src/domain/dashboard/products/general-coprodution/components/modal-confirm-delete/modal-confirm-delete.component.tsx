@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { FaTimes, FaTrashAlt } from 'react-icons/fa';
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../../../store/hooks';
 import { toast } from 'react-toastify';
 
-import { Container, Modal } from './modal-confirm-delete.styles';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
 import InputNoLib from '@shared/components/input-nolib/input-nolib.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
+import { Container, Modal } from './modal-confirm-delete.styles';
 
 interface IModalProps {
   data: any;
@@ -18,7 +17,7 @@ interface IModalProps {
 }
 
 const ModalConfirmDelete = ({ data, setData, dataChanged }: IModalProps) => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const [inputValue, setInputValue] = useState('');
   const [isErrored, setIsErrored] = useState(false);
@@ -41,11 +40,10 @@ const ModalConfirmDelete = ({ data, setData, dataChanged }: IModalProps) => {
     }
 
     try {
-      await api.delete(`user/${user.id}/coProducer`, {
+      await api.delete(`user/${user?.id}/coProducer`, {
         data: {
           userID: data.id,
         },
-        headers: { 'sunize-access-token': user.access_token },
       });
 
       toast.success('Co-produtor removido com sucesso!');

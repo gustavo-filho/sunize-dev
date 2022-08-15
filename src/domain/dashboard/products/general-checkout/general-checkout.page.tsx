@@ -17,7 +17,6 @@ import {
   LoaderContainer,
 } from './general-checkout.styles';
 
-import { userSelector } from '@domain/auth/user/user.store';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 import { CustomCheckoutData, Product } from '@shared/types/types';
@@ -30,9 +29,10 @@ import { CustomCheckoutSchema } from './general-checkout.validate';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Loader } from '@shared/components/loader/loader.component';
 import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
+import { useUser } from '@shared/contexts/user-context/user.context';
 
 export const GeneralCheckoutPage = () => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
 
   const { id: productId } = useParams();
 
@@ -67,7 +67,7 @@ export const GeneralCheckoutPage = () => {
     async function getCustomCheckout() {
       try {
         const response = await api.get(`/checkout/${productId}`, {
-          headers: { 'sunize-access-token': user.access_token },
+          headers: { 'sunize-access-token': user!.access_token },
         });
 
         setCustomCheckout(response.data.data);
@@ -77,15 +77,15 @@ export const GeneralCheckoutPage = () => {
       }
     }
     getCustomCheckout();
-  }, [productId, user.access_token, user.id]);
+  }, [productId, user]);
 
   const products = useAppSelector(productSelector).data as any;
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(ASYNC_GET_PRODUCTS({ userId: user.id }));
-  }, [dispatch, user.id]);
+    dispatch(ASYNC_GET_PRODUCTS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (customCheckout) {
@@ -132,7 +132,7 @@ export const GeneralCheckoutPage = () => {
     async (values: any) => {
       try {
         await api.post(
-          `/checkout/${user.id}/${productId}`,
+          `/checkout/${user?.id}/${productId}`,
           {
             options_pay: values.options_pay,
             text_product_allow: 'vai pfv me ajuda',
@@ -237,7 +237,7 @@ export const GeneralCheckoutPage = () => {
             },
           },
           {
-            headers: { 'sunize-access-token': user.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
 
@@ -246,7 +246,18 @@ export const GeneralCheckoutPage = () => {
         toast.error(error.response.data.message);
       }
     },
-    [customMessage, isNotification, linkMessage, linkSelect, messageSelect, notificationNumberMax, notificationNumberMin, phone, productId, user.access_token, user.id],
+    [
+      customMessage,
+      isNotification,
+      linkMessage,
+      linkSelect,
+      messageSelect,
+      notificationNumberMax,
+      notificationNumberMin,
+      phone,
+      productId,
+      user,
+    ],
   );
 
   return (
