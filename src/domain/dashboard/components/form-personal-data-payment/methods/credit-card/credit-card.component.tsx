@@ -1,31 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { CardFigure } from '@domain/dashboard/components/card-figure-payment/card-figure-payment.component';
+import { SelectInstallment } from '@domain/dashboard/components/inputs-checkout-payment/select-installment/select-installment.component';
+import { Upsell } from '@domain/dashboard/components/upsell-payment/upsell-payment-component';
+import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
+import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import InputMasked from '@shared/components/input-masked/input-masked.component';
+import { Input } from '@shared/components/input/input.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { CustomCheckoutData } from '@shared/types/types';
 import { Form, Formik } from 'formik';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import ReactPixel from 'react-facebook-pixel';
 import { FaArrowRight } from 'react-icons/fa';
 import { useParams } from 'react-router';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import ReactPixel from 'react-facebook-pixel';
+import { toast } from 'react-toastify';
 import { schema } from './credit-card.schema';
 import {
+  ButtonSubmit,
   Container,
   Content,
   ContentLeft,
   ContentRight,
   Validity,
-  ButtonSubmit,
 } from './credit-card.styles';
-import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
-import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
-import { Upsell } from '@domain/dashboard/components/upsell-payment/upsell-payment-component';
-import { CardFigure } from '@domain/dashboard/components/card-figure-payment/card-figure-payment.component';
-import InputMasked from '@shared/components/input-masked/input-masked.component';
-import { Input } from '@shared/components/input/input.component';
-import { SelectInstallment } from '@domain/dashboard/components/inputs-checkout-payment/select-installment/select-installment.component';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { useAppSelector } from '../../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { api } from '@shared/services/api';
-import { CustomCheckoutData } from '@shared/types/types';
 
 declare global {
   interface Window {
@@ -35,11 +34,12 @@ declare global {
 
 export function CreditCard(): JSX.Element {
   const navigate = useNavigate();
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const { installments, voucherApplied } = usePayment();
   const { productId } = useParams();
   const { data } = useFetch(`/checkout/${productId}`, {
-    headers: { 'sunize-access-token': user.data.access_token },
+    headers: { 'sunize-access-token': user?.access_token },
   });
   const [upseelProduct, setUpsellProduct] = useState<number[] | undefined>([]);
 
@@ -98,10 +98,10 @@ export function CreditCard(): JSX.Element {
 
       try {
         const response = await api.post(
-          `users/${user.data.id}/products/${productId}/buy/credit-card`,
+          `users/${user!.id}/products/${productId}/buy/credit-card`,
           data,
           {
-            headers: { 'sunize-access-token': user.data.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
         setSubmitting(false);
@@ -119,13 +119,7 @@ export function CreditCard(): JSX.Element {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      withUpsell,
-      voucherApplied,
-      user.data.id,
-      user.data.access_token,
-      productId,
-    ],
+    [withUpsell, voucherApplied, user, productId],
   );
 
   const validateValidity = useCallback((values: any) => {

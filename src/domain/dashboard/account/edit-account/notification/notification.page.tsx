@@ -1,10 +1,9 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../store/hooks';
 import {
   BoxWrapper,
   ButtonSave,
@@ -12,16 +11,17 @@ import {
   ContainerBox,
   LinkTab,
   Navigation,
-  NotificationSingle
+  NotificationSingle,
 } from '../edit-account.styles';
 
 export const PersonNotificationPage = () => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [userData, setUserData] = useState<null | any>(null);
 
   const getUserData = useCallback(async () => {
     try {
-      const { data } = await api.get(`users/${user.data.id}`);
+      const { data } = await api.get(`users/${user?.id}`);
       if (data) {
         setUserData(data.data);
       }
@@ -36,7 +36,7 @@ export const PersonNotificationPage = () => {
 
   const getInvites = useCallback(async () => {
     try {
-      const { data } = await api.get(`/users/${user.data.id}/invites`);
+      const { data } = await api.get(`/users/${user?.id}/invites`);
       setFieldNotification(data.data.notification_sales_invite);
       setIndication(data.data.notification_invite);
     } catch (error) {
@@ -78,7 +78,7 @@ export const PersonNotificationPage = () => {
 
   const changeInviteNotification = useCallback(async () => {
     try {
-      await api.post(`/users/${user.data.id}/invites`, {
+      await api.post(`/users/${user?.id}/invites`, {
         notification_invite: indication,
         notification_sales_invite: fieldNotification,
       });
@@ -100,7 +100,7 @@ export const PersonNotificationPage = () => {
     };
 
     try {
-      const { data } = await api.put(`users/${user.data.id}`, dataForm);
+      const { data } = await api.put(`users/${user?.id}`, dataForm);
       await changeInviteNotification();
 
       if (data.success) toast.success(data.message);

@@ -2,14 +2,13 @@ import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapp
 import Pagination from '@domain/admin/components/pagination/pagination.component';
 import { UserBox } from '@domain/admin/production/users-control/components/user-box/user-box.component';
 
-import { userSelector } from '@domain/auth/user/user.store';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../store/hooks';
 import {
   AnimationContainer,
   BoxWrapper,
@@ -20,7 +19,8 @@ import {
 } from '../../production.styles';
 
 export const EmployeesControl = () => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [users, setUsers] = useState<null | []>(null);
   const [totalUsers, setTotalUsers] = useState(0);
   const [page, setPage] = useState(0);
@@ -28,7 +28,7 @@ export const EmployeesControl = () => {
   const [filter, setFilter] = useState('');
 
   const getUsers = useCallback(async () => {
-    const response = await api.get(`admin/${user.data.id}/users`, {
+    const response = await api.get(`admin/${user?.id}/users`, {
       params: {
         page,
         paginate: 6,
@@ -94,7 +94,7 @@ export const EmployeesControl = () => {
         <BoxWrapper>
           {users ? (
             users.length ? (
-              users.map((user: any) => <UserBox key={user.id} user={user} />)
+              users.map((user: any) => <UserBox key={user!.id} user={user} />)
             ) : (
               !users && <p>Houve um problema ao buscar usuários</p>
             )

@@ -8,13 +8,13 @@ import { ButtonSubmit, Container, Img } from './pix.styles';
 import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
 import { api } from '@shared/services/api';
 // import { CustomCheckoutData } from '@shared/types/types'
-import { userSelector } from '@domain/auth/user/user.store';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { useAppSelector } from '../../../../../../store/hooks';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { PixDataType } from './interface/ipix-data-type';
 
 export function Pix(): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const { productId } = useParams();
   const { voucherApplied } = usePayment();
   const [data, setData] = useState<PixDataType>();
@@ -38,13 +38,13 @@ export function Pix(): JSX.Element {
     setLoading(true);
     api
       .post(
-        `users/${user.data.id}/products/${productId}/buy/pix`,
+        `users/${user?.id}/products/${productId}/buy/pix`,
         {
           buyUpsell: false,
           voucher: voucherApplied,
         },
         {
-          headers: { 'sunize-access-token': user.data.access_token },
+          headers: { 'sunize-access-token': user!.access_token },
         },
       )
       .then(response => {
@@ -58,8 +58,7 @@ export function Pix(): JSX.Element {
         setLoading(false);
       });
   }, [
-    user.data.id,
-    user.data.access_token,
+    user,
     productId,
     // withUpsell,
     voucherApplied,

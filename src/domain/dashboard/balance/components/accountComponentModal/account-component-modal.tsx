@@ -1,13 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { useFormik, FormikProvider } from 'formik';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { useAppSelector } from '../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { api } from '@shared/services/api';
-import { schemaAccount } from './account-schema';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { IAccountComponentModalPropsValues } from '../../types/account-component-modal-props-values';
 import {
   Autocomplete,
   FormControl,
@@ -17,12 +7,21 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import axios from 'axios';
+import { FormikProvider, useFormik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { listBanks } from '../../config/list-banks';
+import { listCountries } from '../../config/list-coutries';
+import { IAccountComponentModalPropsValues } from '../../types/account-component-modal-props-values';
 import { IAccountComponentModalTypes } from '../../types/account-component-modal-types';
 import { ISubAccountTypesValues } from '../../types/account-component-sub-account-types';
-import { listCountries } from '../../config/list-coutries';
-import { FormGroup, Overlay } from './account-styled-component-styles';
-import { listBanks } from '../../config/list-banks';
 import { TextFieldComponent } from '../textFieldComponent';
+import { schemaAccount } from './account-schema';
+import { FormGroup, Overlay } from './account-styled-component-styles';
 
 export function AccountComponentModal({
   modal,
@@ -30,7 +29,8 @@ export function AccountComponentModal({
   updateModal,
   dataUpdateBanking,
 }: IAccountComponentModalPropsValues): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [statusGetLocation, setStatusGetLocation] = useState('nottried');
   const [dataResponse, setDataResponse] =
     useState<IAccountComponentModalTypes>();
@@ -121,13 +121,9 @@ export function AccountComponentModal({
     };
 
     try {
-      await api.post(
-        `/users/${user.data.id}/safe2pay/sub-accounts`,
-        subAccount,
-        {
-          headers: { 'sunize-access-token': user.data.access_token },
-        },
-      );
+      await api.post(`/users/${user!.id}/safe2pay/sub-accounts`, subAccount, {
+        headers: { 'sunize-access-token': user!.access_token },
+      });
       toast.success('Sua conta foi cadastrada!');
       setModal(false);
     } catch (error) {

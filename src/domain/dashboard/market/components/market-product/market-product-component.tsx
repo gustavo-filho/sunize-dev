@@ -1,29 +1,29 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaImage, FaTimes } from 'react-icons/fa';
-import {
-  EmptyImage,
-  Modal,
-  ContentModal,
-  Overlay,
-  Divisor,
-  CloseButton,
-  DepositionsContainer,
-  Container,
-  Img,
-  CardInformation,
-} from './market-product-styles';
-import { Evaluation } from './evaluation/evaluation.component';
-import { Deposition } from './deposition/deposition.component';
-import ReactPixel from 'react-facebook-pixel';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
-import { useAppSelector } from '../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import ReactPixel from 'react-facebook-pixel';
+import { FaImage, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IMarketProductProps } from '../../interfaces/imarket-product-props.type';
+import { Deposition } from './deposition/deposition.component';
+import { Evaluation } from './evaluation/evaluation.component';
+import {
+  CardInformation,
+  CloseButton,
+  Container,
+  ContentModal,
+  DepositionsContainer,
+  Divisor,
+  EmptyImage,
+  Img,
+  Modal,
+  Overlay,
+} from './market-product-styles';
 
 export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [modal, setModal] = useState(false);
   const [avaliations, setAvaliations] = useState([]) as any;
   const [hasAffiliate, setHasAffiliate] = useState(false);
@@ -31,7 +31,7 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
 
   const getTerms = useCallback(async () => {
     const { data } = await api.get(
-      `users/${user.data.id}/products/terms/${product.id}`,
+      `users/${user?.id}/products/terms/${product.id}`,
     );
 
     if (data.success) {
@@ -50,7 +50,7 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
     }
     getAvaliations();
     api
-      .get(`/user/${user.data.id}/${product.id}/pixel/show`)
+      .get(`/user/${user?.id}/${product.id}/pixel/show`)
       .then(res => {
         res.data.message.forEach((v: any, k: number) => {
           switch (v.type) {
@@ -65,7 +65,7 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
     api.get(`/products/${product.id}`).then(({ data }) => {
       setHasAffiliate(data.data.product.system_affiliate);
     });
-  }, [product.id, user.data.id]);
+  }, [product.id, user]);
 
   const priceConverted = useMemo(() => {
     if (product.price) {
@@ -99,18 +99,18 @@ export const MarketProduct: React.FC<IMarketProductProps> = ({ product }) => {
   const requestAffiliation = useCallback(async () => {
     try {
       await api.post(
-        `users/${user.data.id}/affiliates/${product.id}`,
+        `users/${user?.id}/affiliates/${product.id}`,
         {
           producerID: product.owner_id,
         },
-        { headers: { 'sunize-access-token': user.data.access_token } },
+        { headers: { 'sunize-access-token': user!.access_token } },
       );
       toast.success('Solicitação de afiliação enviada!');
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product.owner_id, user.data.access_token, user.data.id]);
+  }, [product.owner_id, user?.access_token, user?.id]);
 
   return (
     <>

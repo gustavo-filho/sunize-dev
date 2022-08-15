@@ -1,23 +1,19 @@
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
 import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
-import { Formik } from 'formik';
-import { FormContainer } from './forgot-password.styles';
-import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
-import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
-import { BiEnvelope } from 'react-icons/bi';
 import { schema } from '@domain/auth/forgot-password/forgot-password.validation';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import {
-  ASYNC_RECOVERY_PASSWORD,
-  userSelector,
-} from '@domain/auth/user/user.store';
+import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
+import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
+import { Formik } from 'formik';
+import { useState } from 'react';
+import { BiEnvelope } from 'react-icons/bi';
+import { FormContainer } from './forgot-password.styles';
 
 export const ForgotPassword = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector);
+  const [loading] = useState(false);
 
   const onSubmit = (values: any) => {
-    dispatch(ASYNC_RECOVERY_PASSWORD({ email: values.email }));
+    // TODO
+    // dispatch(ASYNC_RECOVERY_PASSWORD({ email: values.email }));
   };
 
   return (
@@ -41,9 +37,7 @@ export const ForgotPassword = () => {
                 placeholder="Digite seu email"
               />
 
-              <DefaultButton loading={user.recoveryPassword.loading}>
-                Recuperar senha
-              </DefaultButton>
+              <DefaultButton loading={loading}>Recuperar senha</DefaultButton>
             </FormContainer>
           )}
         />

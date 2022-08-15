@@ -1,9 +1,8 @@
-import { userSelector } from '@domain/auth/user/user.store';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { useCallback, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../store/hooks';
 import {
   BoxWrapper,
   Container,
@@ -15,7 +14,8 @@ import { IndicatedBox } from './components/indicated-box/indicated-box.component
 import { Indicated, InviteLink } from './invites.styles';
 
 export const PersonInvitesPage = () => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [totalPages, setTotalPages] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [page, setPage] = useState(0);
@@ -37,7 +37,7 @@ export const PersonInvitesPage = () => {
 
   const getInvites = useCallback(async () => {
     try {
-      const { data } = await api.get(`/users/${user.data.id}/invites`);
+      const { data } = await api.get(`/users/${user?.id}/invites`);
       setInviteLink(
         `${window.location.origin}/register?has_link=true&hash_link=${data.data.hash_link}`,
       );
@@ -52,7 +52,7 @@ export const PersonInvitesPage = () => {
 
   const getIndications = useCallback(async () => {
     try {
-      const { data } = await api.get(`/users/${user.data.id}/invites-by-user`, {
+      const { data } = await api.get(`/users/${user?.id}/invites-by-user`, {
         params: {
           page,
           paginate: 6,

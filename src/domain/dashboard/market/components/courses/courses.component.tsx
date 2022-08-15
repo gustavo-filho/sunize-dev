@@ -1,26 +1,26 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { PaginationContainer, Container } from './courses.style';
-import { DropdownFilter } from '../dropdown-filter/dropdown-filter.component';
-import { api } from '@shared/services/api';
-import { useAppSelector } from '../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
 import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
-import { MarketProduct } from '../market-product/market-product-component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { useCallback, useEffect, useState } from 'react';
 import { useFetch } from '../../config/useFetch.config';
 import { ICategory } from '../../interfaces/iCategory.types';
+import { DropdownFilter } from '../dropdown-filter/dropdown-filter.component';
+import { MarketProduct } from '../market-product/market-product-component';
+import { Container, PaginationContainer } from './courses.style';
 
 interface CoursesProps {
   search: string;
 }
 
 export function Courses({ search }: CoursesProps): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [offset, setOffset] = useState(0);
   const [totalPages] = useState(0);
   const { data, error } = useFetch(
-    `/marketplace/${user.data.id}/?product_type=ONLINE_COURSE`,
+    `/marketplace/${user!.id}/?product_type=ONLINE_COURSE`,
     {
-      headers: { 'sunize-access-token': user.data.access_token },
+      headers: { 'sunize-access-token': user!.access_token },
     },
   );
   const [courses, setCourses] = useState([]);
@@ -46,10 +46,10 @@ export function Courses({ search }: CoursesProps): JSX.Element {
 
   const getCategories = useCallback(async () => {
     const response = await api.get('categories', {
-      headers: { 'sunize-access-token': user.data.access_token },
+      headers: { 'sunize-access-token': user!.access_token },
     });
     setCategories(response.data.data);
-  }, [user.data.access_token]);
+  }, [user]);
 
   useEffect(() => {
     if (data) {

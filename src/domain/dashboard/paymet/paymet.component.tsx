@@ -23,7 +23,6 @@ import { CustomCheckoutData } from '@shared/types/types';
 import { Loader } from '@shared/components/loader/loader.component';
 import { useFetch } from '../market/config/useFetch.config';
 // import { useAppSelector } from '../../../store/hooks'
-// import { userSelector } from '@domain/auth/user/user.store'
 import { usePayment } from './utils/usePaymet.component';
 import { Countdown } from '../components/count-down/count-down.component';
 import { ThanksPayment } from '../components/thanks-payment/thanks-payment.component';
@@ -34,7 +33,7 @@ import { FormCheckout } from '../components/form-checkout-payment/form-checkout-
 import sunizeLogo from './assets/sunizeLogo.png';
 
 export function Payment() {
-  // const user = useAppSelector(userSelector);
+  // const { user } = useUser();
   const navigate = useNavigate();
   
   const { productId } = useParams();

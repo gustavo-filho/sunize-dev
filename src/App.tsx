@@ -4,14 +4,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Routes } from './routes/routes';
 import { ToastContainer } from 'react-toastify';
+import { UserContextProvider } from '@shared/contexts/user-context/user.context';
 
 function App() {
   return (
-    <>
+    <UserContextProvider>
       <GlobalStyle />
       <Routes />
       <ToastContainer />
-    </>
+    </UserContextProvider>
   );
 }
 

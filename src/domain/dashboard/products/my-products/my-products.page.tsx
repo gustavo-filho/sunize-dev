@@ -7,27 +7,29 @@ import {
   LinksProducts,
 } from './my-products.styles';
 import { Link } from 'react-router-dom';
-import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
-import { Loader } from '@shared/components/loader/loader.component';
-import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
-import { useAppSelector } from '../../../../store/hooks';
 
-import { useCallback, useEffect, useState } from 'react';
-import { userSelector } from '@domain/auth/user/user.store';
+import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { ProductBox } from '@domain/dashboard/products/components/product-box/product-box.component';
+import { Loader } from '@shared/components/loader/loader.component';
+import { Link } from 'react-router-dom';
+import {
+  AnimationContainer, BoxWrapper, Container, LinksProducts, LoaderContainer
+} from './my-products.styles';
+
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
+import { useCallback, useEffect, useState } from 'react';
 
 export const MyProducts = () => {
   const [products, setProducts] = useState([]);
 
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
 
   const getProducts = useCallback(async () => {
-    const response = await api.get(
-      `/users/${user.data.id}/products-purcharsed`,
-    );
+    const response = await api.get(`/users/${user!.id}/products-purcharsed`);
 
     setProducts(response.data);
-  }, [setProducts]);
+  }, [user, setProducts]);
 
   useEffect(() => {
     getProducts();

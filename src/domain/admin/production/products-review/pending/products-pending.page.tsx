@@ -1,14 +1,12 @@
 import { ADMIN_ROUTES } from '@domain/admin/components/admin-wrapper/admin-wrapper.constants';
 import Pagination from '@domain/admin/components/pagination/pagination.component';
-import { userSelector } from '@domain/auth/user/user.store';
 import { FormGroup } from '@mui/material';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../../../store/hooks';
-import { ProductBoxPending } from '../components/product-box-pending/product-box-pending.component';
 import {
   AnimationContainer,
   BoxWrapper,
@@ -17,9 +15,11 @@ import {
   PaginationContainer,
   Statistics,
 } from '../../production.styles';
+import { ProductBoxPending } from '../components/product-box-pending/product-box-pending.component';
 
 export const ProductsPending = () => {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [products, setProducts] = useState<null | []>(null);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(0);
@@ -39,7 +39,7 @@ export const ProductsPending = () => {
 
   const getProducts = useCallback(async () => {
     const { data } = await api.get(
-      `admin/${user.data.id}/products/status/IN_PRODUCTION`,
+      `admin/${user?.id}/products/status/IN_PRODUCTION`,
       {
         params: {
           page,
@@ -107,7 +107,7 @@ export const ProductsPending = () => {
             products.length > 0 ? (
               products.map((product: any) => (
                 <ProductBoxPending
-                  user_id={user.data.id}
+                  user_id={user!.id}
                   onApprove={removeProductToList}
                   onReject={removeProductToList}
                   key={product.id}

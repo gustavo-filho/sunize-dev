@@ -22,7 +22,7 @@ export const BoxAffiliates = ({ user, affiliates }: BoxAffiliatesProps) => {
 
   const getAffiliatesData = useCallback(async () => {
     const responseUser = await api.get(
-      `admin/${user.id}/users/${affiliates.affiliate_id}`,
+      `admin/${user!.id}/users/${affiliates.affiliate_id}`,
     );
     const dataUser = responseUser.data;
 

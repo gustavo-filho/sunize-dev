@@ -1,37 +1,38 @@
-import { useEffect, useState } from 'react';
 import {
-  Container,
-  UserInfo,
   BoxInfo,
+  Container,
   LogoAndBars,
+  UserInfo,
 } from '@domain/admin/components/Header/header.styles';
 import { Notifications } from '@domain/admin/components/Notifications/notifications.component';
-import Logo from '@shared/assets/images/LogoLetter.png';
-import { useMedia } from '@shared/hooks/useMedia';
-import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { Button } from '@mui/material';
-import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
-import { useNavigate } from 'react-router-dom';
-import Hamburger from 'hamburger-react';
+import { ASYNC_GET_NOTIFICATIONS } from '@domain/admin/components/Notifications/notifications.store';
 import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/admin/components/side-bar/side-bar.store';
-import { ASYNC_GET_NOTIFICATIONS } from '@domain/admin/components/Notifications/notifications.store';
+import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
+import { Button } from '@mui/material';
+import Logo from '@shared/assets/images/LogoLetter.png';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { useMedia } from '@shared/hooks/useMedia';
+import Hamburger from 'hamburger-react';
+import { useEffect, useState } from 'react';
+import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 export const Header = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
   const mobile = useMedia('(max-width: 700px)');
-  const user = useAppSelector(userSelector);
   const sidebar = useAppSelector(sideBarSelector);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const { user, signOut } = useUser();
+
   useEffect(() => {
-    dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
-  }, [dispatch, user.data.id]);
+    if (user) dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   return (
     <Container>
@@ -65,13 +66,13 @@ export const Header = () => {
             onClick={() => mobile && setIsOpenBoxInfo(!isOpenBoxInfo)}
             className="user-flex-box"
           >
-            {user.data.photo ? (
-              <img src={user.data.photo} alt={user.data.name} />
+            {user?.photo ? (
+              <img src={user?.photo} alt={user?.name} />
             ) : (
               <Profile />
             )}
 
-            {!mobile && <p className="userName">{user.data.name}</p>}
+            {!mobile && <p className="userName">{user?.name}</p>}
           </div>
 
           {!mobile && <FaCaretDown size={18} />}
@@ -101,12 +102,7 @@ export const Header = () => {
                   </Button>
                 </li>
                 <li onClick={() => setIsOpenBoxInfo(false)}>
-                  <Button
-                    variant="text"
-                    onClick={() => {
-                      dispatch(SIGN_OUT());
-                    }}
-                  >
+                  <Button variant="text" onClick={signOut}>
                     <span>
                       <FaSignOutAlt />
                       Sair

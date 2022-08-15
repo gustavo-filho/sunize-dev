@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react';
+import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
 import {
-  Container,
-  UserInfo,
   BoxInfo,
+  Container,
   LogoAndBars,
+  UserInfo,
 } from '@domain/dashboard/components/Header/header.styles';
 import { Notifications } from '@domain/dashboard/components/Notifications/notifications.component';
-import Logo from '@shared/assets/images/LogoLetter.png';
-import { useMedia } from '@shared/hooks/useMedia';
-import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { Button } from '@mui/material';
-import { ReactComponent as Profile } from '@domain/auth/assets/images/Profile.svg';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { SIGN_OUT, userSelector } from '@domain/auth/user/user.store';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Hamburger from 'hamburger-react';
+import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
 import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
-import { ASYNC_GET_NOTIFICATIONS } from '@domain/dashboard/components/Notifications/notifications.store';
-import { MdDashboard } from 'react-icons/md';
 import { shouldShowSideBar } from '@domain/dashboard/products/my-content/my-content.utils';
+import { Button } from '@mui/material';
+import Logo from '@shared/assets/images/LogoLetter.png';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { useMedia } from '@shared/hooks/useMedia';
+import Hamburger from 'hamburger-react';
+import { useEffect, useState } from 'react';
+import { FaCaretDown, FaHome, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 export const Header = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
   const mobile = useMedia('(max-width: 700px)');
-  const user = useAppSelector(userSelector);
+  const { user, signOut } = useUser();
   const sidebar = useAppSelector(sideBarSelector);
   const { pathname } = useLocation();
 
@@ -34,8 +34,8 @@ export const Header = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
-  }, [dispatch, user.data.id]);
+    dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user!.id }));
+  }, [dispatch, user]);
 
   return (
     <Container>
@@ -71,13 +71,13 @@ export const Header = () => {
             onClick={() => mobile && setIsOpenBoxInfo(!isOpenBoxInfo)}
             className="user-flex-box"
           >
-            {user.data.photo ? (
-              <img src={user.data.photo} alt={user.data.name} />
+            {user?.photo ? (
+              <img src={user?.photo} alt={user?.name} />
             ) : (
               <Profile />
             )}
 
-            {!mobile && <p className="userName">{user.data.name}</p>}
+            {!mobile && <p className="userName">{user?.name}</p>}
           </div>
 
           {!mobile && <FaCaretDown size={18} />}
@@ -85,12 +85,9 @@ export const Header = () => {
           {isOpenBoxInfo && (
             <BoxInfo>
               <ul>
-                {user.data.account_type === 'ADMIN' && (
+                {user?.account_type === 'ADMIN' && (
                   <li onClick={() => setIsOpenBoxInfo(false)}>
-                    <Button
-                      variant="text"
-                      onClick={() => navigate('/admin')}
-                    >
+                    <Button variant="text" onClick={() => navigate('/admin')}>
                       <span>
                         <FaHome />
                         Admin
@@ -123,23 +120,15 @@ export const Header = () => {
                   </Button>
                 </li>
                 <li onClick={() => setIsOpenBoxInfo(false)}>
-                  <Button
-                    variant="text"
-                    onClick={() => navigate('/dashboard')}
-                  >
+                  <Button variant="text" onClick={() => navigate('/dashboard')}>
                     <span>
                       <FaHome />
                       Dashboard
                     </span>
                   </Button>
-                  </li>
+                </li>
                 <li onClick={() => setIsOpenBoxInfo(false)}>
-                  <Button
-                    variant="text"
-                    onClick={() => {
-                      dispatch(SIGN_OUT());
-                    }}
-                  >
+                  <Button variant="text" onClick={signOut}>
                     <span>
                       <FaSignOutAlt />
                       Sair

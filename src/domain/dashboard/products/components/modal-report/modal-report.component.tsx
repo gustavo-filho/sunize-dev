@@ -1,16 +1,15 @@
-import * as Yup from 'yup';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { Input } from '@shared/components/input/input.component';
+import { SingleSelect } from '@shared/components/select/select.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
-import { useAppSelector } from '../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { toast } from 'react-toastify';
-import { Modal, Container, Complaint } from './modal-report.styles';
+import { Form, Formik } from 'formik';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { FiAlertCircle } from 'react-icons/fi';
-import { Formik, Form } from 'formik';
-import { SingleSelect } from '@shared/components/select/select.component';
-import { Input } from '@shared/components/input/input.component';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import { Complaint, Container, Modal } from './modal-report.styles';
 
 interface ComplaintData {
   productName: string;
@@ -24,7 +23,7 @@ interface Props {
 
 export const ModalReport = ({ data, setData }: Props) => {
   const [statusSubmit, setStatusSubmit] = useState('');
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
 
   const schema = Yup.object().shape({
     reason: Yup.string().required('Campo obrigatório'),
@@ -39,9 +38,9 @@ export const ModalReport = ({ data, setData }: Props) => {
       setStatusSubmit('sending');
 
       try {
-        await api.post(`user/${user.data.id}/denunciations`, {
-          denunciatorId: user.data.id,
-          denouncedId: user.data.id,
+        await api.post(`user/${user!.id}/denunciations`, {
+          denunciatorId: user!.id,
+          denouncedId: user!.id,
           productId: data && data.productId,
           reason: values.reason,
           description: values.description,
@@ -63,7 +62,7 @@ export const ModalReport = ({ data, setData }: Props) => {
         setStatusSubmit('');
       }
     },
-    [data, handleCloseModal, user.data.id],
+    [data, handleCloseModal, user],
   );
   return (
     <>

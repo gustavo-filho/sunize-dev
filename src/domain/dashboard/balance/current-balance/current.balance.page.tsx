@@ -1,15 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { api } from '@shared/services/api';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { Container, AddAccount, Value } from './current.balance.styles';
-import { userSelector } from '@domain/auth/user/user.store';
-import { useAppSelector } from '../../../../store/hooks';
-import { WithdrawalAccounts } from '../withdrawal-accounts/withdraw-accounts-component';
-import { ballanceValuesType } from '../types/current-ballance-values.type';
-import { IBankingAccountsType } from '../types/current-ballance-banking-accounts.type';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { wrapperNavigation } from '../components/wrapper-navigation.component';
+import { IBankingAccountsType } from '../types/current-ballance-banking-accounts.type';
+import { ballanceValuesType } from '../types/current-ballance-values.type';
+import { WithdrawalAccounts } from '../withdrawal-accounts/withdraw-accounts-component';
+import { AddAccount, Container, Value } from './current.balance.styles';
 // import {
 //   FormControl,
 //   FormControlLabel,
@@ -21,7 +20,8 @@ import { AccountComponentModal } from '../components/accountComponentModal/accou
 import { listBanks } from '../config/list-banks';
 
 export function CurrentBalance(): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const [modalAddAccount, setModalAddAccount] = useState(false);
   const [isShowBalance, setIsShowBalance] = useState(true);
   const [isShowRelease, setIsShowRelease] = useState(true);
@@ -40,8 +40,8 @@ export function CurrentBalance(): JSX.Element {
   const getBankingAccounts = useCallback(async () => {
     setLoading(true);
     await api
-      .get(`users/${user.data.id}/safe2pay/sub-accounts`, {
-        headers: { 'sunize-access-token': user.data.access_token },
+      .get(`users/${user!.id}/safe2pay/sub-accounts`, {
+        headers: { 'sunize-access-token': user!.access_token },
       })
       .then(response => {
         const bank = listBanks.find(
@@ -55,12 +55,12 @@ export function CurrentBalance(): JSX.Element {
       .catch(() => {
         setLoading(false);
       });
-  }, [user.data.access_token, user.data.id]);
+  }, [user]);
 
   useEffect(() => {
     getBankingAccounts();
     api
-      .get(`users/balance/${user.data.id}`)
+      .get(`users/balance/${user!.id}`)
       .then(res => {
         const balance = {
           balance: res.data.data.AmountReceived,
@@ -84,7 +84,7 @@ export function CurrentBalance(): JSX.Element {
           );
         }
       });
-  }, [getBankingAccounts, user.data.id]);
+  }, [getBankingAccounts, user]);
 
   function totalBallanceComponent(labelDisplayed: string): JSX.Element {
     return (

@@ -1,25 +1,26 @@
-import {
-  TopSearch,
-  Container,
-  PaginationContainer,
-  FormGroup,
-} from './affiliates.styles';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { Form, Formik } from 'formik';
-import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
+import { Pagination } from '@domain/dashboard/components/pagination/pagination.component';
+import { AffiliateProduct } from '@domain/dashboard/products/affiliates/components/affilate-product/affiliate-product.component';
 import {
   ASYNC_GET_AFFILIATES,
   productSelector,
 } from '@domain/dashboard/products/products.store';
-import * as Yup from 'yup';
 import { InputSearch } from '@shared/components/input-search/input-search.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { Form, Formik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
-import { AffiliateProduct } from '@domain/dashboard/products/affiliates/components/affilate-product/affiliate-product.component';
+import * as Yup from 'yup';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import {
+  Container,
+  FormGroup,
+  PaginationContainer,
+  TopSearch,
+} from './affiliates.styles';
 
 export const ProductsOfAffiliates = () => {
-  const user = useAppSelector(userSelector).data;
+  const { user } = useUser();
+
   const dispatch = useAppDispatch();
   const productsStore = useAppSelector(productSelector);
   const productsAffiliate = productsStore.affiliatesProducts.data;
@@ -47,8 +48,8 @@ export const ProductsOfAffiliates = () => {
   }, [filterValue, productsAffiliate]);
 
   useEffect(() => {
-    dispatch(ASYNC_GET_AFFILIATES({ offset, userId: user.id }));
-  }, [dispatch, offset, user.id]);
+    dispatch(ASYNC_GET_AFFILIATES({ offset, userId: user!.id }));
+  }, [dispatch, offset, user]);
 
   return (
     <Container>

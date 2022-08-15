@@ -37,7 +37,7 @@ export const UserBox = ({ user }: UserBoxProps) => {
         </main>
       </Container>
 
-      {modal && <Modal personId={user.id} setModal={setModal} />}
+      {modal && <Modal personId={user!.id} setModal={setModal} />}
     </>
   );
 };

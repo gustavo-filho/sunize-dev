@@ -1,19 +1,19 @@
 import { AuthRouteWrapper } from '@domain/auth/auth-route.wrapper';
 import { AuthWrapperComponent } from '@domain/auth/components/auth-wrapper-component/auth-wrapper.component';
-import { FormContainer, KeyIcon } from '@domain/auth/login/login.styles';
-import { schema } from '@domain/auth/login/login.validation';
+import { FormContainer } from '@domain/auth/login/login.styles';
+import { schema } from '@domain/auth/login-2fa/login-2fa.validation';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { DefaultInput } from '@shared/components/DefaultInput/default-input.component';
 import { useUser } from '@shared/contexts/user-context/user.context';
-import { UserAuthProps } from '@shared/contexts/user-context/user.types';
+import { UserAuth2FAProps } from '@shared/contexts/user-context/user.types';
 import { Formik } from 'formik';
 import { useCallback, useState } from 'react';
 import { BiEnvelope } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-export const LoginPage = () => {
-  const { isAuthenticated, signIn } = useUser();
+export const LoginPage2FA = () => {
+  const { isAuthenticated, signIn2FA } = useUser();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -22,21 +22,17 @@ export const LoginPage = () => {
   }
 
   const onSubmit = useCallback(
-    async (values: UserAuthProps) => {
+    async (values: UserAuth2FAProps) => {
       setLoading(true);
-      signIn({
-        email: values.email,
-        password: values.password,
+      await signIn2FA({
+        code: values.code,
+        by_pass: values.by_pass,
       }).then(response => {
-        if (response.tfa_required) {
-          toast.success('Enviado um código de verificação para o seu e-mail');
-          return navigate('/login/2fa');
-        }
         toast.success('Login efetuado com sucesso');
         return navigate('/dashboard');
       });
     },
-    [navigate, signIn],
+    [navigate, signIn2FA],
   );
 
   return (
@@ -51,27 +47,30 @@ export const LoginPage = () => {
           onSubmit={onSubmit}
           validationSchema={schema}
           initialValues={{
-            email: '',
-            password: '',
+            code: '',
+            by_pass: false,
           }}
-          render={() => (
+          render={({ values, setFieldValue }) => (
             <FormContainer>
               <DefaultInput
                 mode="dark"
-                name="email"
-                text="E-mail *"
+                name="code"
+                text="Codigo de verificação*"
                 icon={BiEnvelope}
-                placeholder="Digite seu e-mail"
+                value={values.code}
+                onChange={(e: any) => {
+                  setFieldValue('code', e.target.value);
+                }}
+                placeholder="Insira o codigo"
+                autoComplete="off"
               />
-              <DefaultInput
-                mode="dark"
-                name="password"
-                type="password"
-                handleShowPassword={true}
-                text="Senha *"
-                icon={KeyIcon}
-                placeholder="Digite sua senha"
+              <input
+                type="checkbox"
+                onChange={e => setFieldValue('by_pass', e.target.checked)}
+                id="by_pass"
+                style={{ marginRight: '5px' }}
               />
+              <label htmlFor="by_pass">Manter conectado por 30 dias!</label>
 
               <DefaultButton loading={loading}>Login</DefaultButton>
             </FormContainer>

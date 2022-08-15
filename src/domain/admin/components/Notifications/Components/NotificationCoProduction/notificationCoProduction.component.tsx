@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 
-import {
-  Container,
-  Buttons,
-  MainContent,
-} from './notificationCoProduction.styles';
-import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
+import { ASYNC_GET_NOTIFICATIONS } from '@domain/admin/components/Notifications/notifications.store';
+import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
 import { toast } from 'react-toastify';
-import { ASYNC_GET_NOTIFICATIONS } from '@domain/admin/components/Notifications/notifications.store';
+import { useAppDispatch } from '../../../../../../store/hooks';
+import {
+  Buttons,
+  Container,
+  MainContent,
+} from './notificationCoProduction.styles';
 
 const NotificationCoProduction: any = ({ productId, producerId, id }: any) => {
   const [productName, setProductName] = useState('');
   const [producerName, setProducerName] = useState('');
 
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,12 +31,12 @@ const NotificationCoProduction: any = ({ productId, producerId, id }: any) => {
 
   async function approveInvite() {
     try {
-      await api.put(`/user/${user.data.id}/coProducer/${id}`, {
+      await api.put(`/user/${user?.id}/coProducer/${id}`, {
         accepted: true,
         acceptedAt: new Date(),
       });
       toast.success('Pedido de co-produção aceito!');
-      dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
+      if (user) dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user!.id }));
     } catch (e) {
       toast.error('Algo de errado aconteceu :(');
     }
@@ -43,9 +44,9 @@ const NotificationCoProduction: any = ({ productId, producerId, id }: any) => {
 
   async function denyInvite() {
     try {
-      await api.delete(`/user/${user.data.id}/coProducer/${id}`);
+      await api.delete(`/user/${user?.id}/coProducer/${id}`);
       toast.success('Pedido de co-produção negado com sucesso.');
-      dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user.data.id }));
+      if (user) dispatch(ASYNC_GET_NOTIFICATIONS({ userId: user!.id }));
     } catch (e: any) {
       toast.error('Algo de errado aconteceu.');
     }

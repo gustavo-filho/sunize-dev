@@ -1,62 +1,56 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 // import ReactPixel from 'react-facebook-pixel'
+import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
+import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
+import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
+import InputMasked from '@shared/components/input-masked/input-masked.component';
+import { useUser } from '@shared/contexts/user-context/user.context';
+import { api } from '@shared/services/api';
+import { CustomCheckoutData, IPixData } from '@shared/types/types';
 import {
   FaArrowRight,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaUser,
-  FaWallet,
   FaBarcode,
   FaCheck,
   FaCreditCard,
+  FaEnvelope,
   FaMoneyCheckAlt,
+  FaPhoneAlt,
   FaRegCreditCard,
+  FaUser,
+  FaWallet,
 } from 'react-icons/fa';
+import { CardFigure } from '../card-figure-payment/card-figure-payment.component';
+import { InputPayment } from '../inputs-checkout-payment/input-component-payment/input-component-payment';
+import { SelectInstallment } from '../inputs-checkout-payment/select-installment/select-installment.component';
+import { ReviewProduct } from '../review-product-payment/review-product-payment.component';
+import { Upsell } from '../upsell-payment/upsell-payment-component';
+import { AlertPopUp } from './alert-popup/alert-popup.component';
 import { schema } from './form-personal-data.schema';
 import {
-  Container,
-  Header,
   ButtonSubmit,
-  Voucher,
-  RadioGroup,
-  Option,
   Check,
-  Method,
   CheckIcon,
+  Container,
   Content,
+  ContentGenerated,
   ContentLeft,
   ContentRight,
-  Validity,
+  Header,
   Img,
-  ContentGenerated,
+  Method,
+  Option,
   PixInfo,
+  RadioGroup,
+  Validity,
+  Voucher,
 } from './form-personal-data.style';
-import { api } from '@shared/services/api';
-import { usePayment } from '@domain/dashboard/paymet/utils/usePaymet.component';
-import { useFetch } from '@domain/dashboard/market/config/useFetch.config';
-import { useAppSelector } from '../../../../store/hooks';
-import { userSelector } from '@domain/auth/user/user.store';
-import { CustomCheckoutData, IPixData } from '@shared/types/types';
-import { ReviewProduct } from '../review-product-payment/review-product-payment.component';
-import InputMasked from '@shared/components/input-masked/input-masked.component';
-import { AlertPopUp } from './alert-popup/alert-popup.component';
-import { CardFigure } from '../card-figure-payment/card-figure-payment.component';
-import { SelectInstallment } from '../inputs-checkout-payment/select-installment/select-installment.component';
-import { Upsell } from '../upsell-payment/upsell-payment-component';
-import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component';
-import { InputPayment } from '../inputs-checkout-payment/input-component-payment/input-component-payment';
 
 export function FormPersonalData(): JSX.Element {
-  const user = useAppSelector(userSelector);
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const { productId } = useParams();
   const [, setIsAutomaticMessageAllowed] = useState(false);
@@ -155,14 +149,14 @@ export function FormPersonalData(): JSX.Element {
 
     try {
       const response = await api.post(
-        `users/${user.data.id}/products/${productId}/buy/bankslip`,
+        `users/${user!.id}/products/${productId}/buy/bankslip`,
         {
           buyUpsell: withUpsell,
           voucher: voucherApplied,
         },
         {
           headers: {
-            'sunize-access-token': user.data.access_token,
+            'sunize-access-token': user!.access_token,
           },
         },
       );
@@ -182,13 +176,13 @@ export function FormPersonalData(): JSX.Element {
     setIsLoading(true);
     api
       .post(
-        `users/${user.data.id}/products/${productId}/buy/pix`,
+        `users/${user!.id}/products/${productId}/buy/pix`,
         {
           buyUpsell: withUpsell,
           voucher: voucherApplied,
         },
         {
-          headers: { 'sunize-access-token': user.data.access_token },
+          headers: { 'sunize-access-token': user!.access_token },
         },
       )
       .then(response => {
@@ -204,8 +198,8 @@ export function FormPersonalData(): JSX.Element {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    // user.id,
-    // user.access_token,
+    // user!.id,
+    // user!.access_token ,
     productId,
     withUpsell,
     voucherApplied,
@@ -232,10 +226,10 @@ export function FormPersonalData(): JSX.Element {
       };
       try {
         const response = await api.post(
-          `users/${user.data.id}/products/${productId}/buy/debit-card`,
+          `users/${user!.id}/products/${productId}/buy/debit-card`,
           data,
           {
-            headers: { 'sunize-access-token': user.data.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
         setSubmitting(false);
@@ -250,8 +244,8 @@ export function FormPersonalData(): JSX.Element {
     [
       withUpsell,
       voucherApplied,
-      // user.id,
-      // user.access_token,
+      // user!.id,
+      // user!.access_token ,
       productId,
       navigate,
     ],
@@ -289,10 +283,10 @@ export function FormPersonalData(): JSX.Element {
 
       try {
         const response = await api.post(
-          `users/${user.data.id}/products/${productId}/buy/credit-card`,
+          `users/${user!.id}/products/${productId}/buy/credit-card`,
           data,
           {
-            headers: { 'sunize-access-token': user.data.access_token },
+            headers: { 'sunize-access-token': user!.access_token },
           },
         );
         setSubmitting(false);
@@ -313,8 +307,8 @@ export function FormPersonalData(): JSX.Element {
     [
       withUpsell,
       voucherApplied,
-      // user.id,
-      // user.access_token,
+      // user!.id,
+      // user!.access_token ,
       productId,
       navigate,
     ],

@@ -1,26 +1,18 @@
+import notificationsReducer from '@domain/dashboard/components/Notifications/notifications.store';
+import sideBarReducer from '@domain/dashboard/components/side-bar/side-bar.store';
+import videoClassReducer from '@domain/dashboard/products/video-class/video-class.store';
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import dashboardReducer from '../../src/domain/dashboard/dashboard.store';
 import productsReducer from '../../src/domain/dashboard/products/products.store';
-import sideBarReducer from '@domain/dashboard/components/side-bar/side-bar.store';
-import notificationsReducer from '@domain/dashboard/components/Notifications/notifications.store';
-import userReducer from '../domain/auth/user/user.store';
-import { createLogger } from 'redux-logger';
-import { userListener } from '../domain/auth/user/user.store.middlewares';
-import videoClassReducer from '@domain/dashboard/products/video-class/video-class.store';
 
 export const store = configureStore({
   reducer: {
     dashboard: dashboardReducer,
-    user: userReducer,
     products: productsReducer,
     sidebar: sideBarReducer,
     notifications: notificationsReducer,
     videoClass: videoClassReducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware()
-      .concat(createLogger())
-      .prepend(userListener.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
