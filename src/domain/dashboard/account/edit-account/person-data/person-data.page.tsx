@@ -3,9 +3,7 @@ import { DotsLoader } from '@shared/components/DotsLoader/dots-loader.component'
 import { Input } from '@shared/components/input/input.component';
 import { useUser } from '@shared/contexts/user-context/user.context';
 import { api } from '@shared/services/api';
-import { addDays } from 'date-fns';
 import { Form, Formik } from 'formik';
-import Cookies from 'js-cookie';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   FaCalendarAlt,
@@ -39,7 +37,7 @@ import {
 import { schemaData, schemaPassword } from './schemas';
 
 export const PersonPage = () => {
-  const { user } = useUser();
+  const { user, updatePhoto } = useUser();
 
   const dispatch = useAppDispatch();
 
@@ -55,10 +53,7 @@ export const PersonPage = () => {
           const response = await api.put(`users/${user?.id}`, dataPhoto);
           if (response.data.success) {
             const newPhoto = response.data.photo;
-            Cookies.set('@Sunize:photo', newPhoto, {
-              expires: addDays(new Date(), 3),
-              secure: process.env.NODE_ENV === 'production',
-            });
+            updatePhoto(newPhoto);
 
             dispatch({
               type: 'USER/UPDATE_PHOTO',
@@ -74,7 +69,7 @@ export const PersonPage = () => {
         toast.error('A imagem não foi selecionada');
       }
     },
-    [user, dispatch],
+    [user, dispatch, updatePhoto],
   );
 
   const onSubmitPassword = useCallback(

@@ -24,6 +24,7 @@ type UserContextData = {
   signIn: (data: UserAuthProps) => Promise<UserAuthResponse>;
   signIn2FA: (data: UserAuth2FAProps) => Promise<UserAuth2FAResponse>;
   signUp: (data: UserRegisterProps) => Promise<UserRegisterResponse>;
+  updatePhoto: (photo: string) => void;
   signOut: () => void;
 };
 
@@ -159,6 +160,20 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     });
   }
 
+  function updatePhoto(photo: string): void {
+    if (user) {
+      const user_cookies = localStorage.getItem('@Sunize:user');
+      if (user_cookies) {
+        let user_data = JSON.parse(user_cookies);
+        user_data.photo = photo;
+        localStorage.setItem('@Sunize:user', JSON.stringify(user_data));
+        setUser(user_data);
+      }
+
+      setUser({ ...user, photo });
+    }
+  }
+
   function signOut(): void {
     try {
       setUser(null);
@@ -177,6 +192,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         signIn,
         signIn2FA,
         signUp,
+        updatePhoto,
         signOut,
       }}
     >
