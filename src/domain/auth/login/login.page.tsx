@@ -7,7 +7,7 @@ import { DefaultInput } from '@shared/components/DefaultInput/default-input.comp
 import { useUser } from '@shared/contexts/user-context/user.context';
 import { UserAuthProps } from '@shared/contexts/user-context/user.types';
 import { Formik } from 'formik';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BiEnvelope } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -17,9 +17,9 @@ export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  if (isAuthenticated) {
-    navigate('/dashboard');
-  }
+  useEffect(() => {
+    if (isAuthenticated) navigate('/dashboard');
+  }, [isAuthenticated, navigate]);
 
   const onSubmit = useCallback(
     async (values: UserAuthProps) => {

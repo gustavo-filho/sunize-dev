@@ -5,8 +5,10 @@ import SunizeLogo from '@shared/assets/images/logob.png';
 import { Link } from 'react-router-dom';
 import { DefaultButton } from '@shared/components/DefaultButton/default-button.component';
 import { NavigateToComponent } from '@domain/landing/utils/navigateToComponent';
+import { useUser } from '@shared/contexts/user-context/user.context';
 
 export const Header = () => {
+  const { isAuthenticated } = useUser();
   const mobile = useMedia('(max-width: 1139px)');
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -52,11 +54,17 @@ export const Header = () => {
             </li>
           </ul>
           <div className="authButtonsContainer">
-            <Link className="loginButton" to="/login">
+            <Link
+              className="loginButton"
+              to={isAuthenticated ? '/dashboard' : '/login'}
+            >
               Login
             </Link>
 
-            <Link className="registerButton" to="/register">
+            <Link
+              className="registerButton"
+              to={isAuthenticated ? '/dashboard' : '/register'}
+            >
               Cadastre-se
             </Link>
           </div>
