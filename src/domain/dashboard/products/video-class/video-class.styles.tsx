@@ -73,6 +73,7 @@ export const StyledTabs = styled((props: StyledTabsProps) => (
   />
 ))({
   borderBottom: '0.5px solid rgba(255, 255, 255, 0.3)',
+  marginTop: '1rem',
   '& .MuiTabs-indicator': {
     display: 'flex',
     justifyContent: 'center',

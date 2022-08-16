@@ -69,8 +69,8 @@ export const VideoClass = () => {
               width: '100%',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '1rem',
+              justifyContent: 'center',
+              gap: '2rem',
             }}
           >
             <div
