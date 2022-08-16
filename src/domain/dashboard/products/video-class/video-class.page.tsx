@@ -17,14 +17,17 @@ import {
   AiOutlineDownload,
   AiOutlineFileImage,
   AiOutlineFilePdf,
-  AiOutlineLeft,
   AiOutlineLike,
-  AiOutlineRight,
 } from 'react-icons/ai';
 import ReactStars from 'react-rating-stars-component';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import Thumbnail from './assets/images/youtube-video-thumbnail.jpeg';
-import { StyledTab, StyledTabs, useStyles } from './video-class.styles';
+import {
+  StyledTab,
+  StyledTabs,
+  useStyles,
+  VideoBackground,
+} from './video-class.styles';
 
 export const VideoClass = () => {
   const classes = useStyles();
@@ -76,18 +79,24 @@ export const VideoClass = () => {
                 display: 'flex',
                 borderRadius: '100%',
                 justifyContent: 'center',
+                fontSize: '24px',
                 alignItems: 'center',
-                padding: '0.7rem',
+                padding: '0.5rem',
+                width: '50px',
+                height: '50px',
+                fontWeight: 'bold',
+                color: 'white',
                 border: `1px solid ${theme.colors.yellow}`,
                 cursor: 'pointer',
               }}
             >
-              <AiOutlineLeft size={20} color={'fff'} />
+              {'<'}
             </div>
+            <VideoBackground />
             <div>
               <div
                 style={{
-                  width: '100%',
+                  width: '1080px',
                   display: 'flex',
                   justifyContent: 'flex-end',
                   marginBottom: '0.5rem',
@@ -101,9 +110,12 @@ export const VideoClass = () => {
                 src="https://player-vz-31a5504a-9ea.tv.pandavideo.com.br/embed/?v=866e8565-0800-4c43-8521-5017ffc7485a"
                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
                 allowFullScreen={true}
-                width="720"
-                height="360"
-                style={{ maxWidth: '100%' }}
+                width="1080"
+                height="500"
+                style={{
+                  maxWidth: '100%',
+                  boxShadow: `3px 4px 15px 0px rgba(0,0,0,0.4)`,
+                }}
               />
             </div>
 
@@ -113,19 +125,25 @@ export const VideoClass = () => {
                 display: 'flex',
                 borderRadius: '100%',
                 justifyContent: 'center',
+                fontSize: '24px',
                 alignItems: 'center',
-                padding: '0.7rem',
+                padding: '0.5rem',
+                width: '50px',
+                height: '50px',
+                fontWeight: 'bold',
+                color: 'white',
                 border: `1px solid ${theme.colors.yellow}`,
                 cursor: 'pointer',
               }}
             >
-              <AiOutlineRight size={20} color={'fff'} />
+              {'>'}
             </div>
           </div>
 
           <div
             style={{
               width: '100%',
+              maxWidth: '1080px',
               display: 'flex',
               justifyContent: 'space-between',
               marginTop: '1.5rem',
@@ -164,14 +182,14 @@ export const VideoClass = () => {
                 color: 'white',
               }}
             >
-              <AiOutlineCheckCircle color={'#adadad'} />
+              <AiOutlineCheckCircle color={'#adadad'} size={24} />
               Aula Concluída
             </button>
           </div>
         </div>
       </div>
       <div className={classes.nextClassesContainer}>
-        <Box sx={{ width: '90%' }}>
+        <Box sx={{ width: '90%', maxWidth: '1080px' }}>
           <Box>
             <StyledTabs
               value={value}
@@ -185,7 +203,7 @@ export const VideoClass = () => {
           </Box>
         </Box>
         {value === 0 && (
-          <div style={{ width: '90%', margin: '2rem 0' }}>
+          <div style={{ width: '90%', margin: '2rem 0', maxWidth: '1080px' }}>
             <p style={{ opacity: 0.7 }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
@@ -223,7 +241,7 @@ export const VideoClass = () => {
           </div>
         )}
         {value === 2 && (
-          <div style={{ width: '90%', marginTop: '1rem' }}>
+          <div style={{ width: '90%', marginTop: '1rem', maxWidth: '1080px' }}>
             {files.map((el, i) => {
               return (
                 <div
@@ -266,11 +284,12 @@ export const VideoClass = () => {
           <div
             style={{
               width: '90%',
+              maxWidth: '1080px',
               margin: '2rem 1rem',
               borderRadius: '5px',
               display: 'flex',
               flexDirection: 'column',
-              padding: '1rem',
+              padding: '1rem 0',
               gap: '1rem',
             }}
           >
@@ -309,6 +328,15 @@ export const VideoClass = () => {
                   background: `${theme.colors.yellow} !important`,
                   height: '100% !important',
                 },
+                '& .MuiInput-underline': {
+                  borderBottom: `1px solid ${theme.colors.yellow}`,
+                },
+                '& .MuiInputLabel-standard': {
+                  marginTop: '-5px',
+                },
+                '& .MuiInputBase-root::after': {
+                  borderBottom: `1px solid ${theme.colors.yellow}`,
+                },
               }}
             >
               <Avatar />
@@ -316,6 +344,7 @@ export const VideoClass = () => {
                 id="outlined-multiline-flexible"
                 label="Comentário"
                 multiline
+                variant={'standard'}
                 maxRows={4}
               />
               <Button type={'submit'} variant={'contained'}>
@@ -432,13 +461,23 @@ export const VideoClass = () => {
                           background: `${theme.colors.yellow} !important`,
                           height: '100% !important',
                         },
+                        '& .MuiInput-underline': {
+                          borderBottom: `1px solid ${theme.colors.yellow}`,
+                        },
+                        '& .MuiInputLabel-standard': {
+                          marginTop: '-5px',
+                        },
+                        '& .MuiInputBase-root::after': {
+                          borderBottom: `1px solid ${theme.colors.yellow}`,
+                        },
                       }}
                     >
                       <Avatar />
                       <TextField
                         id="outlined-multiline-flexible"
-                        label="Responder..."
+                        label="Responder"
                         multiline
+                        variant={'standard'}
                         maxRows={4}
                       />
                       <Button type={'submit'} variant={'contained'}>

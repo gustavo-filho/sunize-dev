@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components'
-import { Tooltip } from '../Tooltip/tooltip.component'
+import styled, { css } from 'styled-components';
+import { Tooltip } from '../Tooltip/tooltip.component';
 
 interface ContainerProps {
-  isFocused: number
-  isFilled: number
-  isErrored: number
+  isFocused: number;
+  isFilled: number;
+  isErrored: number;
 }
 
 export const Content = styled.div`
@@ -33,13 +33,13 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
   width: 100%;
   height: 50px;
-  background-color: #27293D;
+  background-color: #27293d;
   border: none;
   border: 1px solid #c2c2c2;
   font-size: 18px;
@@ -57,20 +57,20 @@ export const Container = styled.div<ContainerProps>`
     color: #c2c2c2;
 
     ${({ isFilled }) =>
-    !!isFilled &&
-    css`
+      !!isFilled &&
+      css`
         color: #e7af07;
       `}
 
     ${({ isErrored }) =>
-    !!isErrored &&
-    css`
+      !!isErrored &&
+      css`
         color: #ff5252;
       `}
 
     ${({ isFocused }) =>
-    !!isFocused &&
-    css`
+      !!isFocused &&
+      css`
         color: #e7af07;
       `}
   }
@@ -101,7 +101,7 @@ export const Container = styled.div<ContainerProps>`
     height: 100%;
     font-size: 16px;
   }
-`
+`;
 
 export const Error = styled(Tooltip)`
   height: 20px;
@@ -118,4 +118,4 @@ export const Error = styled(Tooltip)`
       border-color: #ff5252 transparent;
     }
   }
-`
+`;

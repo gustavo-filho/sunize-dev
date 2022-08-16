@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   > form {
@@ -13,23 +13,23 @@ export const Container = styled.div`
       text-transform: uppercase;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   display: flex;
   @media (max-width: 700px) {
     flex-direction: column;
   }
-`
+`;
 
 export const ContentLeft = styled.div`
   flex: 0.6;
-`
+`;
 
 export const ContentRight = styled.div`
   flex: 0.4;
   margin-top: 1rem;
-`
+`;
 
 export const Validity = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ export const Validity = styled.div`
       }
     }
   }
-`
+`;
 
 export const ButtonSubmit = styled.button`
   text-transform: uppercase;
@@ -79,4 +79,4 @@ export const ButtonSubmit = styled.button`
     justify-content: space-between;
     padding: 0 1.5rem;
   }
-`
+`;

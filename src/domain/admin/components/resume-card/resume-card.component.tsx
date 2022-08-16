@@ -9,13 +9,13 @@ import { ReactNode } from 'react';
 
 interface ResumeCardProps {
   icon: ReactNode;
-  iconBackground?: "warning" | "success" | "error" | string;
+  iconBackground?: 'warning' | 'success' | 'error' | string;
   label: string;
 }
 
 export const ResumeCard = ({
   icon,
-  iconBackground = "warning",
+  iconBackground = 'warning',
   label,
 }: ResumeCardProps) => {
   return (

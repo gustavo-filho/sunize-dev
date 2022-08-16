@@ -17,7 +17,7 @@ import {
 } from './documents.styles';
 
 export const DocumentsPage = () => {
-  const status: string | null = "rejected";
+  const status: string | null = 'rejected';
   // pending | approved | rejected | null
 
   return (

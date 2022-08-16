@@ -29,11 +29,10 @@ export const useStyles = makeStyles({
 });
 
 export const Container = styled.section`
-    max-width: 1640px;
-    width: 100%;
-    margin: 60px auto 0px auto;
-    padding: 0 6%;
-
+  max-width: 1640px;
+  width: 100%;
+  margin: 60px auto 0px auto;
+  padding: 0 6%;
 
   @keyframes animeTop {
     from {
@@ -50,7 +49,7 @@ export const Container = styled.section`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Nunito',sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   > h2 {

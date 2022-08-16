@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-`
+`;
 
 export const Modal = styled(motion.main)`
   padding: 1rem;
@@ -59,7 +59,7 @@ export const Modal = styled(motion.main)`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FFF;
+    color: #fff;
 
     svg {
       color: #00bfa5;
@@ -73,7 +73,7 @@ export const Modal = styled(motion.main)`
     text-align: center;
     width: 100%;
   }
-`
+`;
 
 export const Content = styled.div`
   margin-top: 1.5rem;
@@ -82,7 +82,7 @@ export const Content = styled.div`
   align-items: center;
 
   z-index: 999 !important;
-  
+
   form {
     width: 100%;
 
@@ -114,11 +114,11 @@ export const Content = styled.div`
       }
     }
   }
-`
+`;
 export const OptionSingle = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   width: 100%;
   margin-bottom: 1rem;
 
@@ -214,4 +214,4 @@ export const OptionSingle = styled.div`
       }
     }
   }
-`
+`;

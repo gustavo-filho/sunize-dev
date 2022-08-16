@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 0 5% 5%;
@@ -25,4 +25,4 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;

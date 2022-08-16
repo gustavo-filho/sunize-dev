@@ -11,7 +11,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from '@mui/material';
 import { DetailsModal } from '@shared/components/details-modal/details-modal.component';
 import { useUser } from '@shared/contexts/user-context/user.context';
@@ -28,7 +28,7 @@ import {
   FormGroup,
   HeadInfo,
   Options,
-  useStyles
+  useStyles,
 } from './sale-record.style';
 
 interface Transaction {

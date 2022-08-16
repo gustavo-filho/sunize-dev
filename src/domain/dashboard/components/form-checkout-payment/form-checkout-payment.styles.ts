@@ -1,9 +1,9 @@
-import styled, { css, keyframes } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css, keyframes } from 'styled-components';
+import { shade } from 'polished';
 
 interface Props {
-  name: string
-  methodActive: string
+  name: string;
+  methodActive: string;
 }
 
 const jump = keyframes`
@@ -16,7 +16,7 @@ const jump = keyframes`
   100% {
     transform: translateY(0);
   }
-`
+`;
 
 export const Container = styled.div`
   padding: 0 5% 5%;
@@ -59,7 +59,7 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export const ButtonSubmit = styled.button`
   margin-top: 2.5rem;
@@ -76,7 +76,7 @@ export const ButtonSubmit = styled.button`
   :hover {
     background-color: ${shade(0.2, '#00dd7e')};
   }
-`
+`;
 
 export const Method = styled.div<Props>`
   flex: 1;
@@ -134,7 +134,7 @@ export const Method = styled.div<Props>`
       height: 2.3rem;
     }
   }
-`
+`;
 
 export const CheckIcon = styled.div`
   position: absolute;
@@ -154,4 +154,4 @@ export const CheckIcon = styled.div`
     width: 2rem;
     height: 2rem;
   }
-`
+`;

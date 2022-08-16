@@ -36,7 +36,7 @@ export const ModalDeleteConfirmation = ({
   isVisible,
   productId,
 }: IModalProps) => {
-  const { user } = useUser()
+  const { user } = useUser();
 
   const [statusSubmit, setStatusSubmit] = useState('');
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -10,4 +10,4 @@ export const Container = styled.div`
     line-height: 1.7rem;
     color: #848484;
   }
-`
+`;

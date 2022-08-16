@@ -1,15 +1,15 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { shade } from 'polished';
 interface Props {
-  bgColor: string
-  header: 0 | '5.625rem'
+  bgColor: string;
+  header: 0 | '5.625rem';
 }
 interface HeaderProps {
-  header: 'flex' | 'none'
+  header: 'flex' | 'none';
 }
 
 export const Container = styled.div<Props>`
-  background-color: ${(p) => p.bgColor};
+  background-color: ${p => p.bgColor};
   min-height: 100vh;
   p,
   span,
@@ -65,7 +65,7 @@ export const Container = styled.div<Props>`
       }
     }
   }
-`
+`;
 
 export const Content = styled.div`
   > main {
@@ -88,12 +88,12 @@ export const Content = styled.div`
       padding: 0 0 0rem;
     }
   }
-`
+`;
 
 export const ContentTop = styled.div<HeaderProps>`
-  display: ${(p) => p.header};
+  display: ${p => p.header};
   justify-content: center;
-`
+`;
 
 export const ContentLeft = styled.div`
   flex: 1;
@@ -105,21 +105,22 @@ export const ContentLeft = styled.div`
   @media (max-width: 500px) {
     width: 100%;
   }
-`
+`;
 
 export const ContentRight = styled.div`
   flex: 0.5;
   @media (max-width: 1000px) {
     flex: 1;
     width: 90%;
-    div > div, footer {
+    div > div,
+    footer {
       display: none;
     }
   }
   @media (max-width: 500px) {
     width: 100%;
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -146,7 +147,7 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
 export const WhatsappStick = styled.a`
   position: fixed;
   z-index: 999;
@@ -164,4 +165,4 @@ export const WhatsappStick = styled.a`
   &:hover {
     cursor: pointer;
   }
-`
+`;

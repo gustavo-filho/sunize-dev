@@ -44,7 +44,12 @@ export function ProductCard(): JSX.Element {
           </>
         ) : (
           <div>
-            <input ref={inputVoucherRef} type="text" placeholder="CUPOM" style={{ color: "#000"}}/>
+            <input
+              ref={inputVoucherRef}
+              type="text"
+              placeholder="CUPOM"
+              style={{ color: '#000' }}
+            />
 
             <button
               type="button"

@@ -31,7 +31,7 @@ export const Notifications = () => {
     >
       <BellNotification>
         <>
-          <FaRegBell className={totalOfNotifications !== 0 ? "shine" : ""} />
+          <FaRegBell className={totalOfNotifications !== 0 ? 'shine' : ''} />
           {totalOfNotifications !== 0 && (
             <span>
               <p>{totalOfNotifications}</p>

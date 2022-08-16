@@ -69,7 +69,7 @@ export const Container = styled.div`
       p {
         font-size: 0.9rem;
         line-height: 24px;
-        color: rgb(204,204,204);
+        color: rgb(204, 204, 204);
 
         b {
           color: #c27c2c;

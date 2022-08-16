@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
+import styled from 'styled-components';
 
-export const Container = styled.div``
+export const Container = styled.div``;
 
 export const Modal = styled(motion.main)`
   padding: 1rem;
   padding-bottom: 2.2rem;
-  color: #FFF;
+  color: #fff;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -134,4 +134,4 @@ export const Modal = styled(motion.main)`
       }
     }
   }
-`
+`;

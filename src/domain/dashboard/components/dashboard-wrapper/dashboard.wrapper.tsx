@@ -1,6 +1,4 @@
-import {
-  DASHBOARD_ROUTES
-} from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
+import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 import { Header } from '@domain/dashboard/components/Header/header.component';
 import { SideBar } from '@domain/dashboard/components/side-bar/side-bar.component';
 import { sideBarSelector } from '@domain/dashboard/components/side-bar/side-bar.store';

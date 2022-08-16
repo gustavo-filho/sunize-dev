@@ -1,8 +1,4 @@
-import {
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Error, Content, Container } from './input-component-payment.styles';
 import { useField } from 'formik';
 import { FiAlertCircle } from 'react-icons/fi';

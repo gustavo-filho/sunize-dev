@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   left: 0;
   z-index: 4;
   background-color: rgba(0, 0, 0, 0.3);
-`
+`;
 
 export const Modal = styled(motion.main)`
   padding: 1rem;
@@ -67,7 +67,7 @@ export const Modal = styled(motion.main)`
     text-align: center;
     width: 100%;
   }
-`
+`;
 
 export const Content = styled.div`
   margin-top: 1.5rem;
@@ -121,4 +121,4 @@ export const Content = styled.div`
       }
     }
   }
-`
+`;

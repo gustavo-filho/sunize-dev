@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const Container = styled.div`
   :hover {
     background-color: rgba(100, 100, 100, 0.05);
   }
-`
+`;
 
 export const MainContent = styled.main`
   display: flex;
@@ -63,7 +63,7 @@ export const MainContent = styled.main`
       display: none;
     }
   }
-`
+`;
 
 export const Buttons = styled.section`
   button {
@@ -114,4 +114,4 @@ export const Buttons = styled.section`
       }
     }
   }
-`
+`;

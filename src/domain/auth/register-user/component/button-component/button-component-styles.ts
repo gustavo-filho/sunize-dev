@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.button`
   display: block;
@@ -24,4 +24,4 @@ export const Container = styled.button`
     height: 52px;
     font-size: 25px;
   }
-`
+`;

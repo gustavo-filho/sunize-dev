@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import { AccountComponentModal } from '../components/accountComponentModal/account-component-modal'
-import { IWithdrawalAccountsType } from '../types/withdrawal-accounts.type'
-import { Container, Content, MoneyArt } from './withdraw-accounts-styles'
+import React, { useState } from 'react';
+import { AccountComponentModal } from '../components/accountComponentModal/account-component-modal';
+import { IWithdrawalAccountsType } from '../types/withdrawal-accounts.type';
+import { Container, Content, MoneyArt } from './withdraw-accounts-styles';
 
-export function WithdrawalAccounts({
-  dataBanking,
-}: IWithdrawalAccountsType) {
-  const [modalEditAccount, setModalEditAccount] = useState(false)
+export function WithdrawalAccounts({ dataBanking }: IWithdrawalAccountsType) {
+  const [modalEditAccount, setModalEditAccount] = useState(false);
 
   return (
     <Container>
@@ -22,10 +20,12 @@ export function WithdrawalAccounts({
           </p>
           <p>
             Agência: {dataBanking.BankData.Agency}-
-            {dataBanking.BankData.AgencyDigit && dataBanking.BankData.AgencyDigit}
+            {dataBanking.BankData.AgencyDigit &&
+              dataBanking.BankData.AgencyDigit}
           </p>
           <p>
-            Conta: {dataBanking.BankData.Account}-{dataBanking.BankData.AccountDigit}
+            Conta: {dataBanking.BankData.Account}-
+            {dataBanking.BankData.AccountDigit}
           </p>
           <p>Tipo de Conta: {dataBanking.BankData.AccountType}</p>
         </div>
@@ -38,6 +38,5 @@ export function WithdrawalAccounts({
         updateModal={true}
       />
     </Container>
-  )
+  );
 }
-

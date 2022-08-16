@@ -1,7 +1,6 @@
-
-import styled from 'styled-components'
-import { BsKey } from 'react-icons/bs'
-import { Form } from 'formik'
+import styled from 'styled-components';
+import { BsKey } from 'react-icons/bs';
+import { Form } from 'formik';
 
 export const FormContainer = styled(Form)`
   .field {
@@ -38,8 +37,8 @@ export const FormContainer = styled(Form)`
     width: 100%;
     max-width: 185px;
   }
-`
+`;
 
 export const KeyIcon = styled(BsKey)`
   transform: rotate(-45deg);
-`
+`;

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -58,7 +58,7 @@ export const Container = styled.div`
       top: 2px;
     }
   }
-`
+`;
 export const Navigation = styled.div`
   margin-bottom: 12px;
 
@@ -83,14 +83,14 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -162,7 +162,7 @@ export const BoxWrapper = styled.div`
     border-radius: 0 0 12px 12px;
     padding: 2rem 1rem;
   }
-`
+`;
 export const LoaderContainer = styled.div`
   position: absolute;
   top: 0;
@@ -191,4 +191,4 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;

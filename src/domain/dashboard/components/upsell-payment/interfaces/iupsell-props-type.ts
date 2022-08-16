@@ -1,5 +1,5 @@
 export interface UpsellProps {
-    toggle(): void
-    state: number
-    productIds?: number[]
+  toggle(): void;
+  state: number;
+  productIds?: number[];
 }

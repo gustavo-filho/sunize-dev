@@ -1,5 +1,8 @@
 import {
-  CardBody, CardContent, CircleIcon, Label
+  CardBody,
+  CardContent,
+  CircleIcon,
+  Label,
 } from '@domain/admin/components/chart-card/chart-card.styles';
 import { LineCardChart } from '@domain/admin/components/chart-card/components/line-card-chart/line-card-chart.component';
 import { Box } from '@mui/material';

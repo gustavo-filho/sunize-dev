@@ -21,6 +21,7 @@ import { MdDashboard } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
 import { Container } from './video-class-header.styles';
+import { theme } from '@shared/styles/theme.constants';
 
 export const VideoClassHeader = () => {
   const [isOpenBoxInfo, setIsOpenBoxInfo] = useState(false);
@@ -41,13 +42,21 @@ export const VideoClassHeader = () => {
           width: '280px',
         }}
       >
-        <Hamburger
-          color={'#ffffff'}
-          toggled={sidebar.isOpen}
-          onToggle={() => {
-            dispatch(TOGGLE_SIDE_BAR());
+        <div
+          style={{
+            border: `1px solid ${theme.colors.yellow}`,
+            borderRadius: '5px',
           }}
-        />
+        >
+          <Hamburger
+            color={'#ffffff'}
+            size={20}
+            toggled={sidebar.isOpen}
+            onToggle={() => {
+              dispatch(TOGGLE_SIDE_BAR());
+            }}
+          />
+        </div>
       </div>
       <LogoAndBars>
         <img src={Logo} alt="Sunize" />
@@ -112,10 +121,7 @@ export const VideoClassHeader = () => {
                   </Button>
                 </li>
                 <li onClick={() => setIsOpenBoxInfo(false)}>
-                  <Button
-                    variant="text"
-                    onClick={signOut}
-                  >
+                  <Button variant="text" onClick={signOut}>
                     <span>
                       <FaSignOutAlt />
                       Sair

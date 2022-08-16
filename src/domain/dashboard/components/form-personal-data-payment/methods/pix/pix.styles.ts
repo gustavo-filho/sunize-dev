@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { shade } from 'polished';
 
 interface SubmitCheckProps {
-  loading: number
+  loading: number;
 }
 
 export const Img = styled.div`
@@ -36,7 +36,7 @@ export const Img = styled.div`
       height: 330px;
     }
   }
-`
+`;
 
 export const Container = styled.div`
   margin-top: 2rem;
@@ -86,7 +86,7 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export const ButtonSubmit = styled.button<SubmitCheckProps>`
   text-transform: uppercase;
@@ -119,4 +119,4 @@ export const ButtonSubmit = styled.button<SubmitCheckProps>`
     justify-content: space-between;
     padding: 0 1.5rem;
   }
-`
+`;

@@ -13,10 +13,10 @@ export const Products = ({ userData }: UserProps) => {
     const profit = userData.profit.toLocaleString('pt-br', {
       style: 'currency',
       currency: 'BRL',
-    })
+    });
 
-    return profit
-  }, [userData.profit])
+    return profit;
+  }, [userData.profit]);
 
   return (
     <Container>
@@ -32,7 +32,7 @@ export const Products = ({ userData }: UserProps) => {
       </h1>
       <section>
         {userData.user.products &&
-          userData.user.products.map((product) => (
+          userData.user.products.map(product => (
             <BoxProduct block key={product.id} product={product} />
           ))}
       </section>
@@ -42,10 +42,10 @@ export const Products = ({ userData }: UserProps) => {
       </h1>
       <section>
         {userData.user.purcharses &&
-          userData.user.purcharses.map((purcharse) => (
+          userData.user.purcharses.map(purcharse => (
             <BoxProduct key={purcharse.id} product={purcharse} />
           ))}
       </section>
     </Container>
-  )
+  );
 };

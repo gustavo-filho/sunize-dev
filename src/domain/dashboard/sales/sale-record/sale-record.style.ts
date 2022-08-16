@@ -6,11 +6,10 @@ export const useStyles = makeStyles({
   tableRow: {
     borderBottom: '1px solid #61616e !important',
     '& .MuiTableCell-root': {
-      borderBottom: 'none'
-    }
+      borderBottom: 'none',
+    },
   },
 });
-
 
 export const Center = styled.div`
   display: flex;
@@ -65,10 +64,10 @@ export const Divisor = styled.div`
 `;
 
 export const Container = styled.div`
-    max-width: 1640px;
-    width: 100%;
-    margin: 60px auto 0px auto;
-    padding: 0 6%;
+  max-width: 1640px;
+  width: 100%;
+  margin: 60px auto 0px auto;
+  padding: 0 6%;
 
   > h2 {
     margin-bottom: 32px;
@@ -76,7 +75,7 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Nunito',sans-serif;
+    font-family: 'Nunito', sans-serif;
     margin-left: 30px;
   }
 
@@ -84,7 +83,7 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: 400;
     color: #818181;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 50px;
     margin-left: 30px;
   }

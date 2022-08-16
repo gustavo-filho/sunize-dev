@@ -17,7 +17,11 @@ export const Affiliates = ({ user, userData }: UserProps) => {
       <section>
         {userData.user.affiliates &&
           userData.user.affiliates.map(affiliate => (
-            <BoxAffiliates key={affiliate.id} affiliates={affiliate} user={user} />
+            <BoxAffiliates
+              key={affiliate.id}
+              affiliates={affiliate}
+              user={user}
+            />
           ))}
       </section>
     </Container>

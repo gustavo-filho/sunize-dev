@@ -17,7 +17,6 @@ export const ComplaintsPending = () => {
   const [page, setPage] = useState(0);
   const totalPages = 3;
 
-
   return (
     <Container>
       <AnimationContainer>

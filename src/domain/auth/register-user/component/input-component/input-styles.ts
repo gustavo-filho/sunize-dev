@@ -1,8 +1,7 @@
+import { Tooltip } from '@shared/components/Tooltip/tooltip.component';
+import styled, { css } from 'styled-components';
 
-import { Tooltip } from '@shared/components/Tooltip/tooltip.component'
-import styled, { css } from 'styled-components'
-
-import { ContainerProps } from './interfaces/icontainer-props-type'
+import { ContainerProps } from './interfaces/icontainer-props-type';
 
 export const Content = styled.div`
   .field {
@@ -22,7 +21,7 @@ export const Content = styled.div`
     padding-top: 0.5rem;
     outline: none;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
@@ -87,7 +86,7 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100%;
     font-size: 16px;
-    color: #FFFFFF;
+    color: #ffffff;
     outline: none;
   }
   /* Cor de fundo do autocomplete */
@@ -125,7 +124,7 @@ export const Container = styled.div<ContainerProps>`
       font-size: 21px;
     }
   }
-`
+`;
 
 export const Error = styled(Tooltip)`
   height: 20px;
@@ -139,4 +138,4 @@ export const Error = styled(Tooltip)`
       border-color: #ff5252 transparent;
     }
   }
-`
+`;

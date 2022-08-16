@@ -4,13 +4,14 @@ import { useStyles } from '@domain/dashboard/products/my-content/components/cont
 
 interface ContentProps {
   image: string;
+  link?: string;
 }
 
-export const Content = ({ image, ...rest }: ContentProps) => {
+export const Content = ({ image, link, ...rest }: ContentProps) => {
   const classes = useStyles();
   return (
     <Link
-      to={DASHBOARD_ROUTES.MY_PACKAGES}
+      to={link || DASHBOARD_ROUTES.MY_PACKAGES}
       className={classes.contentBox}
       {...rest}
     >

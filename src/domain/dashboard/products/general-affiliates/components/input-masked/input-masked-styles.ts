@@ -62,20 +62,20 @@ export const Container = styled.div<ContainerProps>`
     color: #c2c2c2;
 
     ${({ isFilled }) =>
-    !!isFilled &&
-    css`
+      !!isFilled &&
+      css`
         color: #c2c2c2;
       `}
 
     ${({ isErrored }) =>
-    !!isErrored &&
-    css`
+      !!isErrored &&
+      css`
         color: #ff5252;
       `}
 
     ${({ isFocused }) =>
-    !!isFocused &&
-    css`
+      !!isFocused &&
+      css`
         color: #c2c2c2;
       `}
   }

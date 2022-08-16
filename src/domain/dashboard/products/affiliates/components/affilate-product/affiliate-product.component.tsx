@@ -16,7 +16,7 @@ import {
   Modal,
   Overlay,
   PaginationContainer,
-  SellLink
+  SellLink,
 } from './affiliate-product.styles';
 
 interface IAffiliateProduct {

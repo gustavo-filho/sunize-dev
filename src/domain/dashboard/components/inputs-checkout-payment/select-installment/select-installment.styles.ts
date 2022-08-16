@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
-  isFocused: number
-  isFilled: number
+  isFocused: number;
+  isFilled: number;
 }
 
 export const Content = styled.div`
@@ -29,7 +29,7 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
@@ -84,4 +84,4 @@ export const Container = styled.div<ContainerProps>`
       color: #c2c2c2;
     }
   }
-`
+`;

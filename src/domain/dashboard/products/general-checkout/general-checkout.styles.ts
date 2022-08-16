@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -59,7 +59,7 @@ export const Container = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
@@ -67,7 +67,7 @@ export const LinkNonActive = styled(Link)`
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -87,32 +87,31 @@ export const BoxWrapper = styled.div`
     width: 100%;
 
     button {
+      margin-bottom: 0.5rem;
 
-    margin-bottom: 0.5rem;
+      cursor: pointer;
+      width: 250px;
+      height: 40px;
+      background: rgba(194, 124, 44, 0.9);
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
 
-    cursor: pointer;
-    width: 250px;
-    height: 40px;
-    background: rgba(194, 124, 44, 0.9);
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
+      margin-top: 2rem;
+      border: 0;
+      border-radius: 4px;
+      transition: background 0.2s ease;
 
-    margin-top: 2rem;
-    border: 0;
-    border-radius: 4px;
-    transition: background 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
-    &:hover {
-      background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
+      &:hover {
+        background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
+      }
     }
   }
-}
 
   > a {
     margin: 0 1rem;
@@ -134,7 +133,7 @@ export const BoxWrapper = styled.div`
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -164,7 +163,7 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
 
 export const FormGroup = styled.div`
   label {
@@ -217,8 +216,7 @@ export const FormGroup = styled.div`
     opacity: 0.89;
     font-size: 15px;
   }
-`
-
+`;
 
 export const Navigation = styled.div`
   margin-bottom: 10px;
@@ -244,7 +242,7 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const W100 = styled.div`
   width: 100%;
@@ -289,7 +287,7 @@ export const W100 = styled.div`
       height: 20px;
     }
   }
-`
+`;
 
 export const ContainerBox = styled.div`
   display: flex;
@@ -298,7 +296,7 @@ export const ContainerBox = styled.div`
   max-width: 930px;
   margin: 0 auto;
   padding: 0 2%;
-`
+`;
 
 export const OptionSingle = styled.div`
   display: flex;
@@ -308,7 +306,6 @@ export const OptionSingle = styled.div`
   margin-bottom: 2.5rem;
 
   .phoneInput {
-
     width: 100%;
     height: 30px;
     font-size: 1.2rem;
@@ -316,7 +313,6 @@ export const OptionSingle = styled.div`
     color: #4b4b4b;
     font-weight: 600;
     transition: border 0.2s ease;
-
   }
 
   .phoneLabel {
@@ -423,13 +419,12 @@ export const OptionSingle = styled.div`
       }
     }
   }
-`
+`;
 
 export const SectionOption = styled.section`
   margin-top: 1.5rem;
 
   label {
-
     font-size: 1.3rem;
     color: #848484;
     margin-bottom: 0.4rem;
@@ -481,7 +476,7 @@ export const SectionOption = styled.section`
       border: 2px solid #c27c2c;
     }
   }
-`
+`;
 
 export const PaymentMethod = styled.div`
   background-color: ${shade(0.04, '#27293d')};
@@ -493,7 +488,7 @@ export const PaymentMethod = styled.div`
     width: 20px;
     height: 20px;
   }
-`
+`;
 export const Error = styled.span`
   color: red;
-`
+`;

@@ -66,7 +66,8 @@ export const NavContainer = styled.nav`
     }
   }
 
-  a,span {
+  a,
+  span {
     color: #fff;
     display: flex;
     align-items: center;

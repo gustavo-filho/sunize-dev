@@ -20,7 +20,7 @@ export const LineCardChart = ({ color, data }: ChartProps) => {
             label: String(item.label),
             data: item.data,
             backgroundColor: hexToRgba(color, 0.6),
-            
+
             fill: true,
             borderColor: color,
             borderWidth: 1,

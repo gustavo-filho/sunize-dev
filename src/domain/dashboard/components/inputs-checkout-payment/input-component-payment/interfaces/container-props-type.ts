@@ -1,5 +1,5 @@
 export interface ContainerPropsType {
-    isFocused: number
-    isFilled: number
-    isErrored: number
-  }
+  isFocused: number;
+  isFilled: number;
+  isErrored: number;
+}

@@ -1,6 +1,6 @@
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -34,7 +34,7 @@ export const Container = styled.div`
     font-family: 'Nonito', sans-serif;
     margin-bottom: 50px;
   }
-`
+`;
 
 export const Navigation = styled.div`
   margin-bottom: 10px;
@@ -60,7 +60,7 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
@@ -73,7 +73,7 @@ export const LinkNonActive = styled(Link)`
   &:hover {
     filter: opacity(0.5);
   }
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -126,7 +126,7 @@ export const BoxWrapper = styled.div`
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
   }
-`
+`;
 
 export const ProductImage = styled.div`
   width: 100%;
@@ -199,7 +199,7 @@ export const ProductImage = styled.div`
       font-size: 4rem;
     }
   }
-`
+`;
 
 export const UpdateEbook = styled.div`
   margin-top: 3rem;
@@ -254,7 +254,7 @@ export const UpdateEbook = styled.div`
       margin-right: 0.4rem;
     }
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -284,7 +284,7 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
 
 export const NotificationSingle = styled.div`
   display: flex;
@@ -340,7 +340,7 @@ export const NotificationSingle = styled.div`
       margin-top: 0.7rem;
     }
   }
-`
+`;
 
 export const FormGroup = styled.div`
   label {
@@ -394,7 +394,7 @@ export const FormGroup = styled.div`
     opacity: 0.89;
     font-size: 15px;
   }
-`
+`;
 
 export const OptionSingle = styled.div`
   display: flex;
@@ -407,7 +407,6 @@ export const OptionSingle = styled.div`
     flex-direction: column;
     margin-right: auto;
 
-
     outline: none !important;
 
     input {
@@ -419,7 +418,6 @@ export const OptionSingle = styled.div`
       margin-bottom: 1rem !important;
       outline: none !important;
     }
-
   }
 
   input[type='text'] {
@@ -436,7 +434,6 @@ export const OptionSingle = styled.div`
     :focus {
       border: 2px solid #c27c2c;
     }
-
   }
 
   h1 {
@@ -446,7 +443,7 @@ export const OptionSingle = styled.div`
   }
 
   .optionTitle {
-    margin-top:1rem;
+    margin-top: 1rem;
   }
 
   main {
@@ -476,7 +473,6 @@ export const OptionSingle = styled.div`
       }
     }
   }
-
 
   > select {
     cursor: pointer;
@@ -513,7 +509,7 @@ export const OptionSingle = styled.div`
       }
     }
   }
-`
+`;
 
 export const SellLink = styled.section`
   width: 100%;
@@ -559,4 +555,4 @@ export const SellLink = styled.section`
       background-color: ${shade(0.3, '#df8b2b')};
     }
   }
-`
+`;

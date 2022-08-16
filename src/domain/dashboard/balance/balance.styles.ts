@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -19,37 +19,36 @@ export const Container = styled.div`
     color: #818181;
     margin-top: 10px;
   }
-  `
+`;
 export const WrapperNavigation = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+
+  &:first-child {
+    margin-right: 40px;
+  }
+
+  .active {
+    background-color: #27293d;
+    color: rgba(129, 129, 129, 1);
+    font-weight: 600;
+  }
+
+  a {
+    color: rgba(129, 129, 129, 1);
+    text-align: center;
+    width: 180px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    height: 43px;
+    border-radius: 8px 8px 0 0;
+  }
 
-    &:first-child {
-      margin-right: 40px;
-    }
-
-    .active {
-      background-color: #27293d;
-      color: rgba(129, 129, 129, 1);
-      font-weight: 600;
-    }
-
-    a {
-      color: rgba(129, 129, 129, 1);
-      text-align: center;
-      width: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 43px;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .AlignAccounts {
-      display: flex;
-      flex-direction: row;
-      margin: 0 auto;
-    }
-  
-`
+  .AlignAccounts {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+`;

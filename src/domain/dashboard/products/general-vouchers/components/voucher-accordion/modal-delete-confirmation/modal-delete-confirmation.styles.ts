@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
+import styled from 'styled-components';
 
-export const Container = styled.div``
+export const Container = styled.div``;
 
 export const Modal = styled(motion.main)`
   padding: 1rem;
@@ -20,9 +20,9 @@ export const Modal = styled(motion.main)`
 
   background-color: rgb(30, 31, 50);
 
-left: 50% !important;
-top: 50% !important;
-transform: translate(-50%, -50%) !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
   > button {
     cursor: pointer;
@@ -132,4 +132,4 @@ transform: translate(-50%, -50%) !important;
       }
     }
   }
-`
+`;

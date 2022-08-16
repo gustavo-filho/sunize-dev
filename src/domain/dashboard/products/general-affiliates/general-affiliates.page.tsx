@@ -10,8 +10,13 @@ import { ModalAddGoal } from './components/modal-add-goal/modal-add-goal.compone
 import { Field, Form, Formik } from 'formik';
 
 import {
-  BoxWrapper, Container, LinkNonActive, LoaderContainer, Navigation, OptionSingle,
-  TaxContainer
+  BoxWrapper,
+  Container,
+  LinkNonActive,
+  LoaderContainer,
+  Navigation,
+  OptionSingle,
+  TaxContainer,
 } from './general-affiliates.styles';
 
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
@@ -25,7 +30,7 @@ import { TermsEditor } from './components/terms-editor/terms-editor.component';
 // import { ASYNC_GET_PRODUCTS, productSelector } from '../products.store';
 
 export const GeneralAffiliatesPage = () => {
-  const {user} = useUser();
+  const { user } = useUser();
 
   const { id: productId } = useParams();
 
@@ -92,14 +97,11 @@ export const GeneralAffiliatesPage = () => {
 
   async function handleSubmit(values: any, { setSubmitting }: any) {
     try {
-      await api.put(
-        `/users/${user?.id}/products/${productId}`,
-        {
-          system_affiliate: isAffiliateBoolean,
-          commission: Number(defaultCommission),
-          affiliate_tax: Number(defaultTax),
-        },
-      );
+      await api.put(`/users/${user?.id}/products/${productId}`, {
+        system_affiliate: isAffiliateBoolean,
+        commission: Number(defaultCommission),
+        affiliate_tax: Number(defaultTax),
+      });
 
       toast.success('Dados atualizados com sucesso!');
     } catch (err) {

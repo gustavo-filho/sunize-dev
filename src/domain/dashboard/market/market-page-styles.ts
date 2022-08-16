@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -29,7 +29,7 @@ export const Container = styled.div`
       padding: 0 6%;
     }
   }
-`
+`;
 
 export const InputSearch = styled.div`
   margin-top: 10px;
@@ -59,7 +59,7 @@ export const InputSearch = styled.div`
       font-size: 15px;
     }
   }
-`
+`;
 
 export const Search = styled.div`
   display: flex;
@@ -77,7 +77,7 @@ export const Search = styled.div`
     background-color: ${shade(0.1, '#df8b2b')};
     fill: white;
   }
-`
+`;
 
 export const Filter = styled.div`
   display: flex;
@@ -148,7 +148,7 @@ export const Filter = styled.div`
       }
     }
   }
-`
+`;
 
 export const ProductWrapper = styled.div`
   display: flex;
@@ -159,7 +159,7 @@ export const ProductWrapper = styled.div`
       justify-content: center;
     }
   }
-`
+`;
 
 export const VerMais = styled.div`
   width: 100%;
@@ -182,8 +182,8 @@ export const VerMais = styled.div`
       color: white;
     }
   }
-`
-export const SearchAndResults = styled.div``
+`;
+export const SearchAndResults = styled.div``;
 export const SearchResults = styled.div`
   display: flex;
   flex-direction: column;
@@ -206,4 +206,4 @@ export const SearchResults = styled.div`
       border-radius: 4px;
     }
   }
-`
+`;

@@ -1,16 +1,16 @@
-import styled, { css, keyframes } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css, keyframes } from 'styled-components';
+import { shade } from 'polished';
 
 interface CheckProps {
-  actual: number | string | boolean
-  option: number | string | boolean
+  actual: number | string | boolean;
+  option: number | string | boolean;
 }
 interface Props {
-  name: string
-  methodActive: string
+  name: string;
+  methodActive: string;
 }
 interface ISubmitCheckProps {
-  loading?: number
+  loading?: number;
 }
 
 const jump = keyframes`
@@ -23,7 +23,7 @@ const jump = keyframes`
   100% {
     transform: translateY(0);
   }
-`
+`;
 
 export const Container = styled.div`
   padding: 0 5% 5%;
@@ -37,12 +37,12 @@ export const Container = styled.div`
     color: #0a215b;
     font-weight: 800;
     margin-top: 1.2rem;
-    margin-bottom: 1.0rem;
+    margin-bottom: 1rem;
   }
   @media (max-width: 500px) {
     padding-bottom: 2rem;
   }
-`
+`;
 
 export const PixInfo = styled.div`
   display: flex;
@@ -66,13 +66,13 @@ export const PixInfo = styled.div`
       height: 2.4rem;
     }
   }
-`
+`;
 
 export const RadioGroup = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1rem;
-`
+`;
 
 export const Option = styled.div`
   display: flex;
@@ -84,7 +84,7 @@ export const Option = styled.div`
   span {
     font-weight: 500;
   }
-`
+`;
 
 export const Check = styled.div<CheckProps>`
   width: 18px;
@@ -108,7 +108,7 @@ export const Check = styled.div<CheckProps>`
         background-color: #e0aa4b;
       `}
   }
-`
+`;
 
 export const Voucher = styled.footer`
   width: 100%;
@@ -146,7 +146,7 @@ export const Voucher = styled.footer`
   @media (max-width: 1000px) {
     display: flex;
   }
-`
+`;
 
 export const PersonType = styled.div`
   margin-top: 3rem;
@@ -181,7 +181,7 @@ export const PersonType = styled.div`
       margin-left: 0.8rem;
     }
   }
-`
+`;
 
 export const ButtonSubmit = styled.button<ISubmitCheckProps>`
   display: flex;
@@ -209,11 +209,11 @@ export const ButtonSubmit = styled.button<ISubmitCheckProps>`
   :hover {
     background-color: ${shade(0.2, '#00dd7e')};
   }
-`
+`;
 
 export const Header = styled.div`
   display: flex;
-`
+`;
 
 export const Method = styled.div<Props>`
   flex: 1;
@@ -271,7 +271,7 @@ export const Method = styled.div<Props>`
       height: 2.3rem;
     }
   }
-`
+`;
 
 export const CheckIcon = styled.div`
   position: absolute;
@@ -291,23 +291,23 @@ export const CheckIcon = styled.div`
     width: 2rem;
     height: 2rem;
   }
-`
+`;
 
 export const Content = styled.div`
   display: flex;
   @media (max-width: 700px) {
     flex-direction: column;
   }
-`
+`;
 
 export const ContentLeft = styled.div`
   flex: 0.6;
-`
+`;
 
 export const ContentRight = styled.div`
   flex: 0.4;
   margin-top: 1rem;
-`
+`;
 
 export const Validity = styled.div`
   display: flex;
@@ -326,7 +326,7 @@ export const Validity = styled.div`
       }
     }
   }
-`
+`;
 
 export const Img = styled.div`
   position: relative;
@@ -359,7 +359,7 @@ export const Img = styled.div`
       height: 330px;
     }
   }
-`
+`;
 
 export const ContentGenerated = styled.div`
   display: flex;
@@ -399,4 +399,4 @@ export const ContentGenerated = styled.div`
       background-color: ${shade(0.15, '#54c989')};
     }
   }
-`
+`;

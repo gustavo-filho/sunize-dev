@@ -1,3 +1,3 @@
 export interface ParamsDataType {
-    productId: string
+  productId: string;
 }

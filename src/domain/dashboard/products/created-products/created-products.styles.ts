@@ -38,7 +38,7 @@ export const AnimationContainer = styled.div`
     font-weight: 200;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Nunito',sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 
   > h2 {
@@ -129,8 +129,8 @@ export const Progress = styled.div<ProgressProps>`
     span {
       border-radius: 50px;
       width: ${({ progress }) =>
-    progress &&
-    css`
+        progress &&
+        css`
           ${progress + '%'}
         `};
       display: block;

@@ -13,8 +13,7 @@ export const useStyles = makeStyles({
 
     '&:hover': {
       marginTop: '-8px',
-      boxShadow:
-        '0 0 13px #595959',
+      boxShadow: '0 0 13px #595959',
     },
     '& img': {
       height: '45vh',

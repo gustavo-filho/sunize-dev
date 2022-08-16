@@ -1,4 +1,4 @@
 export interface IPropsEvaluation {
-    productId: number
-    withoutNumber?: boolean
+  productId: number;
+  withoutNumber?: boolean;
 }

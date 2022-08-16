@@ -32,7 +32,9 @@ export const ProductBoxRejected = ({ product }: IProps) => {
 
           <div>
             <strong>{product.title}</strong>
-            <p>Data reprovação: {moment(product.createdAt).format('DD/MM/YYYY')}</p>
+            <p>
+              Data reprovação: {moment(product.createdAt).format('DD/MM/YYYY')}
+            </p>
             <p>Reprovado por: Indefinido</p>
           </div>
         </main>

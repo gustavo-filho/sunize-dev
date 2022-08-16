@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { shade } from 'polished';
 
-export const Container = styled.div``
+export const Container = styled.div``;
 
 export const ModalAddAccount = styled.div`
   height: 500px;
-`
+`;
 
 export const ContentModal = styled.div`
   position: fixed;
@@ -59,7 +59,7 @@ export const ContentModal = styled.div`
       text-align: center;
     }
   }
-`
+`;
 
 export const Overlay = styled.div`
   position: fixed;
@@ -69,7 +69,7 @@ export const Overlay = styled.div`
   background-color: rgba(55, 59, 68, 0.5);
   width: 100vw;
   height: 100vh;
-`
+`;
 
 export const FormGroup = styled.div`
   display: flex;
@@ -100,7 +100,7 @@ export const FormGroup = styled.div`
     justify-content: center;
     margin: 1rem 0;
   }
-`
+`;
 
 export const FormGroupTop = styled.div`
   margin-top: 1.2rem;
@@ -119,7 +119,7 @@ export const FormGroupTop = styled.div`
       font-weight: 600;
     }
   }
-`
+`;
 
 export const InputRadio = styled.div`
   display: flex;
@@ -137,7 +137,7 @@ export const InputRadio = styled.div`
     margin: 0.4rem 0;
     justify-content: center;
   }
-`
+`;
 export const AccountFields = styled.div`
   display: flex;
   justify-content: center;
@@ -160,7 +160,7 @@ export const AccountFields = styled.div`
       width: 80%;
     }
   }
-`
+`;
 export const Errors = styled.div`
   width: 70%;
   margin: 0 auto;
@@ -172,7 +172,7 @@ export const Errors = styled.div`
     color: red;
     margin-bottom: 0.3rem;
   }
-`
+`;
 
 export const PersonType = styled.div`
   margin-top: 1.5rem;
@@ -209,10 +209,10 @@ export const PersonType = styled.div`
       margin-left: 0.8rem;
     }
   }
-`
+`;
 
 export const Error = styled.p`
   color: #f31;
   font-size: 0.875rem;
   margin-top: 0.25rem;
-`
+`;

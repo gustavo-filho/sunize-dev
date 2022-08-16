@@ -39,7 +39,10 @@ export const MyContent = () => {
           PAINEL DO ALUNO
           </h2>*/}
         <div className={classes.mainContent}>
-          <h2 className={classes.title} style={{ fontSize: '2rem', width: '100%' }}>
+          <h2
+            className={classes.title}
+            style={{ fontSize: '2rem', width: '100%' }}
+          >
             Meus Produtos
           </h2>
           <Carousel
@@ -53,14 +56,17 @@ export const MyContent = () => {
                 <Content
                   key={el.title}
                   image={
-                    'https://cdn.cademi.com.br/cache/bkJT4aMHHwr9isatDfIpbHKsJH6iJgHDsUPJAFdk-550x550-resized.jpg'
+                    'https://cdn.areademembros.com/cache/j6dj1UFwkPFyWAFUhm3QzTkjUFiPTTnzm7EsrcpY-550x550-resized.jpg'
                   }
                 />
               ))}
           </Carousel>
         </div>
         <div className={classes.mainContent}>
-          <h2 className={classes.title} style={{ fontSize: '2rem', width: '100%' }}>
+          <h2
+            className={classes.title}
+            style={{ fontSize: '2rem', width: '100%' }}
+          >
             Meus Pacotes
           </h2>
           <Carousel
@@ -74,7 +80,7 @@ export const MyContent = () => {
                 <Content
                   key={el.title}
                   image={
-                    'https://cdn.cademi.com.br/cache/Babrpv1we3fU0xKUOS9lXpvZar3usmnDx7DWG2kz-550x550-resized.jpg'
+                    'https://cdn.areademembros.com/cache/j6dj1UFwkPFyWAFUhm3QzTkjUFiPTTnzm7EsrcpY-550x550-resized.jpg'
                   }
                   {...{ style: { filter: 'grayscale(1)' } }}
                 />

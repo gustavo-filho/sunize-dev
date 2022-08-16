@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -22,11 +22,11 @@ export const Container = styled.div`
       font-weight: 600;
     }
   }
-`
+`;
 
 export const BoxWrapper = styled.div`
   overflow-y: auto;
-`
+`;
 
 export const BoxSingle = styled.div`
   background-color: #f7f7f7;
@@ -41,4 +41,4 @@ export const BoxSingle = styled.div`
   :hover {
     background-color: #d7dbff;
   }
-`
+`;

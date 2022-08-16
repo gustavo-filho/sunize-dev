@@ -187,7 +187,6 @@ export const OptionSingle = styled.div`
     :focus {
       border: 2px solid #c27c2c;
     }
-
   }
 
   h1 {
@@ -197,7 +196,7 @@ export const OptionSingle = styled.div`
   }
 
   .optionTitle {
-    margin-top:1rem;
+    margin-top: 1rem;
   }
 
   main {
@@ -226,7 +225,6 @@ export const OptionSingle = styled.div`
       }
     }
   }
-
 
   > select {
     cursor: pointer;

@@ -1,13 +1,13 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 interface ContainerProps {
-  accordion: number
+  accordion: number;
 }
 
 interface AccordionProps {
-  accordion: number
-  accordionHeight: number
+  accordion: number;
+  accordionHeight: number;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -36,24 +36,24 @@ export const Container = styled.div<ContainerProps>`
       font-size: 1.1rem;
     }
     ${({ accordion }) =>
-    !!accordion &&
-    css`
+      !!accordion &&
+      css`
         background-color: #df8b2b;
         strong {
           color: #f5f5f5;
         }
       `}
-      @media (max-width: 768px) {
-        max-width: 450px;
-      }
-      @media (max-width: 500px) {
-        max-width: 330px;
-      }
-      @media (max-width: 280px) {
-        max-width: 240px;
-      }
+    @media (max-width: 768px) {
+      max-width: 450px;
+    }
+    @media (max-width: 500px) {
+      max-width: 330px;
+    }
+    @media (max-width: 280px) {
+      max-width: 240px;
+    }
   }
-`
+`;
 
 export const Accordion = styled.section<AccordionProps>`
   overflow: hidden;
@@ -96,4 +96,4 @@ export const Accordion = styled.section<AccordionProps>`
   @media (max-width: 280px) {
     max-width: 240px;
   }
-`
+`;

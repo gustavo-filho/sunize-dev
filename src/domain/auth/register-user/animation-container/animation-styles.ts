@@ -1,6 +1,5 @@
-import { appearFromLeft } from '@shared/styles/animations.styles'
-import styled from 'styled-components'
-
+import { appearFromLeft } from '@shared/styles/animations.styles';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   animation: ${appearFromLeft} 0.7s ease;
@@ -17,4 +16,4 @@ export const Container = styled.div`
   &::-webkit-scrollbar-track {
     background: #f9f9f9;
   }
-`
+`;

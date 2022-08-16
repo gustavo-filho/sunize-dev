@@ -1,17 +1,17 @@
-import React, { CSSProperties, useCallback } from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import React, { CSSProperties, useCallback } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import { Container } from './pagination.styles'
+import { Container } from './pagination.styles';
 
 interface PaginationData {
-  totalPages: number
-  offset: number
-  setOffset: CallableFunction
-  style?: CSSProperties
+  totalPages: number;
+  offset: number;
+  setOffset: CallableFunction;
+  style?: CSSProperties;
 }
 
-const MAX_ITEMS = 5
-const MAX_LEFT = (MAX_ITEMS - 1) / 2
+const MAX_ITEMS = 5;
+const MAX_LEFT = (MAX_ITEMS - 1) / 2;
 
 const Pagination: React.FC<PaginationData> = ({
   totalPages,
@@ -19,14 +19,14 @@ const Pagination: React.FC<PaginationData> = ({
   setOffset,
   style,
 }) => {
-  const first = Math.max(offset - MAX_LEFT, 1)
+  const first = Math.max(offset - MAX_LEFT, 1);
 
   const onPageChange = useCallback(
     (page: number) => {
-      setOffset(page - 1)
+      setOffset(page - 1);
     },
     [setOffset],
-  )
+  );
 
   return (
     <Container total={totalPages} style={style && style}>
@@ -35,7 +35,7 @@ const Pagination: React.FC<PaginationData> = ({
       </button>
       {Array.from({ length: Math.min(MAX_ITEMS, totalPages) })
         .map((_, index) => index + first)
-        .map((page) => (
+        .map(page => (
           <button
             onClick={() => onPageChange(page)}
             key={page}
@@ -52,7 +52,7 @@ const Pagination: React.FC<PaginationData> = ({
       </button>
       <div className="bar"></div>
     </Container>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

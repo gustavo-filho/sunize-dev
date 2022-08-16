@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { ContainerProps } from './types/container-props-types'
+import styled, { css } from 'styled-components';
+import { ContainerProps } from './types/container-props-types';
 
 export const Content = styled.div`
   margin-top: 1rem;
@@ -20,7 +20,7 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
@@ -45,13 +45,13 @@ export const Container = styled.div<ContainerProps>`
     margin-right: 12px;
     color: #c2c2c2;
     ${({ isFocused }) =>
-    isFocused &&
-    css`
+      isFocused &&
+      css`
         color: #e7af07;
       `}
     ${({ isFilled }) =>
-    isFilled &&
-    css`
+      isFilled &&
+      css`
         color: #e7af07;
       `}
   }
@@ -77,4 +77,4 @@ export const Container = styled.div<ContainerProps>`
       font-weight: 600;
     }
   }
-`
+`;

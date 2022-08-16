@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   /* position: absolute; */
@@ -26,9 +26,9 @@ export const Container = styled.div`
       justify-content: start;
       padding-left: 1rem;
       min-height: 5.65rem;
+    }
   }
-  }
-`
+`;
 
 export const ProductImage = styled.div`
   background-color: #b4b4b4;
@@ -44,11 +44,11 @@ export const ProductImage = styled.div`
     height: 100px;
     opacity: 0.5;
   }
-`
+`;
 
 export const Img = styled.img`
   width: 100%;
-`
+`;
 
 export const Voucher = styled.footer`
   display: flex;
@@ -119,4 +119,4 @@ export const Voucher = styled.footer`
     color: #797575;
     text-align: center;
   }
-`
+`;

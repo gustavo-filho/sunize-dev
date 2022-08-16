@@ -35,7 +35,7 @@ import sunizeLogo from './assets/sunizeLogo.png';
 export function Payment() {
   // const { user } = useUser();
   const navigate = useNavigate();
-  
+
   const { productId } = useParams();
   const {
     registerProduct,

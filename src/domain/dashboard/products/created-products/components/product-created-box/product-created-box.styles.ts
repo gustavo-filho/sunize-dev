@@ -147,8 +147,8 @@ export const Status = styled.span<StatusProps>`
     status === 'IN_UPDATE'
       ? styleTypes.IN_UPDATE
       : status === 'IN_PRODUCTION'
-        ? styleTypes.IN_PRODUCTION
-        : status === 'APPROVED'
-          ? styleTypes.PUBLISHED
-          : styleTypes.UNPUBLISHED}
+      ? styleTypes.IN_PRODUCTION
+      : status === 'APPROVED'
+      ? styleTypes.PUBLISHED
+      : styleTypes.UNPUBLISHED}
 `;

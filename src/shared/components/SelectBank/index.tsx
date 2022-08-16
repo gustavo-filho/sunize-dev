@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { FaChevronDown } from 'react-icons/fa'
+import React, { useCallback, useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa';
 
 import {
   Container,
@@ -8,24 +8,24 @@ import {
   DropDownListContainer,
   DropDownList,
   ListItem,
-} from './styles'
+} from './styles';
 
 interface OptionsData {
-  value: number | string | readonly string[] | undefined
-  name: string
+  value: number | string | readonly string[] | undefined;
+  name: string;
 }
 
 interface CustomSelectData {
-  defaultName: string
-  options: OptionsData[]
-  valueBeforeName?: boolean
-  fieldName?: string
+  defaultName: string;
+  options: OptionsData[];
+  valueBeforeName?: boolean;
+  fieldName?: string;
   setFieldValue?: (
     field: string,
     value: any,
     shouldValidate?: boolean | undefined,
-  ) => void
-  funcEach?: CallableFunction
+  ) => void;
+  funcEach?: CallableFunction;
 }
 
 const CustomSelect: React.FC<CustomSelectData> = ({
@@ -36,27 +36,27 @@ const CustomSelect: React.FC<CustomSelectData> = ({
   setFieldValue,
   funcEach,
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<OptionsData>({
     value: undefined,
     name: defaultName,
-  })
-  const toggling = () => setIsOpen(!isOpen)
+  });
+  const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = useCallback(
     (value: OptionsData) => {
-      setSelectedOption(value)
+      setSelectedOption(value);
       if (fieldName && setFieldValue) {
-        setFieldValue(fieldName, value.value)
-        setIsOpen(false)
+        setFieldValue(fieldName, value.value);
+        setIsOpen(false);
       } else if (funcEach) {
-        funcEach(value.value)
+        funcEach(value.value);
       }
 
-      setIsOpen(!isOpen)
+      setIsOpen(!isOpen);
     },
     [fieldName, funcEach, isOpen, setFieldValue],
-  )
+  );
 
   return (
     <Container>
@@ -85,7 +85,7 @@ const CustomSelect: React.FC<CustomSelectData> = ({
         )}
       </DropDownContainer>
     </Container>
-  )
-}
+  );
+};
 
-export default CustomSelect
+export default CustomSelect;

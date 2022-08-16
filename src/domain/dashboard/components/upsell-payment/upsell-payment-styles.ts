@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 interface FooterDescriptionProps {
-  state: number
+  state: number;
 }
 interface ContentProps {
-  state: number
+  state: number;
 }
 
 export const Content = styled.div<ContentProps>`
@@ -59,7 +59,7 @@ export const Content = styled.div<ContentProps>`
       display: block;
     }
   }
-`
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -79,14 +79,14 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 export const DotsLoaderContainer = styled.div`
   height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const ProductImage = styled.div`
   flex: 0.2;
@@ -113,7 +113,7 @@ export const ProductImage = styled.div`
     min-height: 140px;
     margin-bottom: 1rem;
   }
-`
+`;
 
 export const Description = styled.main`
   flex: 0.8;
@@ -125,7 +125,7 @@ export const Description = styled.main`
   p {
     margin-top: 0.3rem;
   }
-`
+`;
 
 export const FooterDescription = styled.footer<FooterDescriptionProps>`
   display: flex;
@@ -191,4 +191,4 @@ export const FooterDescription = styled.footer<FooterDescriptionProps>`
       display: none;
     }
   }
-`
+`;

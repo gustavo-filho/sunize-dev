@@ -38,9 +38,7 @@ export const BoxProduct = ({ product, block = false }: Props) => {
             ID {product.id} - Data {formatDate}
           </p>
         </Description>
-        {block && (
-          <ButtonBlock block>Desativar curso</ButtonBlock>
-        )}
+        {block && <ButtonBlock block>Desativar curso</ButtonBlock>}
       </div>
     </Container>
   );

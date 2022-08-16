@@ -1,5 +1,5 @@
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -12,13 +12,13 @@ export const Container = styled.div`
     font-size: 28px;
     line-height: 27px;
     color: #ffffff;
-    font-family: 'Nunito',sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
   > p {
     font-size: 20px;
     font-weight: 400;
     color: #818181;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 50px;
   }
   @media screen and (max-width: 950px) {
@@ -27,7 +27,7 @@ export const Container = styled.div`
       overflow-x: hidden;
     }
   }
-`
+`;
 
 export const Contact = styled.div`
   margin-bottom: 1.5rem;
@@ -111,10 +111,10 @@ export const Contact = styled.div`
       }
     }
   }
-`
+`;
 
 export const AccordionWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-`
+`;

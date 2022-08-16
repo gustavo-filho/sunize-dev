@@ -27,12 +27,12 @@ export const DocumentBoxRejected = () => {
         <DocumentModal
           type="rejected"
           data={{
-            id: "1",
+            id: '1',
             document_image: null,
-            document_number: "000.000.000.00",
+            document_number: '000.000.000.00',
             document_type: 'RG',
-            document_brith_date: "10/07/1980",
-            createdAt: "2020-07-13T00:00:00.000Z",
+            document_brith_date: '10/07/1980',
+            createdAt: '2020-07-13T00:00:00.000Z',
           }}
           closeModal={() => setModal(false)}
         />

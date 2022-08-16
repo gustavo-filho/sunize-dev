@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { shade } from 'polished'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import { shade } from 'polished';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 4;
-`
+`;
 
 export const Modal = styled(motion.main)`
   padding: 1rem;
@@ -58,7 +58,7 @@ export const Modal = styled(motion.main)`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FFF;
+    color: #fff;
 
     svg {
       color: #00bfa5;
@@ -72,7 +72,7 @@ export const Modal = styled(motion.main)`
     text-align: center;
     width: 100%;
   }
-`
+`;
 
 export const Content = styled.div`
   background-color: #27293d;
@@ -112,4 +112,4 @@ export const Content = styled.div`
       }
     }
   }
-`
+`;

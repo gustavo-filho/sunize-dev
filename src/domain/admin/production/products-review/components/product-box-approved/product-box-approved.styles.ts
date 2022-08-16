@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 0.5rem;
   padding: 0.5rem 0;
   border-radius: 9px;
-  background-color: rgb(31,31,43);
+  background-color: rgb(31, 31, 43);
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
-  total: number
+  total: number;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -40,8 +40,8 @@ export const Container = styled.div<ContainerProps>`
     }
 
     ${({ total }) =>
-    total >= 5
-      ? css`
+      total >= 5
+        ? css`
             :nth-child(1):hover ~ .bar {
               left: 0;
             }
@@ -64,7 +64,7 @@ export const Container = styled.div<ContainerProps>`
               left: 87.8%;
             }
           `
-      : total >= 4
+        : total >= 4
         ? css`
             :nth-child(1):hover ~ .bar {
               left: 0;
@@ -86,7 +86,7 @@ export const Container = styled.div<ContainerProps>`
             }
           `
         : total >= 3
-          ? css`
+        ? css`
             :nth-child(1):hover ~ .bar {
               left: 0;
             }
@@ -103,7 +103,7 @@ export const Container = styled.div<ContainerProps>`
               left: 84.8%;
             }
           `
-          : total >= 2 &&
+        : total >= 2 &&
           css`
             :nth-child(1):hover ~ .bar {
               left: 0;
@@ -128,11 +128,11 @@ export const Container = styled.div<ContainerProps>`
   .bar {
     position: absolute;
     ${({ total }) =>
-    total <= 2
-      ? css`
+      total <= 2
+        ? css`
             width: 18%;
           `
-      : total <= 3
+        : total <= 3
         ? css`
             width: 15%;
           `
@@ -146,4 +146,4 @@ export const Container = styled.div<ContainerProps>`
     left: -20%;
     transition: 0.4s linear;
   }
-`
+`;

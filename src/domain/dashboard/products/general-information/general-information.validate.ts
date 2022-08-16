@@ -1,4 +1,4 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
 export const schema = Yup.object().shape({
   title: Yup.string().required('Campo obrigatório'),
@@ -8,4 +8,4 @@ export const schema = Yup.object().shape({
     .required('Campo obrigatório')
     .typeError('O valor precisa ser um número')
     .min(10, 'O valor precisa ser superior a R$ 10'),
-})
+});

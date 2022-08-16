@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const PaginationContainer = styled.div`
   width: 100%;
@@ -6,8 +6,8 @@ export const PaginationContainer = styled.div`
   margin: 3rem 0;
   display: flex;
   justify-content: center;
-`
-export const Dropdown = styled.div``
+`;
+export const Dropdown = styled.div``;
 
 export const Container = styled.div`
   display: flex;
@@ -15,4 +15,4 @@ export const Container = styled.div`
   p:first-child {
     margin-top: 2rem;
   }
-`
+`;

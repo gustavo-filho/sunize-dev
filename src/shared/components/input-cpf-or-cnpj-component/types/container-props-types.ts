@@ -1,4 +1,4 @@
 export interface ContainerProps {
-    isFocused: boolean,
-    isFilled: boolean
-  }
+  isFocused: boolean;
+  isFilled: boolean;
+}

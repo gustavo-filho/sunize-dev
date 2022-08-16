@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface Props {
-  headerColor: string
+  headerColor: string;
 }
 
 export const Container = styled.div<Props>`
@@ -31,7 +31,7 @@ export const Container = styled.div<Props>`
   }
   > div {
     width: 100%;
-    background-color: ${(p) => p.headerColor};
+    background-color: ${p => p.headerColor};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +81,7 @@ export const Container = styled.div<Props>`
       }
     }
   }
-`
+`;
 
 export const CountTime = styled.main`
   display: flex;
@@ -110,4 +110,4 @@ export const CountTime = styled.main`
       padding: 0 0.2rem;
     }
   }
-`
+`;

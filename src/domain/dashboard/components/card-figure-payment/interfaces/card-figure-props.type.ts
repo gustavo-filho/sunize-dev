@@ -1,6 +1,5 @@
-
 export interface CardFigurePropsType {
-    card: string;
-    validity: string;
-    holderName: string;
+  card: string;
+  validity: string;
+  holderName: string;
 }

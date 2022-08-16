@@ -1,5 +1,5 @@
 export interface Props {
-    data?: any
-    toggleModal: () => void
-    acceptDiscount: () => void
-  }
+  data?: any;
+  toggleModal: () => void;
+  acceptDiscount: () => void;
+}

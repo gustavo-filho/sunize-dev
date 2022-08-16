@@ -8,7 +8,7 @@ interface UserProps {
 }
 
 export const Bank = ({ user, userData }: UserProps) => {
-  console.log(userData)
+  console.log(userData);
   return (
     <Container>
       <h1>Contas bancárias</h1>
@@ -32,5 +32,5 @@ export const Bank = ({ user, userData }: UserProps) => {
         </BoxSingle>
       </BoxWrapper>
     </Container>
-  )
+  );
 };

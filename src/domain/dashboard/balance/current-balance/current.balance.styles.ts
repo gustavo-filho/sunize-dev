@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -28,7 +28,7 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: 400;
     color: #818181;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 50px;
   }
 
@@ -83,7 +83,7 @@ export const Container = styled.div`
     font-size: 18px;
   }
   .contentBalance p {
-    margin-bottom: 1em ;
+    margin-bottom: 1em;
     color: rgb(204, 204, 204);
   }
   .FutureLauch span {
@@ -157,7 +157,7 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export const AddAccount = styled.div`
   width: 100%;
@@ -179,14 +179,14 @@ export const AddAccount = styled.div`
       color: ${shade(-0.2, '#c27c2c')};
     }
   }
-`
+`;
 
 interface PropsWrapper {
   show: boolean;
 }
 
 export const Value = styled.div<PropsWrapper>`
- ${({ show }) =>
+  ${({ show }) =>
     show &&
     css`
       color: transparent !important;

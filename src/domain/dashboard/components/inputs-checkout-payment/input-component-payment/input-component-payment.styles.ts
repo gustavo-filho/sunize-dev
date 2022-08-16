@@ -1,6 +1,6 @@
-import { Tooltip } from '@shared/components/Tooltip/tooltip.component'
-import styled, { css } from 'styled-components'
-import { ContainerPropsType } from './interfaces/container-props-type'
+import { Tooltip } from '@shared/components/Tooltip/tooltip.component';
+import styled, { css } from 'styled-components';
+import { ContainerPropsType } from './interfaces/container-props-type';
 
 export const Content = styled.div`
   position: relative;
@@ -26,7 +26,7 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerPropsType>`
   margin-top: 5px;
@@ -91,7 +91,7 @@ export const Container = styled.div<ContainerPropsType>`
       color: #c2c2c2;
     }
   }
-`
+`;
 
 export const Error = styled(Tooltip)`
   height: 20px;
@@ -105,4 +105,4 @@ export const Error = styled(Tooltip)`
       border-color: #ff5252 transparent;
     }
   }
-`
+`;

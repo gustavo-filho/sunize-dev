@@ -1,6 +1,10 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties } from 'react';
 
-export type ScrollRevealAnimationTypes = "slide-up" | "slide-down" | "slide-left" | "slide-right";
+export type ScrollRevealAnimationTypes =
+  | 'slide-up'
+  | 'slide-down'
+  | 'slide-left'
+  | 'slide-right';
 
 export interface ScrollRevealProps {
   style?: CSSProperties;

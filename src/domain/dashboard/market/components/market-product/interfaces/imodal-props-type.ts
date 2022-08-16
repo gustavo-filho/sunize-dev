@@ -1,3 +1,3 @@
 export interface ModalProps {
-    modal: number
-  }
+  modal: number;
+}

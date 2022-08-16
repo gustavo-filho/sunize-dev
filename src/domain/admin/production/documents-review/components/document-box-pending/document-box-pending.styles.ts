@@ -1,6 +1,6 @@
 import { shade } from 'polished';
 import styled, { css } from 'styled-components';
-import { Field } from 'formik'
+import { Field } from 'formik';
 
 interface ModalProps {
   open: boolean;
@@ -74,7 +74,7 @@ export const Container = styled.div`
       p {
         font-size: 0.8rem;
         line-height: 24px;
-        color: rgb(204,204,204);
+        color: rgb(204, 204, 204);
 
         b {
           color: #c27c2c;
@@ -314,8 +314,7 @@ export const Error = styled.p`
   font-size: 0.9rem;
   font-weight: 600;
   margin-top: 0.5rem;
-`
-
+`;
 
 export const InputText = styled(Field)`
   height: 70px;
@@ -337,4 +336,4 @@ export const InputText = styled(Field)`
     css`
       border-color: #c62828;
     `}
-`
+`;

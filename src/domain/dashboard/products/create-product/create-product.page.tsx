@@ -15,14 +15,14 @@ import {
   FormGroup,
   OptionSingle,
   W100,
-  W50
+  W50,
 } from './create-product.styles';
 
 import { CopyrightFooter } from '@domain/dashboard/components/copyright-footer/copyright-footer.component';
 import { Dropzone } from '@domain/dashboard/products/components/dropzone/dropzone.component';
 import {
   ASYNC_GET_CATEGORIES,
-  productSelector
+  productSelector,
 } from '@domain/dashboard/products/products.store';
 import { round } from 'lodash';
 import CurrencyInput from 'react-currency-input-field';

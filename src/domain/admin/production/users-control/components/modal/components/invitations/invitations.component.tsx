@@ -7,12 +7,9 @@ interface UserProps {
 }
 
 export const Invitations = ({ userData }: UserProps) => {
-
   return (
     <Container>
-      <h1>
-        Em desenvolvimento
-      </h1>
+      <h1>Em desenvolvimento</h1>
     </Container>
-  )
+  );
 };

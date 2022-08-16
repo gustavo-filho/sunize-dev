@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 interface TotalEvaluationsProps {
-  evaluations: number | null
+  evaluations: number | null;
 }
 
 export const Container = styled.div`
@@ -15,7 +15,7 @@ export const Container = styled.div`
     width: 15px;
     color: orange;
   }
-`
+`;
 
 export const TotalEvaluations = styled.small<TotalEvaluationsProps>`
   ${({ evaluations }) =>
@@ -23,4 +23,4 @@ export const TotalEvaluations = styled.small<TotalEvaluationsProps>`
     css`
       margin-left: 8px;
     `}
-`
+`;

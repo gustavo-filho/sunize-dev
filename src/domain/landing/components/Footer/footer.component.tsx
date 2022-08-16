@@ -18,8 +18,6 @@ import {
 } from './footer.styles';
 import { NavigateToComponent } from '@domain/landing/utils/navigateToComponent';
 
-
-
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (

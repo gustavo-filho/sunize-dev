@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -34,7 +34,7 @@ export const Container = styled.div`
     font-family: 'Nonito', sans-serif;
     margin-bottom: 50px;
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
@@ -42,7 +42,7 @@ export const LinkNonActive = styled(Link)`
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -95,7 +95,7 @@ export const BoxWrapper = styled.div`
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -125,7 +125,7 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
 
 export const Navigation = styled.div`
   margin-bottom: 10px;
@@ -151,7 +151,7 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const W100 = styled.div`
   width: 100%;
@@ -196,7 +196,7 @@ export const W100 = styled.div`
       height: 20px;
     }
   }
-`
+`;
 
 export const ContainerBox = styled.div`
   display: flex;
@@ -205,7 +205,7 @@ export const ContainerBox = styled.div`
   max-width: 930px;
   margin: 0 auto;
   padding: 0 2%;
-`
+`;
 
 export const OptionSingle = styled.div`
   display: flex;
@@ -235,7 +235,6 @@ export const OptionSingle = styled.div`
     :focus {
       border: 2px solid #c27c2c;
     }
-
   }
 
   .inputBox {
@@ -250,7 +249,6 @@ export const OptionSingle = styled.div`
     .fInput {
       margin-bottom: 1rem !important;
     }
-
   }
 
   input[type='text'] {
@@ -269,7 +267,6 @@ export const OptionSingle = styled.div`
     :focus {
       border: 2px solid #c27c2c;
     }
-
   }
 
   /* div + & {
@@ -348,10 +345,8 @@ export const OptionSingle = styled.div`
         margin-left: 0rem;
       }
     }
-
-
   }
-`
+`;
 
 export const SectionOption = styled.section`
   margin-top: 1.5rem;
@@ -396,7 +391,7 @@ export const SectionOption = styled.section`
       border: 2px solid #c27c2c;
     }
   }
-`
+`;
 
 export const PaymentMethod = styled.div`
   background-color: ${shade(0.04, '#f0f3ff')};
@@ -407,10 +402,10 @@ export const PaymentMethod = styled.div`
     width: 20px;
     height: 20px;
   }
-`
+`;
 export const Error = styled.span`
   color: red;
-`
+`;
 export const BoxHeaderPixel = styled.div`
   display: flex;
   align-items: center;
@@ -435,4 +430,4 @@ export const BoxHeaderPixel = styled.div`
       }
     }
   }
-`
+`;

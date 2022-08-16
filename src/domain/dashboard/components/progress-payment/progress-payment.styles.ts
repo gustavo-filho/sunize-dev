@@ -1,21 +1,21 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 interface StepProps {
-  index: number
-  stepPayment: number
+  index: number;
+  stepPayment: number;
 }
 
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 0.3rem 0.3rem 0 0;
-`
+`;
 
 export const StepProgress = styled.div`
   width: 100%;
   min-height: 82px;
   display: flex;
   border-radius: 0.4rem;
-`
+`;
 
 const statusStep = {
   active: css`
@@ -40,7 +40,7 @@ const statusStep = {
       color: #00dd80;
     }
   `,
-}
+};
 
 export const Step = styled.div<StepProps>`
   flex: 1 1;
@@ -69,10 +69,10 @@ export const Step = styled.div<StepProps>`
   }
   ${({ index, stepPayment }) => {
     if (stepPayment > index) {
-      return statusStep.concluded
+      return statusStep.concluded;
     }
     if (stepPayment === index) {
-      return statusStep.active
+      return statusStep.active;
     }
   }}
   ${({ stepPayment }) =>
@@ -101,7 +101,7 @@ export const Step = styled.div<StepProps>`
       border-radius: 0 0 0.4rem 0.4rem;
     }
   }
-`
+`;
 
 export const SuccessContainer = styled.div`
   width: 40px;
@@ -122,4 +122,4 @@ export const SuccessContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-`
+`;

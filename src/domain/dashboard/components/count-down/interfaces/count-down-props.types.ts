@@ -1,14 +1,14 @@
 export interface CountdownPropsType {
-    header:
+  header:
     | {
-        allowed: true
-        color?: string
-    }
-    | undefined
-    timer:
+        allowed: true;
+        color?: string;
+      }
+    | undefined;
+  timer:
     | {
-        allowed: boolean
-        time?: number
-    }
-    | undefined
+        allowed: boolean;
+        time?: number;
+      }
+    | undefined;
 }

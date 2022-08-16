@@ -1912,4 +1912,4 @@ export const listCountries = [
     nome: 'Zimbábue',
     nomeFormal: 'República do Zimbábue',
   },
-]
+];

@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-`
+`;
 
 export const ProductImage = styled.div`
   width: 120px;
@@ -24,7 +24,7 @@ export const ProductImage = styled.div`
     height: 50px;
     opacity: 0.5;
   }
-`
+`;
 
 export const Description = styled.div`
   margin-left: 1rem;
@@ -71,11 +71,11 @@ export const Description = styled.div`
     color: #4d4c4c;
     font-weight: 500;
   }
-`
+`;
 
 export const DotsLoaderContainer = styled.div`
   height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;

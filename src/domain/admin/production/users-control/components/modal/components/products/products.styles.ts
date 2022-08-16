@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
+import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -40,4 +40,4 @@ export const Container = styled.div`
     overflow-x: hidden;
     max-height: 500px;
   }
-`
+`;

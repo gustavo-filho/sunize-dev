@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -33,10 +33,10 @@ export const Container = styled.div`
       text-align: center;
     }
   }
-`
+`;
 
 export const Content = styled.main`
   padding: 0 1rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-`
+`;

@@ -12,10 +12,10 @@ interface InputData extends InputProps {
   mask: string;
   maskChar?: string | null;
   name?: string;
-  labelPosition?: 'left' | 'center' | 'right'
-  disabled?: boolean
-  text: string
-  icon?: React.ComponentType
+  labelPosition?: 'left' | 'center' | 'right';
+  disabled?: boolean;
+  text: string;
+  icon?: React.ComponentType;
 }
 
 const InputMasked: React.FC<InputData> = ({
@@ -70,7 +70,6 @@ const InputMasked: React.FC<InputData> = ({
             disabled={disabled}
             maskChar={null}
             {...rest}
-            
           />
 
           {meta.touched && meta.error && (

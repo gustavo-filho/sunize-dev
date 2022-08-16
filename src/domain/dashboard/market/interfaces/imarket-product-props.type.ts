@@ -1,5 +1,5 @@
-import { Product } from "@shared/types/types";
+import { Product } from '@shared/types/types';
 
 export interface IMarketProductProps {
-    product: Product
+  product: Product;
 }

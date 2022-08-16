@@ -1,6 +1,6 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
-const today = new Date()
+const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 export const schema = Yup.object().shape({
@@ -15,4 +15,4 @@ export const schema = Yup.object().shape({
   deadline: Yup.date()
     .min(today, 'Data anterior não permitida')
     .required('Valor obrigatório'),
-})
+});

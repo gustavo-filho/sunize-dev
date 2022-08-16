@@ -1,12 +1,12 @@
 import { makeStyles } from '@mui/styles';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const useStyles = makeStyles({
   tableRow: {
     borderBottom: '1px solid #61616e !important',
     '& .MuiTableCell-root': {
-      borderBottom: 'none'
-    }
+      borderBottom: 'none',
+    },
   },
 });
 
@@ -70,4 +70,4 @@ export const Container = styled.div`
   .AccountStatements span {
     font-size: 17px;
   }
-`
+`;

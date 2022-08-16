@@ -1,4 +1,4 @@
 export interface InstallmentTypes {
-    Installments: number
-    InstallmentValue: number
+  Installments: number;
+  InstallmentValue: number;
 }

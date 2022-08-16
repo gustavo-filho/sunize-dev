@@ -1,18 +1,17 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 interface AccordionProps {
-  height: number
+  height: number;
 }
 
 export const Container = styled.div`
   margin-bottom: 1rem;
   position: relative;
-`
+`;
 
 export const Buttons = styled.div`
   button {
-
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -69,7 +68,7 @@ export const Buttons = styled.div`
       }
     }
   }
-`
+`;
 
 export const Header = styled.header`
   position: relative;
@@ -98,7 +97,7 @@ export const Header = styled.header`
       background-color: transparent;
       border: 0;
       cursor: pointer;
-      color: #FFF;
+      color: #fff;
       font-size: 1.05rem;
       font-weight: 600;
     }
@@ -134,7 +133,7 @@ export const Header = styled.header`
       flex-direction: column;
 
       strong {
-        color: #FFF;
+        color: #fff;
         font-size: 17px;
       }
 
@@ -170,7 +169,7 @@ export const Header = styled.header`
       margin: 8px 0 16px 0;
     }
   }
-`
+`;
 export const Accordion = styled.main<AccordionProps>`
   box-shadow: 0 0 12px 1px rgba(100, 100, 100, 0.15);
   height: 0;
@@ -183,7 +182,7 @@ export const Accordion = styled.main<AccordionProps>`
     css`
       height: ${height + 'px'};
     `}
-`
+`;
 
 export const AccordionContent = styled.div`
   background-color: rgb(30, 31, 50);
@@ -219,15 +218,15 @@ export const AccordionContent = styled.div`
       }
     }
   }
-`
+`;
 
 export const Permissions = styled.section`
   h1 {
-    color: #FFF;
+    color: #fff;
     font-size: 1.3rem;
     margin-top: 1.5rem;
   }
-`
+`;
 
 export const FormGroup = styled.div`
   display: flex;
@@ -242,6 +241,6 @@ export const FormGroup = styled.div`
 
   label {
     font-size: 1rem;
-    color: #FFF;
+    color: #fff;
   }
-`
+`;

@@ -1,4 +1,4 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
 export const CustomCheckoutSchema = Yup.object().shape({
   options_pay: Yup.array().min(1, 'Selecione ao menos uma opção de pagamento'),
@@ -12,4 +12,4 @@ export const CustomCheckoutSchema = Yup.object().shape({
     is: true,
     then: Yup.array().min(1, 'Selecione ao menos um produto'),
   }),
-})
+});

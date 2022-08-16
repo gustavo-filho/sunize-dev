@@ -1,8 +1,8 @@
-import styled, { css, keyframes } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css, keyframes } from 'styled-components';
+import { shade } from 'polished';
 
 interface ButtonSubmitProps {
-  jump: number
+  jump: number;
 }
 
 const jumpAnimation = keyframes`
@@ -15,7 +15,7 @@ const jumpAnimation = keyframes`
   100% {
     transform: translateY(0);
   }
-`
+`;
 
 export const Container = styled.div`
   margin-top: 2rem;
@@ -34,7 +34,7 @@ export const Container = styled.div`
       padding: 0 1.5rem;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   padding: 2rem 0 2rem;
@@ -69,7 +69,7 @@ export const Content = styled.div`
       display: none;
     }
   }
-`
+`;
 
 export const ContentGenerated = styled.div`
   display: flex;
@@ -113,7 +113,7 @@ export const ContentGenerated = styled.div`
     width: 100%;
     margin-top: 0.5rem;
   }
-`
+`;
 
 export const ButtonSubmit = styled.button<ButtonSubmitProps>`
   text-transform: uppercase;
@@ -149,4 +149,4 @@ export const ButtonSubmit = styled.button<ButtonSubmitProps>`
     justify-content: space-between;
     padding: 0 1.5rem;
   }
-`
+`;

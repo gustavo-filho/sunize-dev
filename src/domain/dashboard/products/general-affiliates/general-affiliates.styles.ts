@@ -1,9 +1,8 @@
-import styled from 'styled-components'
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
 
-export const TaxContainer = styled.div`
-`
+export const TaxContainer = styled.div``;
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -62,7 +61,7 @@ export const Container = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const Navigation = styled.div`
   margin-bottom: 10px;
@@ -88,7 +87,7 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
@@ -96,7 +95,7 @@ export const LinkNonActive = styled(Link)`
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -189,7 +188,7 @@ export const BoxWrapper = styled.div`
     border-radius: 0 0 12px 12px;
     padding: 2rem 1rem;
   }
-`
+`;
 
 export const OptionSingle = styled.div`
   display: flex;
@@ -209,7 +208,6 @@ export const OptionSingle = styled.div`
     .fInput {
       margin-bottom: 1rem !important;
     }
-
   }
 
   input[type='text'] {
@@ -226,7 +224,6 @@ export const OptionSingle = styled.div`
     :focus {
       border: 2px solid #c27c2c;
     }
-
   }
 
   h1 {
@@ -236,7 +233,7 @@ export const OptionSingle = styled.div`
   }
 
   .optionTitle {
-    margin-top:1rem;
+    margin-top: 1rem;
   }
 
   main {
@@ -265,7 +262,6 @@ export const OptionSingle = styled.div`
       }
     }
   }
-
 
   > select {
     cursor: pointer;
@@ -302,7 +298,7 @@ export const OptionSingle = styled.div`
       }
     }
   }
-`
+`;
 export const LoaderContainer = styled.div`
   position: absolute;
   top: 0;
@@ -331,4 +327,4 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;

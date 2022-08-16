@@ -1,7 +1,6 @@
-import { shade } from 'polished'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-
+import { shade } from 'polished';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1640px;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   transition: top 1s ease;
 
   .inputcoproductor {
-    color: #000
+    color: #000;
   }
 
   .button {
@@ -59,7 +58,7 @@ export const Container = styled.div`
     font-family: 'Nonito', sans-serif;
     margin-bottom: 50px;
   }
-`
+`;
 
 export const Navigation = styled.div`
   margin-bottom: 12px;
@@ -85,7 +84,7 @@ export const Navigation = styled.div`
       top: 2px;
     }
   }
-`
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -112,7 +111,7 @@ export const Wrapper = styled.div`
 
     margin-left: 15px;
     margin-top: -5px;
-    
+
     border: 0;
     border-radius: 4px;
     transition: background 0.2s ease;
@@ -126,7 +125,7 @@ export const Wrapper = styled.div`
       background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
     }
   }
-`
+`;
 
 export const OptionSingle = styled.div`
   display: flex;
@@ -136,7 +135,6 @@ export const OptionSingle = styled.div`
   margin-bottom: 2.5rem;
 
   .phoneInput {
-
     width: 100%;
     height: 30px;
     font-size: 1.2rem;
@@ -144,7 +142,6 @@ export const OptionSingle = styled.div`
     color: #4b4b4b;
     font-weight: 600;
     transition: border 0.2s ease;
-
   }
 
   .phoneLabel {
@@ -181,7 +178,7 @@ export const OptionSingle = styled.div`
       border: 2px solid #c27c2c;
     }
   }
-  
+
   h1 {
     color: #ffffff;
     font-size: 1.2rem;
@@ -251,7 +248,7 @@ export const OptionSingle = styled.div`
       }
     }
   }
-`
+`;
 
 export const LinkNonActive = styled(Link)`
   font-size: 18px;
@@ -259,7 +256,7 @@ export const LinkNonActive = styled(Link)`
   background-color: transparent !important;
   padding: 16px 22px 12px 22px;
   border-radius: 4px 4px 0 0;
-`
+`;
 
 export const BoxWrapper = styled.div`
   display: flex;
@@ -279,32 +276,31 @@ export const BoxWrapper = styled.div`
     width: 100%;
 
     button {
+      margin-bottom: 0.5rem;
 
-    margin-bottom: 0.5rem;
+      cursor: pointer;
+      width: 250px;
+      height: 40px;
+      background: rgba(194, 124, 44, 0.9);
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
 
-    cursor: pointer;
-    width: 250px;
-    height: 40px;
-    background: rgba(194, 124, 44, 0.9);
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
+      margin-top: 2rem;
+      border: 0;
+      border-radius: 4px;
+      transition: background 0.2s ease;
 
-    margin-top: 2rem;
-    border: 0;
-    border-radius: 4px;
-    transition: background 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
-    &:hover {
-      background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
+      &:hover {
+        background: ${shade(0.2, 'rgba(194, 124, 44, 0.9)')};
+      }
     }
   }
-}
 
   > a {
     margin: 0 1rem;
@@ -326,7 +322,7 @@ export const BoxWrapper = styled.div`
   @media (max-width: 500px) {
     border-radius: 0 0 12px 12px;
   }
-`
+`;
 
 export const ProductImage = styled.div`
   width: 100%;
@@ -397,7 +393,7 @@ export const ProductImage = styled.div`
       font-size: 4rem;
     }
   }
-`
+`;
 
 export const UpdateEbook = styled.div`
   margin-top: 3rem;
@@ -451,7 +447,7 @@ export const UpdateEbook = styled.div`
       margin-right: 0.4rem;
     }
   }
-`
+`;
 
 export const LoaderContainer = styled.div`
   position: absolute;
@@ -481,7 +477,7 @@ export const LoaderContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
-`
+`;
 
 export const NotificationSingle = styled.div`
   display: flex;
@@ -535,4 +531,4 @@ export const NotificationSingle = styled.div`
       margin-top: 0.7rem;
     }
   }
-`
+`;

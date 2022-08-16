@@ -79,7 +79,8 @@ export const Actions = styled.div`
     }
   }
 
-  button:nth-of-type(2), button.submit {
+  button:nth-of-type(2),
+  button.submit {
     cursor: pointer;
     background-color: ${shade(0.2, '#1de9b6')};
     color: white;

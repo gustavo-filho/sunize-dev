@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
@@ -35,7 +35,7 @@ export const Container = styled.div`
       color: rgba(255, 0, 0, 0.5);
     }
   }
-`
+`;
 
 export const Content = styled.div`
   cursor: pointer;
@@ -60,11 +60,11 @@ export const Content = styled.div`
   }
   .AccountInformation .Bank {
     font-size: 18px;
-    color: #CCCCCC;
+    color: #cccccc;
   }
   .AccountInformation p {
     font-size: 14px;
-    color: #CCCCCC;
+    color: #cccccc;
   }
 
   @media (max-width: 576px) {
@@ -83,7 +83,7 @@ export const Content = styled.div`
       margin-bottom: 8px;
     }
   }
-`
+`;
 
 export const MoneyArt = styled.div`
   width: 50px;
@@ -100,4 +100,4 @@ export const MoneyArt = styled.div`
     font-size: 1.5rem;
     margin: 0 !important;
   }
-`
+`;

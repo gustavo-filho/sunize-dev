@@ -4,6 +4,7 @@ import '../my-content.styles.css';
 import { Content } from '@domain/dashboard/products/my-content/components/content/content.component';
 import { useStyles } from '@domain/dashboard/products/my-content/my-packages/my-package.styles';
 import { theme } from '@shared/styles/theme.constants';
+import { DASHBOARD_ROUTES } from '@domain/dashboard/components/dashboard-wrapper/dashboard-wrapper.constants';
 
 export const MyPackages = () => {
   const classes = useStyles();
@@ -51,8 +52,9 @@ export const MyPackages = () => {
               .map(el => (
                 <Content
                   key={el.title}
+                  link={DASHBOARD_ROUTES.VIDEO_CLASS}
                   image={
-                    'https://cdn.cademi.com.br/cache/Y0iuEvug0BzB2OGFpzZiTlpQynNYOy0hx2UTIS0x-550x550-resized.jpg'
+                    'https://cdn.areademembros.com/cache/j6dj1UFwkPFyWAFUhm3QzTkjUFiPTTnzm7EsrcpY-550x550-resized.jpg'
                   }
                 />
               ))}
@@ -73,7 +75,7 @@ export const MyPackages = () => {
                 <Content
                   key={el.title}
                   image={
-                    'https://cdn.cademi.com.br/cache/zMjsnAOglRFMuKW3sG3RTFe9xqH7kS4z7FmD9xHA-550x550-resized.jpg'
+                    'https://cdn.areademembros.com/cache/j6dj1UFwkPFyWAFUhm3QzTkjUFiPTTnzm7EsrcpY-550x550-resized.jpg'
                   }
                   {...{ style: { filter: 'grayscale(1)' } }}
                 />
@@ -98,7 +100,7 @@ export const MyPackages = () => {
                 <Content
                   key={el.title}
                   image={
-                    'https://cdn.cademi.com.br/cache/YAQWmWxsawF8YnP19SEYB1h9x8lHkRA3x5pI3idR-550x550-resized.jpg'
+                    'https://cdn.areademembros.com/cache/j6dj1UFwkPFyWAFUhm3QzTkjUFiPTTnzm7EsrcpY-550x550-resized.jpg'
                   }
                   {...{ style: { filter: 'grayscale(1)' } }}
                 />

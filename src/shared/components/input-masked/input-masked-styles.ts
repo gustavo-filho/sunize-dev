@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components'
-import { Tooltip } from '../Tooltip/tooltip.component'
+import styled, { css } from 'styled-components';
+import { Tooltip } from '../Tooltip/tooltip.component';
 
 interface ContainerProps {
-  isFocused: number
-  isFilled: number
-  isErrored: number
+  isFocused: number;
+  isFilled: number;
+  isErrored: number;
 }
 
 export const Content = styled.div`
   position: relative;
-  
+
   /* margin-top: 2rem; */
 
   div + div {
@@ -34,7 +34,7 @@ export const Content = styled.div`
     font-size: 0.875rem;
     margin-top: 0.25rem;
   }
-`
+`;
 
 export const Container = styled.div<ContainerProps>`
   margin-top: 5px;
@@ -105,7 +105,7 @@ export const Container = styled.div<ContainerProps>`
       outline: 0;
     }
   }
-`
+`;
 
 export const Error = styled(Tooltip)`
   height: 20px;
@@ -122,4 +122,4 @@ export const Error = styled(Tooltip)`
       border-color: #ff5252 transparent;
     }
   }
-`
+`;

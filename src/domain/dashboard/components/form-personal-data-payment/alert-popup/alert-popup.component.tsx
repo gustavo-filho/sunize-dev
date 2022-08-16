@@ -1,12 +1,15 @@
+import React from 'react';
+import { FaTimes } from 'react-icons/fa';
+import { Container, Modal, Content } from './alert-popup.styles';
+import { Props } from './interface/alert-popup-props-type';
 
-import React from 'react'
-import { FaTimes } from 'react-icons/fa'
-import { Container, Modal, Content } from './alert-popup.styles'
-import { Props } from './interface/alert-popup-props-type'
-
-export function AlertPopUp({ data, toggleModal, acceptDiscount }:Props): JSX.Element {
+export function AlertPopUp({
+  data,
+  toggleModal,
+  acceptDiscount,
+}: Props): JSX.Element {
   function handleCloseModal() {
-    toggleModal()
+    toggleModal();
   }
 
   return (
@@ -25,8 +28,8 @@ export function AlertPopUp({ data, toggleModal, acceptDiscount }:Props): JSX.Ele
             <h2>Por: R${data.finalPrice}</h2>
             <button
               onClick={() => {
-                acceptDiscount()
-                toggleModal()
+                acceptDiscount();
+                toggleModal();
               }}
             >
               É claro!
@@ -35,5 +38,5 @@ export function AlertPopUp({ data, toggleModal, acceptDiscount }:Props): JSX.Ele
         </Modal>
       </Container>
     </>
-  )
+  );
 }

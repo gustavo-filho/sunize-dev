@@ -20,12 +20,12 @@ export const DefaultInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const inputMaskRef = useRef<ReactInputMask>(null);
 
-  const [typeInput, setTypeInput] = useState(type)
+  const [typeInput, setTypeInput] = useState(type);
 
   const handleChangeInputType = () => {
     const newTypePassword = typeInput === 'password' ? 'text' : 'password';
-    setTypeInput(newTypePassword)
-  }
+    setTypeInput(newTypePassword);
+  };
 
   const onBlur = useCallback(() => {
     setFocused(false);
@@ -81,9 +81,12 @@ export const DefaultInput = ({
           )}
 
           {!meta.error && handleShowPassword && (
-            <HandlePasswordButton onClick={handleChangeInputType} typePassword={typeInput} id="handleShowPasswdBttn" />
+            <HandlePasswordButton
+              onClick={handleChangeInputType}
+              typePassword={typeInput}
+              id="handleShowPasswdBttn"
+            />
           )}
-
         </Container>
       </div>
     </Content>

@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
-import { shade } from 'polished'
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 interface ButtonNavProps {
-  active: string
-  navName: string
+  active: string;
+  navName: string;
 }
 
-export const Container = styled.div``
+export const Container = styled.div``;
 
 export const ContentModal = styled.div`
   position: fixed;
@@ -58,7 +58,7 @@ export const ContentModal = styled.div`
     div {
     }
   }
-`
+`;
 
 export const CloseButton = styled.button`
   font-size: 0;
@@ -85,7 +85,7 @@ export const CloseButton = styled.button`
   :focus {
     outline: black solid 2px;
   }
-`
+`;
 
 export const Description = styled.div`
   display: flex;
@@ -133,7 +133,7 @@ export const Description = styled.div`
       background-color: ${shade(0.3, '#c27c2c')};
     }
   }
-`
+`;
 
 export const Overlay = styled.div`
   position: fixed;
@@ -143,12 +143,12 @@ export const Overlay = styled.div`
   background-color: rgba(56, 70, 110, 0.5);
   width: 100vw;
   height: 100vh;
-`
+`;
 
 export const Navigation = styled.nav`
   margin-top: 1rem;
   border-bottom: 3px solid #f5f5f5;
-`
+`;
 
 export const ButtonNav = styled.button<ButtonNavProps>`
   cursor: pointer;
@@ -194,6 +194,6 @@ export const ButtonNav = styled.button<ButtonNavProps>`
       margin-left: 0;
     }
   }
-`
+`;
 
-export const Content = styled.main``
+export const Content = styled.main``;

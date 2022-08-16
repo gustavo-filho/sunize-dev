@@ -12,9 +12,8 @@ import {
   sideBarSelector,
   TOGGLE_SIDE_BAR,
 } from '@domain/dashboard/components/side-bar/side-bar.store';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useStyles } from './video-class-sidebar.styles';
-import { AiFillCheckCircle, AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineLeft } from 'react-icons/ai';
 import { theme } from '@shared/styles/theme.constants';
 
 export const VideoClassSidebar = () => {
@@ -72,14 +71,45 @@ export const VideoClassSidebar = () => {
               />
             </div>
           </div>
-          <Accordion style={{ width: '100%' }}>
+          <Accordion
+            style={{
+              width: '100%',
+              padding: '0 10px',
+              background: theme.colors.darkBlue,
+            }}
+          >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              style={{ background: theme.colors.darkBlue, color: 'white' }}
+              style={{
+                background: '#122159',
+                color: 'white',
+                borderRadius: '10px',
+              }}
             >
-              <Typography>Módulo 1</Typography>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                }}
+              >
+                <Typography
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  Módulo 1{' '}
+                  <Typography style={{ fontWeight: 300, fontSize: '0.8rem' }}>
+                    {' - '} Modulo 1
+                  </Typography>
+                </Typography>
+                <p style={{ padding: '1rem 0', color: '#949494' }}>2 aulas</p>
+              </div>
             </AccordionSummary>
             <AccordionDetails
               style={{
@@ -90,14 +120,93 @@ export const VideoClassSidebar = () => {
               <Button
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  color: 'white',
+                  textTransform: 'capitalize',
+                }}
+              >
+                <p style={{ display: 'flex', alignItems: 'center' }}>
+                  <div
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      backgroundColor: 'yellow',
+                      borderRadius: '999px',
+                      marginRight: '10px',
+                    }}
+                  ></div>
+                  Aula 01 - Dê um título{' '}
+                </p>
+              </Button>
+
+              <Button
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  color: 'white',
+                  textTransform: 'capitalize',
+                }}
+              >
+                <p style={{ display: 'flex', alignItems: 'center' }}>
+                  <div
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      backgroundColor: 'yellow',
+                      borderRadius: '999px',
+                      marginRight: '10px',
+                    }}
+                  ></div>
+                  Aula 02 - Dê um título{' '}
+                </p>
+              </Button>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            style={{
+              width: '100%',
+              padding: '0 10px',
+              background: theme.colors.darkBlue,
+              marginTop: '1rem',
+            }}
+          >
+            <AccordionSummary
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+              style={{
+                background: '#122159',
+                color: 'white',
+                borderRadius: '10px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   width: '100%',
                 }}
               >
-                <p>Aula 01</p>
-                <AiFillCheckCircle color={theme.colors.success} />
-              </Button>
-            </AccordionDetails>
+                <Typography
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  Módulo 1{' '}
+                  <Typography style={{ fontWeight: 300, fontSize: '0.8rem' }}>
+                    {' - '} Modulo 1
+                  </Typography>
+                </Typography>
+                <p style={{ padding: '1rem 0', color: '#949494' }}>0 aulas</p>
+              </div>
+            </AccordionSummary>
           </Accordion>
         </div>
       </Drawer>
